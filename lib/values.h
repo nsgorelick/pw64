@@ -86,4 +86,4 @@
 #define FMAXEXP     FLT_MAX_EXP
 #endif
 
-#endif /* _VALUES_H */ 
+#endif                          /* _VALUES_H */

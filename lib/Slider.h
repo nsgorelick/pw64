@@ -9,19 +9,6 @@
  * through XfGetSliderValue(), that value is mapped along the range of max
  * and min.
  *
- * $Header$
- *
- * $Log$
- * Revision 1.1  1999/09/09 17:50:38  gorelick
- * Initial revision
- *
- * Revision 0.2  91/09/23  17:55:07  17:55:07  ngorelic (Noel S. Gorelick)
- * *** empty log message ***
- * 
- * Revision 0.1  91/07/24  18:04:11  18:04:11  rray (Randy Ray)
- * *** empty log message ***
- * 
- *
  */
 
 #ifndef _XF_SLIDER_H
@@ -32,52 +19,53 @@
 #define XfSliderLeftRight 1
 
 /* For ease in typing */
-typedef struct _Slider* Slider;
+typedef struct _Slider *Slider;
 
 /* The basis for a Slider. That is to say, no definition, no slider! */
-struct _Slider
-{
-    Display* display;             /* Display the slider is on */
-    Window window;                /* Window associated with slider */
-    Window parent;                /* window's parent */
-    int active;                   /* Slider active/not active */
-    int width, height;            /* Sizing of slider */
-    int x, y;                     /* X and Y position within parent window */
-    int border_width;             /* width (in pixels) of border */
-    unsigned long border_color;   /* Color of border */
-    char name[256];               /* Name used to identify slider */
-    char* ext;                    /* An externally-visible piece of data */
-    int* member;                  /* Pseudo-clas identifier */
-    int orientation;              /* Whether Left<->Right or Up<->Down */
-    float min, max;               /* Minimum and maximum values */
-    float delta;                  /* Spacing between min and max */
-    float value;                  /* Slider value in range [0, 1] */
-    int thumb_width;              /* Thumb size in X */
-    int thumb_height;             /* Thumb size in Y */
-    int thumb_min_pixel;          /* Minimum value along motion axis */
-    int thumb_max_pixel;          /* Maximum along motion axis */
-    int thumb_cur_pixel;          /* Current pixel value along motion axis */
-    struct VisualInfo* bar;       /* Defining the background, or "bar" */
-    struct VisualInfo* thumb;     /* The definition of the thumb */
-    struct CallBackList* CallBacks;
+struct _Slider {
+    Display *display;           /* Display the slider is on */
+    Window window;              /* Window associated with slider */
+    Window parent;              /* window's parent */
+    int active;                 /* Slider active/not active */
+    int width, height;          /* Sizing of slider */
+    int x, y;                   /* X and Y position within parent window */
+    int border_width;           /* width (in pixels) of border */
+    unsigned long border_color; /* Color of border */
+    char name[256];             /* Name used to identify slider */
+    char *ext;                  /* An externally-visible piece of data */
+    int *member;                /* Pseudo-clas identifier */
+    int orientation;            /* Whether Left<->Right or Up<->Down */
+    float min, max;             /* Minimum and maximum values */
+    float delta;                /* Spacing between min and max */
+    float value;                /* Slider value in range [0, 1] */
+    int thumb_width;            /* Thumb size in X */
+    int thumb_height;           /* Thumb size in Y */
+    int thumb_min_pixel;        /* Minimum value along motion axis */
+    int thumb_max_pixel;        /* Maximum along motion axis */
+    int thumb_cur_pixel;        /* Current pixel value along motion axis */
+    struct VisualInfo *bar;     /* Defining the background, or "bar" */
+    struct VisualInfo *thumb;   /* The definition of the thumb */
+    struct CallBackList *CallBacks;
     CallBack exposeCallback;
     CallBack updateCallback;
     Slider nextSlider;
 };
 
 /* The support routines for general no-good */
-Slider XfCreateSlider(Display *display, Window parent, int x, int y, int width, int height, int border_width, long unsigned int border_color, char *name, int orientation, float min, float max, float delta, int thumb_width, int thumb_height);
+Slider XfCreateSlider(Display * display, Window parent, int x, int y, int width, int height, int border_width,
+                      long unsigned int border_color, char *name, int orientation, float min, float max, float delta,
+                      int thumb_width, int thumb_height);
 int XfDestroySlider(Slider S);
 int XfActivateSliderValue(Slider S, float value, long unsigned int mask);
 int XfDeactivateSlider(Slider S);
 int XfAddSliderVisual(Slider S, struct VisualInfo *vis, int flag);
 int XfAddSliderCallback(Slider S, CallBack new, CallBack old);
 int XfDelSliderCallback(Slider S, CallBack cb);
-int XfSliderResponse(Slider S, XEvent *E);
+int XfSliderResponse(Slider S, XEvent * E);
 int XfMoveSlider(Slider S);
 int XfSetSliderValue(Slider S, float v);
 Slider XfGetSlider(char *name);
-Slider XfEventSlider(XEvent *E);
+Slider XfEventSlider(XEvent * E);
 void XfResizeThumb(Slider S, int width, int height);
 
 #define XfActivateSlider(S, M)          XfActivateSliderValue(S, 0.0, M)
@@ -91,4 +79,4 @@ void XfResizeThumb(Slider S, int width, int height);
 /* The global list of sliders */
 extern Slider SliderList;
 
-#endif /* _XF_SLIDER_H */
+#endif                          /* _XF_SLIDER_H */

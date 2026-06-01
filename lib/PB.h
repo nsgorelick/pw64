@@ -2,23 +2,23 @@
 #define _PB_H_
 
 struct tagPB {
-	int type;
-    Display        *display;
-    Window          parent;
-    Window          window;
-    int             width, height;
-    int           hi, lo, fg, bg; /* 3-D colors */
+    int type;
+    Display *display;
+    Window parent;
+    Window window;
+    int width, height;
+    int hi, lo, fg, bg;         /* 3-D colors */
 
-    CallBack        function;
-   	XButton			nextB;
+    CallBack function;
+    XButton nextB;
 
-    int             state;
-    char           *text;
-    int             align;
-    XFontStruct    *font;
-    Pixmap          pixmap;
-    int             pix_w;
-    int             pix_h;
+    int state;
+    char *text;
+    int align;
+    XFontStruct *font;
+    Pixmap pixmap;
+    int pix_w;
+    int pix_h;
 };
 
 #define XfResizePB(PB, w, h)    XfPosXB((XButton)PB, MAXINT, MAXINT, w, h)
@@ -27,22 +27,9 @@ struct tagPB {
 /**
 *** Function declarations
 **/
-#ifdef __STDC__
+PButton XfCreatePB(Display *, Window, int, int, int, int, int, int, int, int, char *, int, XFontStruct *, CallBack);
+int XfPushPB(PButton, XEvent *);
+void RedrawPB(PButton);
+Pixmap XfSetPBPixmap(PButton, Pixmap, int, int);
 
-	PButton         XfCreatePB(Display *, Window, int, int, int, int,
-							   int, int, int, int, char *, int,
-							   XFontStruct *, CallBack);
-    int             XfPushPB(PButton, XEvent *);
-    void            RedrawPB(PButton);
-    Pixmap          XfSetPBPixmap(PButton, Pixmap, int, int);
-
-#else
-
-	PButton         XfCreatePB();
-    int             XfPushPB();
-    void            RedrawPB();
-    Pixmap          XfSetPBPixmap();
-
-#endif              /* __STDC__ */
-
-#endif              /* _PB_H_ */
+#endif                          /* _PB_H_ */

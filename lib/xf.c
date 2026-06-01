@@ -19,8 +19,7 @@ Pixmap *_XFStip = NULL;
 char **_XFStipnames = NULL;
 int nXFStip = 0;
 
-int _xf3Dheight=3;
-
+int _xf3Dheight = 3;
 
 /**
 *** This routine tries to allocate a bitmap from the X11_INCLUDE bitmaps 
@@ -28,106 +27,114 @@ int _xf3Dheight=3;
 *** path is used instead.
 **/
 
-Pixmap
-XfStipple(Display *display, Drawable window, char *name)
+Pixmap XfStipple(Display *display, Drawable window, char *name)
 {
-	Pixmap p=0;
-	int i;
-	char buf[256];
-	int x_hot, y_hot;
-	int width, height;
-	int err;
+    Pixmap p = 0;
+    int i;
+    char buf[256];
+    int x_hot, y_hot;
+    unsigned int width, height;
+    int err;
 
-	for (i = 0 ; i < nXFStip ; i++) {
-		if (!strcmp(_XFStipnames[i], name)) {
-			return(_XFStip[i]);
-		}
-	}
+    for (i = 0; i < nXFStip; i++) {
+        if (!strcmp(_XFStipnames[i], name)) {
+            return (_XFStip[i]);
+        }
+    }
 
-	if (display == NULL) display = _xfDisplay;
-	if (name == NULL) return((Pixmap)NULL);
+    if (display == NULL)
+        display = _xfDisplay;
+    if (name == NULL)
+        return ((Pixmap) NULL);
 
-	/**
+        /**
 	*** Find and load the bitmap file
 	**/
-	if (strchr(name, '/')) {
-		strcpy(buf, name);
-	} else {
-		sprintf(buf, "%s/bitmaps/%s", X11_INCLUDE, name);
-	}
-	err = XReadBitmapFile(display, window, buf, 
-						  &width, &height, &p, &x_hot, &y_hot);
+    if (strchr(name, '/')) {
+        XF_STRNCPY(buf, name);
+    } else {
+        snprintf(buf, sizeof(buf), "%s/bitmaps/%s", X11_INCLUDE, name);
+    }
+    err = XReadBitmapFile(display, window, buf, &width, &height, &p, &x_hot, &y_hot);
 
-	if (err != BitmapSuccess) {
-		/* guess at a directory */
-		sprintf(buf, "/usr/include/X11/bitmaps/%s", name);
-		err = XReadBitmapFile(display, window, buf, 
-							  &width, &height, &p, &x_hot, &y_hot);
-		if (err != BitmapSuccess) {
-			sprintf(buf, "/usr/openwin/include/X11/bitmaps/%s", name);
-			err = XReadBitmapFile(display, window, buf, 
-								  &width, &height, &p, &x_hot, &y_hot);
-		}
-	}
+    if (err != BitmapSuccess) {
+        /* guess at a directory */
+        snprintf(buf, sizeof(buf), "/usr/include/X11/bitmaps/%s", name);
+        err = XReadBitmapFile(display, window, buf, &width, &height, &p, &x_hot, &y_hot);
+        if (err != BitmapSuccess) {
+            snprintf(buf, sizeof(buf), "/usr/openwin/include/X11/bitmaps/%s", name);
+            err = XReadBitmapFile(display, window, buf, &width, &height, &p, &x_hot, &y_hot);
+        }
+#if defined(__APPLE__)
+        if (err != BitmapSuccess) {
+            snprintf(buf, sizeof(buf), "/opt/X11/include/X11/bitmaps/%s", name);
+            err = XReadBitmapFile(display, window, buf, &width, &height, &p, &x_hot, &y_hot);
+        }
+#endif
+    }
 
-	if (err == BitmapSuccess) {
-		if (nXFStip == 0) {
-			_XFStip = (Pixmap *)malloc(sizeof(Pixmap));
-			_XFStipnames = (char **)malloc(sizeof(char *));
-		} else {
-			_XFStip = (Pixmap *)realloc(_XFStip, sizeof(Pixmap)*(nXFStip+1));
-			_XFStipnames = (char **)realloc(_XFStipnames, sizeof(char *)*(nXFStip+1));
-		}
+    if (err == BitmapSuccess) {
+        if (nXFStip == 0) {
+            _XFStip = (Pixmap *) malloc(sizeof(Pixmap));
+            _XFStipnames = (char **) malloc(sizeof(char *));
+        } else {
+            _XFStip = (Pixmap *) realloc(_XFStip, sizeof(Pixmap) * (nXFStip + 1));
+            _XFStipnames = (char **) realloc(_XFStipnames, sizeof(char *) * (nXFStip + 1));
+        }
 
-		_XFStip[nXFStip] = p;
-		_XFStipnames[nXFStip] = strdup(name);
+        _XFStip[nXFStip] = p;
+        _XFStipnames[nXFStip] = strdup(name);
 
-		nXFStip++;
-		return(p);
-	}
-	return((Pixmap)NULL);
+        nXFStip++;
+        return (p);
+    }
+    return ((Pixmap) NULL);
 }
 
 char **_XFCNames = NULL;
 XColor *_XFColors = NULL;
 int nXFColors = 0;
 
-short
-XfColor(Display *display, char *name)
+short XfColor(Display *display, char *name)
 {
-	int i;
-	XColor xc;
+    int i;
+    XColor xc;
     Colormap cmap;
 
-	if (display == NULL) display = _xfDisplay;
-	cmap = DefaultColormap(display, DefaultScreen(display));
+    if (display == NULL)
+        display = _xfDisplay;
+    cmap = DefaultColormap(display, DefaultScreen(display));
 
-	if (name == (char *)0) return(BlackPixel(display, DefaultScreen(display)));
-	if (name == (char *)1) return(WhitePixel(display, DefaultScreen(display)));
+    if (name == (char *) 0)
+        return (BlackPixel(display, DefaultScreen(display)));
+    if (name == (char *) 1)
+        return (WhitePixel(display, DefaultScreen(display)));
 
-	for (i = 0 ; i < nXFColors ; i++) {
-		if (!strcmp(name, _XFCNames[i])) {
-			return(_XFColors[i].pixel);
-		}
-	}
+    for (i = 0; i < nXFColors; i++) {
+        if (!strcmp(name, _XFCNames[i])) {
+            return (_XFColors[i].pixel);
+        }
+    }
 
-	if (!XParseColor(display, cmap, name, &xc)) return(0);
-	if (!XAllocColor(display, cmap, &xc)) return(0);
+    if (!XParseColor(display, cmap, name, &xc))
+        return (0);
+    if (!XAllocColor(display, cmap, &xc))
+        return (0);
 
-	if (nXFColors == 0) {
-		_XFCNames = (char **) malloc(sizeof(char *));
-		_XFColors = (XColor *)malloc(sizeof(XColor));
-	} else {
-		_XFCNames = (char **) realloc(_XFCNames, sizeof(char *)*(nXFColors+1));
-		_XFColors = (XColor *)realloc(_XFColors, sizeof(XColor)*(nXFColors+1));
-	}
+    if (nXFColors == 0) {
+        _XFCNames = (char **) malloc(sizeof(char *));
+        _XFColors = (XColor *) malloc(sizeof(XColor));
+    } else {
+        _XFCNames = (char **) realloc(_XFCNames, sizeof(char *) * (nXFColors + 1));
+        _XFColors = (XColor *) realloc(_XFColors, sizeof(XColor) * (nXFColors + 1));
+    }
 
-	_XFCNames[nXFColors] = strdup(name);
-	_XFColors[nXFColors] = xc;
+    _XFCNames[nXFColors] = strdup(name);
+    _XFColors[nXFColors] = xc;
 
-	nXFColors++;
+    nXFColors++;
 
-	return(xc.pixel);
+    return (xc.pixel);
 }
 
 /**
@@ -143,86 +150,85 @@ int nXFFonts = 0;
 *** available.  It will allocate the "fixed" font more than once if more
 *** than one requested font is not available.
 **/
-XFontStruct *
-XfFont(Display *display, char *name)
+XFontStruct *XfFont(Display *display, char *name)
 {
-	int i;
-	XFontStruct *font;
+    int i;
+    XFontStruct *font;
 
-	if (display == NULL) display = _xfDisplay;
-	if (name == NULL) {
-		if (_xfFontStruct == NULL) {
-			XfSetDefaultFont(display, NULL);
-		}
-		return(_xfFontStruct);
-	}
+    if (display == NULL)
+        display = _xfDisplay;
+    if (name == NULL) {
+        if (_xfFontStruct == NULL) {
+            XfSetDefaultFont(display, NULL);
+        }
+        return (_xfFontStruct);
+    }
 
-	for (i = 0 ; i < nXFFonts ; i++) {
-		if (!strcmp(name, _XFFNames[i])) {
-			return(_XFFonts[i]);
-		}
-	}
+    for (i = 0; i < nXFFonts; i++) {
+        if (!strcmp(name, _XFFNames[i])) {
+            return (_XFFonts[i]);
+        }
+    }
 
-	/**
+        /**
 	*** Load requested font, otherwise, try "fixed"
 	**/
-	if ((font = XLoadQueryFont(display, name)) == NULL) {
-		if ((font = XLoadQueryFont(display, "fixed")) == NULL) {
-			return(NULL);
-		}
-	}
+    if ((font = XLoadQueryFont(display, name)) == NULL) {
+        if ((font = XLoadQueryFont(display, "fixed")) == NULL) {
+            return (NULL);
+        }
+    }
 
-	if (nXFFonts == 0) {
-		_XFFNames = (char **) malloc(sizeof(char *));
-		_XFFonts = (XFontStruct **)malloc(sizeof(XFontStruct *));
-	} else {
-		_XFFNames = (char **) realloc(_XFFNames, sizeof(char *)*(nXFColors+1));
-		_XFFonts = (XFontStruct **)realloc(_XFFonts,sizeof(XFontStruct)*(nXFFonts+1));
-	}
+    if (nXFFonts == 0) {
+        _XFFNames = (char **) malloc(sizeof(char *));
+        _XFFonts = (XFontStruct **) malloc(sizeof(XFontStruct *));
+    } else {
+        _XFFNames = (char **) realloc(_XFFNames, sizeof(char *) * (nXFColors + 1));
+        _XFFonts = (XFontStruct **) realloc(_XFFonts, sizeof(XFontStruct) * (nXFFonts + 1));
+    }
 
-	_XFFNames[nXFFonts] = strdup(name);
-	_XFFonts[nXFFonts] = font;
+    _XFFNames[nXFFonts] = strdup(name);
+    _XFFonts[nXFFonts] = font;
 
-	nXFFonts++;
+    nXFFonts++;
 
-	return(font);
+    return (font);
 }
 
 /**
 *** This sets up the font returned by XfFont when passed a NULL name.
 **/
-void
-XfSetDefaultFont(Display *display, XFontStruct *fs)
+void XfSetDefaultFont(Display *display, XFontStruct *fs)
 {
-	char *name;
+    char *name;
 
-	if (display == NULL) display = _xfDisplay;
-	if (fs == NULL) {
-		if ((name = getenv("XF_DEFAULT_FONT")) == NULL) 
+    if (display == NULL)
+        display = _xfDisplay;
+    if (fs == NULL) {
+        if ((name = getenv("XF_DEFAULT_FONT")) == NULL)
 #ifdef XF_DEFAULT_FONT
-		name = XF_DEFAULT_FONT;
+            name = XF_DEFAULT_FONT;
 #else
-		name = "7x13";
+            name = "7x13";
 #endif
-		if ((_xfFontStruct = XLoadQueryFont(display, name)) == NULL) {
-			_xfFontStruct = XLoadQueryFont(display, "fixed");
-		}
-	} else {
-		_xfFontStruct = fs;
-	}
+        if ((_xfFontStruct = XLoadQueryFont(display, name)) == NULL) {
+            _xfFontStruct = XLoadQueryFont(display, "fixed");
+        }
+    } else {
+        _xfFontStruct = fs;
+    }
 
-	return;
+    return;
 }
 
-void
-XfSet3DHeight(int height)
+void XfSet3DHeight(int height)
 {
-	if (height == 0) height = 1;
-	_xf3Dheight = height;
+    if (height == 0)
+        height = 1;
+    _xf3Dheight = height;
 }
 
-int
-Xf3DHeight(void)
+int Xf3DHeight(void)
 {
-	return(_xf3Dheight);
+    return (_xf3Dheight);
 }

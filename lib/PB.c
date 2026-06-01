@@ -16,105 +16,105 @@
  ** XfDestroyPB		- Deactivate, unmap and destroy a PushButton
  **/
 
-
-
-extern void Draw3DBox (Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo, short int fg, short int bg, int state, int options);
-extern int Xf3DHeight (void);
+extern void Draw3DBox(Display * disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo,
+                      short int fg, short int bg, int state, int options);
+extern int Xf3DHeight(void);
 
 PButton
-XfCreatePB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, char *text, int align, XFontStruct *font, CallBack func)
+XfCreatePB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, char *text, int align,
+           XFontStruct *font, CallBack func)
 {
-	PButton new;
+    PButton new;
 
-	new = (PButton) XfCreateXB(d,win,x,y,w,h,hi,lo,fg,bg,func,XF_PB);
+    new = (PButton) XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_PB);
 
-	if (text != NULL) {
-		new->text = strdup(text);
-	} else {
-		new->text = NULL;
-	}
-	new->align = align;
-	new->font = font;
-	if (font == NULL && text != NULL) font = _xfFontStruct;
+    if (text != NULL) {
+        new->text = strdup(text);
+    } else {
+        new->text = NULL;
+    }
+    new->align = align;
+    new->font = font;
+    if (font == NULL && text != NULL)
+        font = _xfFontStruct;
 
-	return(new);
+    return (new);
 }
-
 
 /**
  ** XfPushPB	- Handle user events
  **/
 
-int
-XfPushPB(PButton PB, XEvent *E)
+int XfPushPB(PButton PB, XEvent *E)
 {
     Display *display;
     XEvent Ev;
-	int width,height;
+    int width, height;
 
-    if (PB == NULL) return(False);
+    if (PB == NULL)
+        return (False);
 
     display = PB->display;
 
     switch (E->type) {
-        case Expose:
-			while (XCheckTypedWindowEvent(display, PB->window, Expose, &Ev))
-				;
+    case Expose:
+        while (XCheckTypedWindowEvent(display, PB->window, Expose, &Ev));
+        RedrawPB(PB);
+        break;
+
+    case ButtonPress:
+        if (PB->state != -1) {
+            PB->state |= 1;
             RedrawPB(PB);
-            break;
+        }
+        break;
 
-        case ButtonPress:
-            if (PB->state != -1) {
+    case ButtonRelease:
+        if (PB->state != -1) {
+            if (PB->function != NULL && (PB->state & 1)) {
+                (*(PB->function)) (PB, E);
+            }
+            if (PB->state > 0) {
+                PB->state &= (~1);
+                RedrawPB(PB);
+            }
+        }
+        break;
+
+    case EnterNotify:
+        if (PB->state != -1) {
+            if ((PB->state & 2) && (E->xcrossing.state & Button1Mask)) {
                 PB->state |= 1;
-                RedrawPB(PB);
+            } else {
+                PB->state |= 2;
             }
-            break;
+            RedrawPB(PB);
+        }
+        break;
 
-        case ButtonRelease:
-            if (PB->state != -1) {
-                if (PB->function != NULL && (PB->state & 1)) {
-                    (*(PB->function))(PB,E);
-                }
-				if (PB->state > 0) {
-					PB->state &= (~1);
-					RedrawPB(PB);
-				}
+    case LeaveNotify:
+        if (PB->state != -1) {
+            if ((PB->state & 1) && (E->xcrossing.state & Button1Mask)) {
+                PB->state &= (~1);
+            } else {
+                PB->state &= (~2);
             }
-            break;
+            RedrawPB(PB);
+        }
+        break;
 
-        case EnterNotify:
-            if (PB->state != -1) {
-                if ((PB->state & 2) && (E->xcrossing.state & Button1Mask)) {
-                    PB->state |= 1;
-                } else {
-                    PB->state |= 2;
-                }
-                RedrawPB(PB);
-            }
-            break;
-
-        case LeaveNotify:
-            if (PB->state != -1) {
-                if ((PB->state & 1) && (E->xcrossing.state & Button1Mask)) {
-                    PB->state &= (~1);
-                } else {
-                    PB->state &= (~2);
-                }
-                RedrawPB(PB);
-            }
-            break;
-
-		case ConfigureNotify:
-			width = PB->width;
-			height = PB->height;
-			PB->width = E->xconfigure.width;
-			PB->height = E->xconfigure.height;
-			if (width != PB->width || height != PB->height) {
-				XClearWindow(PB->display, PB->window);
-				RedrawPB(PB);
-			}
-			break;
+    case ConfigureNotify:
+        width = PB->width;
+        height = PB->height;
+        PB->width = E->xconfigure.width;
+        PB->height = E->xconfigure.height;
+        if (width != PB->width || height != PB->height) {
+            XClearWindow(PB->display, PB->window);
+            RedrawPB(PB);
+        }
+        break;
     }
+    return True;
 }
 
 /**
@@ -126,8 +126,7 @@ XfPushPB(PButton PB, XEvent *E)
  **				  The safe thing to do is ClearWindow and Expose on change.
  **/
 
-void
-RedrawPB(PButton PB)
+void RedrawPB(PButton PB)
 {
     Display *display = PB->display;
     Window window = PB->window;
@@ -136,70 +135,66 @@ RedrawPB(PButton PB)
     int height = PB->height;
     int r = 4;
 
-	Draw3DBox(display, window, gc, 0, 0, width, height, Xf3DHeight(),
-			  PB->hi, PB->lo, PB->fg, PB->bg, PB->state, 0);
+    Draw3DBox(display, window, gc, 0, 0, width, height, Xf3DHeight(), PB->hi, PB->lo, PB->fg, PB->bg, PB->state, 0);
 
     XSetForeground(display, gc, PB->fg);
     XSetBackground(display, gc, PB->bg);
 
     if (PB->text != NULL) {
         int dir, ascent, descent;
-        int x,y;
+        int x, y;
         XCharStruct extents;
 
-        XTextExtents(PB->font, PB->text, strlen(PB->text), 
-                    &dir, &ascent, &descent, &extents);
+        XTextExtents(PB->font, PB->text, strlen(PB->text), &dir, &ascent, &descent, &extents);
 
-        y = (PB->height+ascent)/2;
-        switch(PB->align) {
-            case 0:     /* center */
-                x = (PB->width - extents.width)/2;
-                break;
-                
-            case 1:     /* left */
-                x = r+2;
-                break;
+        y = (PB->height + ascent) / 2;
+        switch (PB->align) {
+        case 0:                /* center */
+            x = (PB->width - extents.width) / 2;
+            break;
 
-            case -1:    /* right */
-                x = PB->width-(r+2)-extents.width;
-                break;
+        case 1:                /* left */
+            x = r + 2;
+            break;
+
+        case -1:               /* right */
+            x = PB->width - (r + 2) - extents.width;
+            break;
         }
         XSetFont(display, gc, PB->font->fid);
         /**
         *** If inactive, its grayed out
         **/
         if (PB->state == -1) {
-			XSetStipple(display, gc, XfStipple(display, window, "gray"));
+            XSetStipple(display, gc, XfStipple(display, window, "gray"));
             XSetFillStyle(display, gc, FillOpaqueStippled);
-			XSetBackground(display, gc, PB->bg);
+            XSetBackground(display, gc, PB->bg);
         }
         XDrawString(display, window, gc, x, y, PB->text, strlen(PB->text));
     }
     if (PB->pixmap != 0) {
-        int x,y;
+        int x, y;
 
-        x = (PB->width-PB->pix_w)/2;
-        y = (PB->height-PB->pix_h)/2;
+        x = (PB->width - PB->pix_w) / 2;
+        y = (PB->height - PB->pix_h) / 2;
 
-        XCopyPlane(display, PB->pixmap, window, gc, 
-                    0, 0, PB->pix_w, PB->pix_h, x, y, 1);
+        XCopyPlane(display, PB->pixmap, window, gc, 0, 0, PB->pix_w, PB->pix_h, x, y, 1);
         if (PB->state == -1) {
-			XSetStipple(display, gc, XfStipple(display, window, "gray"));
+            XSetStipple(display, gc, XfStipple(display, window, "gray"));
             XSetFillStyle(display, gc, FillStippled);
             XSetForeground(display, gc, PB->bg);
             XFillRectangle(display, window, gc, x, y, PB->pix_w, PB->pix_h);
-		}
+        }
     }
     XSetFillStyle(display, gc, FillSolid);
-	XFlush(display);
+    XFlush(display);
 }
 
 /**
  ** XfSetPBPixmap - Set a pixmap in a PushButton
  **/
 
-Pixmap
-XfSetPBPixmap(PButton PB, Pixmap pixmap, int w, int h)
+Pixmap XfSetPBPixmap(PButton PB, Pixmap pixmap, int w, int h)
 {
     Pixmap ret = PB->pixmap;
 
@@ -207,6 +202,5 @@ XfSetPBPixmap(PButton PB, Pixmap pixmap, int w, int h)
     PB->pix_w = w;
     PB->pix_h = h;
 
-    return(ret);
+    return (ret);
 }
-

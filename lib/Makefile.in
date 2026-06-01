@@ -6,7 +6,7 @@ RANLIB=@RANLIB@
 
 DEFS=@DEFS@
 CPPFLAGS=@CPPFLAGS@ @XINCLUDES@
-CFLAGS=@CFLAGS@
+CFLAGS=@CFLAGS@ -Wall -Wextra
 
 OBJ=Button.o Slider.o VisInfo.o Joystick.o MapAndWait.o init.o AMap.o \
     List.o xgets.o chd.o toggle.o confirm.o hershey.o Composite.o \
@@ -18,8 +18,16 @@ libXfred.a:	$(OBJ) Xfred.h
 	ar cqv libXfred.a $(OBJ)
 	$(RANLIB) libXfred.a
 
+XLIBS=@XLIBS@
+
+panes: panes.o libXfred.a
+	$(CC) -o panes panes.o libXfred.a $(XLIBS)
+
+sampler: sampler.o libXfred.a
+	$(CC) -o sampler sampler.o libXfred.a $(XLIBS)
+
 clean:
-	rm -f $(OBJ) libXfred.a
+	rm -f $(OBJ) libXfred.a panes panes.o sampler sampler.o
 
 .c.o:
 	$(CC) -c $(DEFS) $(CPPFLAGS) $(CFLAGS) $<
@@ -36,3 +44,4 @@ init.o:		init.c
 AMap.o:		AMap.c Xfred.h AMap.h Callback.h VisInfo.h
 List.o: 	Button.c Slider.c Button.h Slider.h List.h VisInfo.h Callback.h
 hershey.o:	hershey.c hershey.h
+	$(CC) -c $(DEFS) $(CPPFLAGS) $(CFLAGS) -Wno-missing-braces -o $@ hershey.c

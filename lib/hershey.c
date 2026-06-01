@@ -7,55 +7,55 @@
 #include "hershey.h"
 #include "hershey.oc.h"
 
-int
-XfHersheyWidth(char c, int cset)
+int XfHersheyWidth(char c, int cset)
 {
-	int     ptr;
-	char    *str;
-	if (cset == 0) {
-		ptr = c;
-	} else {
-		ptr = oc_trans[cset][c-' '];
-	}
-	str = oc[ptr].letter;
-	return((str[1] - 'R') - (str[0] - 'R'));
+    int ptr;
+    char *str;
+    if (cset == 0) {
+        ptr = c;
+    } else {
+        ptr = oc_trans[cset][c - ' '];
+    }
+    str = oc[ptr].letter;
+    return ((str[1] - 'R') - (str[0] - 'R'));
 }
 
 void
-XfHersheyChar(Display *display, Drawable drawable, GC gc, int x, int y, float xscale, float yscale, float cost, float sint, char c, int cset)
+XfHersheyChar(Display *display, Drawable drawable, GC gc, int x, int y, float xscale, float yscale, float cost,
+              float sint, char c, int cset)
 {
-	char    *str;
-	int     count;
-	int     ptr;
-	float   xt, yt, x2;
-	int     xlast, ylast;
-	int     i;
-	int     move = 1;
+    char *str;
+    int count;
+    int ptr;
+    float xt, yt, x2;
+    int xlast, ylast;
+    int i;
+    int move = 1;
 
-	if (cset == 0) {
-		ptr = c;
-	} else {
-		ptr = oc_trans[cset][c-' '];
-	}
-	str = oc[ptr].letter;
-	count = oc[ptr].count;
-	for (i = 1 ; i < count ; i++) {
-		if (str[i*2] == ' ') {
-				move = 1;
-				continue;
-		}
-		xt = str[(i*2)] - 'R';
-		yt = str[(i*2)+1] - 'R';
-		x2 = x + (xt*cost -yt*sint)*xscale;
-		yt = y + (xt*sint +yt*cost)*yscale;
-		xt = x2;
-		if (!move) {
-			XDrawLine(display, drawable, gc, xlast, ylast, (int)xt, (int)yt);
-		}
-		move = 0;
-		xlast = (int)xt;
-		ylast = (int)yt;
-	}
+    if (cset == 0) {
+        ptr = c;
+    } else {
+        ptr = oc_trans[cset][c - ' '];
+    }
+    str = oc[ptr].letter;
+    count = oc[ptr].count;
+    for (i = 1; i < count; i++) {
+        if (str[i * 2] == ' ') {
+            move = 1;
+            continue;
+        }
+        xt = str[(i * 2)] - 'R';
+        yt = str[(i * 2) + 1] - 'R';
+        x2 = x + (xt * cost - yt * sint) * xscale;
+        yt = y + (xt * sint + yt * cost) * yscale;
+        xt = x2;
+        if (!move) {
+            XDrawLine(display, drawable, gc, xlast, ylast, (int) xt, (int) yt);
+        }
+        move = 0;
+        xlast = (int) xt;
+        ylast = (int) yt;
+    }
 }
 
 /**
@@ -65,49 +65,50 @@ XfHersheyChar(Display *display, Drawable drawable, GC gc, int x, int y, float xs
 **/
 
 void
-XfHersheyString(Display *display, Drawable drawable, GC gc, int x, int y, float xscale, float yscale, float angle, char *str, int cset, float align)
+XfHersheyString(Display *display, Drawable drawable, GC gc, int x, int y, float xscale, float yscale, float angle,
+                char *str, int cset, float align)
 {
-	int i;
-	float cost,sint;
-	float x1,y1;
-	int count,c;
-	float c1,c2,c3,c4;
+    int i;
+    float cost, sint;
+    float x1, y1;
+    int count, c;
+    float c1, c2, c3, c4;
 
-	if (strlen(str) == 0) return;
+    if (strlen(str) == 0)
+        return;
 
-	cost = cos(angle);
-	sint = sin(angle);
+    cost = cos(angle);
+    sint = sin(angle);
 
-	x1 = x;
-	y1 = y;
+    x1 = x;
+    y1 = y;
 
-	count = 0;
-	for (i = 0 ; i < strlen(str) ; i++) {
-		count += XfHersheyWidth(str[i], cset);
-	}
+    count = 0;
+    for (i = 0; str[i] != '\0'; i++) {
+        count += XfHersheyWidth(str[i], cset);
+    }
 
-	/**
+        /**
 	*** Adjust for alignment.k
 	**/
 
-	x1 = x1 + (align-1.0)*((float)count*cost*xscale/2.0);
-	y1 = y1 + (align-1.0)*((float)count*sint*yscale/2.0);
+    x1 = x1 + (align - 1.0) * ((float) count * cost * xscale / 2.0);
+    y1 = y1 + (align - 1.0) * ((float) count * sint * yscale / 2.0);
 
-	/**
+        /**
 	*** Each character needs to be centered in its cell.
 	**/
 
-	c3 = 0;
-	c4 = 0;
-	for (i = 0 ; i < strlen(str) ; i++) {
-		c = XfHersheyWidth(str[i], cset);
-		c1 = c*xscale*cost;
-		c2 = c*yscale*sint;
-		x = x1+c3+c1/2.0;
-		y = y1+c4+c2/2.0;
-		XfHersheyChar(display, drawable, gc, x, y, xscale, yscale, 
-			cost, sint, str[i], cset);
-		c3 += c1;
-		c4 += c2;
-	}
+    c3 = 0;
+    c4 = 0;
+    for (i = 0; str[i] != '\0'; i++) {
+        c = XfHersheyWidth(str[i], cset);
+        c1 = c * xscale * cost;
+        c2 = c * yscale * sint;
+        x = x1 + c3 + c1 / 2.0;
+        y = y1 + c4 + c2 / 2.0;
+        XfHersheyChar(display, drawable, gc, x, y, xscale, yscale, cost, sint, str[i], cset);
+        c3 += c1;
+        c4 += c2;
+    }
 }

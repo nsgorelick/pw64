@@ -8,16 +8,15 @@
  * CAUTION: Changes event mask.
  */
 
-void
-MapAndWait(Display *display, Window w)
+void MapAndWait(Display *display, Window w)
 {
-	XEvent	event;
-	XWindowAttributes window_attributes;
+    XEvent event;
+    XWindowAttributes window_attributes;
 
-	XGetWindowAttributes(display, w, &window_attributes);
-	XSelectInput(display, w, ExposureMask);
-	XFlush(display);
-	XMapWindow(display, w);
-	XWindowEvent(display,w,ExposureMask, &event);
-	XSelectInput(display, w, window_attributes.your_event_mask);
+    XGetWindowAttributes(display, w, &window_attributes);
+    XSelectInput(display, w, ExposureMask);
+    XFlush(display);
+    XMapWindow(display, w);
+    XWindowEvent(display, w, ExposureMask, &event);
+    XSelectInput(display, w, window_attributes.your_event_mask);
 }

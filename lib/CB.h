@@ -5,23 +5,23 @@
 #define CB_ON  4
 
 struct tagCB {
-	int type;
-    Display        *display;
-    Window          parent;
-    Window          window;
-    int             width, height;
-    int           hi, lo, fg, bg; /* 3-D colors */
-	
-    CallBack        function;
-   	XButton			nextB;
+    int type;
+    Display *display;
+    Window parent;
+    Window window;
+    int width, height;
+    int hi, lo, fg, bg;         /* 3-D colors */
 
-    int             state;
-    char           *text;
-    int             align;
-    XFontStruct    *font;
-    Pixmap          pixmap;
-    int             pix_w;
-    int             pix_h;
+    CallBack function;
+    XButton nextB;
+
+    int state;
+    char *text;
+    int align;
+    XFontStruct *font;
+    Pixmap pixmap;
+    int pix_w;
+    int pix_h;
 };
 
 #define XfResizeCB(CB, w, h)    XfPosCB(CB, MAXINT, MAXINT, w, h)
@@ -30,24 +30,10 @@ struct tagCB {
 /**
 *** Function declarations
 **/
-#ifdef __STDC__
+CButton XfCreateCB(Display *, Window, int, int, int, int, int, int, int, int, char *, int, XFontStruct *, CallBack);
+int XfPushCB(CButton, XEvent *);
+void RedrawCB(CButton);
+Pixmap XfSetCBPixmap(CButton, Pixmap, int, int);
+int XfActiveCB(CButton);
 
-	CButton         XfCreateCB(Display *, Window, int, int, int, int,
-							   int, int, int, int, char *, int,
-							   XFontStruct *, CallBack);
-    int             XfPushCB(CButton, XEvent *);
-    void            RedrawCB(CButton);
-    Pixmap          XfSetCBPixmap(CButton, Pixmap, int, int);
-	int 			XfActiveCB(CButton);
-
-#else
-
-	CButton         XfCreateCB();
-    int             XfPushCB();
-    void            RedrawCB();
-    Pixmap          XfSetCBPixmap();
-	int 			XfActiveCB();
-
-#endif              /* __STDC__ */
-
-#endif              /* _CB_H_ */
+#endif                          /* _CB_H_ */

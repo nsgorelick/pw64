@@ -2,11 +2,11 @@
 #include <X11/keysym.h>
 #include <stdlib.h>
 
-#define MAX_X   12      /* Number of Buttons across */
-#define MAX_Y   8       /* Number of Buttons down */
-#define SIZE_X  30      /* Size of button in X direction */
-#define SIZE_Y  30      /* Size of button in Y direction */
-#define BORDER  1       /* Size of border on buttons */
+#define MAX_X   12              /* Number of Buttons across */
+#define MAX_Y   8               /* Number of Buttons down */
+#define SIZE_X  30              /* Size of button in X direction */
+#define SIZE_Y  30              /* Size of button in Y direction */
+#define BORDER  1               /* Size of border on buttons */
 
 #define BADMOVE XBell(display, 50)
 #define Primary(i)      (i == 1 || i == 2 || i == 4)
@@ -16,22 +16,23 @@ Display *display;
 int screen;
 XColor Colors[8];
 GC gc;
-Font font;
+XFontStruct *font;
 
 Button Case;
-Button (B[MAX_X][MAX_Y]);
-struct VisualInfo *V[22];
+Button(B[MAX_X][MAX_Y]);
+static char *cross_bitmap;
 int cx = 0;
 int cy = 0;
 int pushed = 0;
-int moves=0;
+int moves = 0;
 int panes;
-int action(Button b, XEvent *E);
-void removeButton(Button B, XEvent *E);
+static Button destroy_pending;
+int action(Button b, XEvent * E);
+void removeButton(Button B, XEvent * E);
 
 struct stack {
-    int x1,y1;
-    int x2,y2;
+    int x1, y1;
+    int x2, y2;
     int a;
     int b;
     int c;
@@ -41,19 +42,22 @@ struct stack {
 // Function prototypes
 int Next(int i, int j);
 int Land(int i, int j);
-int InitColors();
-void CreateWindow();
-void CreateVisuals();
+int InitColors(void);
+void CreateWindow(void);
+void CreateVisuals(void);
+void AddCellVisuals(Button b);
 Button CreateButton(int i, int j);
 void Set(int i, int j);
 void Clear(int i, int j);
-void Update(Button B,int i);
-void HandleKeyPress(XEvent *E);
-void undo();
-int more_moves();
-void GoodBye();
-void GetFont();
-void Intro();
+void Update(Button B, int i);
+void HandleKeyPress(XEvent * E);
+void undo(void);
+int more_moves(void);
+void GoodBye(void);
+void GetFont(void);
+void Intro(void);
+static int text_pixel_width(const char *s);
+static Button create_overlay(const char *line1, const char *line2, const char *line3);
 void push(int x1, int y1, int x2, int y2, int a, int b, int c);
 int pop(int *x1, int *y1, int *x2, int *y2, int *a, int *b, int *c);
 
@@ -65,27 +69,28 @@ int pop(int *x1, int *y1, int *x2, int *y2, int *a, int *b, int *c);
                     if we are primary and next is primary,
                     or next is secondary and we are in it.
 */
-int
-Next(int i, int j)
+int Next(int i, int j)
 {
     int current;
     int next;
 
-    if (i == 0 && j == 0) return(-1);
-    if ((cx + i) < 0 || (cx + i) >= MAX_X) return(-1);
-    if ((cy + j) < 0 || (cy + j) >= MAX_Y) return(-1);
+    if (i == 0 && j == 0)
+        return (-1);
+    if ((cx + i) < 0 || (cx + i) >= MAX_X)
+        return (-1);
+    if ((cy + j) < 0 || (cy + j) >= MAX_Y)
+        return (-1);
 
     current = (B[cx][cy])->state % 7;
-    next = (B[cx+i][cy+j])->state % 7;
+    next = (B[cx + i][cy + j])->state % 7;
 
-    if (next == current || (Primary(current) && Primary(next))) return(0);
+    if (next == current || (Primary(current) && Primary(next)))
+        return (0);
     if (Primary(current) && Secondary(next) && (next & current))
-        return(next - current);
+        return (next - current);
 
-    return(-1);
+    return (-1);
 }
-
-
 
 /* This checks landing block for valid land
     Returns value of landing block after jump
@@ -95,26 +100,28 @@ Next(int i, int j)
                         if Same color,
                         if Primary to Primary (makes secondary)
 */
-int
-Land(int i, int j)
+int Land(int i, int j)
 {
     int current;
     int land;
 
-    if (i == 0 && j == 0) return(-1);
-    if ((cx + i) < 0 || (cx + i) >= MAX_X) return(-1);
-    if ((cy + j) < 0 || (cy + j) >= MAX_Y) return(-1);
+    if (i == 0 && j == 0)
+        return (-1);
+    if ((cx + i) < 0 || (cx + i) >= MAX_X)
+        return (-1);
+    if ((cy + j) < 0 || (cy + j) >= MAX_Y)
+        return (-1);
 
     current = (B[cx][cy])->state % 7;
-    land = (B[cx+i][cy+j])->state % 7;
+    land = (B[cx + i][cy + j])->state % 7;
 
-    if (land == 0 || current == land) return(current);
-    if (Primary(current) && Primary(land)) return(current + land);
+    if (land == 0 || current == land)
+        return (current);
+    if (Primary(current) && Primary(land))
+        return (current + land);
 
-    return(-1);
+    return (-1);
 }
-
-
 
 char *ColorName[] = {
     "White",
@@ -127,111 +134,113 @@ char *ColorName[] = {
     "Black"
 };
 
-
-
-int
-InitColors()
+int InitColors(void)
 {
     int i;
     Colormap cmap = DefaultColormap(display, screen);
 
-    for (i = 0 ; i < 8 ; i++) {
-        if (!XParseColor(display, cmap, ColorName[i], &Colors[i])) return(0);
-        if (!XAllocColor(display, cmap, &Colors[i])) return(0);
+    for (i = 0; i < 8; i++) {
+        if (!XParseColor(display, cmap, ColorName[i], &Colors[i]))
+            return (0);
+        if (!XAllocColor(display, cmap, &Colors[i]))
+            return (0);
     }
     return 1;
 }
 
-void
-CreateWindow()
+void CreateWindow(void)
 {
     Case = XfCreateButton(display, RootWindow(display, screen),
-        10, 10, (SIZE_X+BORDER) * MAX_X+ 1, (SIZE_Y+BORDER) * MAX_Y + 1, 
-        (unsigned long)1, BLACK(display), "Caseing", 1);
+                          10, 10, (SIZE_X + BORDER) * MAX_X + 1, (SIZE_Y + BORDER) * MAX_Y + 1,
+                          (unsigned long) 1, BLACK(display), "Caseing", 1);
     XfActivateButton(Case, ExposureMask);
 }
 
-
-void
-CreateVisuals()
+void CreateVisuals(void)
 {
     int i, j;
-    char    *bitmap;
+    int rowbytes = SIZE_X / 8 + 1;
 
 /*
- * This creates a cross to mark valid moves.  Creation is at runtime
- * so SIZE can be changed without messing anything up.
- *
- * (Note:   I really don't the way this looks on the board)
+ * Cross bitmap for valid-move markers. Built once; each cell gets its own
+ * pixmap copy via XfCreateVisual (pixmaps must not be shared across buttons).
  */
+    cross_bitmap = (char *) calloc((size_t) rowbytes * (SIZE_Y + 1), 1);
+    if (cross_bitmap == NULL) {
+        fprintf(stderr, "panes: out of memory\n");
+        exit(1);
+    }
 
-    bitmap = (char *)malloc((unsigned)((SIZE_X/8+1) * (SIZE_Y+1)));
-
-    for (j = 0 ; j < SIZE_Y ; j++) {
-        for (i = 0 ; i <= SIZE_X ; i++) {
-            if (j == SIZE_Y / 2 || i == SIZE_X / 2) {
-                bitmap[j*(SIZE_X/8+1)+(i/8)] |= (1 << (i%8));
-            } else {
-                bitmap[j*(SIZE_X/8+1)+(i/8)] = 0;
-            }
+    for (j = 0; j < SIZE_Y; j++) {
+        for (i = 0; i < SIZE_X; i++) {
+            if (j == SIZE_Y / 2 || i == SIZE_X / 2)
+                cross_bitmap[j * rowbytes + (i / 8)] |= (1 << (i % 8));
         }
     }
-
-    for (i = 0 ; i < 7 ; i++) {
-        V[i] = XfCreateVisual(Case, 0, 0, SIZE_X, SIZE_Y, Colors[i].pixel,
-            (unsigned long)0, XfSolidVisual);
-        V[i+7] = XfCreateVisual(Case, 0, 0, SIZE_X, SIZE_Y, Colors[7].pixel,
-            Colors[i].pixel, XfPixmapVisual, 1, bitmap);
-        V[i+14] = XfCreateVisual(Case, 0, 0, SIZE_X, SIZE_Y, Colors[0].pixel,
-            Colors[i].pixel, XfPixmapVisual, 1, bitmap);
-    }
-    V[21] = XfCreateVisual(Case, 1, 1, SIZE_X-3, SIZE_Y-3, BLACK(display),
-            (unsigned long)0, XfOutlineVisual);
-
-    free(bitmap);
 }
 
+void AddCellVisuals(Button b)
+{
+    int k;
+
+    for (k = 0; k < 7; k++) {
+        XfAddButtonVisual(b, k, XfCreateVisual(b, 0, 0, SIZE_X, SIZE_Y,
+                                               Colors[k].pixel, (unsigned long) 0, XfSolidVisual));
+        XfAddButtonVisual(b, k + 7, XfCreateVisual(b, 0, 0, SIZE_X, SIZE_Y,
+                                                   Colors[7].pixel, Colors[k].pixel, XfPixmapVisual, 1, cross_bitmap));
+        XfAddButtonVisual(b, k + 14, XfCreateVisual(b, 0, 0, SIZE_X, SIZE_Y,
+                                                    Colors[0].pixel, Colors[k].pixel, XfPixmapVisual, 1, cross_bitmap));
+    }
+    /* Jump-target outline on primary-color states (each state needs its own struct) */
+    XfAddButtonVisual(b, 3, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                           BLACK(display), (unsigned long) 0, XfOutlineVisual));
+    XfAddButtonVisual(b, 3 + 7, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                               BLACK(display), (unsigned long) 0, XfOutlineVisual));
+    XfAddButtonVisual(b, 3 + 14, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                                BLACK(display), (unsigned long) 0, XfOutlineVisual));
+    XfAddButtonVisual(b, 5, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                           BLACK(display), (unsigned long) 0, XfOutlineVisual));
+    XfAddButtonVisual(b, 5 + 7, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                               BLACK(display), (unsigned long) 0, XfOutlineVisual));
+    XfAddButtonVisual(b, 5 + 14, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                                BLACK(display), (unsigned long) 0, XfOutlineVisual));
+    XfAddButtonVisual(b, 6, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                           BLACK(display), (unsigned long) 0, XfOutlineVisual));
+    XfAddButtonVisual(b, 6 + 7, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                               BLACK(display), (unsigned long) 0, XfOutlineVisual));
+    XfAddButtonVisual(b, 6 + 14, XfCreateVisual(b, 1, 1, SIZE_X - 3, SIZE_Y - 3,
+                                                BLACK(display), (unsigned long) 0, XfOutlineVisual));
+}
 
 // Create a wrapper function for action
-void actionWrapper(Button b, XEvent *E) {
+void actionWrapper(Button b, XEvent *E)
+{
     action(b, E);
 }
 
-Button
-CreateButton(int i, int j)
+Button CreateButton(int i, int j)
 {
     Button b;
     char buf[10];
     int k;
 
-    sprintf(buf, "%d,%d", i, j);
+    snprintf(buf, sizeof(buf), "%d,%d", i, j);
 
     b = XfCreateButton(display, Case->window,
-        i * (SIZE_X + BORDER), j * (SIZE_Y + BORDER), 
-        SIZE_X, SIZE_Y, (unsigned long)BORDER, 
-        BLACK(display), buf, 21);
+                       i * (SIZE_X + BORDER), j * (SIZE_Y + BORDER),
+                       SIZE_X, SIZE_Y, (unsigned long) BORDER, BLACK(display), buf, 21);
 
-    for (k = 0; k < 21; k++) {
-        XfAddButtonVisual(b, k, V[k]);
-        XfAddButtonCallback(b, k, actionWrapper, NULL);
-    }
-    XfAddButtonVisual(b, 3,   V[21]);
-    XfAddButtonVisual(b, 3+7, V[21]);
-    XfAddButtonVisual(b, 3+14,V[21]);
-    XfAddButtonVisual(b, 5,   V[21]);
-    XfAddButtonVisual(b, 5+7, V[21]);
-    XfAddButtonVisual(b, 5+14,V[21]);
-    XfAddButtonVisual(b, 6,   V[21]);
-    XfAddButtonVisual(b, 6+7, V[21]);
-    XfAddButtonVisual(b, 6+14,V[21]);
+    AddCellVisuals(b);
+    for (k = 0; k < 21; k++)
+        XfAddButtonCallback(b, k, XF_CALLBACK(actionWrapper), NULL);
 
-    XfActivateButtonState(b, (rand()%6)+1, 
-        (ExposureMask | ButtonPressMask | KeyPressMask));
+    XfActivateButtonState(b, (rand() % 6) + 1, (ExposureMask | ButtonPressMask | KeyPressMask));
     (B[i][j]) = b;
+    return b;
 }
 
-
-int action(Button b, XEvent *E) {
+int action(Button b, XEvent *E)
+{
     int i, j;
     int x, y;
     int count;
@@ -250,7 +259,11 @@ int action(Button b, XEvent *E) {
         return 1;
     }
 
-    sscanf(b->name, "%d,%d", &i, &j);
+    if (sscanf(b->name, "%d,%d", &i, &j) != 2)
+        return 0;
+    if (i < 0 || j < 0 || i >= MAX_X || j >= MAX_Y)
+        return 0;
+
     if (pushed == 0) {
         if (b->state == 0) {
             BADMOVE;
@@ -278,19 +291,38 @@ int action(Button b, XEvent *E) {
         Set(i, j);
     } else {
         if (b != B[cx][cy]) {
+            int dx = i - cx;
+            int dy = j - cy;
+            int land_state;
+            int next_state;
+
             current = (B[cx][cy]);
+            if (((i + cx) & 1) != 0 || ((j + cy) & 1) != 0) {
+                BADMOVE;
+                return 0;
+            }
             next = (B[(i + cx) / 2][(j + cy) / 2]);
             land = b;
+            if (current == NULL || next == NULL || land == NULL) {
+                BADMOVE;
+                return 0;
+            }
 
             if (land->state < 7) {
+                BADMOVE;
+                return 0;
+            }
+            land_state = Land(dx, dy);
+            next_state = Next(dx / 2, dy / 2);
+            if (land_state < 0 || next_state < 0) {
                 BADMOVE;
                 return 0;
             }
             push(cx, cy, i, j, current->state, next->state, land->state);
             moves++;
 
-            Update(land, Land(i - cx, j - cy));
-            Update(next, Next((i - cx) / 2, (j - cy) / 2));
+            Update(land, land_state);
+            Update(next, next_state);
             Update(current, 0);
         }
         for (x = -1; x < 2; x++) {
@@ -306,30 +338,31 @@ int action(Button b, XEvent *E) {
     return 1;
 }
 
-
-void
-Set(int i, int j)
-{
-    int k = (B[i][j])->state + 7;
-    Update((B[i][j]),k);
-}
-
-
-void
-Clear(int i, int j)
+void Set(int i, int j)
 {
     int k;
-    if (i < 0 || j < 0 || i >= MAX_X || j >= MAX_Y) return;
+
+    if (i < 0 || j < 0 || i >= MAX_X || j >= MAX_Y)
+        return;
+    k = (B[i][j])->state + 7;
+    Update((B[i][j]), k);
+}
+
+void Clear(int i, int j)
+{
+    int k;
+    if (i < 0 || j < 0 || i >= MAX_X || j >= MAX_Y)
+        return;
     k = (B[i][j])->state % 7;
     Update((B[i][j]), k);
 }
 
-
-void
-Update(Button B,int i)
+void Update(Button B, int i)
 {
+    if (B == NULL || i < 0 || i >= B->maxstate)
+        return;
     B->state = i;
-    (*(B->updateCallback))(B, NULL);
+    (*(B->updateCallback)) (B, NULL);
 }
 
 int main(int argc, char *argv[])
@@ -340,55 +373,66 @@ int main(int argc, char *argv[])
     XEvent E;
     int depth;
 
+    (void) argc;
+    (void) argv;
+
     if (!initx(NULL, &display, &screen, &depth, &gc)) {
-        (void)fprintf(stderr, "Could not initialize X server\n");
+        (void) fprintf(stderr, "Could not initialize X server\n");
         exit(1);
     }
     if (depth < 3) {
-        (void)fprintf(stderr, "Cannot run on a %d bit display\n",depth);
+        (void) fprintf(stderr, "Cannot run on a %d bit display\n", depth);
         exit(1);
     }
     if (InitColors() == 0) {
-        (void)fprintf(stderr, "Could not init colors\n");
+        (void) fprintf(stderr, "Could not init colors\n");
         exit(1);
     }
-    (void)srand(getpid());
+    (void) srand(getpid());
     GetFont();
+    XfSetDefaultFont(display, font);
     CreateWindow();
     CreateVisuals();
 
-    panes = MAX_X*MAX_Y;
-    for (j = 0 ; j < MAX_Y ; j++) {
-        for (i = 0 ; i < MAX_X ; i++) {
+    panes = MAX_X * MAX_Y;
+    for (j = 0; j < MAX_Y; j++) {
+        for (i = 0; i < MAX_X; i++) {
             CreateButton(i, j);
         }
     }
     Intro();
     while (1) {
         XNextEvent(display, &E);
+        destroy_pending = NULL;
         XfButtonPush(XfEventButton(&E), &E);
+        if (destroy_pending != NULL) {
+            XfDestroyButton(destroy_pending);
+            destroy_pending = NULL;
+        }
     }
 }
 
 void push(int x1, int y1, int x2, int y2, int a, int b, int c)
 {
     struct stack *n;
-    n = (struct stack *)malloc(sizeof(struct stack));
+    n = (struct stack *) malloc(sizeof(struct stack));
     n->x2 = x2;
     n->y2 = y2;
     n->x1 = x1;
     n->y1 = y1;
-    n->a = a % 7;
-    n->b = b % 7;
-    n->c = c % 7;
+    n->a = a;
+    n->b = b;
+    n->c = c;
     n->next = head;
     head = n;
 }
 
-int pop(int *x1, int *y1, int *x2, int *y2, int *a, int *b, int *c) {
+int pop(int *x1, int *y1, int *x2, int *y2, int *a, int *b, int *c)
+{
     struct stack *n = head;
 
-    if (n == NULL) return 0;
+    if (n == NULL)
+        return 0;
 
     *a = n->a;
     *b = n->b;
@@ -414,7 +458,7 @@ void HandleKeyPress(XEvent *E)
     }
 }
 
-void undo()
+void undo(void)
 {
     int x, y;
     int x1, y1;
@@ -439,27 +483,28 @@ void undo()
     Update(B[(x1 + x2) / 2][(y1 + y2) / 2], next);
 }
 
-int more_moves()
+int more_moves(void)
 {
     int i;
     int j;
     int x;
     int y;
-    int t_x=cx;
-    int t_y=cy;
+    int t_x = cx;
+    int t_y = cy;
 
-    for (j = 0 ; j < MAX_Y ; j++) {
-        for (i = 0 ; i < MAX_X ; i++) {
-            if ((B[i][j])->state == 0) continue;
+    for (j = 0; j < MAX_Y; j++) {
+        for (i = 0; i < MAX_X; i++) {
+            if ((B[i][j])->state == 0)
+                continue;
 
             cx = i;
             cy = j;
-            for (x = -1 ; x < 2 ; x++) {
-                for (y = -1 ; y < 2 ; y++) {
-                    if (Next(x,y) != -1 && Land(x*2,y*2) != -1) {
+            for (x = -1; x < 2; x++) {
+                for (y = -1; y < 2; y++) {
+                    if (Next(x, y) != -1 && Land(x * 2, y * 2) != -1) {
                         cx = t_x;
                         cy = t_y;
-                        return(1);
+                        return (1);
                     }
                 }
             }
@@ -469,87 +514,88 @@ int more_moves()
     return 0;
 }
 
-void GoodBye()
+static int text_pixel_width(const char *s)
+{
+    XCharStruct xcs;
+    int dir, asc, des;
+
+    XTextExtents(font, s, (int) strlen(s), &dir, &asc, &des, &xcs);
+    return xcs.width;
+}
+
+static Button create_overlay(const char *line1, const char *line2, const char *line3)
 {
     Button B;
-    char buf[256];
-    int width, height;
-    XFontStruct *fs;
-    int asc, desc, dir;
-    XCharStruct xcs;
+    int line_h = font->ascent + font->descent;
+    int ypos = line_h;
+    int width = line1 ? text_pixel_width(line1) : 0;
+    int height;
+    int w2, w3;
 
-    strcpy(buf,"NO MORE MOVES");
-    fs = XQueryFont(display, font);
-    XTextExtents(fs, buf, strlen(buf), &dir, &asc, &desc, &xcs);
+    if (line2) {
+        w2 = text_pixel_width(line2);
+        if (w2 > width)
+            width = w2;
+    }
+    if (line3) {
+        w3 = text_pixel_width(line3);
+        if (w3 > width)
+            width = w3;
+    }
+    width += 24;
+    height = line_h * 4 + 24;
 
-    width = xcs.width*1.4;
-    height = (xcs.ascent + xcs.descent)*3.5;
-
-    B = XfCreateButton(display, Case->window, 
-        Case->width/2 - width/2, Case->height/2 - height/2, width,height,
-        (unsigned long)1, BLACK(display), "Out'o Moves", 1);
-    XfAddButtonVisual(B, 0, XfCreateVisual(B, 0,
-            (int)(height*0.3), 0, 0, BLACK(display),
-            WHITE(display), XfTextVisual, buf, font, 0));
-    sprintf(buf, "TOTAL MOVES: %d",moves);
-    XfAddButtonVisual(B, 0, XfCreateVisual(B, 0,
-            (int)(height*0.6), 0, 0, BLACK(display),
-            WHITE(display), XfTextVisual, buf, font, 0));
-    XfAddButtonCallback(B, 0, removeButton, NULL);
+    B = XFCreateButton(display, Case->window,
+                       Case->width / 2 - width / 2, Case->height / 2 - height / 2,
+                       width, height, 1, BLACK(display), WHITE(display), "overlay", 1);
+    XfAddButtonVisual(B, 0, XfCreateVisual(B, 0, 0, 0, 0, WHITE(display), WHITE(display), XfSolidVisual));
+    if (line1) {
+        XfAddButtonVisual(B, 0, XfCreateVisual(B, 0, ypos, 0, 0,
+                                               BLACK(display), WHITE(display), XfTextVisual, line1, font, 0));
+        ypos += line_h + 6;
+    }
+    if (line2) {
+        XfAddButtonVisual(B, 0, XfCreateVisual(B, 0, ypos, 0, 0,
+                                               BLACK(display), WHITE(display), XfTextVisual, line2, font, 0));
+        ypos += line_h + 6;
+    }
+    if (line3) {
+        XfAddButtonVisual(B, 0, XfCreateVisual(B, 0, ypos, 0, 0,
+                                               BLACK(display), WHITE(display), XfTextVisual, line3, font, 0));
+    }
+    XfAddButtonCallback(B, 0, XF_CALLBACK(removeButton), NULL);
     XfActivateButton(B, ExposureMask | ButtonPressMask);
+    return B;
+}
+
+void GoodBye(void)
+{
+    char buf[256];
+
+    snprintf(buf, sizeof(buf), "TOTAL MOVES: %d", moves);
+    create_overlay("NO MORE MOVES", buf, NULL);
 }
 
 void removeButton(Button B, XEvent *E)
 {
-    XfDestroyButton(B);
+    (void) E;
+    /* Destroy after XfButtonPush returns; destroying here frees the callback list */
+    destroy_pending = B;
 }
 
-void GetFont()
+void GetFont(void)
 {
-	XFontStruct *fs;
-
-    fs = XLoadQueryFont(display, "terminal14");
-    if (fs == NULL)
-    fs = XLoadQueryFont(display, "fixed");
-    if (fs == NULL) {
+    font = XLoadQueryFont(display, "terminal14");
+    if (font == NULL)
+        font = XLoadQueryFont(display, "fixed");
+    if (font == NULL) {
         fprintf(stderr, "Cant find fonts\n");
         exit(1);
     }
-	font = fs->fid;
-    XSetFont(display, gc, font);
+    XSetFont(display, gc, font->fid);
 }
 
-void Intro()
+void Intro(void)
 {
-    Button B;
-    char buf[256];
-    XFontStruct *fs;
-    int asc, desc, dir;
-    XCharStruct xcs;
-    int width,height;
-
-    strcpy(buf,"A Stained Glass Clone");
-    fs = XQueryFont(display, font);
-    XTextExtents(fs, buf, strlen(buf), &dir, &asc, &desc, &xcs);
-
-    width = xcs.width*1.25;
-    height = (xcs.ascent + xcs.descent)*7;
-
-    B = XfCreateButton(display, Case->window, 
-        Case->width/2 - width/2, Case->height/2 - height/2, width,height,
-        (unsigned long)1, BLACK(display), "Out'o Moves", 1);
-    strcpy(buf,"PANES");
-    XfAddButtonVisual(B, 0, XfCreateVisual(B, 0,
-            (int)(height*0.1), 0, 0, BLACK(display),
-            WHITE(display), XfTextVisual, buf, font, 0));
-    strcpy(buf,"A Stained Glass Clone");
-    XfAddButtonVisual(B, 0, XfCreateVisual(B, 0,
-            (int)(height*0.25), 0, 0, BLACK(display),
-            WHITE(display), XfTextVisual, buf, font, 0));
-    sprintf(buf, "Click Here To Start");
-    XfAddButtonVisual(B, 0, XfCreateVisual(B, 0,
-            (int)(height*0.8), 0, 0, BLACK(display),
-            WHITE(display), XfTextVisual, buf, font, 0));
-    XfAddButtonCallback(B, 0, removeButton, NULL);
-    XfActivateButton(B, ExposureMask | ButtonPressMask);
+    create_overlay("PANES", "A Stained Glass Clone", "Click Here To Start");
 }

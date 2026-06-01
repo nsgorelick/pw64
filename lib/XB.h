@@ -8,17 +8,16 @@
 #define XF_MB   4
 #define XF_LB   5
 
-/* typedef struct tagCB 		*MButton;	*/	/* MenuButton */
-typedef struct tagAnyButton *AButton;	/* AnyButton */
-typedef struct tagPB 		*PButton;	/* PushButton */
-typedef struct tagRB 		*RButton;	/* RadioButton */
-typedef struct tagCB 		*CButton;	/* CheckButton */
-typedef struct tagMB 		*MButton;	/* Menu Button */
-typedef struct tagLB 		*LButton;	/* Label Button */
-typedef union _XButton 		*XButton;
+                                                                /* typedef struct tagCB 		*MButton;	*//* MenuButton */
+typedef struct tagAnyButton *AButton;   /* AnyButton */
+typedef struct tagPB *PButton;  /* PushButton */
+typedef struct tagRB *RButton;  /* RadioButton */
+typedef struct tagCB *CButton;  /* CheckButton */
+typedef struct tagMB *MButton;  /* Menu Button */
+typedef struct tagLB *LButton;  /* Label Button */
+typedef union _XButton *XButton;
 
 typedef struct tagMenuItem MenuItem;
-
 
 #include "PB.h"
 #include "RB.h"
@@ -27,33 +26,33 @@ typedef struct tagMenuItem MenuItem;
 #include "LB.h"
 
 struct tagAnyButton {
-	int             type;
-	Display        *display;
-	Window          parent;
-	Window          window;
-	int             width, height;
-	int           hi, lo, fg, bg;
+    int type;
+    Display *display;
+    Window parent;
+    Window window;
+    int width, height;
+    int hi, lo, fg, bg;
 
-	CallBack        function;
-	XButton         nextB;
+    CallBack function;
+    XButton nextB;
 
-	int             state;
-	char           *text;
-	int             align;
-	XFontStruct    *font;
-	Pixmap          pixmap;
-	int             pix_w;
-	int             pix_h;
+    int state;
+    char *text;
+    int align;
+    XFontStruct *font;
+    Pixmap pixmap;
+    int pix_w;
+    int pix_h;
 };
 
 union _XButton {
-	int             type;
-	struct tagAnyButton XB;
-	struct tagPB PB;
-	struct tagRB RB; 
-	struct tagCB CB; 
-	struct tagMB MB; 
-	struct tagLB LB; 
+    int type;
+    struct tagAnyButton XB;
+    struct tagPB PB;
+    struct tagRB RB;
+    struct tagCB CB;
+    struct tagMB MB;
+    struct tagLB LB;
 };
 
 extern XButton XBList;
@@ -61,7 +60,7 @@ extern XButton XBList;
 #define DEFCOLORS			-1,-1,-1,-1
 #define XV_COLORS			XV_HI, XV_LO, XV_FG, XV_BG
 
-#define XV_HI				XfColor(NULL, "#C6D5E2") 
+#define XV_HI				XfColor(NULL, "#C6D5E2")
 #define XV_LO				XfColor(NULL, "#8B99B5")
 #define XV_FG 				XfColor(NULL, "#000000")
 #define XV_BG				XfColor(NULL, "#B2C0DC")
@@ -78,36 +77,17 @@ extern XButton XBList;
 #define XfResizeXB(XB, w, h)    XfPosXB(XB, MAXINT, MAXINT, w, h)
 #define XfMoveXB(XB, x, y)      XfPosXB(XB, x, y, MAXINT, MAXINT)
 
-#ifdef __STDC__ 
-
 #define XB_CALLBACK(proc)   void proc(XB_ARGS)
-#define XB_ARGS     		XButton __xB, XEvent *__xE
+#define XB_ARGS             XButton __xB, XEvent *__xE
 
-int             XfActivateXB(XButton, int);
-void            XfDeactivateXB(XButton);
-int             XfPushXB(XButton, XEvent * E);
-XButton         XfEventXB(XEvent *E);
-void            XfPosXB(XButton, int, int, int, int);
-void            XfDestroyXB(XButton);
-XButton         XfCreateXB(Display *, Window, int, int, int, int,
-						   int, int, int, int, 
-						   CallBack, int);
-void			RedrawXB(XButton);
-
-#else
-
-#define XB_CALLBACK(proc)   void proc(__xB, __xE) XButton __xB; XEvent *__xE;
-
-int             XfActivateXB();
-void            XfDeactivateXB();
-int             XfPushXB();
-XButton         XfEventXB();
-void            XfPosXB();
-void            XfDestroyXB();
-XButton         XfCreateXB();
-void			RedrawXB();
-
-#endif		/* __STDC__ */
+int XfActivateXB(XButton, int);
+void XfDeactivateXB(XButton);
+int XfPushXB(XButton, XEvent * E);
+XButton XfEventXB(XEvent * E);
+void XfPosXB(XButton, int, int, int, int);
+void XfDestroyXB(XButton);
+XButton XfCreateXB(Display *, Window, int, int, int, int, int, int, int, int, CallBack, int);
+void RedrawXB(XButton);
 
 #define XfGetCallbackItem()		(__xB)
 #define XfGetCallbackEvent()	(__xE)
@@ -131,5 +111,4 @@ void			RedrawXB();
 #define XfDeactivateLB(LB)	XfDeactivateXB((XButton)LB)
 #define XfDestroyLB(LB)		XfDestroyXB((XButton)LB)
 
-
-#endif	 /* _XB_H_ */
+#endif                          /* _XB_H_ */

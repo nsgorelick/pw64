@@ -4,15 +4,6 @@
  * A define that allows recursive-like freeing of memory in a linked
  * list.
  *
- * $Header$
- * 
- * $Log$
- * Revision 1.1  1999/09/09 17:50:39  gorelick
- * Initial revision
- *
- * Revision 0.1  91/07/24  18:04:17  18:04:17  rray (Randy Ray)
- * *** empty log message ***
- * 
  */
 
 /*
@@ -32,6 +23,3 @@
       n = m; \
     } \
 }
-
-
-

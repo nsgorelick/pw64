@@ -349,8 +349,6 @@ int     oc_trans[20][96] =
     }
 };
 
-
-
 struct _hfont {
 	int count;
 	char *letter;
@@ -1954,6 +1952,4 @@ struct _hfont {
  49, "I[KOLOMPMYP[UY RMNNONYPZ RKOMMOOOXRZ RVMXOWPW]V_U`SaQaO`MaObQa RVPWOVNUOVPV^U_ RPaNa RVMTOUPU^T`Sa",
  43, "L[RNOPOORNTMWOWSRU RTNVOVS RRNUPUSTT RRUWWW]V_U`SaQaO`MaObQa RVWV^U_ RPaNa RTVUWU^T`Sa"
 };
-
-
 
