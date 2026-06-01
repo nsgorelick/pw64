@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/dbs/xtiff
+END
+xtifficon.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/dbs/xtiff/xtifficon.h
+END
+xtiff.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/dbs/xtiff/xtiff.c
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/dbs/xtiff/Makefile.in
+END
+Imakefile
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/dbs/xtiff/Imakefile
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/dbs/xtiff/Makefile.am
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/dbs/xtiff/README
+END
+patchlevel.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/dbs/xtiff/patchlevel.h
+END

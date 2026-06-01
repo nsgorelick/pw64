@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test
+END
+test_arrays.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/test_arrays.c
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/Makefile.in
+END
+strip.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/strip.c
+END
+ascii_tag.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/ascii_tag.c
+END
+test_arrays.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/test_arrays.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/Makefile.am
+END
+check_tag.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/check_tag.c
+END
+strip_rw.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/strip_rw.c
+END
+long_tag.c
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/long_tag.c
+END
+short_tag.c
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/test/short_tag.c
+END

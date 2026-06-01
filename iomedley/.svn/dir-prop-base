@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 88
+*.o
+*.a
+cscope.out
+configure
+config.status
+config.log
+config.cache
+Makefile
+iom_config.h
+END

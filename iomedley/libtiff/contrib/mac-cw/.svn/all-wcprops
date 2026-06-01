@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw
+END
+Makefile.script
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/Makefile.script
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/Makefile.in
+END
+mac_main.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/mac_main.c
+END
+metrowerks.note
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/metrowerks.note
+END
+mkg3_main.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/mkg3_main.c
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/Makefile.am
+END
+mac_main.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/mac_main.h
+END
+version.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/version.h
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/mac-cw/README
+END

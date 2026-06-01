@@ -1,0 +1,99 @@
+#
+# Makefile to build pw.
+#
+
+###############################################################################
+# Destination directories
+###############################################################################
+prefix=/usr/local
+exec_prefix=$(prefix)
+BINDIR=$(prefix)/bin
+LIBDIR=$(prefix)/lib
+mandir=$(prefix)/man/cat1
+
+INSTALL=/usr/bin/install -c
+INSTALL_PROGRAM=${INSTALL}
+INSTALL_DATA=${INSTALL} -m 644
+
+
+# default macro values - possibly overriden by top level makefile
+
+DEFS=-DHAVE_CONFIG_H
+CPPFLAGS=
+CFLAGS=-g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley 
+LDFLAGS= -L/usr/lib64 -L../lib -L../iomedley
+LIBS=-liomedley -lnsl -lXm -lXext -lXt -lX11 -lm -lz  -lXext -lXt -lXpm -lXfred -lX11 $(ISIS_LIB) -lm
+#
+
+OBJ = ColorControls.o buttons.o color.o colorspread.o image.o \
+        error.o composite.o pseudo.o quant.o mag.o  \
+        write.o readout.o block.o inice.o specpr.o loguser.o  \
+        restart.o read.o blockid.o plot.o hist.o rose.o \
+        version.o sp.o \
+        io_pw.o
+
+pw: $(OBJ) pw.o ../lib/libXfred.a ../iomedley/libiomedley.a
+	$(CC) $(DEFS) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS) $(OBJ) pw.o -o $@ $(LIBS)
+
+install:	pw
+	$(INSTALL_PROGRAM) -d $(BINDIR) -m "u=rwx,go=rx" -c pw
+
+.c.o:
+	$(CC) -c $(DEFS) $(CPPFLAGS) $(CFLAGS) $<
+
+clean:
+	rm -f *.o pw
+
+
+# DO NOT DELETE THIS LINE -- make depend depends on it.
+
+ColorControls.o:color.h setcolor.h ColorControls.h
+ColorControls.o:composite.h util.h
+ColorControls.o:image.h vicar.h quant.h pseudo.h
+block.o:mag.h image.h 
+block.o:vicar.h quant.h pseudo.h block.h
+blockid.o:mag.h image.h 
+blockid.o:pseudo.h block.h
+blockid.o:vicar.h quant.h
+buttons.o:ColorControls.h composite.h util.h mag.h
+buttons.o:image.h vicar.h quant.h pseudo.h
+color.o:color.h
+colorspread.o:color.h
+composite.o:composite.h image.h 
+composite.o:image.h 
+composite.o:pseudo.h util.h
+composite.o:vicar.h quant.h
+composite.o:vicar.h quant.h pseudo.h util.h
+hist.o:ColorControls.h 
+hist.o:image.h vicar.h quant.h pseudo.h
+image.o:image.h vicar.h quant.h pseudo.h color.h
+image.o:vicar.h quant.h pseudo.h
+mag.o:image.h 
+mag.o:mag.h image.h vicar.h quant.h pseudo.h
+mag.o:vicar.h quant.h pseudo.h
+parseisis.o:image.h
+parseisis.o:pseudo.h
+parseisis.o:vicar.h quant.h
+parsevicar.o:image.h
+parsevicar.o:vicar.h quant.h pseudo.h
+plot.o:mag.h image.h
+plot.o:specpr.h
+plot.o:vicar.h quant.h pseudo.h block.h util.h
+pseudo.o:pseudo.h color.h
+pw.o:setcolor.h color.h ColorControls.h image.h
+pw.o:vicar.h quant.h pseudo.h composite.h util.h mag.h loguser.h
+quant.o:pseudo.h
+quant.o:quant.h pseudo.h
+readout.o:util.h image.h 
+readout.o:vicar.h quant.h pseudo.h
+restart.o:image.h 
+restart.o:vicar.h quant.h pseudo.h ColorControls.h
+rose.o:block.h image.h 
+rose.o:vicar.h quant.h pseudo.h rose.h
+sp.o:specpr.h
+specpr.o:specpr.h
+version.o:version.h
+write.o:image.h
+write.o:util.h mag.h color.h
+write.o:vicar.h quant.h pseudo.h ColorControls.h
+

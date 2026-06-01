@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port/Makefile.in
+END
+getopt.c
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port/getopt.c
+END
+Makefile.vc
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port/Makefile.vc
+END
+strcasecmp.c
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port/strcasecmp.c
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port/Makefile.am
+END
+dummy.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port/dummy.c
+END
+lfind.c
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port/lfind.c
+END
+strtoul.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/port/strtoul.c
+END

@@ -1,0 +1,204 @@
+make[1]: Entering directory `/home/src/local/pw64/20100506-64bit/lib'
+make[1]: `libXfred.a' is up to date.
+make[1]: Leaving directory `/home/src/local/pw64/20100506-64bit/lib'
+make[1]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley'
+cd libtiff && make
+make[2]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff'
+Making all in port
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/port'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/port'
+Making all in libtiff
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff'
+make  all-am
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff'
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_aux.lo -MD -MP -MF ".deps/tif_aux.Tpo" -c -o tif_aux.lo tif_aux.c; \
+	then mv -f ".deps/tif_aux.Tpo" ".deps/tif_aux.Plo"; else rm -f ".deps/tif_aux.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_aux.lo -MD -MP -MF .deps/tif_aux.Tpo -c tif_aux.c  -fPIC -DPIC -o .libs/tif_aux.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_aux.lo -MD -MP -MF .deps/tif_aux.Tpo -c tif_aux.c -o tif_aux.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_close.lo -MD -MP -MF ".deps/tif_close.Tpo" -c -o tif_close.lo tif_close.c; \
+	then mv -f ".deps/tif_close.Tpo" ".deps/tif_close.Plo"; else rm -f ".deps/tif_close.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_close.lo -MD -MP -MF .deps/tif_close.Tpo -c tif_close.c  -fPIC -DPIC -o .libs/tif_close.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_close.lo -MD -MP -MF .deps/tif_close.Tpo -c tif_close.c -o tif_close.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_codec.lo -MD -MP -MF ".deps/tif_codec.Tpo" -c -o tif_codec.lo tif_codec.c; \
+	then mv -f ".deps/tif_codec.Tpo" ".deps/tif_codec.Plo"; else rm -f ".deps/tif_codec.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_codec.lo -MD -MP -MF .deps/tif_codec.Tpo -c tif_codec.c  -fPIC -DPIC -o .libs/tif_codec.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_codec.lo -MD -MP -MF .deps/tif_codec.Tpo -c tif_codec.c -o tif_codec.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_color.lo -MD -MP -MF ".deps/tif_color.Tpo" -c -o tif_color.lo tif_color.c; \
+	then mv -f ".deps/tif_color.Tpo" ".deps/tif_color.Plo"; else rm -f ".deps/tif_color.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_color.lo -MD -MP -MF .deps/tif_color.Tpo -c tif_color.c  -fPIC -DPIC -o .libs/tif_color.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_color.lo -MD -MP -MF .deps/tif_color.Tpo -c tif_color.c -o tif_color.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_compress.lo -MD -MP -MF ".deps/tif_compress.Tpo" -c -o tif_compress.lo tif_compress.c; \
+	then mv -f ".deps/tif_compress.Tpo" ".deps/tif_compress.Plo"; else rm -f ".deps/tif_compress.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_compress.lo -MD -MP -MF .deps/tif_compress.Tpo -c tif_compress.c  -fPIC -DPIC -o .libs/tif_compress.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_compress.lo -MD -MP -MF .deps/tif_compress.Tpo -c tif_compress.c -o tif_compress.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dir.lo -MD -MP -MF ".deps/tif_dir.Tpo" -c -o tif_dir.lo tif_dir.c; \
+	then mv -f ".deps/tif_dir.Tpo" ".deps/tif_dir.Plo"; else rm -f ".deps/tif_dir.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dir.lo -MD -MP -MF .deps/tif_dir.Tpo -c tif_dir.c  -fPIC -DPIC -o .libs/tif_dir.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dir.lo -MD -MP -MF .deps/tif_dir.Tpo -c tif_dir.c -o tif_dir.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirinfo.lo -MD -MP -MF ".deps/tif_dirinfo.Tpo" -c -o tif_dirinfo.lo tif_dirinfo.c; \
+	then mv -f ".deps/tif_dirinfo.Tpo" ".deps/tif_dirinfo.Plo"; else rm -f ".deps/tif_dirinfo.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirinfo.lo -MD -MP -MF .deps/tif_dirinfo.Tpo -c tif_dirinfo.c  -fPIC -DPIC -o .libs/tif_dirinfo.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirinfo.lo -MD -MP -MF .deps/tif_dirinfo.Tpo -c tif_dirinfo.c -o tif_dirinfo.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirread.lo -MD -MP -MF ".deps/tif_dirread.Tpo" -c -o tif_dirread.lo tif_dirread.c; \
+	then mv -f ".deps/tif_dirread.Tpo" ".deps/tif_dirread.Plo"; else rm -f ".deps/tif_dirread.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirread.lo -MD -MP -MF .deps/tif_dirread.Tpo -c tif_dirread.c  -fPIC -DPIC -o .libs/tif_dirread.o
+tif_dirread.c: In function 'TIFFFetchFloatArray':
+tif_dirread.c:1230: warning: dereferencing type-punned pointer will break strict-aliasing rules
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirread.lo -MD -MP -MF .deps/tif_dirread.Tpo -c tif_dirread.c -o tif_dirread.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirwrite.lo -MD -MP -MF ".deps/tif_dirwrite.Tpo" -c -o tif_dirwrite.lo tif_dirwrite.c; \
+	then mv -f ".deps/tif_dirwrite.Tpo" ".deps/tif_dirwrite.Plo"; else rm -f ".deps/tif_dirwrite.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirwrite.lo -MD -MP -MF .deps/tif_dirwrite.Tpo -c tif_dirwrite.c  -fPIC -DPIC -o .libs/tif_dirwrite.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dirwrite.lo -MD -MP -MF .deps/tif_dirwrite.Tpo -c tif_dirwrite.c -o tif_dirwrite.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dumpmode.lo -MD -MP -MF ".deps/tif_dumpmode.Tpo" -c -o tif_dumpmode.lo tif_dumpmode.c; \
+	then mv -f ".deps/tif_dumpmode.Tpo" ".deps/tif_dumpmode.Plo"; else rm -f ".deps/tif_dumpmode.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dumpmode.lo -MD -MP -MF .deps/tif_dumpmode.Tpo -c tif_dumpmode.c  -fPIC -DPIC -o .libs/tif_dumpmode.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_dumpmode.lo -MD -MP -MF .deps/tif_dumpmode.Tpo -c tif_dumpmode.c -o tif_dumpmode.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_error.lo -MD -MP -MF ".deps/tif_error.Tpo" -c -o tif_error.lo tif_error.c; \
+	then mv -f ".deps/tif_error.Tpo" ".deps/tif_error.Plo"; else rm -f ".deps/tif_error.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_error.lo -MD -MP -MF .deps/tif_error.Tpo -c tif_error.c  -fPIC -DPIC -o .libs/tif_error.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_error.lo -MD -MP -MF .deps/tif_error.Tpo -c tif_error.c -o tif_error.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_extension.lo -MD -MP -MF ".deps/tif_extension.Tpo" -c -o tif_extension.lo tif_extension.c; \
+	then mv -f ".deps/tif_extension.Tpo" ".deps/tif_extension.Plo"; else rm -f ".deps/tif_extension.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_extension.lo -MD -MP -MF .deps/tif_extension.Tpo -c tif_extension.c  -fPIC -DPIC -o .libs/tif_extension.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_extension.lo -MD -MP -MF .deps/tif_extension.Tpo -c tif_extension.c -o tif_extension.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_fax3.lo -MD -MP -MF ".deps/tif_fax3.Tpo" -c -o tif_fax3.lo tif_fax3.c; \
+	then mv -f ".deps/tif_fax3.Tpo" ".deps/tif_fax3.Plo"; else rm -f ".deps/tif_fax3.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_fax3.lo -MD -MP -MF .deps/tif_fax3.Tpo -c tif_fax3.c  -fPIC -DPIC -o .libs/tif_fax3.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_fax3.lo -MD -MP -MF .deps/tif_fax3.Tpo -c tif_fax3.c -o tif_fax3.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_flush.lo -MD -MP -MF ".deps/tif_flush.Tpo" -c -o tif_flush.lo tif_flush.c; \
+	then mv -f ".deps/tif_flush.Tpo" ".deps/tif_flush.Plo"; else rm -f ".deps/tif_flush.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_flush.lo -MD -MP -MF .deps/tif_flush.Tpo -c tif_flush.c  -fPIC -DPIC -o .libs/tif_flush.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_flush.lo -MD -MP -MF .deps/tif_flush.Tpo -c tif_flush.c -o tif_flush.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_getimage.lo -MD -MP -MF ".deps/tif_getimage.Tpo" -c -o tif_getimage.lo tif_getimage.c; \
+	then mv -f ".deps/tif_getimage.Tpo" ".deps/tif_getimage.Plo"; else rm -f ".deps/tif_getimage.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_getimage.lo -MD -MP -MF .deps/tif_getimage.Tpo -c tif_getimage.c  -fPIC -DPIC -o .libs/tif_getimage.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_getimage.lo -MD -MP -MF .deps/tif_getimage.Tpo -c tif_getimage.c -o tif_getimage.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_jpeg.lo -MD -MP -MF ".deps/tif_jpeg.Tpo" -c -o tif_jpeg.lo tif_jpeg.c; \
+	then mv -f ".deps/tif_jpeg.Tpo" ".deps/tif_jpeg.Plo"; else rm -f ".deps/tif_jpeg.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_jpeg.lo -MD -MP -MF .deps/tif_jpeg.Tpo -c tif_jpeg.c  -fPIC -DPIC -o .libs/tif_jpeg.o
+tif_jpeg.c: In function 'JPEGVSetField':
+tif_jpeg.c:1578: warning: suggest braces around empty body in an 'if' statement
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_jpeg.lo -MD -MP -MF .deps/tif_jpeg.Tpo -c tif_jpeg.c -o tif_jpeg.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_luv.lo -MD -MP -MF ".deps/tif_luv.Tpo" -c -o tif_luv.lo tif_luv.c; \
+	then mv -f ".deps/tif_luv.Tpo" ".deps/tif_luv.Plo"; else rm -f ".deps/tif_luv.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_luv.lo -MD -MP -MF .deps/tif_luv.Tpo -c tif_luv.c  -fPIC -DPIC -o .libs/tif_luv.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_luv.lo -MD -MP -MF .deps/tif_luv.Tpo -c tif_luv.c -o tif_luv.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_lzw.lo -MD -MP -MF ".deps/tif_lzw.Tpo" -c -o tif_lzw.lo tif_lzw.c; \
+	then mv -f ".deps/tif_lzw.Tpo" ".deps/tif_lzw.Plo"; else rm -f ".deps/tif_lzw.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_lzw.lo -MD -MP -MF .deps/tif_lzw.Tpo -c tif_lzw.c  -fPIC -DPIC -o .libs/tif_lzw.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_lzw.lo -MD -MP -MF .deps/tif_lzw.Tpo -c tif_lzw.c -o tif_lzw.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_next.lo -MD -MP -MF ".deps/tif_next.Tpo" -c -o tif_next.lo tif_next.c; \
+	then mv -f ".deps/tif_next.Tpo" ".deps/tif_next.Plo"; else rm -f ".deps/tif_next.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_next.lo -MD -MP -MF .deps/tif_next.Tpo -c tif_next.c  -fPIC -DPIC -o .libs/tif_next.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_next.lo -MD -MP -MF .deps/tif_next.Tpo -c tif_next.c -o tif_next.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_ojpeg.lo -MD -MP -MF ".deps/tif_ojpeg.Tpo" -c -o tif_ojpeg.lo tif_ojpeg.c; \
+	then mv -f ".deps/tif_ojpeg.Tpo" ".deps/tif_ojpeg.Plo"; else rm -f ".deps/tif_ojpeg.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_ojpeg.lo -MD -MP -MF .deps/tif_ojpeg.Tpo -c tif_ojpeg.c  -fPIC -DPIC -o .libs/tif_ojpeg.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_ojpeg.lo -MD -MP -MF .deps/tif_ojpeg.Tpo -c tif_ojpeg.c -o tif_ojpeg.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_open.lo -MD -MP -MF ".deps/tif_open.Tpo" -c -o tif_open.lo tif_open.c; \
+	then mv -f ".deps/tif_open.Tpo" ".deps/tif_open.Plo"; else rm -f ".deps/tif_open.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_open.lo -MD -MP -MF .deps/tif_open.Tpo -c tif_open.c  -fPIC -DPIC -o .libs/tif_open.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_open.lo -MD -MP -MF .deps/tif_open.Tpo -c tif_open.c -o tif_open.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_packbits.lo -MD -MP -MF ".deps/tif_packbits.Tpo" -c -o tif_packbits.lo tif_packbits.c; \
+	then mv -f ".deps/tif_packbits.Tpo" ".deps/tif_packbits.Plo"; else rm -f ".deps/tif_packbits.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_packbits.lo -MD -MP -MF .deps/tif_packbits.Tpo -c tif_packbits.c  -fPIC -DPIC -o .libs/tif_packbits.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_packbits.lo -MD -MP -MF .deps/tif_packbits.Tpo -c tif_packbits.c -o tif_packbits.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_pixarlog.lo -MD -MP -MF ".deps/tif_pixarlog.Tpo" -c -o tif_pixarlog.lo tif_pixarlog.c; \
+	then mv -f ".deps/tif_pixarlog.Tpo" ".deps/tif_pixarlog.Plo"; else rm -f ".deps/tif_pixarlog.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_pixarlog.lo -MD -MP -MF .deps/tif_pixarlog.Tpo -c tif_pixarlog.c  -fPIC -DPIC -o .libs/tif_pixarlog.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_pixarlog.lo -MD -MP -MF .deps/tif_pixarlog.Tpo -c tif_pixarlog.c -o tif_pixarlog.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_predict.lo -MD -MP -MF ".deps/tif_predict.Tpo" -c -o tif_predict.lo tif_predict.c; \
+	then mv -f ".deps/tif_predict.Tpo" ".deps/tif_predict.Plo"; else rm -f ".deps/tif_predict.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_predict.lo -MD -MP -MF .deps/tif_predict.Tpo -c tif_predict.c  -fPIC -DPIC -o .libs/tif_predict.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_predict.lo -MD -MP -MF .deps/tif_predict.Tpo -c tif_predict.c -o tif_predict.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_print.lo -MD -MP -MF ".deps/tif_print.Tpo" -c -o tif_print.lo tif_print.c; \
+	then mv -f ".deps/tif_print.Tpo" ".deps/tif_print.Plo"; else rm -f ".deps/tif_print.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_print.lo -MD -MP -MF .deps/tif_print.Tpo -c tif_print.c  -fPIC -DPIC -o .libs/tif_print.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_print.lo -MD -MP -MF .deps/tif_print.Tpo -c tif_print.c -o tif_print.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_read.lo -MD -MP -MF ".deps/tif_read.Tpo" -c -o tif_read.lo tif_read.c; \
+	then mv -f ".deps/tif_read.Tpo" ".deps/tif_read.Plo"; else rm -f ".deps/tif_read.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_read.lo -MD -MP -MF .deps/tif_read.Tpo -c tif_read.c  -fPIC -DPIC -o .libs/tif_read.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_read.lo -MD -MP -MF .deps/tif_read.Tpo -c tif_read.c -o tif_read.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_strip.lo -MD -MP -MF ".deps/tif_strip.Tpo" -c -o tif_strip.lo tif_strip.c; \
+	then mv -f ".deps/tif_strip.Tpo" ".deps/tif_strip.Plo"; else rm -f ".deps/tif_strip.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_strip.lo -MD -MP -MF .deps/tif_strip.Tpo -c tif_strip.c  -fPIC -DPIC -o .libs/tif_strip.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_strip.lo -MD -MP -MF .deps/tif_strip.Tpo -c tif_strip.c -o tif_strip.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_swab.lo -MD -MP -MF ".deps/tif_swab.Tpo" -c -o tif_swab.lo tif_swab.c; \
+	then mv -f ".deps/tif_swab.Tpo" ".deps/tif_swab.Plo"; else rm -f ".deps/tif_swab.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_swab.lo -MD -MP -MF .deps/tif_swab.Tpo -c tif_swab.c  -fPIC -DPIC -o .libs/tif_swab.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_swab.lo -MD -MP -MF .deps/tif_swab.Tpo -c tif_swab.c -o tif_swab.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_thunder.lo -MD -MP -MF ".deps/tif_thunder.Tpo" -c -o tif_thunder.lo tif_thunder.c; \
+	then mv -f ".deps/tif_thunder.Tpo" ".deps/tif_thunder.Plo"; else rm -f ".deps/tif_thunder.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_thunder.lo -MD -MP -MF .deps/tif_thunder.Tpo -c tif_thunder.c  -fPIC -DPIC -o .libs/tif_thunder.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_thunder.lo -MD -MP -MF .deps/tif_thunder.Tpo -c tif_thunder.c -o tif_thunder.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_tile.lo -MD -MP -MF ".deps/tif_tile.Tpo" -c -o tif_tile.lo tif_tile.c; \
+	then mv -f ".deps/tif_tile.Tpo" ".deps/tif_tile.Plo"; else rm -f ".deps/tif_tile.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_tile.lo -MD -MP -MF .deps/tif_tile.Tpo -c tif_tile.c  -fPIC -DPIC -o .libs/tif_tile.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_tile.lo -MD -MP -MF .deps/tif_tile.Tpo -c tif_tile.c -o tif_tile.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_unix.lo -MD -MP -MF ".deps/tif_unix.Tpo" -c -o tif_unix.lo tif_unix.c; \
+	then mv -f ".deps/tif_unix.Tpo" ".deps/tif_unix.Plo"; else rm -f ".deps/tif_unix.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_unix.lo -MD -MP -MF .deps/tif_unix.Tpo -c tif_unix.c  -fPIC -DPIC -o .libs/tif_unix.o
+tif_unix.c: In function '_tiffReadProc':
+tif_unix.c:58: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffWriteProc':
+tif_unix.c:64: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffSeekProc':
+tif_unix.c:70: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffCloseProc':
+tif_unix.c:76: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffSizeProc':
+tif_unix.c:88: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffMapProc':
+tif_unix.c:101: warning: cast from pointer to integer of different size
+tif_unix.c: In function 'TIFFFdOpen':
+tif_unix.c:140: warning: cast to pointer from integer of different size
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_unix.lo -MD -MP -MF .deps/tif_unix.Tpo -c tif_unix.c -o tif_unix.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_version.lo -MD -MP -MF ".deps/tif_version.Tpo" -c -o tif_version.lo tif_version.c; \
+	then mv -f ".deps/tif_version.Tpo" ".deps/tif_version.Plo"; else rm -f ".deps/tif_version.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_version.lo -MD -MP -MF .deps/tif_version.Tpo -c tif_version.c  -fPIC -DPIC -o .libs/tif_version.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_version.lo -MD -MP -MF .deps/tif_version.Tpo -c tif_version.c -o tif_version.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_warning.lo -MD -MP -MF ".deps/tif_warning.Tpo" -c -o tif_warning.lo tif_warning.c; \
+	then mv -f ".deps/tif_warning.Tpo" ".deps/tif_warning.Plo"; else rm -f ".deps/tif_warning.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_warning.lo -MD -MP -MF .deps/tif_warning.Tpo -c tif_warning.c  -fPIC -DPIC -o .libs/tif_warning.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_warning.lo -MD -MP -MF .deps/tif_warning.Tpo -c tif_warning.c -o tif_warning.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_write.lo -MD -MP -MF ".deps/tif_write.Tpo" -c -o tif_write.lo tif_write.c; \
+	then mv -f ".deps/tif_write.Tpo" ".deps/tif_write.Plo"; else rm -f ".deps/tif_write.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_write.lo -MD -MP -MF .deps/tif_write.Tpo -c tif_write.c  -fPIC -DPIC -o .libs/tif_write.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_write.lo -MD -MP -MF .deps/tif_write.Tpo -c tif_write.c -o tif_write.o >/dev/null 2>&1
+if /bin/sh ../libtool --tag=CC --mode=compile gcc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_zip.lo -MD -MP -MF ".deps/tif_zip.Tpo" -c -o tif_zip.lo tif_zip.c; \
+	then mv -f ".deps/tif_zip.Tpo" ".deps/tif_zip.Plo"; else rm -f ".deps/tif_zip.Tpo"; exit 1; fi
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_zip.lo -MD -MP -MF .deps/tif_zip.Tpo -c tif_zip.c  -fPIC -DPIC -o .libs/tif_zip.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W -MT tif_zip.lo -MD -MP -MF .deps/tif_zip.Tpo -c tif_zip.c -o tif_zip.o >/dev/null 2>&1
+/bin/sh ../libtool --tag=CC --mode=link gcc  -g -O2 -fPIC -I../iomedley -I../libltdl -I../vicar -Wall -W   -o libtiff.la -rpath /usr/local/lib -no-undefined -version-number 3:8:2  tif_aux.lo tif_close.lo tif_codec.lo tif_color.lo tif_compress.lo tif_dir.lo tif_dirinfo.lo tif_dirread.lo tif_dirwrite.lo tif_dumpmode.lo tif_error.lo tif_extension.lo tif_fax3.lo tif_fax3sm.lo tif_flush.lo tif_getimage.lo tif_jpeg.lo tif_luv.lo tif_lzw.lo tif_next.lo tif_ojpeg.lo tif_open.lo tif_packbits.lo tif_pixarlog.lo tif_predict.lo tif_print.lo tif_read.lo tif_strip.lo tif_swab.lo tif_thunder.lo tif_tile.lo tif_unix.lo tif_version.lo tif_warning.lo tif_write.lo tif_zip.lo ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: rm -fr  .libs/libtiff.a .libs/libtiff.la .libs/libtiff.lai .libs/libtiff.so .libs/libtiff.so.3 .libs/libtiff.so.3.8.2
+libtool: link: gcc -shared  .libs/tif_aux.o .libs/tif_close.o .libs/tif_codec.o .libs/tif_color.o .libs/tif_compress.o .libs/tif_dir.o .libs/tif_dirinfo.o .libs/tif_dirread.o .libs/tif_dirwrite.o .libs/tif_dumpmode.o .libs/tif_error.o .libs/tif_extension.o .libs/tif_fax3.o .libs/tif_fax3sm.o .libs/tif_flush.o .libs/tif_getimage.o .libs/tif_jpeg.o .libs/tif_luv.o .libs/tif_lzw.o .libs/tif_next.o .libs/tif_ojpeg.o .libs/tif_open.o .libs/tif_packbits.o .libs/tif_pixarlog.o .libs/tif_predict.o .libs/tif_print.o .libs/tif_read.o .libs/tif_strip.o .libs/tif_swab.o .libs/tif_thunder.o .libs/tif_tile.o .libs/tif_unix.o .libs/tif_version.o .libs/tif_warning.o .libs/tif_write.o .libs/tif_zip.o  -Wl,--whole-archive ../port/.libs/libport.a -Wl,--no-whole-archive  /usr/lib/libjpeg.so -lz -lm -lc       -Wl,-soname -Wl,libtiff.so.3 -o .libs/libtiff.so.3.8.2
+libtool: link: (cd ".libs" && rm -f "libtiff.so.3" && ln -s "libtiff.so.3.8.2" "libtiff.so.3")
+libtool: link: (cd ".libs" && rm -f "libtiff.so" && ln -s "libtiff.so.3.8.2" "libtiff.so")
+libtool: link: (cd .libs/libtiff.lax/libport.a && ar x /src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff/../port/.libs/libport.a)
+libtool: link: ar cru .libs/libtiff.a  tif_aux.o tif_close.o tif_codec.o tif_color.o tif_compress.o tif_dir.o tif_dirinfo.o tif_dirread.o tif_dirwrite.o tif_dumpmode.o tif_error.o tif_extension.o tif_fax3.o tif_fax3sm.o tif_flush.o tif_getimage.o tif_jpeg.o tif_luv.o tif_lzw.o tif_next.o tif_ojpeg.o tif_open.o tif_packbits.o tif_pixarlog.o tif_predict.o tif_print.o tif_read.o tif_strip.o tif_swab.o tif_thunder.o tif_tile.o tif_unix.o tif_version.o tif_warning.o tif_write.o tif_zip.o  .libs/libtiff.lax/libport.a/dummy.o 
+libtool: link: ranlib .libs/libtiff.a
+libtool: link: rm -fr .libs/libtiff.lax
+libtool: link: creating libtiff.la
+libtool: link: ( cd ".libs" && rm -f "libtiff.la" && ln -s "../libtiff.la" "libtiff.la" )
+if /bin/sh ../libtool --tag=CXX --mode=compile g++ -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -MT tif_stream.lo -MD -MP -MF ".deps/tif_stream.Tpo" -c -o tif_stream.lo tif_stream.cxx; \
+	then mv -f ".deps/tif_stream.Tpo" ".deps/tif_stream.Plo"; else rm -f ".deps/tif_stream.Tpo"; exit 1; fi
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -MT tif_stream.lo -MD -MP -MF .deps/tif_stream.Tpo -c tif_stream.cxx  -fPIC -DPIC -o .libs/tif_stream.o
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -MT tif_stream.lo -MD -MP -MF .deps/tif_stream.Tpo -c tif_stream.cxx -o tif_stream.o >/dev/null 2>&1
+/bin/sh ../libtool --tag=CXX --mode=link g++  -g -O2   -o libtiffxx.la -rpath /usr/local/lib -no-undefined -version-number 3:8:2  tif_stream.lo ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: warning: `/usr/lib//libjpeg.la' seems to be moved
+libtool: link: rm -fr  .libs/libtiffxx.a .libs/libtiffxx.la .libs/libtiffxx.lai .libs/libtiffxx.so .libs/libtiffxx.so.3 .libs/libtiffxx.so.3.8.2
+libtool: link: g++ -shared -nostdlib /usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.1.2/crtbeginS.o  .libs/tif_stream.o  -Wl,--whole-archive ../port/.libs/libport.a -Wl,--no-whole-archive  -Wl,-rpath -Wl,/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff/.libs -Wl,-rpath -Wl,/usr/local/lib ../libtiff/.libs/libtiff.so -L/usr/lib/ /usr/lib/libjpeg.so -lz -L/usr/lib/gcc/x86_64-redhat-linux/4.1.2 -L/usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -lstdc++ -lm -lc -lgcc_s /usr/lib/gcc/x86_64-redhat-linux/4.1.2/crtendS.o /usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../../../lib64/crtn.o         -Wl,-soname -Wl,libtiffxx.so.3 -o .libs/libtiffxx.so.3.8.2
+g++: /usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../../../lib64/crti.o: No such file or directory
+g++: /usr/lib/gcc/x86_64-redhat-linux/4.1.2/crtbeginS.o: No such file or directory
+g++: /usr/lib/gcc/x86_64-redhat-linux/4.1.2/crtendS.o: No such file or directory
+g++: /usr/lib/gcc/x86_64-redhat-linux/4.1.2/../../../../lib64/crtn.o: No such file or directory
+make[4]: *** [libtiffxx.la] Error 1
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff'
+make[3]: *** [all] Error 2
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff'
+make[2]: *** [all-recursive] Error 1
+make[2]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff'
+make[1]: *** [libtiff.a] Error 2
+make[1]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley'
+make: *** [iomedley_src] Error 2

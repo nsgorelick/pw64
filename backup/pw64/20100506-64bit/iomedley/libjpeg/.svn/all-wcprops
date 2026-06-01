@@ -1,0 +1,821 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg
+END
+filelist.doc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/filelist.doc
+END
+jmemansi.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmemansi.c
+END
+jchuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jchuff.c
+END
+coderules.doc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/coderules.doc
+END
+jmemmac.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmemmac.c
+END
+jchuff.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jchuff.h
+END
+transupp.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/transupp.c
+END
+ltmain.sh
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/ltmain.sh
+END
+jcparam.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcparam.c
+END
+transupp.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/transupp.h
+END
+jquant1.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jquant1.c
+END
+ltconfig
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/ltconfig
+END
+jconfig.bcc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.bcc
+END
+jcphuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcphuff.c
+END
+wrjpgcom.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/wrjpgcom.c
+END
+jmemmgr.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmemmgr.c
+END
+jcmarker.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcmarker.c
+END
+jcsample.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcsample.c
+END
+jdsample.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdsample.c
+END
+jdmarker.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdmarker.c
+END
+rdcolmap.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/rdcolmap.c
+END
+jmorecfg.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmorecfg.h
+END
+jinclude.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jinclude.h
+END
+jconfig.doc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.doc
+END
+testprog.jpg
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/testprog.jpg
+END
+jpegint.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jpegint.h
+END
+rdrle.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/rdrle.c
+END
+jdinput.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdinput.c
+END
+jpeglib.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jpeglib.h
+END
+makefile.bcc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.bcc
+END
+jconfig.sas
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.sas
+END
+rdtarga.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/rdtarga.c
+END
+jconfig.wat
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.wat
+END
+install.doc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/install.doc
+END
+djpeg.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/djpeg.c
+END
+jdpostct.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdpostct.c
+END
+jmemsys.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmemsys.h
+END
+cdjpeg.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/cdjpeg.c
+END
+makefile.manx
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.manx
+END
+cdjpeg.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/cdjpeg.h
+END
+makefile.vc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.vc
+END
+rdbmp.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/rdbmp.c
+END
+wrppm.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/wrppm.c
+END
+jfdctfst.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jfdctfst.c
+END
+jcmaster.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcmaster.c
+END
+config.guess
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/config.guess
+END
+jdmaster.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdmaster.c
+END
+jidctfst.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jidctfst.c
+END
+wrgif.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/wrgif.c
+END
+makefile.sas
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.sas
+END
+jquant2.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jquant2.c
+END
+makefile.wat
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.wat
+END
+makefile.mms
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.mms
+END
+jmemname.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmemname.c
+END
+jdct.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdct.h
+END
+jdatasrc.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdatasrc.c
+END
+jmemdosa.asm
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmemdosa.asm
+END
+jconfig.manx
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.manx
+END
+jcapistd.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcapistd.c
+END
+jdapistd.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdapistd.c
+END
+jversion.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jversion.h
+END
+rdjpgcom.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/rdjpgcom.c
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/README
+END
+jdmerge.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdmerge.c
+END
+makvms.opt
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makvms.opt
+END
+ansi2knr.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/ansi2knr.c
+END
+cjpeg.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/cjpeg.c
+END
+jdcolor.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdcolor.c
+END
+install-sh
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/install-sh
+END
+testorig.jpg
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/testorig.jpg
+END
+jdatadst.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdatadst.c
+END
+jconfig.vms
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.vms
+END
+jdtrans.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdtrans.c
+END
+wrtarga.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/wrtarga.c
+END
+structure.doc
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/structure.doc
+END
+jconfig.st
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.st
+END
+change.log
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/change.log
+END
+makefile.ansi
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.ansi
+END
+rdswitch.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/rdswitch.c
+END
+makelib.ds
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makelib.ds
+END
+jconfig.dj
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.dj
+END
+jccolor.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jccolor.c
+END
+.cvsignore
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/.cvsignore
+END
+jconfig.mac
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.mac
+END
+makefile.vms
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.vms
+END
+jfdctflt.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jfdctflt.c
+END
+jidctflt.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jidctflt.c
+END
+jctrans.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jctrans.c
+END
+jutils.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jutils.c
+END
+jcprepct.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcprepct.c
+END
+rdppm.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/rdppm.c
+END
+jconfig.mc6
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.mc6
+END
+ckconfig.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/ckconfig.c
+END
+wizard.doc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/wizard.doc
+END
+makeproj.mac
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makeproj.mac
+END
+makdjpeg.st
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makdjpeg.st
+END
+jcmainct.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcmainct.c
+END
+jdmainct.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdmainct.c
+END
+jcapimin.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcapimin.c
+END
+rdgif.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/rdgif.c
+END
+jdapimin.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdapimin.c
+END
+wrrle.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/wrrle.c
+END
+jconfig.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.cfg
+END
+jcdctmgr.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcdctmgr.c
+END
+makljpeg.st
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makljpeg.st
+END
+jddctmgr.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jddctmgr.c
+END
+configure
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/configure
+END
+jerror.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jerror.c
+END
+maktjpeg.st
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/maktjpeg.st
+END
+jdhuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdhuff.c
+END
+jerror.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jerror.h
+END
+jmemnobs.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmemnobs.c
+END
+jdhuff.h
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdhuff.h
+END
+config.sub
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/config.sub
+END
+makefile.mc6
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.mc6
+END
+jcinit.c
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcinit.c
+END
+makcjpeg.st
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makcjpeg.st
+END
+usage.doc
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/usage.doc
+END
+wrbmp.c
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/wrbmp.c
+END
+makefile.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.cfg
+END
+example.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/example.c
+END
+jmemdos.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jmemdos.c
+END
+libjpeg.doc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/libjpeg.doc
+END
+jfdctint.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jfdctint.c
+END
+cderror.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/cderror.h
+END
+jconfig.vc
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jconfig.vc
+END
+jidctint.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jidctint.c
+END
+jpegtran.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jpegtran.c
+END
+makefile.unix
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.unix
+END
+jccoefct.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jccoefct.c
+END
+jdcoefct.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdcoefct.c
+END
+jcomapi.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jcomapi.c
+END
+makeapps.ds
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makeapps.ds
+END
+jdphuff.c
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jdphuff.c
+END
+makefile.dj
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/makefile.dj
+END
+jidctred.c
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libjpeg/jidctred.c
+END

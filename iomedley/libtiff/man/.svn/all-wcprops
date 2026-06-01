@@ -1,0 +1,395 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man
+END
+TIFFWriteEncodedStrip.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFWriteEncodedStrip.3tiff
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/Makefile.in
+END
+TIFFOpen.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFOpen.3tiff
+END
+tiffcmp.1
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffcmp.1
+END
+pal2rgb.1
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/pal2rgb.1
+END
+TIFFWarning.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFWarning.3tiff
+END
+TIFFReadRawStrip.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadRawStrip.3tiff
+END
+TIFFWriteScanline.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFWriteScanline.3tiff
+END
+TIFFbuffer.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFbuffer.3tiff
+END
+gif2tiff.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/gif2tiff.1
+END
+TIFFcodec.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFcodec.3tiff
+END
+TIFFWriteDirectory.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFWriteDirectory.3tiff
+END
+tiffset.1
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffset.1
+END
+TIFFPrintDirectory.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFPrintDirectory.3tiff
+END
+TIFFReadTile.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadTile.3tiff
+END
+tiffdump.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffdump.1
+END
+TIFFswab.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFswab.3tiff
+END
+TIFFtile.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFtile.3tiff
+END
+TIFFstrip.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFstrip.3tiff
+END
+TIFFDataWidth.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFDataWidth.3tiff
+END
+TIFFcolor.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFcolor.3tiff
+END
+fax2ps.1
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/fax2ps.1
+END
+TIFFReadEncodedStrip.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadEncodedStrip.3tiff
+END
+tiff2pdf.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiff2pdf.1
+END
+TIFFSetDirectory.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFSetDirectory.3tiff
+END
+tiffmedian.1
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffmedian.1
+END
+tiff2rgba.1
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiff2rgba.1
+END
+TIFFWriteRawTile.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFWriteRawTile.3tiff
+END
+TIFFGetField.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFGetField.3tiff
+END
+fax2tiff.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/fax2tiff.1
+END
+bmp2tiff.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/bmp2tiff.1
+END
+tiffcp.1
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffcp.1
+END
+TIFFReadScanline.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadScanline.3tiff
+END
+tiff2ps.1
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiff2ps.1
+END
+sgi2tiff.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/sgi2tiff.1
+END
+tiffgt.1
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffgt.1
+END
+TIFFSetField.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFSetField.3tiff
+END
+TIFFReadRawTile.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadRawTile.3tiff
+END
+libtiff.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/libtiff.3tiff
+END
+TIFFmemory.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFmemory.3tiff
+END
+TIFFsize.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFsize.3tiff
+END
+tiffsv.1
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffsv.1
+END
+TIFFRGBAImage.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFRGBAImage.3tiff
+END
+tiffinfo.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffinfo.1
+END
+TIFFWriteRawStrip.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFWriteRawStrip.3tiff
+END
+TIFFWriteEncodedTile.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFWriteEncodedTile.3tiff
+END
+ras2tiff.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/ras2tiff.1
+END
+thumbnail.1
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/thumbnail.1
+END
+raw2tiff.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/raw2tiff.1
+END
+TIFFReadDirectory.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadDirectory.3tiff
+END
+ppm2tiff.1
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/ppm2tiff.1
+END
+tiffdither.1
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffdither.1
+END
+TIFFquery.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFquery.3tiff
+END
+TIFFClose.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFClose.3tiff
+END
+TIFFWriteTile.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFWriteTile.3tiff
+END
+TIFFReadRGBAImage.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadRGBAImage.3tiff
+END
+TIFFReadEncodedTile.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadEncodedTile.3tiff
+END
+tiff2bw.1
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiff2bw.1
+END
+tiffsplit.1
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/tiffsplit.1
+END
+TIFFFlush.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFFlush.3tiff
+END
+TIFFReadRGBATile.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadRGBATile.3tiff
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/Makefile.am
+END
+TIFFReadRGBAStrip.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFReadRGBAStrip.3tiff
+END
+TIFFError.3tiff
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/TIFFError.3tiff
+END
+rgb2ycbcr.1
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/man/rgb2ycbcr.1
+END

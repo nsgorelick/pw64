@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff
+END
+configure
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/configure
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/Makefile.in
+END
+Makefile.vc
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/Makefile.vc
+END
+VERSION
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/VERSION
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/ChangeLog
+END
+RELEASE-DATE
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/RELEASE-DATE
+END
+nmake.opt
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/nmake.opt
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/README
+END
+configure.ac
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/configure.ac
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/TODO
+END
+SConstruct
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/SConstruct
+END
+COPYRIGHT
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/COPYRIGHT
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/Makefile.am
+END
+autogen.sh
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/autogen.sh
+END
+aclocal.m4
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/aclocal.m4
+END
+HOWTO-RELEASE
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/HOWTO-RELEASE
+END

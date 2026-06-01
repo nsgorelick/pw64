@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/iptcutil
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/iptcutil/Makefile.in
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/iptcutil/Makefile.am
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/iptcutil/README
+END
+test.iptc
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/iptcutil/test.iptc
+END
+test.txt
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/iptcutil/test.txt
+END
+iptcutil.c
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/iptcutil/iptcutil.c
+END

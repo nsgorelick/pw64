@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/win_dib
+END
+Makefile.w95
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/win_dib/Makefile.w95
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/win_dib/Makefile.in
+END
+Tiffile.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/win_dib/Tiffile.cpp
+END
+README.tiff2dib
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/win_dib/README.tiff2dib
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/win_dib/Makefile.am
+END
+tiff2dib.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/win_dib/tiff2dib.c
+END
+README.Tiffile
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/libtiff/contrib/win_dib/README.Tiffile
+END

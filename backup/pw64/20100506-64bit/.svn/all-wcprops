@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/davinci/!svn/ver/18738/pw/branches/20100506-64bit
+END
+acconfig.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/acconfig.h
+END
+config.h.in
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/config.h.in
+END
+configure
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/davinci/!svn/ver/18737/pw/branches/20100506-64bit/configure
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/Makefile.in
+END
+Makefile.org
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/Makefile.org
+END
+configure.in
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/configure.in
+END
+.dvlog
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/.dvlog
+END
+config.guess
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/davinci/!svn/ver/18737/pw/branches/20100506-64bit/config.guess
+END
+.ver
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/.ver
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/README
+END
+config.sub
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/davinci/!svn/ver/18737/pw/branches/20100506-64bit/config.sub
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/18737/pw/branches/20100506-64bit/Makefile
+END
+install-sh
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/davinci/!svn/ver/18736/pw/branches/20100506-64bit/install-sh
+END

@@ -1,0 +1,651 @@
+.\" use ms macros
+.nr LL 6.5i
+.ll 6.5i
+.nr PO 1.1i
+.po 1.1i
+.nr VS 12
+.vs 12
+.ND
+.ce 2
+.B
+An Image Display and Imaging Spectroscopy Cube Display System:
+
+Pic Works (PW) User's Guide
+.R
+
+
+.ce
+by
+
+
+.ce 3
+Noel Gorelick
+
+and
+
+Roger N. Clark
+
+
+
+.ce 3
+U.S. Geological Survey, MS 964
+Box 25046 Federal Center
+Denver, CO 80225-0046
+
+
+
+.ce
+US Geological Survey Open File Report # ________
+
+
+
+
+
+
+N. Gorelick: (303) 236-1411    ngorelic@speclab.cr.usgs.gov
+
+R. Clark:    (303) 236-1332      rclark@speclab.cr.usgs.gov
+
+
+
+
+January 14, 1993
+
+
+
+.bp
+.ce
+.B
+Introduction
+.R
+.PP
+Pic Works (PW) is an image and imaging spectroscopy cube display
+system developed by MercWorks Software (N. Gorelick) under contract
+to the USGS (R. Clark).  Design goals were specific to projects
+involving imaging spectroscopy at the USGS in Denver, but we have
+found that the design is applicable to many image processing tasks.
+.PP
+Pw has several unique features, including up to 16 image cubes
+online at one time, Color overlays where each overlay has color
+intensity ranges, and excellent performance with X-terminals across
+an ethernet as well as at a local console.
+.PP
+Pw is an X-windows based program.  You must have an X-windows device
+(e.g. a console or X-terminal).  X-terminals do surprising well with this
+program, surpassing consoles in some cases (because tasks are
+offloaded from the host cpu).
+.PP
+This manual is derived from a draft writeup of pw functional
+elements by Wendy Calvin, USGS.
+
+
+
+
+.B
+COLOR AND THE REPRODUCTION OF THIS MANUAL
+.R
+
+.PP
+This manual is being copied on regular black and white copy
+machines (as a cost saving).  However, all the figures are color.
+The figures are all available a x-window dumps, as well as the
+manual text via anonymous ftp from speclab.cr.usgs.gov.  Simply
+login as anonymous, and enter your username@machine_name as the
+password.  Then cd to pub/pw and do a binary get pw.manual.tar.Z.
+You must then uncompress it and untar it to the directory of your
+choice.  There is a program, pwmanfig, which will find the appropriate figure
+and display it on your X-window display (you must customize the
+script to point to the correct directory).
+.PP
+To display a figure from
+the manual on your X-display, like figure 1a, simply type:
+
+          pwmanfig 1a
+
+and a full color figure will be shown.  To cancel the
+figure and make the window go away, simply click your mouse button
+on the window.
+
+
+.bp
+.B
+STARTING PW
+.R
+.PP
+To start pw type:
+
+         pw &
+
+(the & is not necessary, but since pw starts its own windows, you
+probably want to free the current window so you may run other commands).
+You may also start pw including file names:
+
+	pw filename1 filename2 ... &
+
+(if you do not include files on the command line, you can add them later
+in pw).  You may include up to 16 files on the command line.
+.PP
+Note that the 16 files that pw can currently have online at one time can
+be any mixture of image cubes, images, overlays or color composites.
+(Yes, you can have 16 image cubes online and extract and compare spectra
+between them!)
+.PP
+Pw starts with two windows, shown in Figure 1.  The "Main Control
+Window" (Figure 1a) contains options for viewing, color control of
+overlays, stretching of images, histograms, controls all other windows
+and allows you to turn them on and off at any time.  The "Files Window"
+(Figure 1b) is a list of files that are accessed, displaying information
+about each file, selected overlays, and color composites.
+
+
+.bp
+.B
+FILE LOADING
+.R
+
+.PP
+If you started PW with image filenames on the command line, these files
+should appear in the Files Window with the image letter highlighted in
+red.  Information at the bottom of the Files Window (header info, image
+format and size) is displayed for the image highlighted with a grey bar.
+.PP
+If you started PW without any images on the command line, the Files
+Window has no files.  To add a file, click the left mouse key once
+to highlight the desired letter in grey.  A second click will turn the
+bar black and allow a filename to be typed in.  File completion (using
+the <ESC> key) will work.  When the filename is complete hit return
+and the name will be input, the file header (if any) will be read, and
+the file letter highlighted in red (Figure 2).  If you entered these files
+on the command line, they would be shown here just like you typed them
+in internal to pw (Figure 2).
+.PP
+If working with an image cube, you must select a band number in the
+first column to the right of the list.  Use the same method to select
+band number, left click to turn the number black, type in a band number
+and return to input that number.  If you make a mistake or don't want to
+input a file the right mouse key will return to the grey bar.
+.PP
+To read the image data into memory, click on the red file letter.  The
+letter will turn grey while the reading occurs, and then white when the
+image is loaded into memory (Figure 3).  Two copies of the image are
+stored in memory:  1) the original data (if 16 bit it stays as 16-bit),
+and 2) an 8-bit stretched image for the display.  (Note:  this scheme
+uses a lot of memory.  A 1000x1000 16-bit image takes 3 megabytes:  2
+megabytes for the 16-bit data and 1 megabyte for the display images.
+Three such images and a color composite then take up 10 megabytes of
+memory.)
+.KS
+.PP
+\fBIMAGE HEADER NOT RECOGNIZED.\fR  If the file header is not
+recognized, you can still read the image, but you must describe it
+by hand.  Figure 2 shows the header label information.  Click on
+each box and enter the correct value:
+
+.in 10n
+.nf
+Format: byte (8-bit data)
+        half (16-bit data)
+
+Org: BSQ (Band Sequential)
+     BIL (Band Interleaved by Line)
+     BIP (Band Interleaved by Pixel)
+
+Label: the size of the header label in bytes.
+
+Lines: Number of scan lines in the image.  This is
+       the number of pixels in the image top to bottom.
+
+Samples: Number of cross-track samples in the image.  This
+         is the number of pixels in the image left to right.
+
+Bands: the number of spectral bands in the data set.
+
+Order: sun (Byte order like on a Sun, or HP computer)
+           (Most machines are this way.)
+       vax (byte order like on a Dec VAX.
+
+.in 0n
+.KE
+.KS
+.PP
+\fBSUB-SCENES AND SKIPS.\fR  If you have a very large image, and the
+memory requirements overwhelm your computer, you may want to look at
+only a subscene, or some fraction of the data.  The bottom section
+of the Files Window contains subsetting and skipping options.  After
+reading (or setting) the file header, you can change these fields to
+subset your image.  Simply click on each box and enter the value you
+desire.
+.PP
+For example, say you have a 10,000 by 12,000 image, and you
+want to look at the subscene starting at line 3,500, sample 5,000,
+and you want to look at an image 2000 by 1900 on the screen at one
+time (say your screen is 1280x1024).  To fit 2000 pixels into 1024
+pixels on screen, you must skip every other pixel.  You would then
+set the following values:
+
+.in 10n
+.nf
+Start L = 3500
+Start S = 5000
+Height  = 1900
+Width   = 2000
+L Skip  = 1
+S Skip  = 1
+.fi
+.in 0n
+
+Next, you simply load the image.  If you want to look at another
+section, simply change the parameters and reload the image.
+.KE
+
+
+.bp
+.B
+IMAGE VIEWING
+.R
+
+At this point images can be displayed by opening the Image View Window
+by clicking on the eyeglasses icon in the upper left of the Main Control
+Window.  Next place the mouse cursor in the image window (or in the pan
+window or the histogram window, both in the Main Control Window) and
+type one of the file letters.  You can cycle or toggle images by simply
+typing the letter (it is not necessary to type a carriage return).  A
+picture of the full image will then appear in the Pan Window and the
+Image Window (Figure 4a,b).
+.PP
+\fBPANNING.\fR The red box on the Pan Window (see Figure 1a) is the "Pan
+Cursor."  The Pan Window is a representation of the entire image, and
+the Pan Cursor shows the outline of the image that appears in the image
+window.  You can roam through the image by placing the mouse cursor on
+the Pan Cursor and holding the left mouse button down, dragging the
+cursor.  The image window will be updated real time (within the
+limitations of the bandwidth of the systems in use).  You may also place
+the mouse cursor to any point in the Pan Window, click the right mouse
+button and the pan cursor will be placed at that position and that
+portion of the image displayed in the image window.  The Pan Cursor
+works for any size image and any size image window size.  Theoretically,
+given enough memory, you could have a 10,000 by 10,000 image, or larger,
+an image window of 1000 by 1000 and roam around the image (such an image
+would require 200 megabytes of virtual memory for byte data).
+.PP
+\fBIMAGE WINDOW SIZE.\fR The picture window size can be adjusted using
+the mouse pointer at the corners, or with the mouse over the eyeglasses
+in the Main Control Window, click the middle mouse button and the image
+window will expand to the full image size (possibly limited by your
+X-window manager).  Be cautious using this expansion on large images -
+they may overwhelm the entire screen.  A second click on the middle
+mouse key on the eyeglasses icon will alternately enlarge the image to
+full size (limited by the screen size) and restore the picture window to
+its original size, 300 x 300 pixels.
+.PP
+\fBMAGNIFY.\fR A magnified portion of the picture window can be viewed
+either by clicking on the magnifying glass in the Main Control Window, or by
+clicking on any point in the Image Window.  A Magnified Image Window
+is opened and a red box appears in the Image Window to denote the area
+being magnified.  To change the magnification, place the mouse pointer
+in the magnified image and type the desired level 1 through 9.
+Multiples of 10 can be achieved using *1 *2 etc.  The image can be
+shrunk by using -2, -3, through -9.  Factors of ten shrinking can be
+done using /2, /3, etc through /9.  The area magnified can
+be moved using point and click, drag will not work.  The size of the
+Magnify Window can be changed using your window manager controls.
+.PP
+\fBDN READOUT.\fR At any time the mouse pointer is in either the picture
+window or the magnified image window, the line number (L), sample number
+(S) and DN value are displayed under the icons in the Main Control
+Window.  The DN value is always the original data value.  For
+example if the original data are 16-bit, the DN readout is the
+unstretched 16-bit values.  When color composites or overlays are
+displayed, the DN values for all components in the image may be
+displayed by clicking on the DN readout in the Main Control Window.
+This opens a new DN Readout Window described later.
+
+
+
+.bp
+.B
+IMAGE STRETCHING
+.R
+
+At the bottom of the Main Control Window is a histogram of the intensity
+levels in the image.  The vertical scale of the histogram can be
+incremented in steps using the up and down arrows on the right hand
+side.  The histogram display can be cycled through a basic histogram
+(numbers vs intensity, see Figure 4a) labeled FREQ, a cumulative
+histogram (Figure 5a) labeled CUMUL, or NONE.  The cumulative display is
+useful for image stretching.  The red line that runs diagonal through
+the histogram adjusts the contrast of the image.  This is the DN in
+(horizontal axis) to DN out (vertical axis) transfer function.  The end
+points move only in a vertical direction, but additional points can be
+added to design almost any curve shape (e.g.  Figure 5a).  By clicking
+the mouse on "ADD" to the left of the histogram, new points are added to
+the red line.  Points can be moved or deleted by selecting "MOV" or
+"DEL".  You may click and drag points on the transfer curve and the
+stretch changes real time.  By selecting "SHIFT", and dragging the mouse
+pointer you can move the entire curve as a single unit.  To return to
+the beginning straight line, select "CLEAR".  "ALIGN" moves the shifted
+curve back to its original position.
+.PP
+A Gaussian stretch can be done by setting the histogram to cumulative
+(CUMUL) and adding points on the red transfer curve to make it follow
+the cumulative histogram.  The transfer function shown in Figure 5a is
+close to a Gaussian stretch.  A Gaussian stretch seems to lose detail in
+the brighter parts of the image.  To maintain some detail, try setting
+the transfer curve slightly below the cumulative histogram at the upper
+end of the curve.
+.PP
+Directly above the histogram are two bar scales which control the lower
+and upper grey level of the display.  The numbers on the right hand side
+display the range of values for the image.  For example, for 16-bit
+data, they might be something like 1523 to 9627.  These values are the
+minimum and maximum DN found in the image.  Initially, the values on the
+left are the same, but can be changed.  For example, if the histogram is
+very narrow, and you want to expand it, click on the left hand numbers
+and type in new ones.  You will then have to reload the image (the raw
+DN's are already in memory, clicking on the red file letter will just
+recompute the 8-bit image in memory).  Values less than the minimum DN
+are set to display DN of 0, and values greater the maximum DN are set to
+display DN 255.  Use the slider bars to get an idea of what you might
+want to set these values.  The upper bar adjusts the lower limit.
+.PP
+For example, to the min and max in Figure 5a is 1 and 254.  Say we use
+the slider bars and decide we want the min and max to be 50 to 220.  By
+setting the box in the upper left bar scale to 50 (point and click on
+the box), all pixels with values less than 50 are set to zero.  Next
+click on the lower left box.  We set it to 220 as in Figure 5b.  The
+image is not yet changed.  The file letter changes to red.  You must
+click on the file letter and then put the new image into the image
+window by typing the file letter with the mouse cursor in the image
+window.  The histogram from Figure 5a now appears like that in Figure
+5c.
+.PP
+\fBSLIDER BAR BUG.\fR In some cases, the histogram (and sometimes the
+image) appears all grey.  This is really a bug in the auto DN scaling.
+To get your image and histogram back, simply grab the slider bars and
+move the upper bar to the right then all the way to the left.  Move the
+lower bar to the left then all the way to the right.
+
+
+.bp
+.B
+COLOR COMPOSITES
+.R
+
+With three bands from the same scene, color composites can be made.
+Load the images and stretch them as desired.  To change the image
+displayed in the Image Window, place the mouse pointer in the small
+image in the Main Control Window, or on the image window, or on the
+histogram, and type the letter associated with the
+image you want to view.
+.PP
+Next, select a letter from the Files Window that has no title, i.e.  so
+that a "<NA>" is highlighted in grey (Figure 6a).  On the column of
+double boxes on the right side of the Files Window click on the left
+column.  The box will turn red, then green, then blue.  Cycle to reach
+the desired color for each of the three bands in the composite.  With
+the selection of the first color, the title of the highlighted line will
+change from "<NA>" to "<composite>" and the letter on the left will turn
+red (Figure 6b).  You may also want to select how many colors are to be
+in the final image (unless you want to add overlays, you will probably
+want to maximize the colors).  To change the number of colors, click on
+the used colors box and enter the new number, up to the available
+colors.
+.PP
+To calculate the composite image (Figure 7), click on the red file
+letter, then to display the image place the mouse pointer in the
+Image Window, or the Pan or Histogram Windows, and type the
+letter associated with the composite image.
+.PP
+In the middle of the Main Control Window is a box with three bar scales
+labeled red, green and blue.  These bar scales adjust the color mix
+in a color composite.  By moving the box associated with a particular
+color, the contribution of that color to the composite image can be
+varied (Figure 8).
+
+
+
+.bp
+.B
+COLOR OVERLAYS
+.R
+
+.PP
+A nice feature of PW is that it handles intensity variations within
+overlays.  That is overlays are not simply on/off, but can contain
+variations in intensity level.  For example, when overlays are mineral
+band depth maps, then the brightness is also indicative of abundance
+level.
+.PP
+First, lets discuss the concept of "colors" in the display.  PW holds
+images as 16 bit then calculates an 8 bit image to go to the display
+(because generic X-windows is still limited to 8-bit color displays).
+As such there are then 2^8=256 grey levels.  In doing color overlays
+this number of "colors" or levels, must be shared among the image, the
+overlays, and the rest of the screen.
+.PP
+For black and white image, the eye is not sensitive to 256 grey levels,
+or even 128 grey levels.  A reasonable system seems to be setting the
+background image to 64 colors and the overlays to 24 (or if you have
+many overlays, 12).  (You might not be able to tell the difference with
+even 32 grey levels.)
+.PP
+Currently, pw can have 16 images online (we do plan to expand it).
+So you can have one black and white and 15 overlays.  If the black
+and white image has 32 grey levels, and say you have 222 colors
+available (some colors are used by the window manager and other
+windows on your display--pw leaves these colors alone so when you
+move the mouse cursor out of the pw windows, the screen doesn't
+flash to a new color palette).  Thus you have 222-32 = 190 colors
+available for overlays.  For 15 overlays you could have 190/15 =
+12.6 or 12 colors per overlay.
+.PP
+To set the number of colors in an image, whether to be used as a
+color overlay, or a grey scale image, click on the file name in the
+files window to turn it grey (if you click twice it turns black to
+type in a new file--if you do that click the right mouse button to
+undo the file entry).  Then move down to the number of colors and
+click on the used colors box and type in the number of colors you
+want for that image (Figure 9).
+.PP
+Each overlay can be viewed and stretched as a normal image (e.g.  Figure
+10).  If using more than one overlay, for example, mapping many
+different minerals, color each overlay using the RED-GRN-BLU slider bars
+in the Main Control Window.  Each color can be adjusted individually to
+attain the entire chromatic range.  Colors can also be adjusted using
+hue, saturation and intensity, rather than the relative proportion of
+red/green/blue.  To switch between these methods of color selection
+click the mouse pointer on the box which reads "RED GRN BLU" to the left
+of the sliding bars in the Main Control Window.  This box will then
+display "HUE SAT VAL" so you know which system you are using.
+.PP
+After the desired overlays have been stretched and colored they can be
+displayed over a background image as follows.  First, in the Image
+Window, select the background image (type the file letter associated
+with the background image, e.g.  file G in Figure 10).  Then, in the
+Main Control Window, select the background image so that it is
+highlighted in grey.  Then use the mouse pointer to click on the right
+most column of double boxes in the Files Window.  As each overlay is
+selected this box will turn yellow.  If a box will not turn yellow, you
+have run out of colors (in that case you will need to use less colors in
+that or other overlays or the base image and reload them).  Finally,
+click on "REDRAW" in the Main Control Window, just under the icons.
+This will redisplay the background image with the selected overlays
+(Figure 11a).  The initial computation takes a few seconds.  To remove
+overlays click on the associated yellow box and then on "REDRAW" (Figure
+11b).  Toggling overlays on and off is relatively quick (click on the
+yellow overlay box, then on redraw) once the initial overlay mask has
+been computed.
+.PP
+If you cannot seem to get an overlay to turn yellow, check the total
+number of colors, or the colors used for each overlay.  You cannot use
+more than the total number of available colors.  Also be sure of the
+order: base image in the Image Window, and the grey bar on the base
+image file name in the Files Window, yellow overlay boxes colored,
+and finally click on redraw.
+
+
+.bp
+.B
+EXPANDED DN READOUT
+.R
+
+.PP
+If you click on the DN readout box in the Main Control Window
+(Figure 1a), you get an Expanded DN Readout Window (Figure 12).
+The expanded box is useful for overlays and color composites.  In
+the case of Figure 12, the overlays in the image as well as the base
+image are shown.  There are two columns: the DN value (in the
+original images) and the scaled to physical value column (marked
+scaled).  For example, Figure 12 shows the base image, G, has a DN
+value of 4499 (16-bit data) at pixel location line 100, sample 124.
+The overlay "D" (magenta) has a DN value of 237.
+.PP
+If you want the DN's scaled to physical values you must enter the
+scale factors.  For each box under the "SCALED" column, click on the
+box and enter the full scale value.  For example, in image "G", a
+reflectance of 1.0 is DN 20,000.  So clicking on the G box and
+entering 20,000 will enter the scale factor.  In Figure 12, we see
+that the DN of 4499 in image G is a reflectance of 0.2249, and that
+the overlay D has a value of 0.9294 (in this case the value is a
+correlation coefficient indicating a very high confidence in that
+mineral identification).
+.PP
+The boxes labeled UTM are for future UTM or longitude and latitude
+readout (under development).
+.PP
+The Expanded DN Readout Window can be turned off by clicking on the
+DN box in the Main Control Window.
+
+
+
+.bp
+.B
+SPECTRA FROM AN IMAGE CUBE
+.R
+
+.PP
+Spectra from an image cube can be extracted and displayed using the Main
+Control Window icon that resembles an x-y graph (the upper right icon):
+the "Plot Window" as indicated in Figure 1a.  Selecting this icon opens
+a spectral display window which can be resized using the mouse pointer
+on any corner.  First, place the mouse pointer on the lower left box in
+the Plot Window that says "CUBE 0" and type the letter associated with
+the image cube.  The box will turn black and display the letter you
+typed in.  It is important to have one channel of your image cube
+displayed either alone, or with appropriate overlays in the picture
+window.  The image could be a single band image, like file G in Figure
+10, or extract a channel from the cube.  You select a channel in file H
+and load the image (see Figure 10).
+.PP
+Next, in the plot window, select a color to use for plotting the
+spectrum.  On the left of the Plot Window, are three columns of squares:
+open white boxes on either side of colored boxes.  Click on the Y column
+any box to activate that color.  The box will be outlined in that color
+when activated (Figure 13).  (The X column is for wavelengths but is not
+yet functional.)
+.PP
+The magnification window is then used for selecting individual pixels
+for spectral display.  The X and Y axes scales in the plot window can be
+adjusted using the boxes adjacent to the x or y with an up or down
+arrow.  Select the box and it will turn black and you can type in the
+appropriate limit, followed by return.  Again the right mouse key will
+restore the original value, without change.  Selecting the arrowed boxes
+themselves will adjust the scales in step increments in the indicated
+direction.
+.PP
+To display individual spectra, select a color as described above, then
+click on a pixel from the magnified image window with the left mouse
+button.  The selected pixel will turn the same color as its displayed
+spectrum.  Data readout on the spectrum occurs automatically when you
+put the mouse cursor on the plot.  The readout is simply the position of
+the cursor within the plot.
+.PP
+To display spectra of a region, hold the mouse key down and drag the
+rubber band box to outline the desired rectangular region.  Upon
+releasing the mouse key all spectra from this region will be displayed
+and the associated pixels colored to match the spectra (Figure 14).  To
+delete an individual spectrum, place the mouse cursor on the pixel in
+the Magnify Window and press the right mouse button.  To erase all the
+plots for one color, select the associated plot color and then click on
+the "no" icon (this is a circle with a line through it just above the
+integral icon).  To simply turn off all spectra of a given color on the
+plot, click on the solid color boxes.  Clicking on the same box again
+will bring all the spectra back.  The remaining icons in this window
+will be available in a future version of PW.
+.PP
+In order to get a list of pixels extracted in any one color, click the
+right mouse button on the active Y-column box in the Plot Window (Figure
+15).  In this Pixel List Window, individual spectra can be highlighted
+just by clicking on the line containing the pixel coordinates, and then
+deleted (and then undeleted).  This way you can see if individual
+spectra are plotting away from the general trend.  (The boxes HILITE and
+BLOCK are not yet functional.)  Deleted pixels are flagged with a
+negative line number (Figure 16).  You can than write the list to an
+ascii file by clicking on the write box.
+.PP
+Note that you can have multiple cubes (up to 16) online at one time!
+You can extract spectra from one cube, switch cubes by entering a
+file letter in the cube box, and then continuing to extract
+spectra, thus overlaying spectra from multiple cubes.
+
+
+.bp
+.B
+OTHER ITEMS
+.R
+
+.PP
+\fBSAVE AND RESTART\FR.  After attaining certain composites or overlays
+you may wish to save your current list of images and selections.  Do
+this by clicking on the "SAVE" button near the bottom of the Files
+Window.  To restore this, for example on entering PW at a later time
+(start pw with no file names on the command line), click on "READ" in
+the Files Window.  The "DEL" box adjacent to the latter two will delete
+the image highlighted in grey from the file list.
+.PP
+\fBWRITING IMAGES OUT.\fR If you wish to write an image, or a portion
+there of, the pencil icon in the Main Control Window will achieve this.
+Click on the pencil and a small window opens which allows you to enter
+filenames for each of the red, green and blue image planes.  You can
+also select a VICAR header, PGM format, or no header (new formats will
+be added), and what to write by cycling through the options under
+"Header" and "Write".  When ready, click on "GO" or else use "CANCEL" to
+quit.  A second click on the pencil icon will also close this window
+without writing.  To write a grey scale image, only enter one file name,
+e.g.  under red.  Only enter all three file names when writing color
+composites, or color overlay images.  The files are currently always
+written as byte BSQ stretched images.
+.PP
+\fBTURNING FILES WINDOW ON AND OFF.\fR Of the remaining icons in the
+Main Control Window, the file folder icon will open and close the Files
+Window.
+.PP
+\fBONLINE HELP.\fR  The on line help denoted by the ? icon in the Main
+Control Window is not working yet.
+.PP
+\fBQUITTING PW.\fR To quit PW simply select "QUIT" in the Main Control
+Window.
+
+
+.KS
+.B
+ESOTERIC FEATURES
+.R
+
+.PP
+In the Main Control Window, there is a color bar which displays the range
+of color intensities in the displayed image.   This bar is in the
+middle, next to the box which says "PICK".
+Usually this bar is black to white or black to some color, red for 
+example.  But you can also display an image as blue to white,
+or primrose to turquoise.  Click the mouse on the box at the left side
+of the colored bar.  This selects the bottom end (default is black).
+Then use the three RGB slider bars to adjust the color of the low
+intensities in the image.  Then click on the box at the right end of the
+colored pick bar to adjust the the color of the high intensities of the
+image.  In this way the image can grade from any color into any other
+color.  It should be noted that for overlays, the "dark" end color will
+not appear on the overlay, only the color associated with "higher"
+intensities.  However, colored overlays can be displayed over a
+background image which ranges from any color into any other color.
+.KE

@@ -1,0 +1,25 @@
+xwd dumps to the paintjet300xl printer should be scaled by:
+
+
+fig.1a  4x
+fig.1b  4x
+fig.2   4x
+fig.3   4x
+fig.4a  4x
+fig.4b  4x
+fig.5a  4x
+fig.5b  4x
+fig.5c  4x
+fig.6a  4x
+fig.6b  4x
+fig.7   auto scale
+fig.8   4x
+fig.9   4x
+fig.10  3x
+fig.11a 3x
+fig.11b 3x
+fig.12  4x
+fig.13  3x
+fig.14  3x
+fig.15  3x
+fig.16  3x

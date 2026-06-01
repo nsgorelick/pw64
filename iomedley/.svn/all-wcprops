@@ -1,0 +1,239 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/davinci/!svn/ver/18582/iomedley/branches/64bit
+END
+io_lablib3.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_lablib3.c
+END
+configure
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/configure
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/Makefile.in
+END
+io_grd.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_grd.c
+END
+io_lablib3.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_lablib3.h
+END
+mungelibs
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/mungelibs
+END
+iomedley.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/9278/iomedley/branches/64bit/iomedley.c
+END
+config.guess
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/config.guess
+END
+io_png.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_png.c
+END
+config.sub
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/config.sub
+END
+iomedley.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/davinci/!svn/ver/18581/iomedley/branches/64bit/iomedley.h
+END
+io_tiff.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/18582/iomedley/branches/64bit/io_tiff.c
+END
+io_ers.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_ers.c
+END
+io_pnm.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/9278/iomedley/branches/64bit/io_pnm.c
+END
+configure.ac
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/configure.ac
+END
+iom_config.h.in
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/iom_config.h.in
+END
+io_goes.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_goes.c
+END
+io_aviris.c
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_aviris.c
+END
+io_vicar.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_vicar.c
+END
+toolbox.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/toolbox.h
+END
+io_gif.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_gif.c
+END
+.cvsignore
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/.cvsignore
+END
+io_isis.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_isis.c
+END
+tools.c
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/tools.c
+END
+io_bmp.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_bmp.c
+END
+tools.h
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/tools.h
+END
+io_jpeg.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_jpeg.c
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/README
+END
+Makefile.min
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/Makefile.min
+END
+test.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/test.c
+END
+io_raw.c
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_raw.c
+END
+swig_cygwin.sh
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/swig_cygwin.sh
+END
+Makefile.win
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/Makefile.win
+END
+configwin.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/configwin.h
+END
+io_envi.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_envi.c
+END
+io_imath.c
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_imath.c
+END
+io_envi.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/io_envi.h
+END
+header.h
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/header.h
+END
+install-sh
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/davinci/!svn/ver/9276/iomedley/branches/64bit/install-sh
+END

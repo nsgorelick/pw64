@@ -1,0 +1,70 @@
+8
+
+dir
+18729
+https://oss.mars.asu.edu/svn/davinci/iomedley/branches/64bit/giflib-4.1.4/gba
+https://oss.mars.asu.edu/svn/davinci
+
+
+
+2006-02-14T18:32:43.000000Z
+1035
+mjd
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+dedd6328-c50f-0410-8be5-b54a49638459
+
+giftest.c
+file
+
+
+
+
+2010-04-15T19:16:31.000000Z
+0c1c9fa24057c8b76a729b19cd6757d7
+2006-02-14T18:32:43.000000Z
+1035
+mjd
+has-props
+
+res
+dir
+
+giftest.dsp
+file
+
+
+
+
+2010-04-15T19:16:31.000000Z
+c36d635fdcf633bb3e4c820b2683942a
+2006-02-14T18:32:43.000000Z
+1035
+mjd
+has-props
+
+giftest.mak
+file
+
+
+
+
+2010-04-15T19:16:31.000000Z
+7433af1167c02e9932361bfca64a518c
+2006-02-14T18:32:43.000000Z
+1035
+mjd
+has-props
+

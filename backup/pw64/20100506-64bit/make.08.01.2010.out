@@ -1,0 +1,1102 @@
+make[1]: Entering directory `/home/src/local/pw64/20100506-64bit/lib'
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 Button.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 Slider.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 VisInfo.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 Joystick.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 MapAndWait.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 init.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 AMap.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 List.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 xgets.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 chd.c
+chd.c: In function ‘sort_dirs’:
+chd.c:38: warning: incompatible implicit declaration of built-in function ‘strcpy’
+chd.c:45: warning: incompatible implicit declaration of built-in function ‘strcpy’
+chd.c:62: warning: incompatible implicit declaration of built-in function ‘strlen’
+chd.c: In function ‘get_sorted_dir’:
+chd.c:78: warning: incompatible implicit declaration of built-in function ‘malloc’
+chd.c:94: warning: incompatible implicit declaration of built-in function ‘strlen’
+chd.c:95: warning: incompatible implicit declaration of built-in function ‘strcpy’
+chd.c: In function ‘complete_match’:
+chd.c:121: warning: incompatible implicit declaration of built-in function ‘strlen’
+chd.c:132: warning: incompatible implicit declaration of built-in function ‘strcat’
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 toggle.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 confirm.c
+confirm.c: In function ‘opt_callback’:
+confirm.c:28: warning: cast from pointer to integer of different size
+confirm.c: In function ‘ConfirmRequestor’:
+confirm.c:109: warning: cast to pointer from integer of different size
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 hershey.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 Composite.c
+Composite.c: In function ‘Cedit_callback’:
+Composite.c:144: warning: passing argument 5 of ‘GetText’ makes integer from pointer without a cast
+Composite.c:22: note: expected ‘int’ but argument is of type ‘void *’
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 LB.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 MB.c
+MB.c: In function ‘StringToMenu’:
+MB.c:72: warning: cast to pointer from integer of different size
+MB.c:98: warning: cast to pointer from integer of different size
+MB.c: In function ‘print_menu’:
+MB.c:132: warning: cast from pointer to integer of different size
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 PB.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 RB.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 CB.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 XB.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 xf.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 misc.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 3D.c
+*** Making Xfred library ***
+rm -f libXfred.a
+ar cqv libXfred.a Button.o Slider.o VisInfo.o Joystick.o MapAndWait.o init.o AMap.o List.o xgets.o chd.o toggle.o confirm.o hershey.o Composite.o LB.o MB.o PB.o RB.o CB.o XB.o xf.o misc.o 3D.o
+a - Button.o
+a - Slider.o
+a - VisInfo.o
+a - Joystick.o
+a - MapAndWait.o
+a - init.o
+a - AMap.o
+a - List.o
+a - xgets.o
+a - chd.o
+a - toggle.o
+a - confirm.o
+a - hershey.o
+a - Composite.o
+a - LB.o
+a - MB.o
+a - PB.o
+a - RB.o
+a - CB.o
+a - XB.o
+a - xf.o
+a - misc.o
+a - 3D.o
+ranlib libXfred.a
+make[1]: Leaving directory `/home/src/local/pw64/20100506-64bit/lib'
+make[1]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley'
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_aviris.c
+io_aviris.c: In function ‘iom_isAVIRIS’:
+io_aviris.c:23: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result
+io_aviris.c:29: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result
+io_aviris.c: In function ‘iom_GetAVIRISHeader’:
+io_aviris.c:65: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result
+io_aviris.c:91: warning: ignoring return value of ‘fgets’, declared with attribute warn_unused_result
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_goes.c
+io_goes.c: In function ‘iom_GetGOESHeader’:
+io_goes.c:81: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_grd.c
+io_grd.c: In function ‘iom_isGRD’:
+io_grd.c:39: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_grd.c:48: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_grd.c:49: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_grd.c: In function ‘iom_GetGRDHeader’:
+io_grd.c:82: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_grd.c:87: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_imath.c
+io_imath.c: In function ‘iom_isIMath’:
+io_imath.c:37: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_imath.c: In function ‘iom_GetIMathHeader’:
+io_imath.c:65: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_imath.c:66: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_imath.c:67: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_isis.c
+io_isis.c: In function ‘iom_GetISISHeader’:
+io_isis.c:403: warning: comparison of distinct pointer types lacks a cast
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_lablib3.c
+io_lablib3.c: In function ‘OdlPrintMessage’:
+io_lablib3.c:3211: warning: format ‘%d’ expects type ‘int’, but argument 3 has type ‘long int’
+io_lablib3.c: In function ‘OdlPrintHierarchy’:
+io_lablib3.c:3506: warning: format ‘%-5d’ expects type ‘int’, but argument 3 has type ‘long unsigned int’
+io_lablib3.c:3506: warning: format ‘%d’ expects type ‘int’, but argument 4 has type ‘long unsigned int’
+io_lablib3.c:3506: warning: format ‘%d’ expects type ‘int’, but argument 5 has type ‘long unsigned int’
+io_lablib3.c:3515: warning: format ‘%-5d’ expects type ‘int’, but argument 3 has type ‘long unsigned int’
+io_lablib3.c:3515: warning: format ‘%d’ expects type ‘int’, but argument 4 has type ‘long unsigned int’
+io_lablib3.c:3515: warning: format ‘%d’ expects type ‘int’, but argument 5 has type ‘long unsigned int’
+io_lablib3.c: In function ‘OdlParseFile’:
+io_lablib3.c:4112: warning: format ‘%7d’ expects type ‘int’, but argument 3 has type ‘long int’
+io_lablib3.c:4115: warning: format ‘%7d’ expects type ‘int’, but argument 3 has type ‘long int’
+io_lablib3.c:4117: warning: format ‘%7d’ expects type ‘int’, but argument 3 has type ‘long int’
+io_lablib3.c:4119: warning: format ‘%7d’ expects type ‘int’, but argument 3 has type ‘long int’
+io_lablib3.c:4121: warning: format ‘%7d’ expects type ‘int’, but argument 3 has type ‘long int’
+io_lablib3.c: In function ‘OdlValidElement’:
+io_lablib3.c:4348: warning: format ‘%d’ expects type ‘int’, but argument 3 has type ‘long int’
+io_lablib3.c: In function ‘find_file’:
+io_lablib3.c:5985: warning: cast to pointer from integer of different size
+io_lablib3.c:5991: warning: cast to pointer from integer of different size
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_gif.c
+io_gif.c: In function ‘iom_ReadGIF’:
+io_gif.c:276: warning: format ‘%d’ expects type ‘int’, but argument 3 has type ‘long unsigned int’
+io_gif.c:287: warning: format ‘%d’ expects type ‘int’, but argument 3 has type ‘long unsigned int’
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_png.c
+io_png.c: In function ‘iom_isPNG’:
+io_png.c:75: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_png.c: In function ‘iom_ReadPNG’:
+io_png.c:268: warning: format ‘%d’ expects type ‘int’, but argument 3 has type ‘png_uint_32’
+io_png.c:277: warning: format ‘%d’ expects type ‘int’, but argument 3 has type ‘long unsigned int’
+io_png.c: In function ‘iom_WritePNG’:
+io_png.c:521: warning: format ‘%d’ expects type ‘int’, but argument 3 has type ‘long unsigned int’
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_jpeg.c
+In file included from libjpeg/jpeglib.h:24,
+                 from io_jpeg.c:24:
+libjpeg/jconfig.h:12:1: warning: "HAVE_STDLIB_H" redefined
+In file included from io_jpeg.c:12:
+./iom_config.h:51:1: warning: this is the location of the previous definition
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_tiff.c
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_pnm.c
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_bmp.c
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_vicar.c
+io_vicar.c: In function ‘iom_GetVicarHeader’:
+io_vicar.c:120: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_vicar.c:134: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_vicar.c: In function ‘iom_WriteVicar’:
+io_vicar.c:451: warning: field width should have type ‘int’, but argument 3 has type ‘size_t’
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_ers.c
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_raw.c
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g io_envi.c
+io_envi.c: In function ‘iom_GetENVIHeader’:
+io_envi.c:104: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+io_envi.c: In function ‘iom_WriteENVI’:
+io_envi.c:277: warning: format ‘%d’ expects type ‘int’, but argument 3 has type ‘size_t’
+io_envi.c: In function ‘iom_GetENVIHeader’:
+io_envi.c:169: warning: attempt to free a non-heap object ‘buf’
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g iomedley.c
+iomedley.c: In function ‘iom_is_compressed’:
+iomedley.c:781: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+cc -c -DHAVE_CONFIG_H -I. -Ilibtiff/libtiff -Ilibjpeg -Ilibgif  -g -O2 -Ilibpng-1.2.3  -g tools.c
+tools.c: In function ‘list_copy’:
+tools.c:86: warning: incompatible implicit declaration of built-in function ‘memcpy’
+tools.c: In function ‘list_merge’:
+tools.c:175: warning: incompatible implicit declaration of built-in function ‘memcpy’
+cd libtiff && make
+make[2]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff'
+Making all in port
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/port'
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff     -g -O2 -Wall -W -MT dummy.lo -MD -MP -MF ".deps/dummy.Tpo" -c -o dummy.lo dummy.c; \
+	then mv -f ".deps/dummy.Tpo" ".deps/dummy.Plo"; else rm -f ".deps/dummy.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -g -O2 -Wall -W -MT dummy.lo -MD -MP -MF .deps/dummy.Tpo -c dummy.c  -fPIC -DPIC -o .libs/dummy.o
+dummy.c:8: warning: 'libport_dummy_function' defined but not used
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -g -O2 -Wall -W -MT dummy.lo -MD -MP -MF .deps/dummy.Tpo -c dummy.c -o dummy.o >/dev/null 2>&1
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o libport.la   dummy.lo  -ljpeg -lz -lm -lc 
+libtool: link: ar cru .libs/libport.a .libs/dummy.o 
+libtool: link: ranlib .libs/libport.a
+libtool: link: creating libport.la
+libtool: link: ( cd ".libs" && rm -f "libport.la" && ln -s "../libport.la" "libport.la" )
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/port'
+Making all in libtiff
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff'
+make  all-am
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff'
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_aux.lo -MD -MP -MF ".deps/tif_aux.Tpo" -c -o tif_aux.lo tif_aux.c; \
+	then mv -f ".deps/tif_aux.Tpo" ".deps/tif_aux.Plo"; else rm -f ".deps/tif_aux.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_aux.lo -MD -MP -MF .deps/tif_aux.Tpo -c tif_aux.c  -fPIC -DPIC -o .libs/tif_aux.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_aux.lo -MD -MP -MF .deps/tif_aux.Tpo -c tif_aux.c -o tif_aux.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_close.lo -MD -MP -MF ".deps/tif_close.Tpo" -c -o tif_close.lo tif_close.c; \
+	then mv -f ".deps/tif_close.Tpo" ".deps/tif_close.Plo"; else rm -f ".deps/tif_close.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_close.lo -MD -MP -MF .deps/tif_close.Tpo -c tif_close.c  -fPIC -DPIC -o .libs/tif_close.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_close.lo -MD -MP -MF .deps/tif_close.Tpo -c tif_close.c -o tif_close.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_codec.lo -MD -MP -MF ".deps/tif_codec.Tpo" -c -o tif_codec.lo tif_codec.c; \
+	then mv -f ".deps/tif_codec.Tpo" ".deps/tif_codec.Plo"; else rm -f ".deps/tif_codec.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_codec.lo -MD -MP -MF .deps/tif_codec.Tpo -c tif_codec.c  -fPIC -DPIC -o .libs/tif_codec.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_codec.lo -MD -MP -MF .deps/tif_codec.Tpo -c tif_codec.c -o tif_codec.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_color.lo -MD -MP -MF ".deps/tif_color.Tpo" -c -o tif_color.lo tif_color.c; \
+	then mv -f ".deps/tif_color.Tpo" ".deps/tif_color.Plo"; else rm -f ".deps/tif_color.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_color.lo -MD -MP -MF .deps/tif_color.Tpo -c tif_color.c  -fPIC -DPIC -o .libs/tif_color.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_color.lo -MD -MP -MF .deps/tif_color.Tpo -c tif_color.c -o tif_color.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_compress.lo -MD -MP -MF ".deps/tif_compress.Tpo" -c -o tif_compress.lo tif_compress.c; \
+	then mv -f ".deps/tif_compress.Tpo" ".deps/tif_compress.Plo"; else rm -f ".deps/tif_compress.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_compress.lo -MD -MP -MF .deps/tif_compress.Tpo -c tif_compress.c  -fPIC -DPIC -o .libs/tif_compress.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_compress.lo -MD -MP -MF .deps/tif_compress.Tpo -c tif_compress.c -o tif_compress.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_dir.lo -MD -MP -MF ".deps/tif_dir.Tpo" -c -o tif_dir.lo tif_dir.c; \
+	then mv -f ".deps/tif_dir.Tpo" ".deps/tif_dir.Plo"; else rm -f ".deps/tif_dir.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dir.lo -MD -MP -MF .deps/tif_dir.Tpo -c tif_dir.c  -fPIC -DPIC -o .libs/tif_dir.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dir.lo -MD -MP -MF .deps/tif_dir.Tpo -c tif_dir.c -o tif_dir.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_dirinfo.lo -MD -MP -MF ".deps/tif_dirinfo.Tpo" -c -o tif_dirinfo.lo tif_dirinfo.c; \
+	then mv -f ".deps/tif_dirinfo.Tpo" ".deps/tif_dirinfo.Plo"; else rm -f ".deps/tif_dirinfo.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dirinfo.lo -MD -MP -MF .deps/tif_dirinfo.Tpo -c tif_dirinfo.c  -fPIC -DPIC -o .libs/tif_dirinfo.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dirinfo.lo -MD -MP -MF .deps/tif_dirinfo.Tpo -c tif_dirinfo.c -o tif_dirinfo.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_dirread.lo -MD -MP -MF ".deps/tif_dirread.Tpo" -c -o tif_dirread.lo tif_dirread.c; \
+	then mv -f ".deps/tif_dirread.Tpo" ".deps/tif_dirread.Plo"; else rm -f ".deps/tif_dirread.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dirread.lo -MD -MP -MF .deps/tif_dirread.Tpo -c tif_dirread.c  -fPIC -DPIC -o .libs/tif_dirread.o
+tif_dirread.c: In function 'TIFFFetchFloatArray':
+tif_dirread.c:1230: warning: dereferencing type-punned pointer will break strict-aliasing rules
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dirread.lo -MD -MP -MF .deps/tif_dirread.Tpo -c tif_dirread.c -o tif_dirread.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_dirwrite.lo -MD -MP -MF ".deps/tif_dirwrite.Tpo" -c -o tif_dirwrite.lo tif_dirwrite.c; \
+	then mv -f ".deps/tif_dirwrite.Tpo" ".deps/tif_dirwrite.Plo"; else rm -f ".deps/tif_dirwrite.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dirwrite.lo -MD -MP -MF .deps/tif_dirwrite.Tpo -c tif_dirwrite.c  -fPIC -DPIC -o .libs/tif_dirwrite.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dirwrite.lo -MD -MP -MF .deps/tif_dirwrite.Tpo -c tif_dirwrite.c -o tif_dirwrite.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_dumpmode.lo -MD -MP -MF ".deps/tif_dumpmode.Tpo" -c -o tif_dumpmode.lo tif_dumpmode.c; \
+	then mv -f ".deps/tif_dumpmode.Tpo" ".deps/tif_dumpmode.Plo"; else rm -f ".deps/tif_dumpmode.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dumpmode.lo -MD -MP -MF .deps/tif_dumpmode.Tpo -c tif_dumpmode.c  -fPIC -DPIC -o .libs/tif_dumpmode.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_dumpmode.lo -MD -MP -MF .deps/tif_dumpmode.Tpo -c tif_dumpmode.c -o tif_dumpmode.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_error.lo -MD -MP -MF ".deps/tif_error.Tpo" -c -o tif_error.lo tif_error.c; \
+	then mv -f ".deps/tif_error.Tpo" ".deps/tif_error.Plo"; else rm -f ".deps/tif_error.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_error.lo -MD -MP -MF .deps/tif_error.Tpo -c tif_error.c  -fPIC -DPIC -o .libs/tif_error.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_error.lo -MD -MP -MF .deps/tif_error.Tpo -c tif_error.c -o tif_error.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_extension.lo -MD -MP -MF ".deps/tif_extension.Tpo" -c -o tif_extension.lo tif_extension.c; \
+	then mv -f ".deps/tif_extension.Tpo" ".deps/tif_extension.Plo"; else rm -f ".deps/tif_extension.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_extension.lo -MD -MP -MF .deps/tif_extension.Tpo -c tif_extension.c  -fPIC -DPIC -o .libs/tif_extension.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_extension.lo -MD -MP -MF .deps/tif_extension.Tpo -c tif_extension.c -o tif_extension.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_fax3.lo -MD -MP -MF ".deps/tif_fax3.Tpo" -c -o tif_fax3.lo tif_fax3.c; \
+	then mv -f ".deps/tif_fax3.Tpo" ".deps/tif_fax3.Plo"; else rm -f ".deps/tif_fax3.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_fax3.lo -MD -MP -MF .deps/tif_fax3.Tpo -c tif_fax3.c  -fPIC -DPIC -o .libs/tif_fax3.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_fax3.lo -MD -MP -MF .deps/tif_fax3.Tpo -c tif_fax3.c -o tif_fax3.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_fax3sm.lo -MD -MP -MF ".deps/tif_fax3sm.Tpo" -c -o tif_fax3sm.lo tif_fax3sm.c; \
+	then mv -f ".deps/tif_fax3sm.Tpo" ".deps/tif_fax3sm.Plo"; else rm -f ".deps/tif_fax3sm.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_fax3sm.lo -MD -MP -MF .deps/tif_fax3sm.Tpo -c tif_fax3sm.c  -fPIC -DPIC -o .libs/tif_fax3sm.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_fax3sm.lo -MD -MP -MF .deps/tif_fax3sm.Tpo -c tif_fax3sm.c -o tif_fax3sm.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_flush.lo -MD -MP -MF ".deps/tif_flush.Tpo" -c -o tif_flush.lo tif_flush.c; \
+	then mv -f ".deps/tif_flush.Tpo" ".deps/tif_flush.Plo"; else rm -f ".deps/tif_flush.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_flush.lo -MD -MP -MF .deps/tif_flush.Tpo -c tif_flush.c  -fPIC -DPIC -o .libs/tif_flush.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_flush.lo -MD -MP -MF .deps/tif_flush.Tpo -c tif_flush.c -o tif_flush.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_getimage.lo -MD -MP -MF ".deps/tif_getimage.Tpo" -c -o tif_getimage.lo tif_getimage.c; \
+	then mv -f ".deps/tif_getimage.Tpo" ".deps/tif_getimage.Plo"; else rm -f ".deps/tif_getimage.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_getimage.lo -MD -MP -MF .deps/tif_getimage.Tpo -c tif_getimage.c  -fPIC -DPIC -o .libs/tif_getimage.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_getimage.lo -MD -MP -MF .deps/tif_getimage.Tpo -c tif_getimage.c -o tif_getimage.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_jpeg.lo -MD -MP -MF ".deps/tif_jpeg.Tpo" -c -o tif_jpeg.lo tif_jpeg.c; \
+	then mv -f ".deps/tif_jpeg.Tpo" ".deps/tif_jpeg.Plo"; else rm -f ".deps/tif_jpeg.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_jpeg.lo -MD -MP -MF .deps/tif_jpeg.Tpo -c tif_jpeg.c  -fPIC -DPIC -o .libs/tif_jpeg.o
+tif_jpeg.c: In function 'JPEGVSetField':
+tif_jpeg.c:1578: warning: suggest braces around empty body in an 'if' statement
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_jpeg.lo -MD -MP -MF .deps/tif_jpeg.Tpo -c tif_jpeg.c -o tif_jpeg.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_luv.lo -MD -MP -MF ".deps/tif_luv.Tpo" -c -o tif_luv.lo tif_luv.c; \
+	then mv -f ".deps/tif_luv.Tpo" ".deps/tif_luv.Plo"; else rm -f ".deps/tif_luv.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_luv.lo -MD -MP -MF .deps/tif_luv.Tpo -c tif_luv.c  -fPIC -DPIC -o .libs/tif_luv.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_luv.lo -MD -MP -MF .deps/tif_luv.Tpo -c tif_luv.c -o tif_luv.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_lzw.lo -MD -MP -MF ".deps/tif_lzw.Tpo" -c -o tif_lzw.lo tif_lzw.c; \
+	then mv -f ".deps/tif_lzw.Tpo" ".deps/tif_lzw.Plo"; else rm -f ".deps/tif_lzw.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_lzw.lo -MD -MP -MF .deps/tif_lzw.Tpo -c tif_lzw.c  -fPIC -DPIC -o .libs/tif_lzw.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_lzw.lo -MD -MP -MF .deps/tif_lzw.Tpo -c tif_lzw.c -o tif_lzw.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_next.lo -MD -MP -MF ".deps/tif_next.Tpo" -c -o tif_next.lo tif_next.c; \
+	then mv -f ".deps/tif_next.Tpo" ".deps/tif_next.Plo"; else rm -f ".deps/tif_next.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_next.lo -MD -MP -MF .deps/tif_next.Tpo -c tif_next.c  -fPIC -DPIC -o .libs/tif_next.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_next.lo -MD -MP -MF .deps/tif_next.Tpo -c tif_next.c -o tif_next.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_ojpeg.lo -MD -MP -MF ".deps/tif_ojpeg.Tpo" -c -o tif_ojpeg.lo tif_ojpeg.c; \
+	then mv -f ".deps/tif_ojpeg.Tpo" ".deps/tif_ojpeg.Plo"; else rm -f ".deps/tif_ojpeg.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_ojpeg.lo -MD -MP -MF .deps/tif_ojpeg.Tpo -c tif_ojpeg.c  -fPIC -DPIC -o .libs/tif_ojpeg.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_ojpeg.lo -MD -MP -MF .deps/tif_ojpeg.Tpo -c tif_ojpeg.c -o tif_ojpeg.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_open.lo -MD -MP -MF ".deps/tif_open.Tpo" -c -o tif_open.lo tif_open.c; \
+	then mv -f ".deps/tif_open.Tpo" ".deps/tif_open.Plo"; else rm -f ".deps/tif_open.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_open.lo -MD -MP -MF .deps/tif_open.Tpo -c tif_open.c  -fPIC -DPIC -o .libs/tif_open.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_open.lo -MD -MP -MF .deps/tif_open.Tpo -c tif_open.c -o tif_open.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_packbits.lo -MD -MP -MF ".deps/tif_packbits.Tpo" -c -o tif_packbits.lo tif_packbits.c; \
+	then mv -f ".deps/tif_packbits.Tpo" ".deps/tif_packbits.Plo"; else rm -f ".deps/tif_packbits.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_packbits.lo -MD -MP -MF .deps/tif_packbits.Tpo -c tif_packbits.c  -fPIC -DPIC -o .libs/tif_packbits.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_packbits.lo -MD -MP -MF .deps/tif_packbits.Tpo -c tif_packbits.c -o tif_packbits.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_pixarlog.lo -MD -MP -MF ".deps/tif_pixarlog.Tpo" -c -o tif_pixarlog.lo tif_pixarlog.c; \
+	then mv -f ".deps/tif_pixarlog.Tpo" ".deps/tif_pixarlog.Plo"; else rm -f ".deps/tif_pixarlog.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_pixarlog.lo -MD -MP -MF .deps/tif_pixarlog.Tpo -c tif_pixarlog.c  -fPIC -DPIC -o .libs/tif_pixarlog.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_pixarlog.lo -MD -MP -MF .deps/tif_pixarlog.Tpo -c tif_pixarlog.c -o tif_pixarlog.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_predict.lo -MD -MP -MF ".deps/tif_predict.Tpo" -c -o tif_predict.lo tif_predict.c; \
+	then mv -f ".deps/tif_predict.Tpo" ".deps/tif_predict.Plo"; else rm -f ".deps/tif_predict.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_predict.lo -MD -MP -MF .deps/tif_predict.Tpo -c tif_predict.c  -fPIC -DPIC -o .libs/tif_predict.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_predict.lo -MD -MP -MF .deps/tif_predict.Tpo -c tif_predict.c -o tif_predict.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_print.lo -MD -MP -MF ".deps/tif_print.Tpo" -c -o tif_print.lo tif_print.c; \
+	then mv -f ".deps/tif_print.Tpo" ".deps/tif_print.Plo"; else rm -f ".deps/tif_print.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_print.lo -MD -MP -MF .deps/tif_print.Tpo -c tif_print.c  -fPIC -DPIC -o .libs/tif_print.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_print.lo -MD -MP -MF .deps/tif_print.Tpo -c tif_print.c -o tif_print.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_read.lo -MD -MP -MF ".deps/tif_read.Tpo" -c -o tif_read.lo tif_read.c; \
+	then mv -f ".deps/tif_read.Tpo" ".deps/tif_read.Plo"; else rm -f ".deps/tif_read.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_read.lo -MD -MP -MF .deps/tif_read.Tpo -c tif_read.c  -fPIC -DPIC -o .libs/tif_read.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_read.lo -MD -MP -MF .deps/tif_read.Tpo -c tif_read.c -o tif_read.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_strip.lo -MD -MP -MF ".deps/tif_strip.Tpo" -c -o tif_strip.lo tif_strip.c; \
+	then mv -f ".deps/tif_strip.Tpo" ".deps/tif_strip.Plo"; else rm -f ".deps/tif_strip.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_strip.lo -MD -MP -MF .deps/tif_strip.Tpo -c tif_strip.c  -fPIC -DPIC -o .libs/tif_strip.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_strip.lo -MD -MP -MF .deps/tif_strip.Tpo -c tif_strip.c -o tif_strip.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_swab.lo -MD -MP -MF ".deps/tif_swab.Tpo" -c -o tif_swab.lo tif_swab.c; \
+	then mv -f ".deps/tif_swab.Tpo" ".deps/tif_swab.Plo"; else rm -f ".deps/tif_swab.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_swab.lo -MD -MP -MF .deps/tif_swab.Tpo -c tif_swab.c  -fPIC -DPIC -o .libs/tif_swab.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_swab.lo -MD -MP -MF .deps/tif_swab.Tpo -c tif_swab.c -o tif_swab.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_thunder.lo -MD -MP -MF ".deps/tif_thunder.Tpo" -c -o tif_thunder.lo tif_thunder.c; \
+	then mv -f ".deps/tif_thunder.Tpo" ".deps/tif_thunder.Plo"; else rm -f ".deps/tif_thunder.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_thunder.lo -MD -MP -MF .deps/tif_thunder.Tpo -c tif_thunder.c  -fPIC -DPIC -o .libs/tif_thunder.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_thunder.lo -MD -MP -MF .deps/tif_thunder.Tpo -c tif_thunder.c -o tif_thunder.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_tile.lo -MD -MP -MF ".deps/tif_tile.Tpo" -c -o tif_tile.lo tif_tile.c; \
+	then mv -f ".deps/tif_tile.Tpo" ".deps/tif_tile.Plo"; else rm -f ".deps/tif_tile.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_tile.lo -MD -MP -MF .deps/tif_tile.Tpo -c tif_tile.c  -fPIC -DPIC -o .libs/tif_tile.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_tile.lo -MD -MP -MF .deps/tif_tile.Tpo -c tif_tile.c -o tif_tile.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_unix.lo -MD -MP -MF ".deps/tif_unix.Tpo" -c -o tif_unix.lo tif_unix.c; \
+	then mv -f ".deps/tif_unix.Tpo" ".deps/tif_unix.Plo"; else rm -f ".deps/tif_unix.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_unix.lo -MD -MP -MF .deps/tif_unix.Tpo -c tif_unix.c  -fPIC -DPIC -o .libs/tif_unix.o
+tif_unix.c: In function '_tiffReadProc':
+tif_unix.c:58: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffWriteProc':
+tif_unix.c:64: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffSeekProc':
+tif_unix.c:70: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffCloseProc':
+tif_unix.c:76: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffSizeProc':
+tif_unix.c:88: warning: cast from pointer to integer of different size
+tif_unix.c: In function '_tiffMapProc':
+tif_unix.c:101: warning: cast from pointer to integer of different size
+tif_unix.c: In function 'TIFFFdOpen':
+tif_unix.c:140: warning: cast to pointer from integer of different size
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_unix.lo -MD -MP -MF .deps/tif_unix.Tpo -c tif_unix.c -o tif_unix.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_version.lo -MD -MP -MF ".deps/tif_version.Tpo" -c -o tif_version.lo tif_version.c; \
+	then mv -f ".deps/tif_version.Tpo" ".deps/tif_version.Plo"; else rm -f ".deps/tif_version.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_version.lo -MD -MP -MF .deps/tif_version.Tpo -c tif_version.c  -fPIC -DPIC -o .libs/tif_version.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_version.lo -MD -MP -MF .deps/tif_version.Tpo -c tif_version.c -o tif_version.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_warning.lo -MD -MP -MF ".deps/tif_warning.Tpo" -c -o tif_warning.lo tif_warning.c; \
+	then mv -f ".deps/tif_warning.Tpo" ".deps/tif_warning.Plo"; else rm -f ".deps/tif_warning.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_warning.lo -MD -MP -MF .deps/tif_warning.Tpo -c tif_warning.c  -fPIC -DPIC -o .libs/tif_warning.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_warning.lo -MD -MP -MF .deps/tif_warning.Tpo -c tif_warning.c -o tif_warning.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_write.lo -MD -MP -MF ".deps/tif_write.Tpo" -c -o tif_write.lo tif_write.c; \
+	then mv -f ".deps/tif_write.Tpo" ".deps/tif_write.Plo"; else rm -f ".deps/tif_write.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_write.lo -MD -MP -MF .deps/tif_write.Tpo -c tif_write.c  -fPIC -DPIC -o .libs/tif_write.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_write.lo -MD -MP -MF .deps/tif_write.Tpo -c tif_write.c -o tif_write.o >/dev/null 2>&1
+if /bin/bash ../libtool --tag=CC --mode=compile cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT tif_zip.lo -MD -MP -MF ".deps/tif_zip.Tpo" -c -o tif_zip.lo tif_zip.c; \
+	then mv -f ".deps/tif_zip.Tpo" ".deps/tif_zip.Plo"; else rm -f ".deps/tif_zip.Tpo"; exit 1; fi
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_zip.lo -MD -MP -MF .deps/tif_zip.Tpo -c tif_zip.c  -fPIC -DPIC -o .libs/tif_zip.o
+libtool: compile:  cc -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -Wall -W -MT tif_zip.lo -MD -MP -MF .deps/tif_zip.Tpo -c tif_zip.c -o tif_zip.o >/dev/null 2>&1
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o libtiff.la -rpath /usr/local/lib -no-undefined -version-number 3:8:2  tif_aux.lo tif_close.lo tif_codec.lo tif_color.lo tif_compress.lo tif_dir.lo tif_dirinfo.lo tif_dirread.lo tif_dirwrite.lo tif_dumpmode.lo tif_error.lo tif_extension.lo tif_fax3.lo tif_fax3sm.lo tif_flush.lo tif_getimage.lo tif_jpeg.lo tif_luv.lo tif_lzw.lo tif_next.lo tif_ojpeg.lo tif_open.lo tif_packbits.lo tif_pixarlog.lo tif_predict.lo tif_print.lo tif_read.lo tif_strip.lo tif_swab.lo tif_thunder.lo tif_tile.lo tif_unix.lo tif_version.lo tif_warning.lo tif_write.lo tif_zip.lo ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -shared  .libs/tif_aux.o .libs/tif_close.o .libs/tif_codec.o .libs/tif_color.o .libs/tif_compress.o .libs/tif_dir.o .libs/tif_dirinfo.o .libs/tif_dirread.o .libs/tif_dirwrite.o .libs/tif_dumpmode.o .libs/tif_error.o .libs/tif_extension.o .libs/tif_fax3.o .libs/tif_fax3sm.o .libs/tif_flush.o .libs/tif_getimage.o .libs/tif_jpeg.o .libs/tif_luv.o .libs/tif_lzw.o .libs/tif_next.o .libs/tif_ojpeg.o .libs/tif_open.o .libs/tif_packbits.o .libs/tif_pixarlog.o .libs/tif_predict.o .libs/tif_print.o .libs/tif_read.o .libs/tif_strip.o .libs/tif_swab.o .libs/tif_thunder.o .libs/tif_tile.o .libs/tif_unix.o .libs/tif_version.o .libs/tif_warning.o .libs/tif_write.o .libs/tif_zip.o  -Wl,--whole-archive ../port/.libs/libport.a -Wl,--no-whole-archive  /usr/lib/libjpeg.so -lz -lm -lc      -Wl,-soname -Wl,libtiff.so.3 -o .libs/libtiff.so.3.8.2
+libtool: link: (cd ".libs" && rm -f "libtiff.so.3" && ln -s "libtiff.so.3.8.2" "libtiff.so.3")
+libtool: link: (cd ".libs" && rm -f "libtiff.so" && ln -s "libtiff.so.3.8.2" "libtiff.so")
+libtool: link: (cd .libs/libtiff.lax/libport.a && ar x /src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff/../port/.libs/libport.a)
+libtool: link: ar cru .libs/libtiff.a  tif_aux.o tif_close.o tif_codec.o tif_color.o tif_compress.o tif_dir.o tif_dirinfo.o tif_dirread.o tif_dirwrite.o tif_dumpmode.o tif_error.o tif_extension.o tif_fax3.o tif_fax3sm.o tif_flush.o tif_getimage.o tif_jpeg.o tif_luv.o tif_lzw.o tif_next.o tif_ojpeg.o tif_open.o tif_packbits.o tif_pixarlog.o tif_predict.o tif_print.o tif_read.o tif_strip.o tif_swab.o tif_thunder.o tif_tile.o tif_unix.o tif_version.o tif_warning.o tif_write.o tif_zip.o  .libs/libtiff.lax/libport.a/dummy.o 
+libtool: link: ranlib .libs/libtiff.a
+libtool: link: rm -fr .libs/libtiff.lax
+libtool: link: creating libtiff.la
+libtool: link: ( cd ".libs" && rm -f "libtiff.la" && ln -s "../libtiff.la" "libtiff.la" )
+if /bin/bash ../libtool --tag=CXX --mode=compile g++ -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -MT tif_stream.lo -MD -MP -MF ".deps/tif_stream.Tpo" -c -o tif_stream.lo tif_stream.cxx; \
+	then mv -f ".deps/tif_stream.Tpo" ".deps/tif_stream.Plo"; else rm -f ".deps/tif_stream.Tpo"; exit 1; fi
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -MT tif_stream.lo -MD -MP -MF .deps/tif_stream.Tpo -c tif_stream.cxx  -fPIC -DPIC -o .libs/tif_stream.o
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I. -I. -I. -g -O2 -MT tif_stream.lo -MD -MP -MF .deps/tif_stream.Tpo -c tif_stream.cxx -o tif_stream.o >/dev/null 2>&1
+/bin/bash ../libtool --tag=CXX --mode=link g++  -g -O2   -o libtiffxx.la -rpath /usr/local/lib -no-undefined -version-number 3:8:2  tif_stream.lo ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: warning: `/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib//libjpeg.la' seems to be moved
+libtool: link: g++ -shared -nostdlib /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crti.o /usr/lib/gcc/x86_64-linux-gnu/4.4.3/crtbeginS.o  .libs/tif_stream.o  -Wl,--whole-archive ../port/.libs/libport.a -Wl,--no-whole-archive  -Wl,-rpath -Wl,/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff/.libs ../libtiff/.libs/libtiff.so -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/ /usr/lib/libjpeg.so -lz -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3 -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib -L/lib/../lib -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../.. -L/usr/lib/x86_64-linux-gnu -lstdc++ -lm -lc -lgcc_s /usr/lib/gcc/x86_64-linux-gnu/4.4.3/crtendS.o /usr/lib/gcc/x86_64-linux-gnu/4.4.3/../../../../lib/crtn.o        -Wl,-soname -Wl,libtiffxx.so.3 -o .libs/libtiffxx.so.3.8.2
+libtool: link: (cd ".libs" && rm -f "libtiffxx.so.3" && ln -s "libtiffxx.so.3.8.2" "libtiffxx.so.3")
+libtool: link: (cd ".libs" && rm -f "libtiffxx.so" && ln -s "libtiffxx.so.3.8.2" "libtiffxx.so")
+libtool: link: (cd .libs/libtiffxx.lax/libport.a && ar x /src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff/../port/.libs/libport.a)
+libtool: link: ar cru .libs/libtiffxx.a  tif_stream.o  .libs/libtiffxx.lax/libport.a/dummy.o 
+libtool: link: ranlib .libs/libtiffxx.a
+libtool: link: rm -fr .libs/libtiffxx.lax
+libtool: link: creating libtiffxx.la
+libtool: link: ( cd ".libs" && rm -f "libtiffxx.la" && ln -s "../libtiffxx.la" "libtiffxx.la" )
+if cc -DHAVE_CONFIG_H -I. -I. -I. -I.     -g -O2 -Wall -W -MT mkg3states.o -MD -MP -MF ".deps/mkg3states.Tpo" -c -o mkg3states.o mkg3states.c; \
+	then mv -f ".deps/mkg3states.Tpo" ".deps/mkg3states.Po"; else rm -f ".deps/mkg3states.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o mkg3states  mkg3states.o ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o mkg3states mkg3states.o  ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff'
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/libtiff'
+Making all in tools
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/tools'
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT bmp2tiff.o -MD -MP -MF ".deps/bmp2tiff.Tpo" -c -o bmp2tiff.o bmp2tiff.c; \
+	then mv -f ".deps/bmp2tiff.Tpo" ".deps/bmp2tiff.Po"; else rm -f ".deps/bmp2tiff.Tpo"; exit 1; fi
+bmp2tiff.c: In function ‘main’:
+bmp2tiff.c:290: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:300: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:312: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:330: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:331: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:332: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:333: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:334: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:335: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:336: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:337: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:338: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:339: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:366: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:371: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:376: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:381: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:428: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+bmp2tiff.c:606: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o bmp2tiff  bmp2tiff.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/bmp2tiff bmp2tiff.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating bmp2tiff
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT fax2ps.o -MD -MP -MF ".deps/fax2ps.Tpo" -c -o fax2ps.o fax2ps.c; \
+	then mv -f ".deps/fax2ps.Tpo" ".deps/fax2ps.Po"; else rm -f ".deps/fax2ps.Tpo"; exit 1; fi
+fax2ps.c: In function ‘main’:
+fax2ps.c:384: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o fax2ps  fax2ps.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/fax2ps fax2ps.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating fax2ps
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT fax2tiff.o -MD -MP -MF ".deps/fax2tiff.Tpo" -c -o fax2tiff.o fax2tiff.c; \
+	then mv -f ".deps/fax2tiff.Tpo" ".deps/fax2tiff.Po"; else rm -f ".deps/fax2tiff.Tpo"; exit 1; fi
+fax2tiff.c: In function ‘main’:
+fax2tiff.c:270: warning: cast to pointer from integer of different size
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o fax2tiff  fax2tiff.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/fax2tiff fax2tiff.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating fax2tiff
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT gif2tiff.o -MD -MP -MF ".deps/gif2tiff.Tpo" -c -o gif2tiff.o gif2tiff.c; \
+	then mv -f ".deps/gif2tiff.Tpo" ".deps/gif2tiff.Po"; else rm -f ".deps/gif2tiff.Tpo"; exit 1; fi
+gif2tiff.c: In function ‘checksignature’:
+gif2tiff.c:227: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+gif2tiff.c: In function ‘readscreen’:
+gif2tiff.c:249: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+gif2tiff.c:253: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+gif2tiff.c: In function ‘readgifimage’:
+gif2tiff.c:288: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+gif2tiff.c: In function ‘readextension’:
+gif2tiff.c:312: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+gif2tiff.c: In function ‘readraster’:
+gif2tiff.c:344: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o gif2tiff  gif2tiff.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/gif2tiff gif2tiff.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating gif2tiff
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT pal2rgb.o -MD -MP -MF ".deps/pal2rgb.Tpo" -c -o pal2rgb.o pal2rgb.c; \
+	then mv -f ".deps/pal2rgb.Tpo" ".deps/pal2rgb.Po"; else rm -f ".deps/pal2rgb.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o pal2rgb  pal2rgb.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/pal2rgb pal2rgb.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating pal2rgb
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT ppm2tiff.o -MD -MP -MF ".deps/ppm2tiff.Tpo" -c -o ppm2tiff.o ppm2tiff.c; \
+	then mv -f ".deps/ppm2tiff.Tpo" ".deps/ppm2tiff.Po"; else rm -f ".deps/ppm2tiff.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o ppm2tiff  ppm2tiff.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/ppm2tiff ppm2tiff.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating ppm2tiff
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT ras2tiff.o -MD -MP -MF ".deps/ras2tiff.Tpo" -c -o ras2tiff.o ras2tiff.c; \
+	then mv -f ".deps/ras2tiff.Tpo" ".deps/ras2tiff.Po"; else rm -f ".deps/ras2tiff.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o ras2tiff  ras2tiff.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/ras2tiff ras2tiff.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating ras2tiff
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT raw2tiff.o -MD -MP -MF ".deps/raw2tiff.Tpo" -c -o raw2tiff.o raw2tiff.c; \
+	then mv -f ".deps/raw2tiff.Tpo" ".deps/raw2tiff.Po"; else rm -f ".deps/raw2tiff.Tpo"; exit 1; fi
+raw2tiff.c: In function ‘guessSize’:
+raw2tiff.c:405: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+raw2tiff.c:406: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o raw2tiff  raw2tiff.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/raw2tiff raw2tiff.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating raw2tiff
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT rgb2ycbcr.o -MD -MP -MF ".deps/rgb2ycbcr.Tpo" -c -o rgb2ycbcr.o rgb2ycbcr.c; \
+	then mv -f ".deps/rgb2ycbcr.Tpo" ".deps/rgb2ycbcr.Po"; else rm -f ".deps/rgb2ycbcr.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o rgb2ycbcr  rgb2ycbcr.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/rgb2ycbcr rgb2ycbcr.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating rgb2ycbcr
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT thumbnail.o -MD -MP -MF ".deps/thumbnail.Tpo" -c -o thumbnail.o thumbnail.c; \
+	then mv -f ".deps/thumbnail.Tpo" ".deps/thumbnail.Po"; else rm -f ".deps/thumbnail.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o thumbnail  thumbnail.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/thumbnail thumbnail.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating thumbnail
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiff2bw.o -MD -MP -MF ".deps/tiff2bw.Tpo" -c -o tiff2bw.o tiff2bw.c; \
+	then mv -f ".deps/tiff2bw.Tpo" ".deps/tiff2bw.Po"; else rm -f ".deps/tiff2bw.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiff2bw  tiff2bw.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiff2bw tiff2bw.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiff2bw
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiff2pdf.o -MD -MP -MF ".deps/tiff2pdf.Tpo" -c -o tiff2pdf.o tiff2pdf.c; \
+	then mv -f ".deps/tiff2pdf.Tpo" ".deps/tiff2pdf.Po"; else rm -f ".deps/tiff2pdf.Tpo"; exit 1; fi
+tiff2pdf.c: In function ‘main’:
+tiff2pdf.c:705: warning: cast to pointer from integer of different size
+tiff2pdf.c: In function ‘t2p_write_pdf_trailer’:
+tiff2pdf.c:5066: warning: dereferencing type-punned pointer will break strict-aliasing rules
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiff2pdf  tiff2pdf.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiff2pdf tiff2pdf.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiff2pdf
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiff2ps.o -MD -MP -MF ".deps/tiff2ps.Tpo" -c -o tiff2ps.o tiff2ps.c; \
+	then mv -f ".deps/tiff2ps.Tpo" ".deps/tiff2ps.Po"; else rm -f ".deps/tiff2ps.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiff2ps  tiff2ps.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiff2ps tiff2ps.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiff2ps
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiff2rgba.o -MD -MP -MF ".deps/tiff2rgba.Tpo" -c -o tiff2rgba.o tiff2rgba.c; \
+	then mv -f ".deps/tiff2rgba.Tpo" ".deps/tiff2rgba.Po"; else rm -f ".deps/tiff2rgba.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiff2rgba  tiff2rgba.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiff2rgba tiff2rgba.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiff2rgba
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiffcmp.o -MD -MP -MF ".deps/tiffcmp.Tpo" -c -o tiffcmp.o tiffcmp.c; \
+	then mv -f ".deps/tiffcmp.Tpo" ".deps/tiffcmp.Po"; else rm -f ".deps/tiffcmp.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiffcmp  tiffcmp.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiffcmp tiffcmp.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiffcmp
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiffcp.o -MD -MP -MF ".deps/tiffcp.Tpo" -c -o tiffcp.o tiffcp.c; \
+	then mv -f ".deps/tiffcp.Tpo" ".deps/tiffcp.Po"; else rm -f ".deps/tiffcp.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiffcp  tiffcp.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiffcp tiffcp.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiffcp
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiffdither.o -MD -MP -MF ".deps/tiffdither.Tpo" -c -o tiffdither.o tiffdither.c; \
+	then mv -f ".deps/tiffdither.Tpo" ".deps/tiffdither.Po"; else rm -f ".deps/tiffdither.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiffdither  tiffdither.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiffdither tiffdither.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiffdither
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiffdump.o -MD -MP -MF ".deps/tiffdump.Tpo" -c -o tiffdump.o tiffdump.c; \
+	then mv -f ".deps/tiffdump.Tpo" ".deps/tiffdump.Po"; else rm -f ".deps/tiffdump.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiffdump  tiffdump.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiffdump tiffdump.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiffdump
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiffinfo.o -MD -MP -MF ".deps/tiffinfo.Tpo" -c -o tiffinfo.o tiffinfo.c; \
+	then mv -f ".deps/tiffinfo.Tpo" ".deps/tiffinfo.Po"; else rm -f ".deps/tiffinfo.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiffinfo  tiffinfo.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiffinfo tiffinfo.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiffinfo
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiffmedian.o -MD -MP -MF ".deps/tiffmedian.Tpo" -c -o tiffmedian.o tiffmedian.c; \
+	then mv -f ".deps/tiffmedian.Tpo" ".deps/tiffmedian.Po"; else rm -f ".deps/tiffmedian.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiffmedian  tiffmedian.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiffmedian tiffmedian.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiffmedian
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiffset.o -MD -MP -MF ".deps/tiffset.Tpo" -c -o tiffset.o tiffset.c; \
+	then mv -f ".deps/tiffset.Tpo" ".deps/tiffset.Po"; else rm -f ".deps/tiffset.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiffset  tiffset.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiffset tiffset.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiffset
+if cc -DHAVE_CONFIG_H -I. -I. -I../libtiff -I../libtiff -I../libtiff    -g -O2 -Wall -W -MT tiffsplit.o -MD -MP -MF ".deps/tiffsplit.Tpo" -c -o tiffsplit.o tiffsplit.c; \
+	then mv -f ".deps/tiffsplit.Tpo" ".deps/tiffsplit.Po"; else rm -f ".deps/tiffsplit.Tpo"; exit 1; fi
+/bin/bash ../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiffsplit  tiffsplit.o ../libtiff/libtiff.la ../port/libport.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiffsplit tiffsplit.o  ../libtiff/.libs/libtiff.so ../port/.libs/libport.a /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiffsplit
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/tools'
+Making all in contrib
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib'
+Making all in acorn
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/acorn'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/acorn'
+Making all in addtiffo
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/addtiffo'
+if cc -DHAVE_CONFIG_H -I. -I. -I../../libtiff -I../../libtiff -I../../libtiff    -g -O2 -Wall -W -MT addtiffo.o -MD -MP -MF ".deps/addtiffo.Tpo" -c -o addtiffo.o addtiffo.c; \
+	then mv -f ".deps/addtiffo.Tpo" ".deps/addtiffo.Po"; else rm -f ".deps/addtiffo.Tpo"; exit 1; fi
+if cc -DHAVE_CONFIG_H -I. -I. -I../../libtiff -I../../libtiff -I../../libtiff    -g -O2 -Wall -W -MT tif_overview.o -MD -MP -MF ".deps/tif_overview.Tpo" -c -o tif_overview.o tif_overview.c; \
+	then mv -f ".deps/tif_overview.Tpo" ".deps/tif_overview.Po"; else rm -f ".deps/tif_overview.Tpo"; exit 1; fi
+tif_overview.c: In function ‘TIFF_WriteOverview’:
+tif_overview.c:88: warning: unused parameter ‘bUseSubIFDs’
+tif_overview.c: In function ‘TIFF_DownSample_Subsampled’:
+tif_overview.c:364: warning: unused parameter ‘nOBlockYSize’
+tif_overview.c: In function ‘TIFFBuildOverviews’:
+tif_overview.c:694: warning: unused parameter ‘pfnProgress’
+tif_overview.c:695: warning: unused parameter ‘pProgressData’
+if cc -DHAVE_CONFIG_H -I. -I. -I../../libtiff -I../../libtiff -I../../libtiff    -g -O2 -Wall -W -MT tif_ovrcache.o -MD -MP -MF ".deps/tif_ovrcache.Tpo" -c -o tif_ovrcache.o tif_ovrcache.c; \
+	then mv -f ".deps/tif_ovrcache.Tpo" ".deps/tif_ovrcache.Po"; else rm -f ".deps/tif_ovrcache.Tpo"; exit 1; fi
+/bin/bash ../../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o addtiffo  addtiffo.o tif_overview.o tif_ovrcache.o ../../libtiff/libtiff.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/addtiffo addtiffo.o tif_overview.o tif_ovrcache.o  ../../libtiff/.libs/libtiff.so /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating addtiffo
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/addtiffo'
+Making all in dbs
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/dbs'
+Making all in xtiff
+make[5]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/dbs/xtiff'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/dbs/xtiff'
+make[5]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/dbs'
+if cc -DHAVE_CONFIG_H -I. -I. -I../../libtiff -I../../libtiff -I../../libtiff    -g -O2 -Wall -W -MT tiff-bi.o -MD -MP -MF ".deps/tiff-bi.Tpo" -c -o tiff-bi.o tiff-bi.c; \
+	then mv -f ".deps/tiff-bi.Tpo" ".deps/tiff-bi.Po"; else rm -f ".deps/tiff-bi.Tpo"; exit 1; fi
+/bin/bash ../../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiff-bi  tiff-bi.o ../../libtiff/libtiff.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiff-bi tiff-bi.o  ../../libtiff/.libs/libtiff.so /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiff-bi
+if cc -DHAVE_CONFIG_H -I. -I. -I../../libtiff -I../../libtiff -I../../libtiff    -g -O2 -Wall -W -MT tiff-grayscale.o -MD -MP -MF ".deps/tiff-grayscale.Tpo" -c -o tiff-grayscale.o tiff-grayscale.c; \
+	then mv -f ".deps/tiff-grayscale.Tpo" ".deps/tiff-grayscale.Po"; else rm -f ".deps/tiff-grayscale.Tpo"; exit 1; fi
+/bin/bash ../../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiff-grayscale  tiff-grayscale.o ../../libtiff/libtiff.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiff-grayscale tiff-grayscale.o  ../../libtiff/.libs/libtiff.so /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiff-grayscale
+if cc -DHAVE_CONFIG_H -I. -I. -I../../libtiff -I../../libtiff -I../../libtiff    -g -O2 -Wall -W -MT tiff-palette.o -MD -MP -MF ".deps/tiff-palette.Tpo" -c -o tiff-palette.o tiff-palette.c; \
+	then mv -f ".deps/tiff-palette.Tpo" ".deps/tiff-palette.Po"; else rm -f ".deps/tiff-palette.Tpo"; exit 1; fi
+/bin/bash ../../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiff-palette  tiff-palette.o ../../libtiff/libtiff.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiff-palette tiff-palette.o  ../../libtiff/.libs/libtiff.so /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiff-palette
+if cc -DHAVE_CONFIG_H -I. -I. -I../../libtiff -I../../libtiff -I../../libtiff    -g -O2 -Wall -W -MT tiff-rgb.o -MD -MP -MF ".deps/tiff-rgb.Tpo" -c -o tiff-rgb.o tiff-rgb.c; \
+	then mv -f ".deps/tiff-rgb.Tpo" ".deps/tiff-rgb.Po"; else rm -f ".deps/tiff-rgb.Tpo"; exit 1; fi
+/bin/bash ../../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o tiff-rgb  tiff-rgb.o ../../libtiff/libtiff.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/tiff-rgb tiff-rgb.o  ../../libtiff/.libs/libtiff.so /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating tiff-rgb
+make[5]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/dbs'
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/dbs'
+Making all in iptcutil
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/iptcutil'
+if cc -DHAVE_CONFIG_H -I. -I. -I../../libtiff -I../../libtiff -I../../libtiff    -g -O2 -Wall -W -MT iptcutil.o -MD -MP -MF ".deps/iptcutil.Tpo" -c -o iptcutil.o iptcutil.c; \
+	then mv -f ".deps/iptcutil.Tpo" ".deps/iptcutil.Po"; else rm -f ".deps/iptcutil.Tpo"; exit 1; fi
+iptcutil.c: In function ‘super_fgets’:
+iptcutil.c:335: warning: cast from pointer to integer of different size
+iptcutil.c:335: warning: cast from pointer to integer of different size
+iptcutil.c:340: warning: cast from pointer to integer of different size
+iptcutil.c:340: warning: cast from pointer to integer of different size
+iptcutil.c:355: warning: cast from pointer to integer of different size
+iptcutil.c:355: warning: cast from pointer to integer of different size
+iptcutil.c: In function ‘main’:
+iptcutil.c:388: warning: format not a string literal and no format arguments
+iptcutil.c:447: warning: format not a string literal and no format arguments
+/bin/bash ../../libtool --tag=CC --mode=link cc  -g -O2 -Wall -W   -o iptcutil  iptcutil.o ../../libtiff/libtiff.la -ljpeg -lz -lm -lc 
+libtool: link: cc -g -O2 -Wall -W -o .libs/iptcutil iptcutil.o  ../../libtiff/.libs/libtiff.so /usr/lib/libjpeg.so -lz -lm -lc
+libtool: link: creating iptcutil
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/iptcutil'
+Making all in mac-cw
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/mac-cw'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/mac-cw'
+Making all in mac-mpw
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/mac-mpw'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/mac-mpw'
+Making all in mfs
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/mfs'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/mfs'
+Making all in ojpeg
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/ojpeg'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/ojpeg'
+Making all in pds
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/pds'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/pds'
+Making all in ras
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/ras'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/ras'
+Making all in stream
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/stream'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/stream'
+Making all in tags
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/tags'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/tags'
+Making all in win_dib
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/win_dib'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib/win_dib'
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib'
+make[4]: Nothing to be done for `all-am'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib'
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/contrib'
+Making all in test
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/test'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/test'
+Making all in man
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/man'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/man'
+Making all in html
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/html'
+Making all in images
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/html/images'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/html/images'
+Making all in man
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/html/man'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/html/man'
+make[4]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/html'
+make[4]: Nothing to be done for `all-am'.
+make[4]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/html'
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff/html'
+make[3]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff'
+make[2]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libtiff'
+cd libjpeg && make libjpeg.a
+make[2]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libjpeg'
+cc -O2  -I.   -c -o jcapimin.o jcapimin.c
+cc -O2  -I.   -c -o jcapistd.o jcapistd.c
+cc -O2  -I.   -c -o jctrans.o jctrans.c
+cc -O2  -I.   -c -o jcparam.o jcparam.c
+cc -O2  -I.   -c -o jdatadst.o jdatadst.c
+cc -O2  -I.   -c -o jcinit.o jcinit.c
+cc -O2  -I.   -c -o jcmaster.o jcmaster.c
+cc -O2  -I.   -c -o jcmarker.o jcmarker.c
+cc -O2  -I.   -c -o jcmainct.o jcmainct.c
+cc -O2  -I.   -c -o jcprepct.o jcprepct.c
+cc -O2  -I.   -c -o jccoefct.o jccoefct.c
+cc -O2  -I.   -c -o jccolor.o jccolor.c
+cc -O2  -I.   -c -o jcsample.o jcsample.c
+cc -O2  -I.   -c -o jchuff.o jchuff.c
+cc -O2  -I.   -c -o jcphuff.o jcphuff.c
+cc -O2  -I.   -c -o jcdctmgr.o jcdctmgr.c
+cc -O2  -I.   -c -o jfdctfst.o jfdctfst.c
+cc -O2  -I.   -c -o jfdctflt.o jfdctflt.c
+cc -O2  -I.   -c -o jfdctint.o jfdctint.c
+cc -O2  -I.   -c -o jdapimin.o jdapimin.c
+cc -O2  -I.   -c -o jdapistd.o jdapistd.c
+cc -O2  -I.   -c -o jdtrans.o jdtrans.c
+cc -O2  -I.   -c -o jdatasrc.o jdatasrc.c
+cc -O2  -I.   -c -o jdmaster.o jdmaster.c
+cc -O2  -I.   -c -o jdinput.o jdinput.c
+cc -O2  -I.   -c -o jdmarker.o jdmarker.c
+cc -O2  -I.   -c -o jdhuff.o jdhuff.c
+cc -O2  -I.   -c -o jdphuff.o jdphuff.c
+cc -O2  -I.   -c -o jdmainct.o jdmainct.c
+cc -O2  -I.   -c -o jdcoefct.o jdcoefct.c
+cc -O2  -I.   -c -o jdpostct.o jdpostct.c
+cc -O2  -I.   -c -o jddctmgr.o jddctmgr.c
+cc -O2  -I.   -c -o jidctfst.o jidctfst.c
+cc -O2  -I.   -c -o jidctflt.o jidctflt.c
+cc -O2  -I.   -c -o jidctint.o jidctint.c
+cc -O2  -I.   -c -o jidctred.o jidctred.c
+cc -O2  -I.   -c -o jdsample.o jdsample.c
+cc -O2  -I.   -c -o jdcolor.o jdcolor.c
+cc -O2  -I.   -c -o jquant1.o jquant1.c
+cc -O2  -I.   -c -o jquant2.o jquant2.c
+cc -O2  -I.   -c -o jdmerge.o jdmerge.c
+cc -O2  -I.   -c -o jcomapi.o jcomapi.c
+cc -O2  -I.   -c -o jutils.o jutils.c
+cc -O2  -I.   -c -o jerror.o jerror.c
+cc -O2  -I.   -c -o jmemmgr.o jmemmgr.c
+cc -O2  -I.   -c -o jmemnobs.o jmemnobs.c
+rm -f libjpeg.a
+ar rc libjpeg.a  jcapimin.o jcapistd.o jctrans.o jcparam.o jdatadst.o jcinit.o jcmaster.o jcmarker.o jcmainct.o jcprepct.o jccoefct.o jccolor.o jcsample.o jchuff.o jcphuff.o jcdctmgr.o jfdctfst.o jfdctflt.o jfdctint.o jdapimin.o jdapistd.o jdtrans.o jdatasrc.o jdmaster.o jdinput.o jdmarker.o jdhuff.o jdphuff.o jdmainct.o jdcoefct.o jdpostct.o jddctmgr.o jidctfst.o jidctflt.o jidctint.o jidctred.o jdsample.o jdcolor.o jquant1.o jquant2.o jdmerge.o jcomapi.o jutils.o jerror.o jmemmgr.o jmemnobs.o
+ranlib libjpeg.a
+make[2]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libjpeg'
+cd libgif && make
+make[2]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libgif'
+cc -c -I.  -g -O2  dev2gif.c
+dev2gif.c: In function ‘DumpScreen2Gif’:
+dev2gif.c:324: warning: incompatible implicit declaration of built-in function ‘malloc’
+dev2gif.c:334: warning: incompatible implicit declaration of built-in function ‘free’
+dev2gif.c:344: warning: incompatible implicit declaration of built-in function ‘free’
+dev2gif.c:353: warning: incompatible implicit declaration of built-in function ‘free’
+dev2gif.c:360: warning: incompatible implicit declaration of built-in function ‘free’
+cc -c -I.  -g -O2  egif_lib.c
+egif_lib.c: In function ‘EGifOpenFileHandle’:
+egif_lib.c:164: warning: incompatible implicit declaration of built-in function ‘free’
+egif_lib.c: In function ‘EGifCloseFile’:
+egif_lib.c:530: warning: incompatible implicit declaration of built-in function ‘free’
+egif_lib.c:533: warning: incompatible implicit declaration of built-in function ‘free’
+cc -c -I.  -g -O2  dgif_lib.c
+dgif_lib.c: In function ‘DGifOpenFileHandle’:
+dgif_lib.c:146: warning: incompatible implicit declaration of built-in function ‘free’
+dgif_lib.c:157: warning: incompatible implicit declaration of built-in function ‘free’
+dgif_lib.c:167: warning: incompatible implicit declaration of built-in function ‘free’
+dgif_lib.c:173: warning: incompatible implicit declaration of built-in function ‘free’
+dgif_lib.c: In function ‘DGifGetImageDesc’:
+dgif_lib.c:317: warning: incompatible implicit declaration of built-in function ‘realloc’
+dgif_lib.c: In function ‘DGifCloseFile’:
+dgif_lib.c:500: warning: incompatible implicit declaration of built-in function ‘free’
+dgif_lib.c: In function ‘DGifSetupDecompress’:
+dgif_lib.c:592: warning: ignoring return value of ‘fread’, declared with attribute warn_unused_result
+cc -c -I.  -g -O2  gifalloc.c
+gifalloc.c: In function ‘MakeMapObject’:
+gifalloc.c:48: warning: incompatible implicit declaration of built-in function ‘malloc’
+gifalloc.c:52: warning: incompatible implicit declaration of built-in function ‘calloc’
+gifalloc.c:60: warning: incompatible implicit declaration of built-in function ‘memcpy’
+gifalloc.c: In function ‘FreeMapObject’:
+gifalloc.c:71: warning: incompatible implicit declaration of built-in function ‘free’
+gifalloc.c: In function ‘UnionColorMap’:
+gifalloc.c:179: warning: incompatible implicit declaration of built-in function ‘realloc’
+gifalloc.c: In function ‘AddExtensionBlock’:
+gifalloc.c:217: warning: incompatible implicit declaration of built-in function ‘malloc’
+gifalloc.c:220: warning: incompatible implicit declaration of built-in function ‘realloc’
+gifalloc.c:232: warning: incompatible implicit declaration of built-in function ‘memcpy’
+gifalloc.c: In function ‘FreeExtension’:
+gifalloc.c:244: warning: incompatible implicit declaration of built-in function ‘free’
+gifalloc.c: In function ‘MakeSavedImage’:
+gifalloc.c:260: warning: incompatible implicit declaration of built-in function ‘malloc’
+gifalloc.c:262: warning: incompatible implicit declaration of built-in function ‘realloc’
+gifalloc.c:270: warning: incompatible implicit declaration of built-in function ‘memset’
+gifalloc.c:274: warning: incompatible implicit declaration of built-in function ‘memcpy’
+gifalloc.c: In function ‘FreeSavedImages’:
+gifalloc.c:332: warning: incompatible implicit declaration of built-in function ‘free’
+gifalloc.c:337: warning: incompatible implicit declaration of built-in function ‘free’
+cc -c -I.  -g -O2  gif_font.c
+cc -c -I.  -g -O2  gif_hash.c
+cc -c -I.  -g -O2  gif_err.c
+cc -c -I.  -g -O2  quantize.c
+quantize.c: In function ‘QuantizeBuffer’:
+quantize.c:106: warning: incompatible implicit declaration of built-in function ‘malloc’
+quantize.c:158: warning: incompatible implicit declaration of built-in function ‘free’
+quantize.c:215: warning: incompatible implicit declaration of built-in function ‘free’
+quantize.c: In function ‘SubdivColorMap’:
+quantize.c:259: warning: incompatible implicit declaration of built-in function ‘malloc’
+quantize.c:274: warning: incompatible implicit declaration of built-in function ‘free’
+cc -c -I.  -g -O2  qprintf.c
+cc -c -I.  -g -O2  getarg.c
+getarg.c: In function ‘MyMalloc’:
+getarg.c:627: warning: incompatible implicit declaration of built-in function ‘exit’
+rm -f libgif.a
+ar rcv libgif.a dev2gif.o egif_lib.o dgif_lib.o gifalloc.o gif_font.o gif_hash.o gif_err.o quantize.o qprintf.o getarg.o
+a - dev2gif.o
+a - egif_lib.o
+a - dgif_lib.o
+a - gifalloc.o
+a - gif_font.o
+a - gif_hash.o
+a - gif_err.o
+a - quantize.o
+a - qprintf.o
+a - getarg.o
+ranlib libgif.a
+make[2]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libgif'
+cd libpng-1.2.3 && make libpng.a
+make[2]: Entering directory `/home/src/local/pw64/20100506-64bit/iomedley/libpng-1.2.3'
+cc -c  -g -O2  png.c
+cc -c  -g -O2  pngset.c
+cc -c  -g -O2  pngget.c
+cc -c  -g -O2  pngrutil.c
+cc -c  -g -O2  pngtrans.c
+cc -c  -g -O2  pngwutil.c
+cc -c  -g -O2  pngread.c
+cc -c  -g -O2  pngrio.c
+cc -c  -g -O2  pngwio.c
+cc -c  -g -O2  pngwrite.c
+cc -c  -g -O2  pngrtran.c
+cc -c  -g -O2  pngwtran.c
+cc -c  -g -O2  pngmem.c
+cc -c  -g -O2  pngerror.c
+cc -c  -g -O2  pngpread.c
+ar rc libpng.a  png.o pngset.o pngget.o pngrutil.o pngtrans.o pngwutil.o pngread.o pngrio.o pngwio.o pngwrite.o pngrtran.o pngwtran.o pngmem.o pngerror.o pngpread.o
+ranlib libpng.a
+make[2]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley/libpng-1.2.3'
+ar -ruv libiomedley.a io_aviris.o io_goes.o io_grd.o io_imath.o io_isis.o io_lablib3.o io_gif.o io_png.o io_jpeg.o io_tiff.o io_pnm.o io_bmp.o io_vicar.o io_ers.o io_raw.o io_envi.o iomedley.o tools.o
+ar: creating libiomedley.a
+a - io_aviris.o
+a - io_goes.o
+a - io_grd.o
+a - io_imath.o
+a - io_isis.o
+a - io_lablib3.o
+a - io_gif.o
+a - io_png.o
+a - io_jpeg.o
+a - io_tiff.o
+a - io_pnm.o
+a - io_bmp.o
+a - io_vicar.o
+a - io_ers.o
+a - io_raw.o
+a - io_envi.o
+a - iomedley.o
+a - tools.o
+./mungelibs
+a - tif_aux.o
+a - tif_close.o
+a - tif_codec.o
+a - tif_color.o
+a - tif_compress.o
+a - tif_dir.o
+a - tif_dirinfo.o
+a - tif_dirread.o
+a - tif_dirwrite.o
+a - tif_dumpmode.o
+a - tif_error.o
+a - tif_extension.o
+a - tif_fax3.o
+a - tif_fax3sm.o
+a - tif_flush.o
+a - tif_getimage.o
+a - tif_jpeg.o
+a - tif_luv.o
+a - tif_lzw.o
+a - tif_next.o
+a - tif_ojpeg.o
+a - tif_open.o
+a - tif_packbits.o
+a - tif_pixarlog.o
+a - tif_predict.o
+a - tif_print.o
+a - tif_read.o
+a - tif_strip.o
+a - tif_swab.o
+a - tif_thunder.o
+a - tif_tile.o
+a - tif_unix.o
+a - tif_version.o
+a - tif_warning.o
+a - tif_write.o
+a - tif_zip.o
+a - dummy.o
+a - jcapimin.o
+a - jcapistd.o
+a - jctrans.o
+a - jcparam.o
+a - jdatadst.o
+a - jcinit.o
+a - jcmaster.o
+a - jcmarker.o
+a - jcmainct.o
+a - jcprepct.o
+a - jccoefct.o
+a - jccolor.o
+a - jcsample.o
+a - jchuff.o
+a - jcphuff.o
+a - jcdctmgr.o
+a - jfdctfst.o
+a - jfdctflt.o
+a - jfdctint.o
+a - jdapimin.o
+a - jdapistd.o
+a - jdtrans.o
+a - jdatasrc.o
+a - jdmaster.o
+a - jdinput.o
+a - jdmarker.o
+a - jdhuff.o
+a - jdphuff.o
+a - jdmainct.o
+a - jdcoefct.o
+a - jdpostct.o
+a - jddctmgr.o
+a - jidctfst.o
+a - jidctflt.o
+a - jidctint.o
+a - jidctred.o
+a - jdsample.o
+a - jdcolor.o
+a - jquant1.o
+a - jquant2.o
+a - jdmerge.o
+a - jcomapi.o
+a - jutils.o
+a - jerror.o
+a - jmemmgr.o
+a - jmemnobs.o
+a - png.o
+a - pngset.o
+a - pngget.o
+a - pngrutil.o
+a - pngtrans.o
+a - pngwutil.o
+a - pngread.o
+a - pngrio.o
+a - pngwio.o
+a - pngwrite.o
+a - pngrtran.o
+a - pngwtran.o
+a - pngmem.o
+a - pngerror.o
+a - pngpread.o
+a - dev2gif.o
+a - egif_lib.o
+a - dgif_lib.o
+a - gifalloc.o
+a - gif_font.o
+a - gif_hash.o
+a - gif_err.o
+a - quantize.o
+a - qprintf.o
+a - getarg.o
+ranlib libiomedley.a
+make[1]: Leaving directory `/home/src/local/pw64/20100506-64bit/iomedley'
+make[1]: Entering directory `/home/src/local/pw64/20100506-64bit/pw'
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  ColorControls.c
+ColorControls.c: In function ‘LoadColorSpread’:
+ColorControls.c:666: warning: cast to pointer from integer of different size
+ColorControls.c: In function ‘amap_set_action’:
+ColorControls.c:700: warning: cast from pointer to integer of different size
+ColorControls.c: In function ‘CreateAMap’:
+ColorControls.c:1038: warning: passing argument 2 of ‘XfAddSliderCallback’ from incompatible pointer type
+../lib/Slider.h:74: note: expected ‘CallBack’ but argument is of type ‘int (*)(struct _Slider *, union XEvent *)’
+ColorControls.c:1039: warning: passing argument 2 of ‘XfAddSliderCallback’ from incompatible pointer type
+../lib/Slider.h:74: note: expected ‘CallBack’ but argument is of type ‘int (*)(struct _Slider *, union XEvent *)’
+ColorControls.c: In function ‘colorspread’:
+ColorControls.c:1210: warning: cast from pointer to integer of different size
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  buttons.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  color.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  colorspread.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  image.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  error.c
+error.c: In function ‘errors’:
+error.c:24: warning: incompatible implicit declaration of built-in function ‘exit’
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  composite.c
+composite.c: In function ‘CreateRequestor’:
+composite.c:203: warning: cast to pointer from integer of different size
+composite.c:222: warning: cast to pointer from integer of different size
+composite.c:248: warning: cast to pointer from integer of different size
+composite.c:269: warning: cast to pointer from integer of different size
+composite.c: In function ‘RGB_pushbutton’:
+composite.c:724: warning: cast from pointer to integer of different size
+composite.c:725: warning: cast from pointer to integer of different size
+composite.c:759: warning: cast from pointer to integer of different size
+composite.c:763: warning: cast from pointer to integer of different size
+composite.c: In function ‘overlay_pushbutton’:
+composite.c:792: warning: cast from pointer to integer of different size
+composite.c:793: warning: cast from pointer to integer of different size
+composite.c:807: warning: cast from pointer to integer of different size
+composite.c:815: warning: cast from pointer to integer of different size
+composite.c: In function ‘load_filename’:
+composite.c:835: warning: cast from pointer to integer of different size
+composite.c:842: warning: cast from pointer to integer of different size
+composite.c:900: warning: cast from pointer to integer of different size
+composite.c:905: warning: cast from pointer to integer of different size
+composite.c: In function ‘off_load_filename’:
+composite.c:963: warning: cast to pointer from integer of different size
+composite.c:967: warning: cast from pointer to integer of different size
+composite.c: In function ‘load_band’:
+composite.c:981: warning: cast from pointer to integer of different size
+composite.c: In function ‘load_ncolors’:
+composite.c:1029: warning: cast from pointer to integer of different size
+composite.c: In function ‘toggle_mem’:
+composite.c:1149: warning: cast from pointer to integer of different size
+composite.c:1164: warning: cast from pointer to integer of different size
+composite.c:1164: warning: cast from pointer to integer of different size
+composite.c:1170: warning: cast from pointer to integer of different size
+composite.c:1173: warning: cast from pointer to integer of different size
+composite.c: In function ‘LoadImage’:
+composite.c:1401: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_Samples’:
+composite.c:1776: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_Lines’:
+composite.c:1795: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_Bands’:
+composite.c:1814: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_Format’:
+composite.c:1833: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_Org’:
+composite.c:1857: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_Order’:
+composite.c:1885: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_Label’:
+composite.c:1908: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_SubsetLine’:
+composite.c:1925: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_SubsetSample’:
+composite.c:1946: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_SubsetWidth’:
+composite.c:1965: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_SubsetHeight’:
+composite.c:1984: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_SubsetLSkip’:
+composite.c:2004: warning: cast from pointer to integer of different size
+composite.c: In function ‘GetInput_SubsetSSkip’:
+composite.c:2023: warning: cast from pointer to integer of different size
+composite.c: In function ‘DeleteImage’:
+composite.c:2093: warning: cast from pointer to integer of different size
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  pseudo.c
+pseudo.c: In function ‘sort_by_node’:
+pseudo.c:474: warning: passing argument 4 of ‘qsort’ from incompatible pointer type
+/usr/include/stdlib.h:756: note: expected ‘__compar_fn_t’ but argument is of type ‘int (*)(struct table_entry *, struct table_entry *)’
+pseudo.c:480: warning: passing argument 4 of ‘qsort’ from incompatible pointer type
+/usr/include/stdlib.h:756: note: expected ‘__compar_fn_t’ but argument is of type ‘int (*)(struct table_entry *, struct table_entry *)’
+pseudo.c:486: warning: passing argument 4 of ‘qsort’ from incompatible pointer type
+/usr/include/stdlib.h:756: note: expected ‘__compar_fn_t’ but argument is of type ‘int (*)(struct table_entry *, struct table_entry *)’
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  quant.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  mag.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  write.c
+write.c: In function ‘WritePopup’:
+write.c:98: warning: cast to pointer from integer of different size
+write.c:113: warning: cast to pointer from integer of different size
+write.c:128: warning: cast to pointer from integer of different size
+write.c: In function ‘WriteGetFilename’:
+write.c:248: warning: cast from pointer to integer of different size
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  readout.c
+readout.c: In function ‘WriteColorKey’:
+readout.c:453: warning: cast from pointer to integer of different size
+readout.c: In function ‘ChangeColorKeyName’:
+readout.c:465: warning: cast from pointer to integer of different size
+readout.c: In function ‘AddToDnList’:
+readout.c:507: warning: cast to pointer from integer of different size
+readout.c:508: warning: cast to pointer from integer of different size
+readout.c:522: warning: cast to pointer from integer of different size
+readout.c:530: warning: cast to pointer from integer of different size
+readout.c:538: warning: cast to pointer from integer of different size
+readout.c:547: warning: cast to pointer from integer of different size
+readout.c:555: warning: cast to pointer from integer of different size
+readout.c: In function ‘ChangeImageDnScaleFactor’:
+readout.c:574: warning: cast from pointer to integer of different size
+readout.c:576: warning: cast from pointer to integer of different size
+readout.c: In function ‘UpdatePopupReadout’:
+readout.c:596: warning: cast from pointer to integer of different size
+readout.c: In function ‘RescalePopupReadout’:
+readout.c:621: warning: cast from pointer to integer of different size
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  block.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  inice.c
+cc -c -DHAVE_CONFIG_H  -g -O2 -I/usr/include/X11 -I.. -I../lib -I../iomedley  specpr.c
+In file included from specpr.c:9:
+specpr.h:58:8: warning: extra tokens at end of #endif directive
+specpr.c: In function ‘read_specpr’:
+specpr.c:115: warning: passing argument 3 of ‘read_record’ from incompatible pointer type
+specpr.c:93: note: expected ‘char *’ but argument is of type ‘struct _label *’
+specpr.c:127: warning: passing argument 3 of ‘read_record’ from incompatible pointer type
+specpr.c:93: note: expected ‘char *’ but argument is of type ‘struct _label *’
+specpr.c: In function ‘write_record’:
+specpr.c:148: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result
+specpr.c: In function ‘specpr_open’:
+specpr.c:187: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result
+specpr.c: In function ‘write_specpr’:
+specpr.c:232: warning: passing argument 3 of ‘write_record’ from incompatible pointer type
+specpr.c:141: note: expected ‘struct _label *’ but argument is of type ‘struct _tlabel *’
+In file included from /usr/include/fcntl.h:205,
+                 from specpr.c:8:
+In function ‘open’,
+    inlined from ‘specpr_open’ at specpr.c:176:
+/usr/include/bits/fcntl2.h:51: error: call to ‘__open_missing_mode’ declared with attribute error: open with O_CREAT in second argument needs 3 arguments
+make[1]: *** [specpr.o] Error 1
+make[1]: Leaving directory `/home/src/local/pw64/20100506-64bit/pw'
+make: *** [pw_src] Error 2

@@ -1,0 +1,10 @@
+This directory contains the pw users guide.  The program pwmanfig
+gets a figure and x-window undumps it.  You must customize the
+script to point to the correct directory.
+
+The file notes.fig.sizes gives the scale factors for xwud dumpung the
+figures to an HP paintjet XL 300 (300 dots per inch).
+
+
+The manual at this point should be considered a rough draft, but
+should get users fully functional.
