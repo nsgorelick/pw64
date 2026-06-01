@@ -1,106 +1,0 @@
-8
-
-dir
-18729
-https://oss.mars.asu.edu/svn/davinci/iomedley/branches/64bit/libtiff/contrib
-https://oss.mars.asu.edu/svn/davinci
-
-
-
-2007-07-18T01:21:46.225457Z
-7764
-bdeva
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-dedd6328-c50f-0410-8be5-b54a49638459
-
-addtiffo
-dir
-
-Makefile.in
-file
-
-
-
-
-2010-04-15T19:16:25.000000Z
-02a2b1d4d6d22a447e9b847af530b414
-2007-07-18T01:21:46.225457Z
-7764
-bdeva
-has-props
-
-ras
-dir
-
-mfs
-dir
-
-pds
-dir
-
-stream
-dir
-
-README
-file
-
-
-
-
-2010-04-15T19:16:25.000000Z
-a8204c1b09133f44f21998dfaec9b630
-2007-07-18T01:21:46.225457Z
-7764
-bdeva
-has-props
-
-iptcutil
-dir
-
-tags
-dir
-
-mac-mpw
-dir
-
-acorn
-dir
-
-ojpeg
-dir
-
-mac-cw
-dir
-
-dbs
-dir
-
-Makefile.am
-file
-
-
-
-
-2010-04-15T19:16:25.000000Z
-8d6f4f3437eae2c01fe23a41de4ebb02
-2007-07-18T01:21:46.225457Z
-7764
-bdeva
-has-props
-
-win_dib
-dir
-

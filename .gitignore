@@ -1,0 +1,101 @@
+# --- Archive / obsolete VCS ---
+backup/
+.svn/
+
+# --- macOS ---
+.DS_Store
+
+# --- Editor / IDE ---
+*.swp
+*~
+.vscode/
+.idea/
+
+# --- Autotools / configure (generated) ---
+Makefile
+!Makefile.in
+!Makefile.am
+!Makefile.org
+!Makefile.min
+!Makefile.vc
+!Makefile.unx
+autom4te.cache/
+config.log
+config.status
+config.h
+!config.h.in
+stamp-h*
+libtool
+*.out
+make.*.out
+configure.*.out
+
+# iomedley autotools
+iomedley/config.log
+iomedley/config.status
+iomedley/iom_config.h
+iomedley/config.subsub
+
+# Vendored subproject configure output
+**/config.log
+**/config.status
+
+# --- Compiled objects and libraries ---
+*.o
+*.a
+*.lo
+*.la
+*.lai
+*.so
+*.so.*
+*.dylib
+.deps/
+.libs/
+*__.SYMDEF*
+
+# --- Built applications ---
+/pw/pw
+/sp/sp
+
+# libtiff built utilities (sources are *.c)
+iomedley/libtiff/tools/bmp2tiff
+iomedley/libtiff/tools/fax2ps
+iomedley/libtiff/tools/fax2tiff
+iomedley/libtiff/tools/gif2tiff
+iomedley/libtiff/tools/pal2rgb
+iomedley/libtiff/tools/ppm2tiff
+iomedley/libtiff/tools/ras2tiff
+iomedley/libtiff/tools/raw2tiff
+iomedley/libtiff/tools/rgb2ycbcr
+iomedley/libtiff/tools/thumbnail
+iomedley/libtiff/tools/tiff2bw
+iomedley/libtiff/tools/tiff2pdf
+iomedley/libtiff/tools/tiff2ps
+iomedley/libtiff/tools/tiff2rgba
+iomedley/libtiff/tools/tiffcmp
+iomedley/libtiff/tools/tiffcp
+iomedley/libtiff/tools/tiffdither
+iomedley/libtiff/tools/tiffdump
+iomedley/libtiff/tools/tiffinfo
+iomedley/libtiff/tools/tiffmedian
+iomedley/libtiff/tools/tiffset
+iomedley/libtiff/tools/tiffsplit
+
+# libtiff contrib built tools
+iomedley/libtiff/contrib/addtiffo/addtiffo
+iomedley/libtiff/contrib/iptcutil/iptcutil
+iomedley/libtiff/contrib/dbs/tiff-bi
+iomedley/libtiff/contrib/dbs/tiff-grayscale
+iomedley/libtiff/contrib/dbs/tiff-palette
+iomedley/libtiff/contrib/dbs/tiff-rgb
+
+# --- Generated headers (keep *.h.in templates) ---
+iomedley/libjpeg/jconfig.h
+iomedley/libtiff/libtiff/tif_config.h
+iomedley/libtiff/libtiff/tiffconf.h
+
+# --- Merged static library from build ---
+iomedley/libiomedley.a
+iomedley/libgif/libgif.a
+iomedley/libjpeg/libjpeg.a
+iomedley/libpng-1.2.3/libpng.a
