@@ -22,9 +22,9 @@ Pixmap pixmap;
     new->child = NULL;
     new->peer = NULL;
 
-        /**
-	 ** Put this item at then end of the list of children
-	 **/
+    /**
+     ** Put this item at then end of the list of children
+     **/
 
     if (parent != NULL) {
         while (parent->peer != NULL) {
@@ -61,9 +61,9 @@ void *id;
     new->peer = NULL;
     new->id = id;
 
-        /**
-	 ** Put this item at then end of the list of children
-	 **/
+    /**
+     ** Put this item at then end of the list of children
+     **/
 
     if (parent != NULL) {
         if (parent->child != NULL) {
@@ -79,8 +79,7 @@ void *id;
     return (new);
 }
 
-void print_menu(parent, depth)
-XfMenu *parent;
+void print_menu(parent, depth) XfMenu *parent;
 int depth;
 {
     int i;

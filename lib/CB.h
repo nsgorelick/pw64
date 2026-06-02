@@ -2,7 +2,7 @@
 #define _CB_H_
 
 #define CBSIZE 20
-#define CB_ON  4
+#define CB_ON 4
 
 struct tagCB {
     int type;
@@ -10,7 +10,7 @@ struct tagCB {
     Window parent;
     Window window;
     int width, height;
-    int hi, lo, fg, bg;         /* 3-D colors */
+    int hi, lo, fg, bg; /* 3-D colors */
 
     CallBack function;
     XButton nextB;
@@ -24,8 +24,8 @@ struct tagCB {
     int pix_h;
 };
 
-#define XfResizeCB(CB, w, h)    XfPosCB(CB, MAXINT, MAXINT, w, h)
-#define XfMoveCB(CB, x, y)      XfPosCB(CB, x, y, MAXINT, MAXINT)
+#define XfResizeCB(CB, w, h) XfPosCB(CB, MAXINT, MAXINT, w, h)
+#define XfMoveCB(CB, x, y) XfPosCB(CB, x, y, MAXINT, MAXINT)
 
 /**
 *** Function declarations
@@ -36,4 +36,4 @@ void RedrawCB(CButton);
 Pixmap XfSetCBPixmap(CButton, Pixmap, int, int);
 int XfActiveCB(CButton);
 
-#endif                          /* _CB_H_ */
+#endif /* _CB_H_ */

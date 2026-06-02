@@ -3,12 +3,12 @@
 #include <ctype.h>
 #include "Xfred.h"
 
-#define min(a,b) (a < b ? a : b)
-#define max(a,b) (a > b ? a : b)
+#define min(a, b) (a < b ? a : b)
+#define max(a, b) (a > b ? a : b)
 
 static int xgets_clamp_anchor(int anchor, const char *str)
 {
-    int len = (int) strlen(str);
+    int len = (int)strlen(str);
 
     if (anchor < 0)
         return 0;
@@ -26,10 +26,10 @@ int anchor;
 int anchor2;
 
 void insert_str(char *s, char *t, int at);
-void file_completion(Display * display, char *str);
-void decode_control(Display * display, KeySym k, char *str);
+void file_completion(Display *display, char *str);
+void decode_control(Display *display, KeySym k, char *str);
 
-int do_keysym(Display * display, XEvent * event, char *str, int nchars);
+int do_keysym(Display *display, XEvent *event, char *str, int nchars);
 extern void free(void *);
 extern int complete_dir(char *str);
 
@@ -77,8 +77,7 @@ char *xgets(Display *display, Window window, int x, int y, int width, int height
 
     XSelectInput(display, w, Button1MotionMask | ButtonPressMask | KeyPressMask | ExposureMask);
 
-    XGrabPointer(display, window, True,
-                 (ButtonPressMask | ButtonReleaseMask | Button1MotionMask), GrabModeAsync,
+    XGrabPointer(display, window, True, (ButtonPressMask | ButtonReleaseMask | Button1MotionMask), GrabModeAsync,
                  GrabModeAsync, w, None, CurrentTime);
 
     XSetForeground(display, gc, fg);
@@ -91,13 +90,12 @@ char *xgets(Display *display, Window window, int x, int y, int width, int height
 
     while (done == 0) {
         switch (e->type) {
-        case KeyPress:
-            {
-                if (do_keysym(display, e, str, 256) == 1) {
-                    done = 1;
-                }
-                break;
+        case KeyPress: {
+            if (do_keysym(display, e, str, 256) == 1) {
+                done = 1;
             }
+            break;
+        }
         case MotionNotify:
             anchor = e->xbutton.x / font->max_bounds.width + offset;
             anchor = xgets_clamp_anchor(anchor, str);
@@ -105,20 +103,19 @@ char *xgets(Display *display, Window window, int x, int y, int width, int height
         case ButtonPress:
             switch (e->xbutton.button) {
             case Button1:
-            case Button2:
-                {
-                    anchor = e->xbutton.x / font->max_bounds.width + offset;
-                    anchor = xgets_clamp_anchor(anchor, str);
-                    anchor2 = anchor;
-                }
+            case Button2: {
+                anchor = e->xbutton.x / font->max_bounds.width + offset;
+                anchor = xgets_clamp_anchor(anchor, str);
+                anchor2 = anchor;
+            }
                 if (e->type == ButtonPress && e->xbutton.button == Button2) {
                     /* paste buffer at anchor */
                     char *p;
                     int nbytes;
                     p = XFetchBuffer(display, &nbytes, 0);
-                    (void) strncpy(s, p, (nbytes > 255 ? 255 : nbytes));
+                    (void)strncpy(s, p, (nbytes > 255 ? 255 : nbytes));
                     s[nbytes] = 0;
-                    free((char *) p);
+                    free((char *)p);
                     insert_str(str, s, anchor);
                     anchor += nbytes;
                 }
@@ -154,19 +151,16 @@ char *xgets(Display *display, Window window, int x, int y, int width, int height
 
         XClearWindow(display, w);
         XDrawString(display, w, gc, start_x, start_y, str + offset, strlen(str + offset));
-        XDrawLine(display, w, gc,
-                  (anchor - offset) * font->max_bounds.width - 1, start_y + 2,
+        XDrawLine(display, w, gc, (anchor - offset) * font->max_bounds.width - 1, start_y + 2,
                   (anchor - offset) * font->max_bounds.width + 1, start_y);
-        XDrawLine(display, w, gc,
-                  (anchor - offset) * font->max_bounds.width + 1, start_y,
+        XDrawLine(display, w, gc, (anchor - offset) * font->max_bounds.width + 1, start_y,
                   (anchor - offset) * font->max_bounds.width + 3, start_y + 2);
 
         if (anchor2 >= 0 && anchor2 != anchor) {
             int x1 = min(anchor, anchor2);
             int x2 = max(anchor, anchor2);
-            XFillRectangle(display, w, gc,
-                           start_x + (x1 - offset) * font->max_bounds.width,
-                           0, (x2 - x1) * font->max_bounds.width, height);
+            XFillRectangle(display, w, gc, start_x + (x1 - offset) * font->max_bounds.width, 0,
+                           (x2 - x1) * font->max_bounds.width, height);
             XSetForeground(display, gc, bg);
             XSetBackground(display, gc, fg);
             XDrawString(display, w, gc, start_x + (x1 - offset) * font->max_bounds.width, start_y, str + x1, x2 - x1);
@@ -203,14 +197,14 @@ int do_keysym(Display *display, XEvent *event, char *str, int nchars)
         return (1);
     case XK_BackSpace:
         if (strlen(str) > 0 && anchor > 0) {
-            (void) strcpy(str + anchor - 1, str + anchor);
+            (void)strcpy(str + anchor - 1, str + anchor);
             anchor--;
         } else {
             XBell(display, 50);
         }
         break;
     case XK_Delete:
-        if (strlen(str) && anchor < (int) strlen(str)) {
+        if (strlen(str) && anchor < (int)strlen(str)) {
             strcpy(str + anchor, str + anchor + 1);
             anchor = xgets_clamp_anchor(anchor, str);
         } else {
@@ -238,7 +232,7 @@ int do_keysym(Display *display, XEvent *event, char *str, int nchars)
             if (event->xkey.state & ControlMask) {
                 decode_control(display, ksym, str);
             } else {
-                if ((int) (strlen(buffer) + strlen(str)) > nchars) {
+                if ((int)(strlen(buffer) + strlen(str)) > nchars) {
                     XBell(display, 50);
                 } else {
                     insert_str(str, buffer, anchor);
@@ -252,7 +246,7 @@ int do_keysym(Display *display, XEvent *event, char *str, int nchars)
         }
     }
 
-    /* clear buffer so multi-character popup_strs are properly supported, 
+    /* clear buffer so multi-character popup_strs are properly supported,
      * even though they can only be deleted on char at a time */
     buffer[1] = '\0';
     return (0);
@@ -263,15 +257,15 @@ void decode_control(Display *display, KeySym k, char *str)
     char buf[8];
     int a;
 
-    (void) strcpy(buf, XKeysymToString(k));
+    (void)strcpy(buf, XKeysymToString(k));
 
     if (str == NULL || strlen(str) == 0)
         return;
 
     switch (buf[0]) {
-                /**
-		 ** some important vt100 control keys
-		 **/
+        /**
+         ** some important vt100 control keys
+         **/
     case 'u':
         anchor = 0;
         str[0] = '\0';
@@ -287,12 +281,12 @@ void decode_control(Display *display, KeySym k, char *str)
         }
 
         anchor++;
-        (void) strcpy(str + anchor, str + a);
+        (void)strcpy(str + anchor, str + a);
         break;
 
-                /**
-		 ** some important emacs keys.
-		 **/
+        /**
+         ** some important emacs keys.
+         **/
     case 'a':
         anchor = 0;
         break;
@@ -309,7 +303,7 @@ void decode_control(Display *display, KeySym k, char *str)
         anchor = max(anchor - 1, 0);
         break;
     case 'd':
-        if (strlen(str) && anchor < (int) strlen(str)) {
+        if (strlen(str) && anchor < (int)strlen(str)) {
             strcpy(str + anchor, str + anchor + 1);
             anchor = xgets_clamp_anchor(anchor, str);
         } else {
@@ -322,13 +316,13 @@ void decode_control(Display *display, KeySym k, char *str)
 void insert_str(char *s, char *t, int at)
 {
     /* put t into s at 'at' */
-    (void) strcat(t, s + at);
-    (void) strcpy(s + at, t);
+    (void)strcat(t, s + at);
+    (void)strcpy(s + at, t);
 }
 
 void directory_requestor(Display *display, char *str)
 {
-    (void) str;
+    (void)str;
     printf("directory requestor not implemented yet.\n");
     printf("freeing pointer though.\n");
 
@@ -346,7 +340,7 @@ void file_completion(Display *display, char *str)
         XBell(display, 100);
     if (i > 0)
         anchor = i;
-    if (i == -1 || i > (int) strlen(str))
+    if (i == -1 || i > (int)strlen(str))
         strcpy(str, buf);
     if (i == -1)
         anchor = strlen(str);

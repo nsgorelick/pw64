@@ -1,8 +1,7 @@
 #include "Xfred.h"
 
-void
-Draw3DBox(Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo, short int fg,
-          short int bg, int state, int options)
+void Draw3DBox(Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo,
+               short int fg, short int bg, int state, int options)
 {
     XPoint ul[7], lr[7], *p1, *p2;
 
@@ -44,7 +43,7 @@ Draw3DBox(Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, s
         p2 = ul;
     }
 
-    /** 
+    /**
      ** Background
      **/
     XSetBackground(disp, gc, bg);
@@ -55,9 +54,9 @@ Draw3DBox(Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, s
     }
 
     if (r > 1) {
-                /**
-		 ** lo stippled polygon 
-		 **/
+        /**
+         ** lo stippled polygon
+         **/
 
         XSetForeground(disp, gc, lo);
         {
@@ -72,17 +71,17 @@ Draw3DBox(Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, s
         }
         XFillPolygon(disp, win, gc, p2, 7, Complex, CoordModeOrigin);
 
-                /**
-		 ** hi polygon 
-		 **/
+        /**
+         ** hi polygon
+         **/
 
         XSetForeground(disp, gc, hi);
         XSetFillStyle(disp, gc, FillSolid);
         XFillPolygon(disp, win, gc, p1, 7, Complex, CoordModeOrigin);
 
-                /**
-		 ** edge hilites
-		 **/
+        /**
+         ** edge hilites
+         **/
         if (0 && r > 3) {
             XDrawRectangle(disp, win, gc, x + r, y + r, w - (r * 2 + 1), h - (r * 2 + 1));
             XSetForeground(disp, gc, lo);

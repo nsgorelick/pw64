@@ -1,13 +1,13 @@
 /*
 ** Xf* - Resource caching routines
 **
-** XfStipple - Create (or retrieve) a stippling pixmap 
+** XfStipple - Create (or retrieve) a stippling pixmap
 ** XfColor   - Allocate (or retrieve) a pixel value
 ** XfFont    - Allocate (or retrieve) a font
 **
 ** All of these routines cache their return values, so subsequent calls
 ** with the same parameters do not reallocate the same resouce.
-** 
+**
 ** Resouces are not currently freed through any means other than
 ** program termination.
 **
@@ -22,7 +22,7 @@ int nXFStip = 0;
 int _xf3Dheight = 3;
 
 /**
-*** This routine tries to allocate a bitmap from the X11_INCLUDE bitmaps 
+*** This routine tries to allocate a bitmap from the X11_INCLUDE bitmaps
 *** directory.  If the user specifies the full path to a stipple, the
 *** path is used instead.
 **/
@@ -45,11 +45,11 @@ Pixmap XfStipple(Display *display, Drawable window, char *name)
     if (display == NULL)
         display = _xfDisplay;
     if (name == NULL)
-        return ((Pixmap) NULL);
+        return ((Pixmap)NULL);
 
-        /**
-	*** Find and load the bitmap file
-	**/
+    /**
+    *** Find and load the bitmap file
+    **/
     if (strchr(name, '/')) {
         XF_STRNCPY(buf, name);
     } else {
@@ -75,11 +75,11 @@ Pixmap XfStipple(Display *display, Drawable window, char *name)
 
     if (err == BitmapSuccess) {
         if (nXFStip == 0) {
-            _XFStip = (Pixmap *) malloc(sizeof(Pixmap));
-            _XFStipnames = (char **) malloc(sizeof(char *));
+            _XFStip = (Pixmap *)malloc(sizeof(Pixmap));
+            _XFStipnames = (char **)malloc(sizeof(char *));
         } else {
-            _XFStip = (Pixmap *) realloc(_XFStip, sizeof(Pixmap) * (nXFStip + 1));
-            _XFStipnames = (char **) realloc(_XFStipnames, sizeof(char *) * (nXFStip + 1));
+            _XFStip = (Pixmap *)realloc(_XFStip, sizeof(Pixmap) * (nXFStip + 1));
+            _XFStipnames = (char **)realloc(_XFStipnames, sizeof(char *) * (nXFStip + 1));
         }
 
         _XFStip[nXFStip] = p;
@@ -88,7 +88,7 @@ Pixmap XfStipple(Display *display, Drawable window, char *name)
         nXFStip++;
         return (p);
     }
-    return ((Pixmap) NULL);
+    return ((Pixmap)NULL);
 }
 
 char **_XFCNames = NULL;
@@ -105,9 +105,9 @@ short XfColor(Display *display, char *name)
         display = _xfDisplay;
     cmap = DefaultColormap(display, DefaultScreen(display));
 
-    if (name == (char *) 0)
+    if (name == (char *)0)
         return (BlackPixel(display, DefaultScreen(display)));
-    if (name == (char *) 1)
+    if (name == (char *)1)
         return (WhitePixel(display, DefaultScreen(display)));
 
     for (i = 0; i < nXFColors; i++) {
@@ -122,11 +122,11 @@ short XfColor(Display *display, char *name)
         return (0);
 
     if (nXFColors == 0) {
-        _XFCNames = (char **) malloc(sizeof(char *));
-        _XFColors = (XColor *) malloc(sizeof(XColor));
+        _XFCNames = (char **)malloc(sizeof(char *));
+        _XFColors = (XColor *)malloc(sizeof(XColor));
     } else {
-        _XFCNames = (char **) realloc(_XFCNames, sizeof(char *) * (nXFColors + 1));
-        _XFColors = (XColor *) realloc(_XFColors, sizeof(XColor) * (nXFColors + 1));
+        _XFCNames = (char **)realloc(_XFCNames, sizeof(char *) * (nXFColors + 1));
+        _XFColors = (XColor *)realloc(_XFColors, sizeof(XColor) * (nXFColors + 1));
     }
 
     _XFCNames[nXFColors] = strdup(name);
@@ -170,9 +170,9 @@ XFontStruct *XfFont(Display *display, char *name)
         }
     }
 
-        /**
-	*** Load requested font, otherwise, try "fixed"
-	**/
+    /**
+    *** Load requested font, otherwise, try "fixed"
+    **/
     if ((font = XLoadQueryFont(display, name)) == NULL) {
         if ((font = XLoadQueryFont(display, "fixed")) == NULL) {
             return (NULL);
@@ -180,11 +180,11 @@ XFontStruct *XfFont(Display *display, char *name)
     }
 
     if (nXFFonts == 0) {
-        _XFFNames = (char **) malloc(sizeof(char *));
-        _XFFonts = (XFontStruct **) malloc(sizeof(XFontStruct *));
+        _XFFNames = (char **)malloc(sizeof(char *));
+        _XFFonts = (XFontStruct **)malloc(sizeof(XFontStruct *));
     } else {
-        _XFFNames = (char **) realloc(_XFFNames, sizeof(char *) * (nXFColors + 1));
-        _XFFonts = (XFontStruct **) realloc(_XFFonts, sizeof(XFontStruct) * (nXFFonts + 1));
+        _XFFNames = (char **)realloc(_XFFNames, sizeof(char *) * (nXFColors + 1));
+        _XFFonts = (XFontStruct **)realloc(_XFFonts, sizeof(XFontStruct) * (nXFFonts + 1));
     }
 
     _XFFNames[nXFFonts] = strdup(name);
@@ -228,7 +228,4 @@ void XfSet3DHeight(int height)
     _xf3Dheight = height;
 }
 
-int Xf3DHeight(void)
-{
-    return (_xf3Dheight);
-}
+int Xf3DHeight(void) { return (_xf3Dheight); }

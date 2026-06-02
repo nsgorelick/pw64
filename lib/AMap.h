@@ -26,44 +26,44 @@ typedef struct _AMap *AMap;
 
 /* Define the structure used for points in the spread */
 struct Point {
-    int v;                      /* Vertical Value */
-    int flag;                   /* Whether this is real or interpolated */
+    int v; /* Vertical Value */
+    int flag; /* Whether this is real or interpolated */
 };
 
 /* Define the encapusalted (more or less) data structure for an AMap */
 struct _AMap {
-    Display *display;           /* Display the AMap is on */
-    Window window;              /* Window created for AMap */
-    Window parent;              /* window's parent */
-    int active;                 /* AMap active/!active */
-    int width, height;          /* Window's width and height */
-    int x, y;                   /* X & Y positioning */
-    int border_width;           /* width (in pixels) of border */
+    Display *display; /* Display the AMap is on */
+    Window window; /* Window created for AMap */
+    Window parent; /* window's parent */
+    int active; /* AMap active/!active */
+    int width, height; /* Window's width and height */
+    int x, y; /* X & Y positioning */
+    int border_width; /* width (in pixels) of border */
     unsigned long border_color; /* Color of border */
-    char name[256];             /* Name used to identify AMap */
-    char *ext;                  /* Externally-visible data */
-    int *member;                /* Pseudo-class identifier */
-    struct Point *points;       /* Internal representation of spread */
-    int left_edge;              /* Left edge of current window in points */
-    int max_left_edge;          /* Maximum value for above */
-    unsigned long pen_color;    /* Pen color for lines */
-    unsigned long shade_color;  /* Color to use when shading */
-    int shade_style;            /* Style for shading */
-    Pixmap shade_pattern;       /* Pattern (if used) for shading */
-    int shade_left;             /* No. of pixels on left to shade */
-    int shade_right;            /* No. of pixels on right to shade */
-    int action_mode;            /* Mode to be considered when Action'd */
-    Pixmap map;                 /* The Pixmap used to draw the lines in */
-    struct VisualInfo *visual;  /* The information for the background */
+    char name[256]; /* Name used to identify AMap */
+    char *ext; /* Externally-visible data */
+    int *member; /* Pseudo-class identifier */
+    struct Point *points; /* Internal representation of spread */
+    int left_edge; /* Left edge of current window in points */
+    int max_left_edge; /* Maximum value for above */
+    unsigned long pen_color; /* Pen color for lines */
+    unsigned long shade_color; /* Color to use when shading */
+    int shade_style; /* Style for shading */
+    Pixmap shade_pattern; /* Pattern (if used) for shading */
+    int shade_left; /* No. of pixels on left to shade */
+    int shade_right; /* No. of pixels on right to shade */
+    int action_mode; /* Mode to be considered when Action'd */
+    Pixmap map; /* The Pixmap used to draw the lines in */
+    struct VisualInfo *visual; /* The information for the background */
     struct CallBackList *CallBacks;
     CallBack exposeCallback;
     CallBack updateCallback;
-    CallBack readoutCallback;   /* Callback for readout update */
+    CallBack readoutCallback; /* Callback for readout update */
     AMap nextAMap;
 };
 
 /* Support routines */
-AMap XfCreateAMap(Display * display, Window parent, int x, int y, int width, int height, int border_width,
+AMap XfCreateAMap(Display *display, Window parent, int x, int y, int width, int height, int border_width,
                   long unsigned int border_color, char *name, long unsigned int pen_color,
                   long unsigned int shade_color, int shade_style, Pixmap shade_pattern);
 int XfDestroyAMap(AMap A);
@@ -74,14 +74,14 @@ int XfDelAMapCallback(AMap A, CallBack cb);
 int XfAddAMapVisual(AMap A, struct VisualInfo *vis);
 int XfActivateAMapMode(AMap A, int mode, long unsigned int mask);
 int XfDeactivateAMap(AMap A);
-int XfAMapAction(AMap A, XEvent * E);
+int XfAMapAction(AMap A, XEvent *E);
 int XfMoveAMap(AMap A);
 AMap XfGetAMap(char *name);
-AMap XfEventAMap(XEvent * E);
+AMap XfEventAMap(XEvent *E);
 struct Point *XfPhotographAMap(AMap A);
 int XfRestoreAMap(AMap A, struct Point *data);
 
-#define XfActivateAMap(A, M)    XfActivateAMapMode(A, XfAMapNoAction, M)
+#define XfActivateAMap(A, M) XfActivateAMapMode(A, XfAMapNoAction, M)
 
 /* The global list of Assoc. Maps */
 extern AMap AMapList;
@@ -91,4 +91,4 @@ int XfCenterAMap(AMap A);
 int XfClearAMap(AMap A);
 int XfAddAMapReadoutCallback(AMap A, CallBack callback);
 
-#endif                          /* _XF_AMAP_H */
+#endif /* _XF_AMAP_H */

@@ -1,28 +1,27 @@
 #include "Xfred.h"
 #include "List.h"
 
-void ListSlider(Slider S, XEvent * E);
-void ListCallback(Button B, XEvent * E);
+void ListSlider(Slider S, XEvent *E);
+void ListCallback(Button B, XEvent *E);
 int draw(List list, int i, short int bg);
 void RefreshList(List list);
 
 extern int XfRescaleSlider(Slider S, float lo, float hi, float d);
 
-List
-CreateList(Display *display, Window parent, XFontStruct *font, int x, int y, int w, int h, int sw, int fast,
-           long unsigned int hilite, int nitems, char **items)
-                /* upper left corner in parent */
-                /* width and height of viewport (including scrollbar) */
-                /* Slider width */
-                /* use pixmap or not (fast vs slow) */
-                        /* color to hilite in */
+List CreateList(Display *display, Window parent, XFontStruct *font, int x, int y, int w, int h, int sw, int fast,
+                long unsigned int hilite, int nitems, char **items)
+/* upper left corner in parent */
+/* width and height of viewport (including scrollbar) */
+/* Slider width */
+/* use pixmap or not (fast vs slow) */
+/* color to hilite in */
 {
     List list;
     float thumb_scale;
     float range;
     int i;
 
-    list = (List) malloc(sizeof(struct _list));
+    list = (List)malloc(sizeof(struct _list));
     list->display = display;
     list->parent = parent;
     list->font = font;
@@ -39,8 +38,7 @@ CreateList(Display *display, Window parent, XFontStruct *font, int x, int y, int
     list->offset = 0;
 
     list->scrollwidth = sw;
-
-    list->gc = DefaultGC(display, DefaultScreen(display));
+    list->gc = NULL;
 
     list->font_ascent = font->ascent * 1.2;
     list->font_descent = font->descent * 1.2;
@@ -50,15 +48,16 @@ CreateList(Display *display, Window parent, XFontStruct *font, int x, int y, int
     /* view window */
 
     list->view = XfCreateButton(display, parent, x, y, w, h, 1, BLACK(display), " ", 1);
-    list->view->member = (int *) list;
+    list->view->member = (int *)list;
     XfAddButtonCallback(list->view, 0, XF_CALLBACK(ListCallback), NULL);
+    list->gc = XCreateGC(display, list->view->window, 0, NULL);
 
     /* slider bar */
 
     if (nitems == 0) {
         thumb_scale = 1.0;
     } else {
-        thumb_scale = ((float) h / (float) list->font_height) / (float) nitems;
+        thumb_scale = ((float)h / (float)list->font_height) / (float)nitems;
         if (thumb_scale > 1.0)
             thumb_scale = 1.0;
     }
@@ -69,21 +68,17 @@ CreateList(Display *display, Window parent, XFontStruct *font, int x, int y, int
     if (range < 0)
         range = 0;
 
-    list->scroll = XfCreateSlider(display, list->view->window, w - sw - 2, -1,
-                                  sw, h, 1, BLACK(display), "ThumbSlider",
-                                  XfSliderUpDown, (float) range, 0.0, (float) list->font_height, sw, (int) thumb_scale);
-    XfAddSliderBarVisual(list->scroll,
-                         XfCreateVisual(list->scroll, 0, 0, 0, 0, BLACK(display),
-                                        WHITE(display), XfStippledVisual, "\252\125", 2, 2));
-    XfAddSliderThumbVisual(list->scroll, XfCreateVisual(list->scroll,
-                                                        0, 0, sw, (int) thumb_scale, BLACK(display),
+    list->scroll = XfCreateSlider(display, list->view->window, w - sw - 2, -1, sw, h, 1, BLACK(display), "ThumbSlider",
+                                  XfSliderUpDown, (float)range, 0.0, (float)list->font_height, sw, (int)thumb_scale);
+    XfAddSliderBarVisual(list->scroll, XfCreateVisual(list->scroll, 0, 0, 0, 0, BLACK(display), WHITE(display),
+                                                      XfStippledVisual, "\252\125", 2, 2));
+    XfAddSliderThumbVisual(list->scroll, XfCreateVisual(list->scroll, 0, 0, sw, (int)thumb_scale, BLACK(display),
                                                         WHITE(display), XfSolidVisual));
-    XfAddSliderThumbVisual(list->scroll, XfCreateVisual(list->scroll,
-                                                        0, 1, sw, (int) thumb_scale - 2, WHITE(display),
+    XfAddSliderThumbVisual(list->scroll, XfCreateVisual(list->scroll, 0, 1, sw, (int)thumb_scale - 2, WHITE(display),
                                                         WHITE(display), XfSolidVisual));
     XfAddSliderCallback(list->scroll, XF_CALLBACK(ListSlider), NULL);
     XfActivateSliderValue(list->scroll, 1.0, (ExposureMask | ButtonPressMask | ButtonMotionMask));
-    list->scroll->member = (int *) list;
+    list->scroll->member = (int *)list;
 
     if (list->speed) {
         list->pixmap = XCreatePixmap(display, parent, w, nitems * list->font_height, 8);
@@ -94,9 +89,9 @@ CreateList(Display *display, Window parent, XFontStruct *font, int x, int y, int
         for (i = 0; i < nitems; i++) {
             draw(list, i, WHITE(display));
         }
-        XfAddButtonVisual(list->view, 0, XfCreateVisual(list->view,
-                                                        0, 0, w, nitems * list->font_height, BLACK(display),
-                                                        WHITE(display), XfPixmapVisual, 8, list->pixmap));
+        XfAddButtonVisual(list->view, 0,
+                          XfCreateVisual(list->view, 0, 0, w, nitems * list->font_height, BLACK(display),
+                                         WHITE(display), XfPixmapVisual, 8, list->pixmap));
     } else {
         XfNoAutoExposeButton(list->view);
     }
@@ -122,7 +117,7 @@ void ReCreateList(List list, int nitems, char **items)
     if (nitems == 0) {
         thumb_scale = 1.0;
     } else {
-        thumb_scale = ((float) list->height / (float) list->font_height) / (float) list->nitems;
+        thumb_scale = ((float)list->height / (float)list->font_height) / (float)list->nitems;
         if (thumb_scale > 1.0)
             thumb_scale = 1.0;
     }
@@ -133,8 +128,8 @@ void ReCreateList(List list, int nitems, char **items)
     if (range < 0)
         range = 0;
 
-    XfRescaleSlider(list->scroll, (float) range, 0.0, (float) list->font_height);
-    XfResizeThumb(list->scroll, list->scrollwidth, (int) thumb_scale);
+    XfRescaleSlider(list->scroll, (float)range, 0.0, (float)list->font_height);
+    XfResizeThumb(list->scroll, list->scrollwidth, (int)thumb_scale);
     list->scroll->thumb->height = thumb_scale;
     list->scroll->thumb->next->height = thumb_scale - 2;
     XfSetSliderValue(list->scroll, 1.0);
@@ -143,32 +138,31 @@ void ReCreateList(List list, int nitems, char **items)
         XfFreeVisual(display, list->view->States[0]->Visuals);
         list->view->States[0]->Visuals = NULL;
         list->pixmap = XCreatePixmap(display, list->parent, list->width, nitems * list->font_height, 8);
-        XfAddButtonVisual(list->view, 0, XfCreateVisual(list->view,
-                                                        0, 0, list->width, nitems * list->font_height,
-                                                        WHITE(display), WHITE(display),
-                                                        XfPixmapVisual, 8, list->pixmap));
+        XfAddButtonVisual(list->view, 0,
+                          XfCreateVisual(list->view, 0, 0, list->width, nitems * list->font_height, WHITE(display),
+                                         WHITE(display), XfPixmapVisual, 8, list->pixmap));
     }
     RefreshList(list);
 }
 
 void ListSlider(Slider S, XEvent *E)
 {
-    (void) E;
+    (void)E;
     Button B;
     List list;
     int offset;
-    list = (List) S->member;
+    list = (List)S->member;
     B = list->view;
 
-/* 
-   put slow vs fast stuff here.
-   Just repaint all necessary strings, at +offset
-*/
-    offset = -(int) XfGetSliderValue(S);
+    /*
+       put slow vs fast stuff here.
+       Just repaint all necessary strings, at +offset
+    */
+    offset = -(int)XfGetSliderValue(S);
     list->offset = offset;
     if (list->speed) {
         B->States[0]->Visuals->y_pos = offset;
-        (*(B->updateCallback)) (B, NULL);
+        (*(B->updateCallback))(B, NULL);
     } else {
         RefreshList(list);
     }
@@ -180,7 +174,7 @@ void ListCallback(Button B, XEvent *E)
     int i;
     List list;
 
-    list = (List) B->member;
+    list = (List)B->member;
 
     if (E->type == Expose) {
         /* Can only get this if in slow mode */
@@ -198,15 +192,12 @@ void ListCallback(Button B, XEvent *E)
             list->selected = i;
         }
         if (list->callback != NULL)
-            (*(list->callback)) (list, E);
+            (*(list->callback))(list, E);
         list->last_time = E->xbutton.time;
     }
 }
 
-void AddListCallback(List list, CallBack proc)
-{
-    list->callback = proc;
-}
+void AddListCallback(List list, CallBack proc) { list->callback = proc; }
 
 void RefreshList(List list)
 {
@@ -231,7 +222,7 @@ void RefreshList(List list)
         }
     }
     if (list->speed) {
-        (*(list->view->updateCallback)) (list->view, NULL);
+        (*(list->view->updateCallback))(list->view, NULL);
     }
 }
 
@@ -251,19 +242,20 @@ int draw(List list, int i, short int bg)
         XSetForeground(B->display, list->gc, bg);
         XFillRectangle(B->display, list->pixmap, list->gc, 0, loc, list->width, list->font_height);
         XSetForeground(B->display, list->gc, BLACK(B->display));
-        XDrawString(B->display, list->pixmap, list->gc,
-                    list->font_width / 2, list->font_ascent + loc, list->items[i], strlen(list->items[i]));
+        XDrawString(B->display, list->pixmap, list->gc, list->font_width / 2, list->font_ascent + loc, list->items[i],
+                    strlen(list->items[i]));
     } else {
         if ((loc + list->offset) > list->height)
-            return 0;;
+            return 0;
+        ;
         if ((loc + list->offset) < -list->font_height)
-            return 0;;
+            return 0;
+        ;
         XSetForeground(B->display, list->gc, bg);
-        XFillRectangle(B->display, list->view->window, list->gc, 0,
-                       (loc + list->offset), list->width, list->font_height);
+        XFillRectangle(B->display, list->view->window, list->gc, 0, (loc + list->offset), list->width,
+                       list->font_height);
         XSetForeground(B->display, list->gc, BLACK(B->display));
-        XDrawString(B->display, list->view->window, list->gc,
-                    list->font_width / 2,
+        XDrawString(B->display, list->view->window, list->gc, list->font_width / 2,
                     list->font_ascent + loc + list->offset, list->items[i], strlen(list->items[i]));
     }
     return 1;
@@ -271,18 +263,16 @@ int draw(List list, int i, short int bg)
 
 List DestroyList(List list)
 {
+    if (list->gc != NULL) {
+        XFreeGC(list->display, list->gc);
+        list->gc = NULL;
+    }
     XfDestroyButton(list->view);
     XfDestroySlider(list->scroll);
     free(list);
     return (NULL);
 }
 
-void ActivateList(List list)
-{
-    XfActivateButton(list->view, ExposureMask | ButtonPressMask);
-}
+void ActivateList(List list) { XfActivateButton(list->view, ExposureMask | ButtonPressMask); }
 
-void DeactivateList(List list)
-{
-    XfDeactivateButton(list->view);
-}
+void DeactivateList(List list) { XfDeactivateButton(list->view); }

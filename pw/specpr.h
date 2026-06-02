@@ -1,13 +1,12 @@
 #ifndef _SPECPR_H
 #define _SPECPR_H
 
-#define check_bit(i,n) ((i & (1 << n)) != 0)
-#define set_bit(i,n,m) i = ((i & (~(1<<n))) | (m<<n))
+#define check_bit(i, n) ((i & (1 << n)) != 0)
+#define set_bit(i, n, m) i = ((i & (~(1 << n))) | (m << n))
 
-#define SPECPR_STAMP    "SPECPR_FS_2.0\r\nRECORD_BYTES=1536\r\nLABEL_RECORDS=1\r\n"
+#define SPECPR_STAMP "SPECPR_FS_2.0\r\nRECORD_BYTES=1536\r\nLABEL_RECORDS=1\r\n"
 
-
-#define LABELSIZE   1536
+#define LABELSIZE 1536
 
 struct _label {
     int icflag;
@@ -41,7 +40,7 @@ struct _label {
     float timint;
     float tempd;
     float data[256];
-} * make_label();
+} *make_label();
 
 struct _tlabel {
     int icflag;
@@ -55,4 +54,4 @@ struct _tlabel {
 char *decode_time(int s, char *buf);
 char *decode_date(int jday, char *buf);
 
-#endif _SPECPR_H
+#endif /* _SPECPR_H */

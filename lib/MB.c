@@ -14,9 +14,9 @@ void MBDeactivatePopup(MButton MB);
  ** Append an item to a menu
  **/
 
-int HitTest(MButton MB, MenuItem * menu, int x, int y);
+int HitTest(MButton MB, MenuItem *menu, int x, int y);
 extern int Xf3DHeight(void);
-extern void Draw3DBox(Display * disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo,
+extern void Draw3DBox(Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo,
                       short int fg, short int bg, int state, int options);
 
 MenuItem *XfAddMenuItem(MenuItem *parent, char *str, int align, XFontStruct *font, Pixmap pixmap, int p_width,
@@ -73,7 +73,7 @@ MenuItem *StringToMenu(char *string, MenuItem *parent, int idval)
         }
         parent = calloc(1, sizeof(MenuItem));
         parent->str = strdup(p);
-        parent->id = (void *) (intptr_t) id++;
+        parent->id = (void *)(intptr_t)id++;
         StringToMenu(q, parent, 0);
         return (parent);
     } else {
@@ -99,7 +99,7 @@ MenuItem *StringToMenu(char *string, MenuItem *parent, int idval)
                     parent->items = calloc(1, sizeof(MenuItem));
                 }
                 parent->items[parent->nitems].str = strdup(p + top);
-                parent->items[parent->nitems].id = (void *) (intptr_t) id++;
+                parent->items[parent->nitems].id = (void *)(intptr_t)id++;
                 parent->nitems++;
             } else {
                 printf("something bad\n");
@@ -129,19 +129,18 @@ static int depth(char *str)
 void print_menu(MenuItem *parent, int level)
 {
     int i;
-    printf("%*s%s\t%d\n", level * 4, "", parent->str, (int) (intptr_t) parent->id);
+    printf("%*s%s\t%d\n", level * 4, "", parent->str, (int)(intptr_t)parent->id);
     for (i = 0; i < parent->nitems; i++) {
         print_menu(&(parent->items[i]), level + 1);
     }
 }
 
-MButton
-XfCreateMB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, MenuItem *menu,
-           CallBack func)
+MButton XfCreateMB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, MenuItem *menu,
+                   CallBack func)
 {
     MButton new;
 
-    new = (MButton) XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_MB);
+    new = (MButton)XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_MB);
     new->menu = menu;
     return (new);
 }
@@ -163,7 +162,8 @@ int XfPushMB(MButton MB, XEvent *E)
 
     switch (E->type) {
     case Expose:
-        while (XCheckTypedWindowEvent(display, MB->window, Expose, &Ev));
+        while (XCheckTypedWindowEvent(display, MB->window, Expose, &Ev))
+            ;
         RedrawMB(MB);
         break;
 
@@ -173,13 +173,13 @@ int XfPushMB(MButton MB, XEvent *E)
         }
         break;
 
-    case ButtonRelease:        /* parent never sees release */
+    case ButtonRelease: /* parent never sees release */
         if (MB->state >= 0) {
             parent = MB->root;
             parent->selected = HitTest(MB, MB->menu, E->xbutton.x, E->xbutton.y);
             MBDeactivatePopup(MB);
             if (parent->selected != -1 && parent->function) {
-                (*(parent->function)) (parent, E);
+                (*(parent->function))(parent, E);
             }
         }
         break;
@@ -194,7 +194,8 @@ int XfPushMB(MButton MB, XEvent *E)
         break;
 
     case MotionNotify:
-        while (XCheckTypedWindowEvent(display, MB->window, MotionNotify, &Ev));
+        while (XCheckTypedWindowEvent(display, MB->window, MotionNotify, &Ev))
+            ;
         i = HitTest(MB, MB->menu, E->xmotion.x, E->xmotion.y);
         if (i != MB->selected) {
             MB->selected = -1;
@@ -211,7 +212,7 @@ int XfPushMB(MButton MB, XEvent *E)
 
 int HitTest(MButton MB, MenuItem *menu, int x, int y)
 {
-    (void) x;
+    (void)x;
     int i;
     int last;
     int height;
@@ -248,14 +249,14 @@ void MBActivatePopup(MButton MB)
     int i;
 
     /**
-     ** figure out where this button is located on the screen 
+     ** figure out where this button is located on the screen
      **/
     XTranslateCoordinates(d, MB->window, RootWindow(d, DefaultScreen(d)), MB->width / 2, 0, &x, &y, &child);
     width = MB->width;
     height = MB->height + 2;
 
     /**
-     ** calculate height 
+     ** calculate height
      **/
 
     for (i = 0; i < MB->menu->nitems; i++) {
@@ -294,9 +295,7 @@ void MBActivatePopup(MButton MB)
     xwa.background_pixmap = None;
     xwa.border_pixel = BLACK(d);
     xwa.save_under = True;
-    grab = XCreateWindow(d, RootWindow(d, screen),
-                         x - 1, y - 1, width - 3, height,
-                         2, 0, InputOutput, CopyFromParent,
+    grab = XCreateWindow(d, RootWindow(d, screen), x - 1, y - 1, width - 3, height, 2, 0, InputOutput, CopyFromParent,
                          CWBackPixmap | CWOverrideRedirect | CWSaveUnder | CWBorderPixel, &xwa);
     XDefineCursor(d, grab, XCreateFontCursor(d, 132));
 
@@ -306,8 +305,8 @@ void MBActivatePopup(MButton MB)
     MB->popup->root = MB;
     MB->popup->selected = -1;
     XSelectInput(d, MB->popup->window,
-                 ExposureMask | ButtonPressMask | ButtonReleaseMask |
-                 EnterWindowMask | LeaveWindowMask | StructureNotifyMask | ButtonMotionMask);
+                 ExposureMask | ButtonPressMask | ButtonReleaseMask | EnterWindowMask | LeaveWindowMask |
+                     StructureNotifyMask | ButtonMotionMask);
     XfActivateMB(MB->popup, 4);
 
     XMapRaised(d, grab);
@@ -315,9 +314,8 @@ void MBActivatePopup(MButton MB)
 
     XUngrabPointer(d, CurrentTime);
     XGrabPointer(d, MB->popup->window, False,
-                 ButtonPressMask | ButtonReleaseMask |
-                 EnterWindowMask | LeaveWindowMask |
-                 ButtonMotionMask, GrabModeAsync, GrabModeAsync, None, None, CurrentTime);
+                 ButtonPressMask | ButtonReleaseMask | EnterWindowMask | LeaveWindowMask | ButtonMotionMask,
+                 GrabModeAsync, GrabModeAsync, None, None, CurrentTime);
 }
 
 /**
@@ -334,32 +332,22 @@ void MBDeactivatePopup(MButton MB)
     XfDestroyMB(MB->popup);
     XUnmapWindow(MB->display, MB->grab);
     XDestroyWindow(MB->display, MB->grab);
-
 }
 
 /**
  ** Execute the specified user callback.
  **/
-void MBUserCallback(MButton MB)
-{
-    (void) MB;
-}
+void MBUserCallback(MButton MB) { (void)MB; }
 
 /**
  ** Set MB to be redrawn as raised, and call MBActivatePopup for submenus
  **/
-void RaiseMB(MButton MB)
-{
-    (void) MB;
-}
+void RaiseMB(MButton MB) { (void)MB; }
 
 /**
  ** Set MB to be redrawn as lowered, and call MBDeactivatePopup for submenus
  **/
-void LowerMB(MButton MB)
-{
-    (void) MB;
-}
+void LowerMB(MButton MB) { (void)MB; }
 
 void draw_MenuItem(MButton MB, MenuItem *menu, int xoff, int yoff, int height, int r, int invert)
 {
@@ -427,8 +415,8 @@ void draw_MenuItem(MButton MB, MenuItem *menu, int xoff, int yoff, int height, i
 
 void draw_separator(MButton MB, MenuItem *menu, int xoff, int yoff, int r)
 {
-    (void) menu;
-    (void) r;
+    (void)menu;
+    (void)r;
     Display *display = MB->display;
     Window window = MB->window;
     GC gc = DefaultGC(display, DefaultScreen(display));
@@ -442,7 +430,7 @@ void draw_separator(MButton MB, MenuItem *menu, int xoff, int yoff, int r)
  ** RedrawMB    - Redraw PushButton based on its state
  **
  **             - this function uses Draw3DBox.  If a buttons text or pixmap
- **               ever changes, Draw3DBox won't erase the old text/pixmap 
+ **               ever changes, Draw3DBox won't erase the old text/pixmap
  **               unless the option (CLEAR) is passed as the last argument.
  **               The safe thing to do is ClearWindow and Expose on change.
  **/

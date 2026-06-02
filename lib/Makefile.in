@@ -26,8 +26,26 @@ panes: panes.o libXfred.a
 sampler: sampler.o libXfred.a
 	$(CC) -o sampler sampler.o libXfred.a $(XLIBS)
 
+# --- libXfred unit tests (lib/tests/) ---
+TEST_DIR = tests
+RUN_XFRED_TESTS = $(TEST_DIR)/run_xfred_tests
+TEST_CPPFLAGS = $(CPPFLAGS) -I.
+TEST_CFLAGS = $(CFLAGS) -std=c99
+
+.PHONY: check
+
+check: libXfred.a $(RUN_XFRED_TESTS)
+	PW64_TEST_FIXTURES=$(CURDIR)/$(TEST_DIR)/fixtures $(RUN_XFRED_TESTS)
+
+$(RUN_XFRED_TESTS): $(TEST_DIR)/test_main.o $(TEST_DIR)/test_xfred.o libXfred.a
+	$(CC) $(CFLAGS) -o $@ $(TEST_DIR)/test_main.o $(TEST_DIR)/test_xfred.o libXfred.a $(XLIBS)
+
+$(TEST_DIR)/%.o: $(TEST_DIR)/%.c $(TEST_DIR)/test.h libXfred.a
+	$(CC) -c $(TEST_CPPFLAGS) $(TEST_CFLAGS) -o $@ $<
+
 clean:
 	rm -f $(OBJ) libXfred.a panes panes.o sampler sampler.o
+	rm -f $(RUN_XFRED_TESTS) $(TEST_DIR)/test_main.o $(TEST_DIR)/test_xfred.o
 
 .c.o:
 	$(CC) -c $(DEFS) $(CPPFLAGS) $(CFLAGS) $<

@@ -20,16 +20,15 @@
 
 Pixmap cb_check;
 
-extern void Draw3DBox(Display * disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo,
+extern void Draw3DBox(Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo,
                       short int fg, short int bg, int state, int options);
 extern int Xf3DHeight(void);
 
-CButton
-XfCreateCB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, char *text, int align,
-           XFontStruct *font, CallBack func)
+CButton XfCreateCB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, char *text,
+                   int align, XFontStruct *font, CallBack func)
 {
     CButton new;
-    new = (CButton) XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_CB);
+    new = (CButton)XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_CB);
 
     if (text != NULL) {
         new->text = strdup(text);
@@ -60,7 +59,8 @@ int XfPushCB(CButton CB, XEvent *E)
 
     switch (E->type) {
     case Expose:
-        while (XCheckTypedWindowEvent(display, CB->window, Expose, &Ev));
+        while (XCheckTypedWindowEvent(display, CB->window, Expose, &Ev))
+            ;
         RedrawCB(CB);
         break;
 
@@ -73,14 +73,14 @@ int XfPushCB(CButton CB, XEvent *E)
 
     case ButtonRelease:
         if (CB->state != -1) {
-                                /**
-				 ** Call user function and toggle check mark
-				 **/
+            /**
+             ** Call user function and toggle check mark
+             **/
             if (CB->state & 1) {
                 CB->state ^= CB_ON;
                 CB->state &= (~1);
                 if (CB->function != NULL) {
-                    (*(CB->function)) (CB, NULL);
+                    (*(CB->function))(CB, NULL);
                 }
             }
             RedrawCB(CB);
@@ -145,7 +145,7 @@ void RedrawCB(CButton CB)
         w = CB->pix_w;
     }
 
-    if (CB->align < 0) {        /* button on right side */
+    if (CB->align < 0) { /* button on right side */
         xlo = width - CBSIZE;
         xhi = xlo - w - 4;
     } else {
@@ -159,11 +159,11 @@ void RedrawCB(CButton CB)
 
     Draw3DBox(disp, win, gc, xlo, ypos, CBSIZE, CBSIZE, Xf3DHeight(), CB->hi, CB->lo, CB->fg, CB->bg, CB->state, 0);
 
-        /**
-	 ** Paint in checkmark.  Use bg to erase old
-	 **/
+    /**
+     ** Paint in checkmark.  Use bg to erase old
+     **/
     if (!cb_check) {
-        cb_check = XCreateBitmapFromData(disp, win, (const char *) cb_check_bits, CBSIZE, CBSIZE);
+        cb_check = XCreateBitmapFromData(disp, win, (const char *)cb_check_bits, CBSIZE, CBSIZE);
     }
 
     XSetStipple(disp, gc, cb_check);
@@ -195,9 +195,9 @@ void RedrawCB(CButton CB)
 
         XCopyPlane(disp, CB->pixmap, win, gc, 0, 0, CB->pix_w, CB->pix_h, xhi, y, 1);
     }
-        /**
-	 ** If inactive, its grayed out
-	 **/
+    /**
+     ** If inactive, its grayed out
+     **/
     if (CB->state == -1) {
         XSetFillStyle(disp, gc, FillStippled);
         XSetStipple(disp, gc, XfStipple(disp, win, "gray"));
@@ -223,7 +223,4 @@ Pixmap XfSetCBPixmap(CButton CB, Pixmap pixmap, int w, int h)
     return (ret);
 }
 
-int XfActiveCB(CButton CB)
-{
-    return ((CB->state & CB_ON) != 0);
-}
+int XfActiveCB(CButton CB) { return ((CB->state & CB_ON) != 0); }

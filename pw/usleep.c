@@ -5,12 +5,12 @@
  *                    call to delay for the desired number of
  *                    micro-seconds. This call returns ZERO
  *                    (which is usually ignored) on successful
- *                    completion, -1 otherwise. 
+ *                    completion, -1 otherwise.
  *
  *  ALGORITHM:
  *      1) We range check the passed in microseconds and log a
  *         warning message if appropriate. We then return without
- *         delay, flagging an error. 
+ *         delay, flagging an error.
  *      2) Load the Seconds and micro-seconds portion of the
  *         interval timer structure.
  *      3) Call select(2) with no file descriptors set, just the
@@ -29,47 +29,43 @@
  */
 #ifdef NEED_USLEEP
 
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <errno.h>
-#include <time.h>
-#include <sys/time.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <sys/param.h>
+#include <sys/time.h>
 #include <sys/types.h>
+#include <time.h>
+#include <unistd.h>
 
-int     usleep(microSeconds )
+int usleep(microSeconds)
 unsigned long int microSeconds;
 {
-        unsigned int            Seconds, uSec;
-        int                     nfds;
-        struct  timeval         Timer;
+    unsigned int Seconds, uSec;
+    int nfds;
+    struct timeval Timer;
 
-		nfds = 0;
+    nfds = 0;
 
-        if( (microSeconds == (unsigned long) 0) 
-                || microSeconds > (unsigned long) 4000000 )
-        {
-                errno = ERANGE;         /* value out of range */
-                perror( "usleep time out of range ( 0 -> 4000000 ) " );
-                return -1;
-        }
+    if ((microSeconds == (unsigned long)0) || microSeconds > (unsigned long)4000000) {
+        errno = ERANGE; /* value out of range */
+        perror("usleep time out of range ( 0 -> 4000000 ) ");
+        return -1;
+    }
 
-        Seconds = microSeconds / (unsigned long) 1000000;
-        uSec    = microSeconds % (unsigned long) 1000000;
+    Seconds = microSeconds / (unsigned long)1000000;
+    uSec = microSeconds % (unsigned long)1000000;
 
-        Timer.tv_sec            = Seconds;
-        Timer.tv_usec           = uSec;
+    Timer.tv_sec = Seconds;
+    Timer.tv_usec = uSec;
 
-        if( select( nfds, NULL, NULL, NULL, &Timer ) < 0 )
-        {
-                perror( "usleep (select) failed" );
-                return -1;
-        }
+    if (select(nfds, NULL, NULL, NULL, &Timer) < 0) {
+        perror("usleep (select) failed");
+        return -1;
+    }
 
-        return 0;
+    return 0;
 }
 #else
 static char *foo = "just a marker to get a usleep.o";
 #endif
-

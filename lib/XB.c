@@ -2,7 +2,7 @@
 #include "XB.h"
 
 /**
- ** XButtons - Generic button routines 
+ ** XButtons - Generic button routines
  **
  ** XfCreateXB		- Create an XButton
  ** XfActivateXB	- Map a XButton to the screen, and set its state.
@@ -14,10 +14,10 @@
  ** RedrawXB		- Call the appropirate Redraw routine based on an XB's type
  **/
 
-XButton XBList;                 /* Global list of Buttons */
-XButton *XBModal = NULL;        /* List of modal buttons */
-int XBnModal = 0;               /* number of elements in Modal list */
-int XBsModal = 0;               /* size of modal list */
+XButton XBList; /* Global list of Buttons */
+XButton *XBModal = NULL; /* List of modal buttons */
+int XBnModal = 0; /* number of elements in Modal list */
+int XBsModal = 0; /* size of modal list */
 
 void XfDeleteFromModalList(XButton B);
 void XfClearModalList(void);
@@ -26,15 +26,14 @@ void XfClearModalList(void);
  ** XfCreateXB	- Create an XButton
  **/
 
-extern int XfPushMB(MButton MB, XEvent * E);
+extern int XfPushMB(MButton MB, XEvent *E);
 extern void RedrawMB(MButton MB);
 
-XButton
-XfCreateXB(Display *disp, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, CallBack func,
-           int type)
+XButton XfCreateXB(Display *disp, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, CallBack func,
+                   int type)
 {
     AButton new;
-    new = (AButton) calloc(1, sizeof((*(XButton) NULL)));
+    new = (AButton)calloc(1, sizeof((*(XButton)NULL)));
 
     if (disp == NULL)
         disp = _xfDisplay;
@@ -61,9 +60,9 @@ XfCreateXB(Display *disp, Window win, int x, int y, int w, int h, int hi, int lo
     if (bg == -1)
         bg = XfColor(disp, "gray80");
 
-        /**
-	 *** If we can't allocate gray80, default to white
-	 **/
+    /**
+     *** If we can't allocate gray80, default to white
+     **/
     if (bg == 0)
         bg = XfColor(disp, "White");
 
@@ -76,17 +75,17 @@ XfCreateXB(Display *disp, Window win, int x, int y, int w, int h, int hi, int lo
 
     new->window = XCreateSimpleWindow(disp, win, x, y, w, h, 0, 0, bg);
     XSelectInput(new->display, new->window,
-                 ExposureMask | ButtonPressMask | ButtonReleaseMask |
-                 EnterWindowMask | LeaveWindowMask | StructureNotifyMask);
+                 ExposureMask | ButtonPressMask | ButtonReleaseMask | EnterWindowMask | LeaveWindowMask |
+                     StructureNotifyMask);
 
-        /**
-	 ** Add this Button to the front of the ButtonList
-	 **/
+    /**
+     ** Add this Button to the front of the ButtonList
+     **/
 
     new->nextB = XBList;
-    XBList = (XButton) new;
+    XBList = (XButton)new;
 
-    return ((XButton) new);
+    return ((XButton)new);
 }
 
 /**
@@ -95,7 +94,7 @@ XfCreateXB(Display *disp, Window win, int x, int y, int w, int h, int hi, int lo
 
 int XfActivateXB(XButton XB, int state)
 {
-    AButton B = (AButton) XB;
+    AButton B = (AButton)XB;
     int ret = B->state;
 
     B->state = state;
@@ -120,7 +119,7 @@ XButton XBModalEvent(XEvent *E)
     for (i = 0; i < XBsModal; i++) {
         if (XBModal[i] == NULL)
             continue;
-        if (((AButton) XBModal[i])->window == E->xany.window) {
+        if (((AButton)XBModal[i])->window == E->xany.window) {
             return (XBModal[i]);
         }
     }
@@ -144,27 +143,27 @@ XButton XfEventXB(XEvent *E)
     if (XBList == NULL)
         return (NULL);
 
-        /**
-	 ** If there are any items in the ModalList, nothing else 
-	 ** gets any events (except Expose).
-	 **/
+    /**
+     ** If there are any items in the ModalList, nothing else
+     ** gets any events (except Expose).
+     **/
     if (XBnModal != 0 && E->type != Expose) {
         return (XBModalEvent(E));
     }
 
-    search = (AButton) XBList;
+    search = (AButton)XBList;
     if (search->window == E->xany.window) {
-        return ((XButton) search);
+        return ((XButton)search);
     } else {
         while (search->nextB != NULL) {
-            if (((AButton) (search->nextB))->window == E->xany.window) {
+            if (((AButton)(search->nextB))->window == E->xany.window) {
                 find = search->nextB;
-                search->nextB = ((AButton) (search->nextB))->nextB;
-                ((AButton) find)->nextB = XBList;
+                search->nextB = ((AButton)(search->nextB))->nextB;
+                ((AButton)find)->nextB = XBList;
                 XBList = find;
-                return ((XButton) find);
+                return ((XButton)find);
             }
-            search = (AButton) search->nextB;
+            search = (AButton)search->nextB;
         }
     }
     return (NULL);
@@ -180,15 +179,15 @@ int XfPushXB(XButton XB, XEvent *E)
         return 0;
     switch (XB->type) {
     case XF_PB:
-        return (XfPushPB((PButton) XB, E));
+        return (XfPushPB((PButton)XB, E));
     case XF_RB:
-        return (XfPushRB((RButton) XB, E));
+        return (XfPushRB((RButton)XB, E));
     case XF_CB:
-        return (XfPushCB((CButton) XB, E));
+        return (XfPushCB((CButton)XB, E));
     case XF_MB:
-        return (XfPushMB((MButton) XB, E));
+        return (XfPushMB((MButton)XB, E));
     case XF_LB:
-        return (XfPushLB((LButton) XB, E));
+        return (XfPushLB((LButton)XB, E));
     }
     return (0);
 }
@@ -200,7 +199,7 @@ int XfPushXB(XButton XB, XEvent *E)
 void XfPosXB(XButton XB, int x, int y, int w, int h)
 {
     int move = 0, resize = 0;
-    AButton B = (AButton) XB;
+    AButton B = (AButton)XB;
 
     if (x != MAXINT && y != MAXINT) {
         move = 1;
@@ -221,10 +220,7 @@ void XfPosXB(XButton XB, int x, int y, int w, int h)
  ** XfDeactivateXB - Unmap an XButton
  **/
 
-void XfDeactivateXB(XButton XB)
-{
-    XUnmapWindow(((AButton) XB)->display, ((AButton) XB)->window);
-}
+void XfDeactivateXB(XButton XB) { XUnmapWindow(((AButton)XB)->display, ((AButton)XB)->window); }
 
 /**
  ** XfDestroyXB - Destroy an XButton
@@ -238,11 +234,11 @@ void XfDestroyXB(XButton XB)
         return;
 
     XfDeactivateXB(XB);
-    B = (AButton) XB;
+    B = (AButton)XB;
 
-        /**
-	 ** Remove from modal list if present.
-	 **/
+    /**
+     ** Remove from modal list if present.
+     **/
     if (XBnModal != 0) {
         XfDeleteFromModalList(XB);
     }
@@ -252,17 +248,17 @@ void XfDestroyXB(XButton XB)
     if (B->text != NULL)
         free(B->text);
 
-        /**
-	 ** Pull button out of XBList
-	 **/
+    /**
+     ** Pull button out of XBList
+     **/
 
-    search = (AButton) XBList;
+    search = (AButton)XBList;
     if (search == B) {
         XBList = search->nextB;
     } else {
-        while (search->nextB != (XButton) B)
-            search = (AButton) search->nextB;
-        search->nextB = ((AButton) (search->nextB))->nextB;
+        while (search->nextB != (XButton)B)
+            search = (AButton)search->nextB;
+        search->nextB = ((AButton)(search->nextB))->nextB;
     }
     free(XB);
 }
@@ -275,19 +271,19 @@ void RedrawXB(XButton XB)
 {
     switch (XB->type) {
     case XF_PB:
-        RedrawPB((PButton) XB);
+        RedrawPB((PButton)XB);
         break;
     case XF_RB:
-        RedrawRB((RButton) XB);
+        RedrawRB((RButton)XB);
         break;
     case XF_CB:
-        RedrawCB((CButton) XB);
+        RedrawCB((CButton)XB);
         break;
     case XF_MB:
-        RedrawMB((MButton) XB);
+        RedrawMB((MButton)XB);
         break;
     case XF_LB:
-        RedrawLB((LButton) XB);
+        RedrawLB((LButton)XB);
         break;
     }
 }

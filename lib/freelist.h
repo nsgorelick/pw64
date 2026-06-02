@@ -11,15 +11,14 @@
  * has been slaved to a linked list.
  */
 
-#define FreeList(type, head, next) \
-{ \
-  type n; \
-  type m; \
-  n = head; \
-  while (n != NULL) \
-    { \
-      m = n->next; \
-      free(n); \
-      n = m; \
-    } \
-}
+#define FreeList(type, head, next)                                                                                     \
+    {                                                                                                                  \
+        type n;                                                                                                        \
+        type m;                                                                                                        \
+        n = head;                                                                                                      \
+        while (n != NULL) {                                                                                            \
+            m = n->next;                                                                                               \
+            free(n);                                                                                                   \
+            n = m;                                                                                                     \
+        }                                                                                                              \
+    }

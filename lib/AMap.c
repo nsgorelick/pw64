@@ -42,10 +42,9 @@ int XfDestroyAMap(AMap A)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(A->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -67,10 +66,9 @@ int XfDestroyAMap(AMap A)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(A->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -182,7 +180,7 @@ int XfAddAMapCallback(AMap A, CallBack new, CallBack old)
     if (A == NULL)
         return (False);
 
-    new_ptr = (struct CallBackList *) malloc(sizeof(struct CallBackList));
+    new_ptr = (struct CallBackList *)malloc(sizeof(struct CallBackList));
     if (new_ptr == NULL)
         return (False);
     new_ptr->proc = new;
@@ -301,11 +299,11 @@ AMap XfCreateAMap(Display *display, Window parent, int x, int y, int width, int 
 
     /*
      */
-    new = (AMap) malloc(sizeof(struct _AMap));
+    new = (AMap)malloc(sizeof(struct _AMap));
     if (new == NULL)
         return (NULL);
 
-    new->points = (struct Point *) calloc((width * 3), sizeof(struct Point));
+    new->points = (struct Point *)calloc((width * 3), sizeof(struct Point));
     if (new->points == NULL) {
         free(new);
         return (NULL);
@@ -328,12 +326,13 @@ AMap XfCreateAMap(Display *display, Window parent, int x, int y, int width, int 
     new->shade_left = 0;
     new->shade_right = 0;
     new->active = False;
-    new->visual = (struct VisualInfo *) NULL;
-    new->CallBacks = (struct CallBackList *) NULL;
+    new->visual = (struct VisualInfo *)NULL;
+    new->CallBacks = (struct CallBackList *)NULL;
     new->exposeCallback = XF_CALLBACK(defaultAMapCallback);
     new->updateCallback = XF_CALLBACK(defaultAMapUpdateCallback);
     new->readoutCallback = NULL;
-    new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color, 0);
+    new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color,
+                                      XfDefaultWidgetBackground(display));
     new->map = XCreatePixmap(display, new->window, width, height, DefaultDepth(display, DefaultScreen(display)));
     new->nextAMap = NULL;
 
@@ -361,7 +360,7 @@ int XfSetAMap(AMap A, int *data, int npoints)
 
     A->left_edge = A->max_left_edge - A->width;
 
-    if (npoints == 1) {         /* special case */
+    if (npoints == 1) { /* special case */
         for (i = 0; i < (A->width * 3); i++)
             A->points[i].v = data[0], A->points[i].flag = 0;
         A->points[A->left_edge].flag = 1;
@@ -422,10 +421,10 @@ int XfinterpolateAMap(AMap A)
     while (front != ((A->width * 3) - 1)) {
         while (A->points[end].flag == 0)
             end++;
-        delta = (float) (A->points[end].v - A->points[front].v);
-        delta /= (float) (end - front);
+        delta = (float)(A->points[end].v - A->points[front].v);
+        delta /= (float)(end - front);
         for (i = 1; i < (end - front); i++)
-            A->points[front + i].v = (int) ((float) A->points[front].v + i * delta);
+            A->points[front + i].v = (int)((float)A->points[front].v + i * delta);
         front = end;
         end++;
     }
@@ -437,14 +436,14 @@ int XfinterpolateAMap(AMap A)
  */
 void defaultAMapCallback(AMap A, XEvent *E)
 {
-    (void) E;
+    (void)E;
     struct VisualInfo *vis;
     GC localGC;
     unsigned long bg;
-    XCharStruct xcs;
-    int dir, asc, des;
 
-    localGC = DefaultGC(A->display, DefaultScreen(A->display));
+    localGC = XCreateGC(A->display, A->map, 0, NULL);
+    if (localGC == NULL)
+        return;
     vis = A->visual;
     if (vis != NULL)
         bg = vis->foreground;
@@ -455,48 +454,21 @@ void defaultAMapCallback(AMap A, XEvent *E)
     while (vis != NULL) {
         switch (vis->vtype) {
         case XfXImageVisual:
-            XPutImage(A->display, A->map, localGC, vis->visual.i_vis,
-                      0, 0, vis->x_pos, vis->y_pos, vis->width, vis->height);
+            XPutImage(A->display, A->map, localGC, vis->visual.i_vis, 0, 0, vis->x_pos, vis->y_pos, vis->width,
+                      vis->height);
             break;
         case XfPixmapVisual:
             XSetForeground(A->display, localGC, vis->foreground);
             XSetBackground(A->display, localGC, vis->background);
             if (vis->visual.p_vis.depth == 1)
-                XCopyPlane(A->display, vis->visual.p_vis.map, A->map,
-                           localGC, 0, 0, vis->width, vis->height, vis->x_pos, vis->y_pos, 1);
+                XCopyPlane(A->display, vis->visual.p_vis.map, A->map, localGC, 0, 0, vis->width, vis->height,
+                           vis->x_pos, vis->y_pos, 1);
             else
-                XCopyArea(A->display, vis->visual.p_vis.map, A->map,
-                          localGC, 0, 0, vis->width, vis->height, vis->x_pos, vis->y_pos);
+                XCopyArea(A->display, vis->visual.p_vis.map, A->map, localGC, 0, 0, vis->width, vis->height, vis->x_pos,
+                          vis->y_pos);
             break;
         case XfTextVisual:
-            XSetFont(A->display, localGC, vis->visual.t_vis.font->fid);
-            XSetForeground(A->display, localGC, vis->foreground);
-            XTextExtents(vis->visual.t_vis.font,
-                         vis->visual.t_vis.text, strlen(vis->visual.t_vis.text), &dir, &asc, &des, &xcs);
-            switch (vis->visual.t_vis.align) {
-            case 0:            /* Center */
-                dir = xcs.width / 2;
-                if (vis->width == 0)
-                    asc = vis->x_pos + A->width;
-                else
-                    asc = vis->x_pos + vis->width;
-                asc /= 2;
-                asc -= dir;
-                des = vis->y_pos + xcs.ascent;
-                break;
-            case 1:            /* Left justify */
-                asc = vis->x_pos;
-                des = vis->y_pos + xcs.ascent;
-                break;
-            case 2:            /* Right justify */
-                asc = vis->width;
-                if (asc == 0)
-                    asc = A->width;
-                asc -= xcs.width;
-                des = vis->y_pos + xcs.ascent;
-                break;
-            }
-            XDrawString(A->display, A->map, localGC, asc, des, vis->visual.t_vis.text, strlen(vis->visual.t_vis.text));
+            XfDrawTextVisual(A->display, A->map, localGC, A->width, A->height, vis, 0, 0);
             break;
         case XfOutlineVisual:
         case XfSolidVisual:
@@ -548,29 +520,33 @@ void defaultAMapCallback(AMap A, XEvent *E)
         XFillRectangle(A->display, A->map, localGC, (A->width - A->shade_right), 0, A->width, A->height);
         XSetFillStyle(A->display, localGC, FillSolid);
     }
+    XFreeGC(A->display, localGC);
     defaultAMapUpdateCallback(A, NULL);
 }
 
 void defaultAMapUpdateCallback(AMap A, XEvent *E)
 {
-    (void) E;
+    GC winGC;
+    (void)E;
     int front, end;
-    GC localGC;
 
-    localGC = DefaultGC(A->display, DefaultScreen(A->display));
-    XCopyArea(A->display, A->map, A->window, localGC, 0, 0, A->width, A->height, 0, 0);
-    XSetForeground(A->display, localGC, A->pen_color);
+    winGC = XCreateGC(A->display, A->window, 0, NULL);
+    if (winGC == NULL)
+        return;
+    XCopyArea(A->display, A->map, A->window, winGC, 0, 0, A->width, A->height, 0, 0);
+    XSetForeground(A->display, winGC, A->pen_color);
 
     front = 0;
     end = 1;
     while (front != ((A->width * 3) - 1)) {
         while (A->points[end].flag == 0)
             end++;
-        XDrawLine(A->display, A->window, localGC, (front - A->left_edge),
-                  (A->height - A->points[front].v - 1), (end - A->left_edge), (A->height - A->points[end].v - 1));
+        XDrawLine(A->display, A->window, winGC, (front - A->left_edge), (A->height - A->points[front].v - 1),
+                  (end - A->left_edge), (A->height - A->points[end].v - 1));
         front = end;
         end++;
     }
+    XFreeGC(A->display, winGC);
 }
 
 /*
@@ -582,8 +558,8 @@ int XfAMapAction(AMap A, XEvent *E)
     int d_left, d_right;
     int x, y;
     XEvent EE;
-    static int lo_x, hi_x;      /* For moving and adding */
-    static int anchor, old_edge;        /* For sliding */
+    static int lo_x, hi_x; /* For moving and adding */
+    static int anchor, old_edge; /* For sliding */
     static int cur_x;
     static int button_down;
 
@@ -594,13 +570,14 @@ int XfAMapAction(AMap A, XEvent *E)
 
     switch (E->type) {
     case Expose:
-        (*(A->exposeCallback)) (A, E);
+        (*(A->exposeCallback))(A, E);
         return (True);
         break;
     case ButtonPress:
         if (A->action_mode == XfAMapNoAction)
             return (False);
-        while (XCheckMaskEvent(A->display, ButtonMotionMask, &EE));
+        while (XCheckMaskEvent(A->display, ButtonMotionMask, &EE))
+            ;
         x = E->xbutton.x;
         y = E->xbutton.y;
         if (y >= A->height)
@@ -626,7 +603,7 @@ int XfAMapAction(AMap A, XEvent *E)
                 cur_x = d_right;
         }
         /*
-         * Set end points if necessary 
+         * Set end points if necessary
          */
         if ((A->action_mode == XfAMapAdd) || (A->action_mode == XfAMapMove) || (A->action_mode == XfAMapDel)) {
             if ((cur_x != 0) && (cur_x != (A->width - 1))) {
@@ -664,17 +641,18 @@ int XfAMapAction(AMap A, XEvent *E)
             A->points[A->left_edge + cur_x].v = A->height - y - 1;
             A->points[A->left_edge + cur_x].flag = 1;
         }
-        (*(A->updateCallback)) (A, E);
+        (*(A->updateCallback))(A, E);
         button_down = True;
         break;
     case MotionNotify:
         if ((A->action_mode == XfAMapDel) || (A->action_mode == XfAMapNoAction) || (!button_down))
             return (False);
 
-        while (XCheckMaskEvent(A->display, ButtonMotionMask, E));
+        while (XCheckMaskEvent(A->display, ButtonMotionMask, E))
+            ;
 
         if (A->readoutCallback != NULL) {
-            (*(A->readoutCallback)) (A, E);
+            (*(A->readoutCallback))(A, E);
         }
 
         x = E->xmotion.x;
@@ -688,7 +666,7 @@ int XfAMapAction(AMap A, XEvent *E)
         if (A->action_mode == XfAMapAdd || A->action_mode == XfAMapMove) {
             if (cur_x == 0 || cur_x == A->width - 1) {
                 A->points[A->left_edge + cur_x].v = A->height - y - 1;
-                (*(A->updateCallback)) (A, E);
+                (*(A->updateCallback))(A, E);
             } else {
                 A->points[A->left_edge + cur_x].flag = 0;
                 if (x <= lo_x)
@@ -699,7 +677,7 @@ int XfAMapAction(AMap A, XEvent *E)
                 A->points[A->left_edge + x].v = A->height - y - 1;
                 A->points[A->left_edge + x].flag = 1;
                 XfinterpolateAMap(A);
-                (*(A->updateCallback)) (A, E);
+                (*(A->updateCallback))(A, E);
                 cur_x = x;
             }
         } else if (A->action_mode == XfAMapSlide) {
@@ -709,7 +687,7 @@ int XfAMapAction(AMap A, XEvent *E)
             else if (d_left > A->max_left_edge)
                 d_left = A->max_left_edge;
             A->left_edge = d_left;
-            (*(A->updateCallback)) (A, E);
+            (*(A->updateCallback))(A, E);
         }
         break;
     case ButtonRelease:
@@ -727,7 +705,7 @@ int XfAMapAction(AMap A, XEvent *E)
         if (A->action_mode == XfAMapAdd || A->action_mode == XfAMapMove) {
             if (cur_x == 0 || cur_x == A->width - 1) {
                 A->points[A->left_edge + cur_x].v = A->height - y - 1;
-                (*(A->updateCallback)) (A, E);
+                (*(A->updateCallback))(A, E);
             } else {
                 A->points[A->left_edge + cur_x].flag = 0;
                 if (x <= lo_x)
@@ -738,7 +716,7 @@ int XfAMapAction(AMap A, XEvent *E)
                 A->points[A->left_edge + x].v = A->height - y - 1;
                 A->points[A->left_edge + x].flag = 1;
                 XfinterpolateAMap(A);
-                (*(A->updateCallback)) (A, E);
+                (*(A->updateCallback))(A, E);
                 cur_x = x;
 
                 lo_x = -1;
@@ -751,7 +729,7 @@ int XfAMapAction(AMap A, XEvent *E)
             else if (d_left > A->max_left_edge)
                 d_left = A->max_left_edge;
             A->left_edge = d_left;
-            (*(A->updateCallback)) (A, E);
+            (*(A->updateCallback))(A, E);
             old_edge = 0;
             anchor = 0;
         }
@@ -765,7 +743,7 @@ int XfAMapAction(AMap A, XEvent *E)
         struct CallBackList *next_exec = execs->next;
 
         if (execs->proc != NULL)
-            (*(execs->proc)) (A, E);
+            (*(execs->proc))(A, E);
         execs = next_exec;
     }
     return (True);
@@ -820,7 +798,7 @@ int XfCenterAMap(AMap A)
     if (A->left_edge == A->width)
         return (True);
 
-    data = (struct Point *) calloc(A->width, sizeof(struct Point));
+    data = (struct Point *)calloc(A->width, sizeof(struct Point));
     if (data == NULL)
         return (False);
     for (i = 0; i < A->width; i++)
@@ -847,7 +825,7 @@ struct Point *XfPhotographAMap(AMap A)
     if (A == NULL)
         return (NULL);
 
-    new = (struct Point *) calloc(A->width, sizeof(struct Point));
+    new = (struct Point *)calloc(A->width, sizeof(struct Point));
     if (new == NULL)
         return (NULL);
 
@@ -876,7 +854,7 @@ int XfRestoreAMap(AMap A, struct Point *data)
         A->points[A->left_edge + i].v = data[i].v;
         A->points[A->left_edge + i].flag = data[i].flag;
     }
-    (*(A->updateCallback)) (A, NULL);
+    (*(A->updateCallback))(A, NULL);
 
     return (True);
 }

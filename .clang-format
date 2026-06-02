@@ -1,0 +1,20 @@
+# PicWorks / pw64: 4 spaces, 120 columns, spaces not tabs.
+# Function braces on the next line; control-statement braces stay attached (K&R-ish).
+BasedOnStyle: LLVM
+IndentWidth: 4
+UseTab: Never
+ColumnLimit: 120
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterStruct: false
+  AfterUnion: false
+  BeforeElse: false
+  BeforeCatch: false
+ReflowComments: true
+AlignTrailingComments: false
+SpacesInParentheses: false
+# Legacy sources rely on include order; do not reorder #includes.
+SortIncludes: false

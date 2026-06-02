@@ -7,4 +7,3 @@
 
 /* define the following to use the built-in specpr reader */
 #undef INTERNAL_SP
-

@@ -1,9 +1,11 @@
 struct roseplot {
     int x, y;
-    int width,height;
-    int nseg;               /* how many segments, currently? */
-    float radial_offset;    /* whats our offset from zero? */
+    int width, height;
+    int nseg; /* how many segments, currently? */
+    float radial_offset; /* whats our offset from zero? */
     Pixmap pixmap;
+    GC pm_gc;
+    GC win_gc;
     Button B;
     Button *Switches;
     Button Segs;

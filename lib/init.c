@@ -1,7 +1,7 @@
-#include	<stdio.h>
-#include	<X11/Xos.h>
-#include	<X11/Xlib.h>
-#include	<X11/Xutil.h>
+#include <stdio.h>
+#include <X11/Xos.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
 
 Display *_xfDisplay;
 int _xfScreen;
@@ -9,7 +9,7 @@ int _xfDepth;
 GC _xfgc;
 XFontStruct _xfFontStruct;
 
-extern void XfSetDefaultFont(Display * display, XFontStruct * fs);
+extern void XfSetDefaultFont(Display *display, XFontStruct *fs);
 
 int initx(char *name, Display **d, int *s, int *dpth, GC *gcptr)
 {
@@ -26,7 +26,7 @@ int initx(char *name, Display **d, int *s, int *dpth, GC *gcptr)
 
     screen = DefaultScreen(display);
     depth = DefaultDepth(display, screen);
-    gc = XCreateGC(display, RootWindow(display, screen), (unsigned long) 0, NULL);
+    gc = XCreateGC(display, RootWindow(display, screen), (unsigned long)0, NULL);
     if (gc == NULL) {
         fprintf(stderr, "Could not create graphics context.\n");
         return (0);
@@ -40,9 +40,9 @@ int initx(char *name, Display **d, int *s, int *dpth, GC *gcptr)
     if (gcptr != NULL)
         *gcptr = gc;
 
-        /**
-	*** Set default values for these
-	**/
+    /**
+    *** Set default values for these
+    **/
 
     _xfDisplay = display;
     _xfScreen = screen;

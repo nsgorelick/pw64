@@ -8,12 +8,12 @@ struct pixel_entry {
 
 struct table_entry {
     unsigned char r;
-	unsigned char g;
-	unsigned char b;
+    unsigned char g;
+    unsigned char b;
     unsigned int color;
     int count;
     struct pixel_entry head;
     struct pixel_entry *last;
 };
 
-#endif 
+#endif

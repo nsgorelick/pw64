@@ -28,9 +28,9 @@ int sort_dirs(char *buf)
     char *p;
     char str[256];
 
-/* append and remove the necessary /'s */
+    /* append and remove the necessary /'s */
 
-/* if doesn't start with "/", put . as directory */
+    /* if doesn't start with "/", put . as directory */
 
     if (buf[0] != '/') {
         snprintf(str, CHD_PATH_MAX, "./%s", buf);
@@ -38,7 +38,7 @@ int sort_dirs(char *buf)
         XF_STRNCPY(str, buf);
     }
 
-/* remove trailing filename (assuming there is one) */
+    /* remove trailing filename (assuming there is one) */
 
     p = strrchr(str, '/');
     if (p)
@@ -46,19 +46,19 @@ int sort_dirs(char *buf)
     if (str[0] == '\0')
         XF_STRNCPY(str, "/");
 
-/* Make sure path to here is valid */
+    /* Make sure path to here is valid */
 
     cwd = opendir(str);
     if (cwd == NULL) {
-                /**
-		 ** no such directory.  Try moving up 1 directory, to look for error 
-		 **/
+        /**
+         ** no such directory.  Try moving up 1 directory, to look for error
+         **/
         XF_STRNCPY(buf, str);
         return (sort_dirs(buf));
     }
     closedir(cwd);
 
-/* read directory, save a list of directory entires. */
+    /* read directory, save a list of directory entires. */
 
     dn = get_sorted_dir(str, &dirs);
     return (strlen(str));
@@ -77,7 +77,7 @@ int get_sorted_dir(char *path, char ***ds)
     if (cwd == NULL)
         return (-1);
 
-    dirs = (char **) malloc(size * sizeof(char *));
+    dirs = (char **)malloc(size * sizeof(char *));
 
     while ((dent = readdir(cwd)) != NULL) {
         if (!strcmp(dent->d_name, ".."))
@@ -87,20 +87,21 @@ int get_sorted_dir(char *path, char ***ds)
 
         if (dn >= size - 2) {
             size *= 2;
-            dirs = (char **) realloc(dirs, size * sizeof(char *));
+            dirs = (char **)realloc(dirs, size * sizeof(char *));
         }
         /* Insert directory name in sorted list */
 
-        for (i = 0; i < dn && strcmp(dent->d_name, dirs[i]) > 0; i++);
+        for (i = 0; i < dn && strcmp(dent->d_name, dirs[i]) > 0; i++)
+            ;
         for (j = dn; j >= i; j--)
             dirs[j + 1] = dirs[j];
-        dirs[i] = (char *) malloc(strlen(dent->d_name) + 1);
+        dirs[i] = (char *)malloc(strlen(dent->d_name) + 1);
         strcpy(dirs[i], dent->d_name);
         dn++;
     }
     closedir(cwd);
 
-    dirs = (char **) realloc(dirs, dn * sizeof(char *));
+    dirs = (char **)realloc(dirs, dn * sizeof(char *));
     *ds = dirs;
     return (dn);
 }
@@ -120,7 +121,7 @@ int complete_match(char *str)
 
     last = dn - 1;
     first = 0;
-    for (i = 1; i <= (int) strlen(dir); i++) {
+    for (i = 1; i <= (int)strlen(dir); i++) {
         while ((first < last) && (strncmp(dir, dirs[first], i) > 0)) {
             first++;
         }
@@ -135,7 +136,7 @@ int complete_match(char *str)
             return (-1);
         } else {
             i = 0;
-            while ((i < (int) strlen(dir)) && (dir[i] == dirs[first][i]))
+            while ((i < (int)strlen(dir)) && (dir[i] == dirs[first][i]))
                 i++;
             return (dir - str + i);
         }
@@ -169,9 +170,9 @@ int complete_dir(char *str)
 
 /*
 
-	i = complete_dir(buf);
-	i = -1, good
-	i >= 0, beep.
-	i > 0, locate to that point 
+        i = complete_dir(buf);
+        i = -1, good
+        i >= 0, beep.
+        i > 0, locate to that point
 
 */

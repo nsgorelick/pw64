@@ -15,7 +15,7 @@
 Slider SliderList = NULL;
 
 /* Forward declaration of callback default */
-void displaySlider(Slider S);
+void displaySlider(Slider S, GC localGC);
 
 /*
  * Destroy the passed slider
@@ -38,10 +38,9 @@ int XfDestroySlider(Slider S)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(S->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -51,10 +50,9 @@ int XfDestroySlider(Slider S)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(S->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -73,10 +71,9 @@ int XfDestroySlider(Slider S)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(S->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -86,10 +83,9 @@ int XfDestroySlider(Slider S)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(S->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -125,7 +121,7 @@ Slider XfGetSlider(char *name)
  * the slider bar or thumb, based on flag.
  */
 int XfAddSliderVisual(Slider S, struct VisualInfo *vis, int flag)
-                         /* 0 for bar, 1 for thumb */
+/* 0 for bar, 1 for thumb */
 {
     struct VisualInfo *loop;
 
@@ -196,12 +192,12 @@ Slider XfEventSlider(XEvent *E)
     return (NULL);
 }
 
-/* 
+/*
  * Add a callback to the list for the slider specified. Return
  * an error for any of the many things that could go wrong.
  */
 int XfAddSliderCallback(Slider S, CallBack new, CallBack old)
-           /* The slider */
+/* The slider */
 {
     struct CallBackList *new_ptr;
     struct CallBackList *loop;
@@ -210,7 +206,7 @@ int XfAddSliderCallback(Slider S, CallBack new, CallBack old)
     if (S == NULL)
         return (False);
 
-    new_ptr = (struct CallBackList *) calloc(1, sizeof(struct CallBackList));
+    new_ptr = (struct CallBackList *)calloc(1, sizeof(struct CallBackList));
     if (new_ptr == NULL)
         return (False);
     new_ptr->proc = new;
@@ -273,7 +269,7 @@ int XfDelSliderCallback(Slider S, CallBack cb)
         loop = loopn;
         loopn = loop->next;
     }
-    return (False);             /* Callback was not found */
+    return (False); /* Callback was not found */
 }
 
 /*
@@ -288,7 +284,7 @@ int XfDeactivateSlider(Slider S)
     return (True);
 }
 
-/* 
+/*
  * Map the slider's window, set it's event mask, and mark it active.
  */
 int XfActivateSliderValue(Slider S, float value, long unsigned int mask)
@@ -318,7 +314,7 @@ Slider XfCreateSlider(Display *display, Window parent, int x, int y, int width, 
     Slider new;
     Slider search;
 
-    new = (Slider) calloc(1, sizeof(struct _Slider));
+    new = (Slider)calloc(1, sizeof(struct _Slider));
     if (new == NULL)
         return (NULL);
 
@@ -338,10 +334,11 @@ Slider XfCreateSlider(Display *display, Window parent, int x, int y, int width, 
     new->orientation = orientation;
     new->thumb_width = thumb_width;
     new->thumb_height = (thumb_height <= 0 ? 1 : thumb_height);
-    new->bar = (struct VisualInfo *) NULL;
-    new->thumb = (struct VisualInfo *) NULL;
-    new->CallBacks = (struct CallBackList *) NULL;
-    new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color, 0);
+    new->bar = (struct VisualInfo *)NULL;
+    new->thumb = (struct VisualInfo *)NULL;
+    new->CallBacks = (struct CallBackList *)NULL;
+    new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color,
+                                      XfDefaultWidgetBackground(display));
     new->exposeCallback = XF_CALLBACK(defaultSliderCallback);
     new->updateCallback = XF_CALLBACK(defaultSliderUpdateCallback);
     new->active = False;
@@ -392,12 +389,14 @@ int XfSliderResponse(Slider S, XEvent *E)
 
     switch (E->type) {
     case Expose:
-        while (XCheckTypedWindowEvent(S->display, S->window, Expose, &EE));
-        (*(S->exposeCallback)) (S, E);
+        while (XCheckTypedWindowEvent(S->display, S->window, Expose, &EE))
+            ;
+        (*(S->exposeCallback))(S, E);
         return (True);
         break;
     case ButtonPress:
-        while (XCheckMaskEvent(S->display, ButtonPressMask, &EE));
+        while (XCheckMaskEvent(S->display, ButtonPressMask, &EE))
+            ;
         if (E->xbutton.button == Button3) {
             /* Move slider towards max by delta value */
             cur_value += S->delta * (S->max > S->min ? 1.0 : -1.0);
@@ -408,16 +407,16 @@ int XfSliderResponse(Slider S, XEvent *E)
             cur_value -= S->delta * (S->max > S->min ? 1.0 : -1.0);
             if (((cur_value < S->min) && (S->min < S->max)) || ((cur_value > S->min) && (S->min > S->max)))
                 cur_value = S->min;
-        } else {                /* Button1 */
-            point = ((S->orientation == XfSliderUpDown) ?
-                     (E->xbutton.y - (S->thumb_height / 2)) : (E->xbutton.x - (S->thumb_width / 2)));
+        } else { /* Button1 */
+            point = ((S->orientation == XfSliderUpDown) ? (E->xbutton.y - (S->thumb_height / 2))
+                                                        : (E->xbutton.x - (S->thumb_width / 2)));
             point -= S->thumb_min_pixel;
             if (point < 0)
                 point = 0;
             if (S->thumb_max_pixel - S->thumb_min_pixel == 0)
                 cur_value = 0;
             else {
-                cur_value = (float) point / (float) (S->thumb_max_pixel - S->thumb_min_pixel);
+                cur_value = (float)point / (float)(S->thumb_max_pixel - S->thumb_min_pixel);
                 if (cur_value < 0.0)
                     cur_value = 0.0;
                 else if (cur_value > 1.0)
@@ -433,14 +432,15 @@ int XfSliderResponse(Slider S, XEvent *E)
             else {
                 cur_value = XfGetSliderValue(S);
                 cur_value /= S->delta;
-                cur_value = (float) floor((double) cur_value);
+                cur_value = (float)floor((double)cur_value);
                 cur_value *= S->delta;
             }
         }
         break;
     case MotionNotify:
         if (E->xmotion.state & Button1Mask) {
-            while (XCheckMaskEvent(S->display, ButtonMotionMask, E));
+            while (XCheckMaskEvent(S->display, ButtonMotionMask, E))
+                ;
             x = E->xmotion.x - (S->thumb_width / 2);
             y = E->xmotion.y - (S->thumb_height / 2);
             point = ((S->orientation == XfSliderUpDown) ? y : x);
@@ -451,7 +451,7 @@ int XfSliderResponse(Slider S, XEvent *E)
                 if (S->thumb_max_pixel - S->thumb_min_pixel == 0)
                     cur_value = 0;
                 else {
-                    cur_value = (float) point / (float) (S->thumb_max_pixel - S->thumb_min_pixel);
+                    cur_value = (float)point / (float)(S->thumb_max_pixel - S->thumb_min_pixel);
                     if (cur_value < 0.0)
                         cur_value = 0.0;
                     else if (cur_value > 1.0)
@@ -468,7 +468,7 @@ int XfSliderResponse(Slider S, XEvent *E)
             else {
                 cur_value = XfGetSliderValue(S);
                 cur_value /= S->delta;
-                cur_value = (float) floor((double) cur_value);
+                cur_value = (float)floor((double)cur_value);
                 cur_value *= S->delta;
             }
         }
@@ -481,12 +481,12 @@ int XfSliderResponse(Slider S, XEvent *E)
     else
         cur_value = (cur_value - S->min) / (S->max - S->min);
     S->value = cur_value;
-    (*(S->updateCallback)) (S, E);
+    (*(S->updateCallback))(S, E);
     while (execs != NULL) {
         struct CallBackList *next_exec = execs->next;
 
         if (execs->proc != NULL)
-            (*(execs->proc)) (S, E);
+            (*(execs->proc))(S, E);
         execs = next_exec;
     }
     return (True);
@@ -497,19 +497,21 @@ int XfSliderResponse(Slider S, XEvent *E)
  */
 void defaultSliderCallback(Slider S, XEvent *E)
 {
-    struct VisualInfo *vis;     /* For traversing linked lists */
-    GC localGC;                 /* Inherited from parent */
-    unsigned long bg;           /* Color for filling bar initially */
-    float value;                /* Used to extract value from S */
+    struct VisualInfo *vis; /* For traversing linked lists */
+    GC localGC; /* Inherited from parent */
+    unsigned long bg; /* Color for filling bar initially */
+    float value; /* Used to extract value from S */
 
-    (void) E;
+    (void)E;
 
     /* First, update S->thumb_cur_pixel */
     value = S->value;
     if (S->orientation == XfSliderUpDown)
         value = 1.0 - value;
     S->thumb_cur_pixel = (S->thumb_min_pixel + (value * (S->thumb_max_pixel - S->thumb_min_pixel)));
-    localGC = DefaultGC(S->display, DefaultScreen(S->display));
+    localGC = XCreateGC(S->display, S->window, 0, NULL);
+    if (localGC == NULL)
+        return;
     vis = S->bar;
     if (vis != NULL)
         bg = vis->background;
@@ -518,7 +520,8 @@ void defaultSliderCallback(Slider S, XEvent *E)
     XSetForeground(S->display, localGC, bg);
     XFillRectangle(S->display, S->window, localGC, 0, 0, S->width, S->height);
 
-    displaySlider(S);
+    displaySlider(S, localGC);
+    XFreeGC(S->display, localGC);
 }
 
 /*
@@ -530,21 +533,19 @@ void defaultSliderUpdateCallback(Slider S, XEvent *E)
      * Full redraw on drag: the old partial thumb erase left black
      * streaks when the GC fill style was still stippled from the bar.
      */
-    (void) E;
+    (void)E;
     defaultSliderCallback(S, E);
 }
 
 /* Since so much code was common... */
-void displaySlider(Slider S)
+void displaySlider(Slider S, GC localGC)
 {
     int x_off, y_off;
     struct VisualInfo *vis;
     int i;
-    GC localGC;                 /* Inherited from parent */
-    XCharStruct xcs;            /* Character structure for XQueryTextExtents */
-    int dir, asc, des;          /* Used in calls to XQueryTextExtents */
 
-    localGC = DefaultGC(S->display, DefaultScreen(S->display));
+    if (localGC == NULL)
+        return;
     vis = S->bar;
     x_off = 0;
     y_off = 0;
@@ -563,60 +564,31 @@ void displaySlider(Slider S)
         while (vis != NULL) {
             switch (vis->vtype) {
             case XfXImageVisual:
-                XPutImage(S->display, S->window, localGC,
-                          vis->visual.i_vis, 0, 0, (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                XPutImage(S->display, S->window, localGC, vis->visual.i_vis, 0, 0, (vis->x_pos + x_off),
+                          (vis->y_pos + y_off), vis->width, vis->height);
                 break;
             case XfPixmapVisual:
                 XSetForeground(S->display, localGC, vis->foreground);
                 XSetBackground(S->display, localGC, vis->background);
                 if (vis->visual.p_vis.depth == 1)
-                    XCopyPlane(S->display, vis->visual.p_vis.map,
-                               S->window, localGC, 0, 0,
-                               vis->width, vis->height, (vis->x_pos + x_off), (vis->y_pos + y_off), 1);
+                    XCopyPlane(S->display, vis->visual.p_vis.map, S->window, localGC, 0, 0, vis->width, vis->height,
+                               (vis->x_pos + x_off), (vis->y_pos + y_off), 1);
                 else
-                    XCopyArea(S->display, vis->visual.p_vis.map,
-                              S->window, localGC, 0, 0, vis->width,
-                              vis->height, (vis->x_pos + x_off), (vis->y_pos + y_off));
+                    XCopyArea(S->display, vis->visual.p_vis.map, S->window, localGC, 0, 0, vis->width, vis->height,
+                              (vis->x_pos + x_off), (vis->y_pos + y_off));
                 break;
             case XfTextVisual:
-                XSetFont(S->display, localGC, vis->visual.t_vis.font->fid);
-                XSetForeground(S->display, localGC, vis->foreground);
-                XTextExtents(vis->visual.t_vis.font,
-                             vis->visual.t_vis.text, strlen(vis->visual.t_vis.text), &dir, &asc, &des, &xcs);
-                switch (vis->visual.t_vis.align) {
-                case 0:        /* Center */
-                    dir = xcs.width / 2;
-                    if (vis->width == 0)
-                        asc = (vis->x_pos + x_off) + S->width / 2;
-                    else
-                        asc = (vis->x_pos + x_off) + vis->width / 2;
-                    asc -= dir;
-                    des = (vis->y_pos + y_off) + xcs.ascent;
-                    break;
-                case 1:        /* Left justify */
-                    asc = (vis->x_pos + x_off);
-                    des = (vis->y_pos + y_off) + xcs.ascent;
-                    break;
-                case 2:        /* Right justify */
-                    asc = vis->width;
-                    if (asc == 0)
-                        asc = S->width;
-                    asc -= xcs.width;
-                    des = (vis->y_pos + y_off) + xcs.ascent;
-                    break;
-                }
-                XDrawString(S->display, S->window, localGC, asc,
-                            des, vis->visual.t_vis.text, strlen(vis->visual.t_vis.text));
+                XfDrawTextVisual(S->display, S->window, localGC, S->width, S->height, vis, x_off, y_off);
                 break;
             case XfOutlineVisual:
             case XfSolidVisual:
                 XSetForeground(S->display, localGC, vis->foreground);
                 if (vis->vtype == XfSolidVisual)
-                    XFillRectangle(S->display, S->window, localGC,
-                                   (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                    XFillRectangle(S->display, S->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off),
+                                   vis->width, vis->height);
                 else
-                    XDrawRectangle(S->display, S->window, localGC,
-                                   (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                    XDrawRectangle(S->display, S->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off),
+                                   vis->width, vis->height);
                 break;
             case XfStippledVisual:
             case XfOpaqueStippledVisual:
@@ -625,25 +597,21 @@ void displaySlider(Slider S)
                 XSetStipple(S->display, localGC, vis->visual.p_vis.map);
                 XSetFillStyle(S->display, localGC,
                               ((vis->vtype == XfStippledVisual) ? FillStippled : FillOpaqueStippled));
-                XFillRectangle(S->display, S->window, localGC,
-                               (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                XFillRectangle(S->display, S->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width,
+                               vis->height);
                 XSetFillStyle(S->display, localGC, FillSolid);
                 break;
             case XfTiledVisual:
                 XSetTile(S->display, localGC, vis->visual.p_vis.map);
                 XSetFillStyle(S->display, localGC, FillTiled);
-                XFillRectangle(S->display, S->window, localGC,
-                               (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                XFillRectangle(S->display, S->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width,
+                               vis->height);
                 XSetFillStyle(S->display, localGC, FillSolid);
                 break;
             case XfHersheyVisual:
                 XSetForeground(S->display, localGC, vis->foreground);
-                XfHersheyString(S->display, S->window, localGC,
-                                (vis->x_pos + x_off),
-                                (vis->y_pos + y_off),
-                                vis->visual.h_vis.scale,
-                                vis->visual.h_vis.scale,
-                                vis->visual.h_vis.angle,
+                XfHersheyString(S->display, S->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off),
+                                vis->visual.h_vis.scale, vis->visual.h_vis.scale, vis->visual.h_vis.angle,
                                 vis->visual.h_vis.text, vis->visual.h_vis.cset, vis->visual.h_vis.align);
                 break;
             }
@@ -667,7 +635,7 @@ int XfSetSliderValue(Slider S, float v)
     else
         S->value = v;
 
-    (*(S->updateCallback)) (S, NULL);
+    (*(S->updateCallback))(S, NULL);
     return (True);
 }
 

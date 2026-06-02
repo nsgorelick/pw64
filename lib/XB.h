@@ -1,20 +1,20 @@
 #ifndef _XB_H_
 #define _XB_H_
 
-#define XF_XB   0
-#define XF_PB   1
-#define XF_RB   2
-#define XF_CB   3
-#define XF_MB   4
-#define XF_LB   5
+#define XF_XB 0
+#define XF_PB 1
+#define XF_RB 2
+#define XF_CB 3
+#define XF_MB 4
+#define XF_LB 5
 
-                                                                /* typedef struct tagCB 		*MButton;	*//* MenuButton */
-typedef struct tagAnyButton *AButton;   /* AnyButton */
-typedef struct tagPB *PButton;  /* PushButton */
-typedef struct tagRB *RButton;  /* RadioButton */
-typedef struct tagCB *CButton;  /* CheckButton */
-typedef struct tagMB *MButton;  /* Menu Button */
-typedef struct tagLB *LButton;  /* Label Button */
+/* typedef struct tagCB 		*MButton;	*/ /* MenuButton */
+typedef struct tagAnyButton *AButton; /* AnyButton */
+typedef struct tagPB *PButton; /* PushButton */
+typedef struct tagRB *RButton; /* RadioButton */
+typedef struct tagCB *CButton; /* CheckButton */
+typedef struct tagMB *MButton; /* Menu Button */
+typedef struct tagLB *LButton; /* Label Button */
 typedef union _XButton *XButton;
 
 typedef struct tagMenuItem MenuItem;
@@ -57,58 +57,58 @@ union _XButton {
 
 extern XButton XBList;
 
-#define DEFCOLORS			-1,-1,-1,-1
-#define XV_COLORS			XV_HI, XV_LO, XV_FG, XV_BG
+#define DEFCOLORS -1, -1, -1, -1
+#define XV_COLORS XV_HI, XV_LO, XV_FG, XV_BG
 
-#define XV_HI				XfColor(NULL, "#C6D5E2")
-#define XV_LO				XfColor(NULL, "#8B99B5")
-#define XV_FG 				XfColor(NULL, "#000000")
-#define XV_BG				XfColor(NULL, "#B2C0DC")
+#define XV_HI XfColor(NULL, "#C6D5E2")
+#define XV_LO XfColor(NULL, "#8B99B5")
+#define XV_FG XfColor(NULL, "#000000")
+#define XV_BG XfColor(NULL, "#B2C0DC")
 
-#define CENTER	0
-#define LEFT	1
-#define RIGHT	-1
+#define CENTER 0
+#define LEFT 1
+#define RIGHT -1
 
-#define CENTERTEXT(str)		str, 0, XfFont(NULL,NULL)
-#define LEFTTEXT(str)		str, 1, XfFont(NULL,NULL)
-#define RIGHTTEXT(str)		str,-1, XfFont(NULL,NULL)
-#define NOTEXT				NULL, 0, NULL
+#define CENTERTEXT(str) str, 0, XfFont(NULL, NULL)
+#define LEFTTEXT(str) str, 1, XfFont(NULL, NULL)
+#define RIGHTTEXT(str) str, -1, XfFont(NULL, NULL)
+#define NOTEXT NULL, 0, NULL
 
-#define XfResizeXB(XB, w, h)    XfPosXB(XB, MAXINT, MAXINT, w, h)
-#define XfMoveXB(XB, x, y)      XfPosXB(XB, x, y, MAXINT, MAXINT)
+#define XfResizeXB(XB, w, h) XfPosXB(XB, MAXINT, MAXINT, w, h)
+#define XfMoveXB(XB, x, y) XfPosXB(XB, x, y, MAXINT, MAXINT)
 
-#define XB_CALLBACK(proc)   void proc(XB_ARGS)
-#define XB_ARGS             XButton __xB, XEvent *__xE
+#define XB_CALLBACK(proc) void proc(XB_ARGS)
+#define XB_ARGS XButton __xB, XEvent *__xE
 
 int XfActivateXB(XButton, int);
 void XfDeactivateXB(XButton);
-int XfPushXB(XButton, XEvent * E);
-XButton XfEventXB(XEvent * E);
+int XfPushXB(XButton, XEvent *E);
+XButton XfEventXB(XEvent *E);
 void XfPosXB(XButton, int, int, int, int);
 void XfDestroyXB(XButton);
 XButton XfCreateXB(Display *, Window, int, int, int, int, int, int, int, int, CallBack, int);
 void RedrawXB(XButton);
 
-#define XfGetCallbackItem()		(__xB)
-#define XfGetCallbackEvent()	(__xE)
+#define XfGetCallbackItem() (__xB)
+#define XfGetCallbackEvent() (__xE)
 
-#define XfActivatePB(PB, i)	XfActivateXB((XButton)PB, i)
-#define XfDeactivatePB(PB)	XfDeactivateXB((XButton)PB)
-#define XfDestroyPB(PB)		XfDestroyXB((XButton)PB)
+#define XfActivatePB(PB, i) XfActivateXB((XButton)PB, i)
+#define XfDeactivatePB(PB) XfDeactivateXB((XButton)PB)
+#define XfDestroyPB(PB) XfDestroyXB((XButton)PB)
 
-#define XfActivateRB(RB, i)	XfActivateXB((XButton)RB, i)
-#define XfDeactivateRB(RB)	XfDeactivateRB((XButton)RB)
+#define XfActivateRB(RB, i) XfActivateXB((XButton)RB, i)
+#define XfDeactivateRB(RB) XfDeactivateRB((XButton)RB)
 
-#define XfActivateCB(CB, i)	XfActivateXB((XButton)CB, i)
-#define XfDeactivateCB(CB)	XfDeactivateXB((XButton)CB)
-#define XfDestroyCB(CB)		XfDestroyXB((XButton)CB)
+#define XfActivateCB(CB, i) XfActivateXB((XButton)CB, i)
+#define XfDeactivateCB(CB) XfDeactivateXB((XButton)CB)
+#define XfDestroyCB(CB) XfDestroyXB((XButton)CB)
 
-#define XfActivateMB(MB, i)	XfActivateXB((XButton)MB, i)
-#define XfDeactivateMB(MB)	XfDeactivateXB((XButton)MB)
-#define XfDestroyMB(MB)		XfDestroyXB((XButton)MB)
+#define XfActivateMB(MB, i) XfActivateXB((XButton)MB, i)
+#define XfDeactivateMB(MB) XfDeactivateXB((XButton)MB)
+#define XfDestroyMB(MB) XfDestroyXB((XButton)MB)
 
-#define XfActivateLB(LB, i)	XfActivateXB((XButton)LB, i)
-#define XfDeactivateLB(LB)	XfDeactivateXB((XButton)LB)
-#define XfDestroyLB(LB)		XfDestroyXB((XButton)LB)
+#define XfActivateLB(LB, i) XfActivateXB((XButton)LB, i)
+#define XfDeactivateLB(LB) XfDeactivateXB((XButton)LB)
+#define XfDestroyLB(LB) XfDestroyXB((XButton)LB)
 
-#endif                          /* _XB_H_ */
+#endif /* _XB_H_ */

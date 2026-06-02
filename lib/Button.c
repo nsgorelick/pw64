@@ -27,9 +27,10 @@ int XfButtonPush(Button B, XEvent *E)
         return (False);
     switch (E->type) {
     case Expose:
-        while (XCheckTypedWindowEvent(B->display, B->window, Expose, &Ev));
+        while (XCheckTypedWindowEvent(B->display, B->window, Expose, &Ev))
+            ;
         if (!B->noAutoExpose) {
-            (*(B->exposeCallback)) (B, E);
+            (*(B->exposeCallback))(B, E);
             break;
         }
         /* else drop through */
@@ -39,7 +40,7 @@ int XfButtonPush(Button B, XEvent *E)
             struct CallBackList *next_exec = execs->next;
 
             if (execs->proc != NULL)
-                (*(execs->proc)) (B, E);
+                (*(execs->proc))(B, E);
             execs = next_exec;
         }
         break;
@@ -90,10 +91,9 @@ int XfDestroyButton(Button B)
             while (nn != NULL) {
                 mm = nn->next;
                 if (nn->vtype == XfXImageVisual)
-                    XFree((char *) nn->visual.i_vis);
-                if ((nn->vtype == XfPixmapVisual) ||
-                    (nn->vtype == XfTiledVisual) ||
-                    (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                    XFree((char *)nn->visual.i_vis);
+                if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                    (nn->vtype == XfOpaqueStippledVisual))
                     XFreePixmap(B->display, nn->visual.p_vis.map);
                 free(nn);
                 nn = mm;
@@ -116,10 +116,9 @@ int XfDestroyButton(Button B)
             while (nn != NULL) {
                 mm = nn->next;
                 if (nn->vtype == XfXImageVisual)
-                    XFree((char *) nn->visual.i_vis);
-                if ((nn->vtype == XfPixmapVisual) ||
-                    (nn->vtype == XfTiledVisual) ||
-                    (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                    XFree((char *)nn->visual.i_vis);
+                if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                    (nn->vtype == XfOpaqueStippledVisual))
                     XFreePixmap(B->display, nn->visual.p_vis.map);
                 free(nn);
                 nn = mm;
@@ -133,13 +132,13 @@ int XfDestroyButton(Button B)
     return (True);
 }
 
-/* 
+/*
  * Add a callback to the list for the state & button specified. Return
  * an error for any of the many things that could go wrong.
  */
 int XfAddButtonCallback(Button B, int st, CallBack new, CallBack old)
-                /* The button */
-                /* The state */
+/* The button */
+/* The state */
 {
     struct CallBackList *new_ptr;
     struct CallBackList *loop;
@@ -148,7 +147,7 @@ int XfAddButtonCallback(Button B, int st, CallBack new, CallBack old)
     if ((B == NULL) || (st >= B->maxstate))
         return (False);
 
-    new_ptr = (struct CallBackList *) malloc(sizeof(struct CallBackList));
+    new_ptr = (struct CallBackList *)malloc(sizeof(struct CallBackList));
     if (new_ptr == NULL)
         return (False);
     new_ptr->proc = new;
@@ -212,7 +211,7 @@ int XfDelButtonCallback(Button B, int st, CallBack cb)
         loop = loopn;
         loopn = loop->next;
     }
-    return (False);             /* Callback was not found */
+    return (False); /* Callback was not found */
 }
 
 /*
@@ -261,12 +260,12 @@ Button XfCreateButton(Display *display, Window parent, int x, int y, int width, 
      *
      * What does regret mean?
      *
-     * Well, son, regret is a funny thing. Sometimes we regret things we 
+     * Well, son, regret is a funny thing. Sometimes we regret things we
      * haven't done more than the things we have done. Oh, and when you
      * see your mother, tell her SATAN SATAN SATAN!!!
      *
      */
-    new = (Button) calloc(1, sizeof(struct _Button));
+    new = (Button)calloc(1, sizeof(struct _Button));
     if (new == NULL)
         return (NULL);
 
@@ -281,22 +280,23 @@ Button XfCreateButton(Display *display, Window parent, int x, int y, int width, 
     XF_STRNCPY(new->name, name);
     new->maxstate = num_states;
     new->state = 0;
-    new->States = (struct ButtonState **) calloc(num_states, sizeof(struct ButtonState *));
+    new->States = (struct ButtonState **)calloc(num_states, sizeof(struct ButtonState *));
     if (new->States == NULL) {
         free(new);
         return (NULL);
     } else
         for (i = 0; i < new->maxstate; i++) {
-            new->States[i] = (struct ButtonState *) calloc(1, sizeof(struct ButtonState));
+            new->States[i] = (struct ButtonState *)calloc(1, sizeof(struct ButtonState));
             if (new->States[i] == NULL) {
                 free(new);
                 return (NULL);
             } else {
-                (new->States[i])->CallBacks = (struct CallBackList *) NULL;
-                (new->States[i])->Visuals = (struct VisualInfo *) NULL;
+                (new->States[i])->CallBacks = (struct CallBackList *)NULL;
+                (new->States[i])->Visuals = (struct VisualInfo *)NULL;
             }
         }
-    new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color, 0);
+    new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color,
+                                      XfDefaultWidgetBackground(display));
     XStoreName(display, new->window, name);
     new->exposeCallback = XF_CALLBACK(defaultButtonCallback);
     new->updateCallback = XF_CALLBACK(defaultButtonCallback);
@@ -334,12 +334,12 @@ Button XFCreateButton(Display *display, Window parent, int x, int y, int width, 
      *
      * What does regret mean?
      *
-     * Well, son, regret is a funny thing. Sometimes we regret things we 
+     * Well, son, regret is a funny thing. Sometimes we regret things we
      * haven't done more than the things we have done. Oh, and when you
      * see your mother, tell her SATAN SATAN SATAN!!!
      *
      */
-    new = (Button) calloc(1, sizeof(struct _Button));
+    new = (Button)calloc(1, sizeof(struct _Button));
     if (new == NULL)
         return (NULL);
 
@@ -354,19 +354,19 @@ Button XFCreateButton(Display *display, Window parent, int x, int y, int width, 
     XF_STRNCPY(new->name, name);
     new->maxstate = num_states;
     new->state = 0;
-    new->States = (struct ButtonState **) calloc(num_states, sizeof(struct ButtonState *));
+    new->States = (struct ButtonState **)calloc(num_states, sizeof(struct ButtonState *));
     if (new->States == NULL) {
         free(new);
         return (NULL);
     } else
         for (i = 0; i < new->maxstate; i++) {
-            new->States[i] = (struct ButtonState *) calloc(1, sizeof(struct ButtonState));
+            new->States[i] = (struct ButtonState *)calloc(1, sizeof(struct ButtonState));
             if (new->States[i] == NULL) {
                 free(new);
                 return (NULL);
             } else {
-                (new->States[i])->CallBacks = (struct CallBackList *) NULL;
-                (new->States[i])->Visuals = (struct VisualInfo *) NULL;
+                (new->States[i])->CallBacks = (struct CallBackList *)NULL;
+                (new->States[i])->Visuals = (struct VisualInfo *)NULL;
             }
         }
     new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color, bg);
@@ -410,7 +410,7 @@ int XfMoveButton(Button B)
     return (True);
 }
 
-/* 
+/*
  * Map the button's window, set it's event mask, and mark it active.
  */
 int XfActivateButtonState(Button B, int st, long unsigned int mask)
@@ -449,10 +449,8 @@ void defaultButtonCallback(Button B, XEvent *E)
 {
     struct VisualInfo *vis;
     GC localGC;
-    int dir, asc, des;
-    XCharStruct xcs;
 
-    (void) E;
+    (void)E;
 
     if (B == NULL || B->display == NULL) {
         return;
@@ -468,51 +466,22 @@ void defaultButtonCallback(Button B, XEvent *E)
         switch (vis->vtype) {
         case XfXImageVisual:
             if (vis->visual.i_vis != NULL) {
-                XPutImage(B->display, B->window, localGC, vis->visual.i_vis, 0, 0,
-                          vis->x_pos, vis->y_pos, vis->width, vis->height);
+                XPutImage(B->display, B->window, localGC, vis->visual.i_vis, 0, 0, vis->x_pos, vis->y_pos, vis->width,
+                          vis->height);
             }
             break;
         case XfPixmapVisual:
             XSetForeground(B->display, localGC, vis->foreground);
             XSetBackground(B->display, localGC, vis->background);
             if (vis->visual.p_vis.depth == 1)
-                XCopyPlane(B->display, vis->visual.p_vis.map, B->window, localGC,
-                           0, 0, vis->width, vis->height, vis->x_pos, vis->y_pos, 1);
+                XCopyPlane(B->display, vis->visual.p_vis.map, B->window, localGC, 0, 0, vis->width, vis->height,
+                           vis->x_pos, vis->y_pos, 1);
             else
-                XCopyArea(B->display, vis->visual.p_vis.map, B->window, localGC,
-                          0, 0, vis->width, vis->height, vis->x_pos, vis->y_pos);
+                XCopyArea(B->display, vis->visual.p_vis.map, B->window, localGC, 0, 0, vis->width, vis->height,
+                          vis->x_pos, vis->y_pos);
             break;
         case XfTextVisual:
-            if (vis->visual.t_vis.font != NULL) {
-                XSetFont(B->display, localGC, vis->visual.t_vis.font->fid);
-                XSetForeground(B->display, localGC, vis->foreground);
-                XTextExtents(vis->visual.t_vis.font, vis->visual.t_vis.text,
-                             strlen(vis->visual.t_vis.text), &dir, &asc, &des, &xcs);
-                switch (vis->visual.t_vis.align) {
-                case 0:        /* Center */
-                    dir = xcs.width / 2;
-                    if (vis->width == 0)
-                        asc = vis->x_pos + B->width / 2;
-                    else
-                        asc = vis->x_pos + vis->width / 2;
-                    asc -= dir;
-                    des = vis->y_pos + xcs.ascent;
-                    break;
-                case 1:        /* Left justify */
-                    asc = vis->x_pos;
-                    des = vis->y_pos + xcs.ascent;
-                    break;
-                case 2:        /* Right justify */
-                    asc = vis->width;
-                    if (asc == 0)
-                        asc = B->width;
-                    asc -= xcs.width;
-                    des = vis->y_pos + xcs.ascent;
-                    break;
-                }
-                XDrawString(B->display, B->window, localGC, asc, des,
-                            vis->visual.t_vis.text, strlen(vis->visual.t_vis.text));
-            }
+            XfDrawTextVisual(B->display, B->window, localGC, B->width, B->height, vis, 0, 0);
             break;
         case XfOutlineVisual:
             XSetForeground(B->display, localGC, vis->foreground);
@@ -549,10 +518,8 @@ void defaultButtonCallback(Button B, XEvent *E)
         case XfHersheyVisual:
             XSetForeground(B->display, localGC, vis->foreground);
             XSetBackground(B->display, localGC, vis->background);
-            XfHersheyString(B->display, B->window, localGC,
-                            vis->x_pos, vis->y_pos,
-                            vis->visual.h_vis.scale, vis->visual.h_vis.scale,
-                            vis->visual.h_vis.angle, vis->visual.h_vis.text,
+            XfHersheyString(B->display, B->window, localGC, vis->x_pos, vis->y_pos, vis->visual.h_vis.scale,
+                            vis->visual.h_vis.scale, vis->visual.h_vis.angle, vis->visual.h_vis.text,
                             vis->visual.h_vis.cset, vis->visual.h_vis.align);
             break;
         }
@@ -584,10 +551,7 @@ Button XfEventButton(XEvent *E)
     return (NULL);
 }
 
-void XfNoAutoExposeButton(Button B)
-{
-    B->noAutoExpose = 1;
-}
+void XfNoAutoExposeButton(Button B) { B->noAutoExpose = 1; }
 
 void ResizeButton(Button B, int x, int y, int w, int h)
 {
@@ -631,9 +595,8 @@ void SetButtonText(Button B, char *text)
     UpdateButton(B);
 }
 
-Button
-Make2State(Display *display, Window window, XFontStruct *font, int x, int y, int w, int h, int bw, unsigned int bc,
-           unsigned int fg, unsigned int bg, char *name)
+Button Make2State(Display *display, Window window, XFontStruct *font, int x, int y, int w, int h, int bw,
+                  unsigned int bc, unsigned int fg, unsigned int bg, char *name)
 {
     Button B;
     int a, d, direction;
@@ -652,9 +615,8 @@ Make2State(Display *display, Window window, XFontStruct *font, int x, int y, int
     return (B);
 }
 
-Button
-Make2State3D(Display *display, Window window, XFontStruct *font, int x, int y, int w, int h, int bw, unsigned int bc,
-             unsigned int fg, unsigned int bg, char *name)
+Button Make2State3D(Display *display, Window window, XFontStruct *font, int x, int y, int w, int h, int bw,
+                    unsigned int bc, unsigned int fg, unsigned int bg, char *name)
 {
     Button B;
     int a, d, direction;
@@ -694,7 +656,4 @@ void SetButtonState(Button B, int state)
     }
 }
 
-void UpdateButton(Button B)
-{
-    (*(B->updateCallback)) (B, NULL);
-}
+void UpdateButton(Button B) { (*(B->updateCallback))(B, NULL); }

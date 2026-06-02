@@ -7,36 +7,36 @@ struct tagMB {
     Window parent;
     Window window;
     int width, height;
-    int hi, lo, fg, bg;         /* 3-D colors */
-    CallBack function;          /* user function */
+    int hi, lo, fg, bg; /* 3-D colors */
+    CallBack function; /* user function */
     XButton nextB;
-    int state;                  /* current state */
+    int state; /* current state */
 
-    int level;                  /* level of cascade */
-    MButton popup;              /* stack of popup windows */
-    MButton root;               /* stack of items */
-    Window grab;                /* transparent grab window (only for parent) */
-    MenuItem *menu;             /* menu hierarchy */
-    MenuItem *item;             /* specific menu item we are associated with */
+    int level; /* level of cascade */
+    MButton popup; /* stack of popup windows */
+    MButton root; /* stack of items */
+    Window grab; /* transparent grab window (only for parent) */
+    MenuItem *menu; /* menu hierarchy */
+    MenuItem *item; /* specific menu item we are associated with */
     int selected;
 };
 
 struct tagMenuItem {
-    char *str;                  /* text string to display */
-    int align;                  /* text alignment in cell */
-    XFontStruct *font;          /* font to display string in */
-    Pixmap pixmap;              /* optional pixmap to display */
-    int p_width;                /* width of pixmap */
-    int p_height;               /* height of pixmap */
-    void *id;                   /* identiy of this item */
-    int status;                 /* display status of this item
-                                 *   -1 - disabled
-                                 *    0 - normal
-                                 *  >=1 - selected (display pixmap)
-                                 */
+    char *str; /* text string to display */
+    int align; /* text alignment in cell */
+    XFontStruct *font; /* font to display string in */
+    Pixmap pixmap; /* optional pixmap to display */
+    int p_width; /* width of pixmap */
+    int p_height; /* height of pixmap */
+    void *id; /* identiy of this item */
+    int status; /* display status of this item
+                 *   -1 - disabled
+                 *    0 - normal
+                 *  >=1 - selected (display pixmap)
+                 */
 
-    int nitems;                 /* number of children */
-    MenuItem *items;            /* children */
+    int nitems; /* number of children */
+    MenuItem *items; /* children */
 };
 
 MenuItem *XfAddMenuItem(MenuItem *, char *, int, XFontStruct *, Pixmap, int, int, void *);
@@ -45,4 +45,4 @@ void *XfMBSelectedValue(MButton);
 void SetMenuText(MButton, MenuItem *, char *);
 MButton XfCreateMB(Display *, Window, int, int, int, int, int, int, int, int, MenuItem *, CallBack);
 
-#endif                          /* _MB_H_ */
+#endif /* _MB_H_ */

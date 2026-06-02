@@ -15,7 +15,7 @@
  ** RedrawRB 		 - Redraw the contents of a RadioButton, based on its state
  **
  ** These XB routines that have been #defined for use as RB routines:
- ** 
+ **
  ** XfActivateRB	 - Activate and map a RadioButton
  ** XfDeactivateRB	 - Deactivate and unmap a RadioButton
  **
@@ -27,14 +27,13 @@ Pixmap rb_top, rb_bot, rb_frame, rb_hit, rb_dot;
 
 extern int Xf3DHeight(void);
 
-RButton
-XfCreateRB(Display *d, Window win, int x, int y, int w, int h, short int hi, short int lo, short int fg, short int bg,
-           char *text, int align, XFontStruct *font, CallBack func, RButton RBlist)
+RButton XfCreateRB(Display *d, Window win, int x, int y, int w, int h, short int hi, short int lo, short int fg,
+                   short int bg, char *text, int align, XFontStruct *font, CallBack func, RButton RBlist)
 {
     RButton new;
     RButton search;
 
-    new = (RButton) XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_RB);
+    new = (RButton)XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_RB);
 
     if (text != NULL) {
         new->text = strdup(text);
@@ -46,20 +45,20 @@ XfCreateRB(Display *d, Window win, int x, int y, int w, int h, short int hi, sho
     if (font == NULL && text != NULL)
         font = _xfFontStruct;
 
-        /**
-	 ** Put this button in the given RBlist
-	 **/
+    /**
+     ** Put this button in the given RBlist
+     **/
     if (RBlist == NULL) {
-        ((RButton) new)->headRB = (RButton) new;
+        ((RButton)new)->headRB = (RButton)new;
     } else {
         search = RBlist;
         while (search->nextRB != NULL) {
             search = search->nextRB;
         }
-        search->nextRB = (RButton) new;
-        ((RButton) new)->headRB = RBlist;
+        search->nextRB = (RButton)new;
+        ((RButton)new)->headRB = RBlist;
     }
-    return ((RButton) new);
+    return ((RButton)new);
 }
 
 /**
@@ -70,9 +69,9 @@ void XfActivateRBList(RButton RB, int count)
 {
     RButton search, find = NULL;
 
-        /**
-	*** Activate all buttons to 0 state or less
-	**/
+    /**
+    *** Activate all buttons to 0 state or less
+    **/
     search = RB;
     while (search != NULL) {
         if (count-- == 0) {
@@ -82,9 +81,9 @@ void XfActivateRBList(RButton RB, int count)
         }
         search = search->nextRB;
     }
-        /**
-	*** Set the selected button to active state.
-	**/
+    /**
+    *** Set the selected button to active state.
+    **/
     if (find) {
         XfActivateRB(find, 4);
     }
@@ -108,7 +107,8 @@ int XfPushRB(RButton RB, XEvent *E)
 
     switch (E->type) {
     case Expose:
-        while (XCheckTypedWindowEvent(display, RB->window, Expose, &Ev));
+        while (XCheckTypedWindowEvent(display, RB->window, Expose, &Ev))
+            ;
         RedrawRB(RB);
         break;
 
@@ -121,10 +121,10 @@ int XfPushRB(RButton RB, XEvent *E)
 
     case ButtonRelease:
         if (RB->state != -1) {
-                                /**
-				 ** If we are still on the button, 
-				 ** turn off all other RBs in this list
-				 **/
+            /**
+             ** If we are still on the button,
+             ** turn off all other RBs in this list
+             **/
             if (RB->state & 1) {
                 search = RB->headRB;
                 while (search != NULL) {
@@ -132,14 +132,14 @@ int XfPushRB(RButton RB, XEvent *E)
                         XfActivateRB(search, 0);
                     search = search->nextRB;
                 }
-                                        /**
-					 ** This one gets set to active, and call the user function
-					 **/
+                /**
+                 ** This one gets set to active, and call the user function
+                 **/
                 RB->state |= 4; /* user selection */
                 RB->state |= 1; /* to make sure it stays down */
                 RedrawRB(RB);
                 if (RB->function) {
-                    (*(RB->function)) (RB, NULL);
+                    (*(RB->function))(RB, NULL);
                 }
             } else if (RB->state & 4) {
                 RB->state |= 1; /* to make sure it stays down */
@@ -200,15 +200,15 @@ void RedrawRB(RButton RB)
     int width = RB->width;
 
     if (!rb_top) {
-                /**
-		 ** Create pixmaps
-		 **/
+        /**
+         ** Create pixmaps
+         **/
 
-        rb_frame = XCreateBitmapFromData(disp, win, (const char *) rb_frame_bits, RBSIZE, RBSIZE);
-        rb_top = XCreateBitmapFromData(disp, win, (const char *) rb_top_bits, RBSIZE, RBSIZE);
-        rb_bot = XCreateBitmapFromData(disp, win, (const char *) rb_bot_bits, RBSIZE, RBSIZE);
-        rb_dot = XCreateBitmapFromData(disp, win, (const char *) rb_dot_bits, RBSIZE, RBSIZE);
-        rb_hit = XCreateBitmapFromData(disp, win, (const char *) rb_frame1_bits, RBSIZE, RBSIZE);
+        rb_frame = XCreateBitmapFromData(disp, win, (const char *)rb_frame_bits, RBSIZE, RBSIZE);
+        rb_top = XCreateBitmapFromData(disp, win, (const char *)rb_top_bits, RBSIZE, RBSIZE);
+        rb_bot = XCreateBitmapFromData(disp, win, (const char *)rb_bot_bits, RBSIZE, RBSIZE);
+        rb_dot = XCreateBitmapFromData(disp, win, (const char *)rb_dot_bits, RBSIZE, RBSIZE);
+        rb_hit = XCreateBitmapFromData(disp, win, (const char *)rb_frame1_bits, RBSIZE, RBSIZE);
     }
 
     if (RB->text) {
@@ -230,7 +230,7 @@ void RedrawRB(RButton RB)
     XSetForeground(disp, gc, RB->bg);
     XFillRectangle(disp, win, gc, 0, 0, width, RB->height);
 
-    if (RB->state == -1 || !(RB->state & 1)) {  /* Button UP */
+    if (RB->state == -1 || !(RB->state & 1)) { /* Button UP */
         tcolor = RB->hi;
         bcolor = RB->lo;
     } else {
@@ -260,21 +260,21 @@ void RedrawRB(RButton RB)
 
     XSetForeground(disp, gc, RB->fg);
 
-    if (RB->state != -1 && (RB->state & 2)) {   /* Mouse hit */
+    if (RB->state != -1 && (RB->state & 2)) { /* Mouse hit */
         XSetStipple(disp, gc, rb_hit);
         XFillRectangle(disp, win, gc, xlo, ypos, RBSIZE, RBSIZE);
     }
 
-    if (RB->state != -1 && (RB->state & 4)) {   /* Selected */
+    if (RB->state != -1 && (RB->state & 4)) { /* Selected */
         XSetStipple(disp, gc, rb_dot);
         XFillRectangle(disp, win, gc, xlo, ypos, RBSIZE, RBSIZE);
     }
 
     XSetFillStyle(disp, gc, FillSolid);
 
-/**
- ** Put in the text and stuff
- **/
+    /**
+     ** Put in the text and stuff
+     **/
 
     if (RB->text != NULL) {
         y = (RB->height + ascent) / 2;
@@ -286,9 +286,9 @@ void RedrawRB(RButton RB)
         XCopyPlane(disp, RB->pixmap, win, gc, 0, 0, RB->pix_w, RB->pix_h, xhi, y, 1);
     }
     if (RB->state == -1) {
-                /**
-		 ** If inactive, its grayed out
-		 **/
+        /**
+         ** If inactive, its grayed out
+         **/
         XSetFillStyle(disp, gc, FillStippled);
         XSetStipple(disp, gc, XfStipple(disp, win, "gray"));
         XSetForeground(disp, gc, RB->bg);
@@ -309,9 +309,9 @@ void XfDestroyRB(RButton RB)
     search = RB->headRB;
 
     if (search != NULL) {
-                /**
-		 ** Head element, reset everyone elses head to the next element.
-		 **/
+        /**
+         ** Head element, reset everyone elses head to the next element.
+         **/
         if (search == RB) {
             find = search->nextRB;
             while (search->nextRB != NULL) {
@@ -319,9 +319,9 @@ void XfDestroyRB(RButton RB)
                 search = search->nextRB;
             }
         } else {
-                        /**
-			 ** Just pull element out of list
-			 **/
+            /**
+             ** Just pull element out of list
+             **/
             while (search->nextRB != NULL) {
                 if (search->nextRB == RB) {
                     search->nextRB = search->nextRB->nextRB;
@@ -331,10 +331,10 @@ void XfDestroyRB(RButton RB)
             }
         }
     }
-    XfDestroyXB((XButton) RB);
+    XfDestroyXB((XButton)RB);
 }
 
-/** 
+/**
  ** XfWhichRB		- returns index of RB in list
  **/
 
@@ -351,7 +351,7 @@ int XfWhichRB(RButton RB)
     return (count);
 }
 
-/** 
+/**
  ** XfCountRB		- returns number of items in list
  **/
 
@@ -368,7 +368,7 @@ int XfCountRB(RButton RB)
     return (count);
 }
 
-/** 
+/**
  ** XfActiveRB		- returns index of active RB.  -1 if none active.
  **/
 

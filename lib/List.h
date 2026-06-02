@@ -28,7 +28,7 @@ struct _list {
     CallBack callback;
     Time last_time;
     int offset;
-} *CreateList(Display * display, Window parent, XFontStruct * font, int x, int y, int w, int h, int sw, int fast,
+} *CreateList(Display *display, Window parent, XFontStruct *font, int x, int y, int w, int h, int sw, int fast,
               long unsigned int hilite, int nitems, char **items);
 
 #endif

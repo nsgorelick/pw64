@@ -7,7 +7,7 @@ struct tagPB {
     Window parent;
     Window window;
     int width, height;
-    int hi, lo, fg, bg;         /* 3-D colors */
+    int hi, lo, fg, bg; /* 3-D colors */
 
     CallBack function;
     XButton nextB;
@@ -21,8 +21,8 @@ struct tagPB {
     int pix_h;
 };
 
-#define XfResizePB(PB, w, h)    XfPosXB((XButton)PB, MAXINT, MAXINT, w, h)
-#define XfMovePB(PB, x, y)      XfPosXB((XButton)PB, x, y, MAXINT, MAXINT)
+#define XfResizePB(PB, w, h) XfPosXB((XButton)PB, MAXINT, MAXINT, w, h)
+#define XfMovePB(PB, x, y) XfPosXB((XButton)PB, x, y, MAXINT, MAXINT)
 
 /**
 *** Function declarations
@@ -32,4 +32,4 @@ int XfPushPB(PButton, XEvent *);
 void RedrawPB(PButton);
 Pixmap XfSetPBPixmap(PButton, Pixmap, int, int);
 
-#endif                          /* _PB_H_ */
+#endif /* _PB_H_ */

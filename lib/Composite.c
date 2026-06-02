@@ -13,25 +13,24 @@
  *			 and move this element to current, activating load callback.
  */
 
-void Cedit_callback(Button B, XEvent * E);
-void Cpopdown_callback(Button B, XEvent * E);
-void Clist_callback(List L, XEvent * E);
+void Cedit_callback(Button B, XEvent *E);
+void Cpopdown_callback(Button B, XEvent *E);
+void Clist_callback(List L, XEvent *E);
 
-extern int GetText(Button B, XEvent * E, char *s, int n, int copy);
+extern int GetText(Button B, XEvent *E, char *s, int n, int copy);
 extern void DeactivateList(List list);
 extern void AddListCallback(List list, CallBack proc);
 extern void ActivateList(List list);
 extern void ReCreateList(List list, int nitems, char **items);
-extern int ListIsDoubleClick(List list, XEvent * E);
+extern int ListIsDoubleClick(List list, XEvent *E);
 
-Composite
-CreateComposite(Display *display, Window parent, XFontStruct *font, int x, int y, int width, int height,
-                short int hilite, char *instr)
+Composite CreateComposite(Display *display, Window parent, XFontStruct *font, int x, int y, int width, int height,
+                          short int hilite, char *instr)
 {
     Composite new;
     int font_height = font->ascent;
 
-    new = (Composite) malloc(sizeof(struct _composite));
+    new = (Composite)malloc(sizeof(struct _composite));
 
     new->display = display;
     new->parent = parent;
@@ -50,25 +49,22 @@ CreateComposite(Display *display, Window parent, XFontStruct *font, int x, int y
     XfAddButtonVisual(new->Edit, 0,
                       XfCreateVisual(new->Edit, 0, 0, 0, 0, WHITE(display), WHITE(display), XfSolidVisual));
     XfAddButtonVisual(new->Edit, 0,
-                      XfCreateVisual(new->Edit, 0, height / 2 - font_height / 2, 0, 0,
-                                     BLACK(display), WHITE(display), XfTextVisual, instr, font, 1));
+                      XfCreateVisual(new->Edit, 0, height / 2 - font_height / 2, 0, 0, BLACK(display), WHITE(display),
+                                     XfTextVisual, instr, font, 1));
     XfAddButtonCallback(new->Edit, 0, XF_CALLBACK(Cedit_callback), NULL);
-    new->Edit->member = (int *) new;
+    new->Edit->member = (int *)new;
 
     new->Popdown = XfCreateButton(display, parent, x + width + 2, y, height, height, 1, BLACK(display), "popdown", 1);
     XfAddButtonVisual(new->Popdown, 0, XfCreateVisual(new->Popdown, 0, 0, 0, 0, hilite, hilite, XfSolidVisual));
     XfAddButtonCallback(new->Popdown, 0, XF_CALLBACK(Cpopdown_callback), NULL);
-    new->Popdown->member = (int *) new;
+    new->Popdown->member = (int *)new;
 
     new->font_height = font->ascent + font->descent;
     new->ext = 1;
     return (new);
 }
 
-void AddCompositeCallback(Composite C, CallBack callback)
-{
-    C->load_proc = callback;
-}
+void AddCompositeCallback(Composite C, CallBack callback) { C->load_proc = callback; }
 
 void ActivateComposite(Composite C)
 {
@@ -89,9 +85,9 @@ void AddToComposite(Composite C, char *str)
     C->nitems++;
 
     if (C->items == NULL) {
-        C->items = (char **) malloc(sizeof(char *));
+        C->items = (char **)malloc(sizeof(char *));
     } else {
-        C->items = (char **) realloc(C->items, C->nitems * sizeof(char *));
+        C->items = (char **)realloc(C->items, C->nitems * sizeof(char *));
     }
 
     for (i = C->nitems - 1; i > 0; i--) {
@@ -104,10 +100,10 @@ void PushdownComposite(Composite C)
 {
     int i;
 
-/* 
-	Can't pushdown a text that came from selection (or for that matter,
-	the same peice of text twice)
-*/
+    /*
+            Can't pushdown a text that came from selection (or for that matter,
+            the same peice of text twice)
+    */
 
     if (C->current_text == NULL)
         return;
@@ -126,35 +122,33 @@ ClearComposite()
 void Cedit_callback(Button B, XEvent *E)
 {
     char buf[256];
-    Composite C = (Composite) B->member;
+    Composite C = (Composite)B->member;
 
-    if (GetText(B, E, buf, 256, (int) (long) B->ext) == -1)
+    if (GetText(B, E, buf, 256, (int)(long)B->ext) == -1)
         return;
 
     SetButtonText(B, buf);
-    B->ext = (char *) 1;
+    B->ext = (char *)1;
     C->current_text = B->States[0]->Visuals->visual.t_vis.text;
     if (C->list != NULL)
         DeactivateList(C->list);
-    (*(C->load_proc)) (C, NULL);
+    (*(C->load_proc))(C, NULL);
 }
 
 void Cpopdown_callback(Button B, XEvent *E)
 {
-    (void) E;
-/* 
-	this should just put up a list with the callback of the list
-	setting current_text to the appropriate pointer selection.
-*/
-    Composite C = (Composite) B->member;
+    (void)E;
+    /*
+            this should just put up a list with the callback of the list
+            setting current_text to the appropriate pointer selection.
+    */
+    Composite C = (Composite)B->member;
 
     if (C->list == NULL) {
-        C->list = CreateList(C->display, C->parent, C->font,
-                             C->x, C->y + C->height,
-                             C->width + C->height + 2, (int) (C->font_height * 2 * 1.2),
-                             C->height, 0, C->hilite, C->nitems, C->items);
+        C->list = CreateList(C->display, C->parent, C->font, C->x, C->y + C->height, C->width + C->height + 2,
+                             (int)(C->font_height * 2 * 1.2), C->height, 0, C->hilite, C->nitems, C->items);
         AddListCallback(C->list, XF_CALLBACK(Clist_callback));
-        C->list->member = (int *) B->member;
+        C->list->member = (int *)B->member;
         ActivateList(C->list);
     } else {
         if (C->list->view->active == 0) {
@@ -170,12 +164,12 @@ static int old_select = -1;
 
 void Clist_callback(List L, XEvent *E)
 {
-    Composite C = (Composite) L->member;
+    Composite C = (Composite)L->member;
 
     if (C->list->selected == old_select && ListIsDoubleClick(L, E)) {
         C->current_text = C->items[C->list->selected];
         DeactivateList(C->list);
-        (*(C->load_proc)) (C, NULL);
+        (*(C->load_proc))(C, NULL);
         old_select = -1;
     }
     old_select = C->list->selected;

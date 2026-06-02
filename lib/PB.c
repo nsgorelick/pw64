@@ -16,17 +16,16 @@
  ** XfDestroyPB		- Deactivate, unmap and destroy a PushButton
  **/
 
-extern void Draw3DBox(Display * disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo,
+extern void Draw3DBox(Display *disp, Window win, GC gc, int x, int y, int w, int h, int r, short int hi, short int lo,
                       short int fg, short int bg, int state, int options);
 extern int Xf3DHeight(void);
 
-PButton
-XfCreatePB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, char *text, int align,
-           XFontStruct *font, CallBack func)
+PButton XfCreatePB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, char *text,
+                   int align, XFontStruct *font, CallBack func)
 {
     PButton new;
 
-    new = (PButton) XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_PB);
+    new = (PButton)XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, func, XF_PB);
 
     if (text != NULL) {
         new->text = strdup(text);
@@ -58,7 +57,8 @@ int XfPushPB(PButton PB, XEvent *E)
 
     switch (E->type) {
     case Expose:
-        while (XCheckTypedWindowEvent(display, PB->window, Expose, &Ev));
+        while (XCheckTypedWindowEvent(display, PB->window, Expose, &Ev))
+            ;
         RedrawPB(PB);
         break;
 
@@ -72,7 +72,7 @@ int XfPushPB(PButton PB, XEvent *E)
     case ButtonRelease:
         if (PB->state != -1) {
             if (PB->function != NULL && (PB->state & 1)) {
-                (*(PB->function)) (PB, E);
+                (*(PB->function))(PB, E);
             }
             if (PB->state > 0) {
                 PB->state &= (~1);
@@ -121,7 +121,7 @@ int XfPushPB(PButton PB, XEvent *E)
  ** RedrawPB	- Redraw PushButton based on its state
  **
  **             - this function uses Draw3DBox.  If a buttons text or pixmap
- **               ever changes, Draw3DBox won't erase the old text/pixmap 
+ **               ever changes, Draw3DBox won't erase the old text/pixmap
  **               unless the option (CLEAR) is passed as the last argument.
  **				  The safe thing to do is ClearWindow and Expose on change.
  **/
@@ -149,15 +149,15 @@ void RedrawPB(PButton PB)
 
         y = (PB->height + ascent) / 2;
         switch (PB->align) {
-        case 0:                /* center */
+        case 0: /* center */
             x = (PB->width - extents.width) / 2;
             break;
 
-        case 1:                /* left */
+        case 1: /* left */
             x = r + 2;
             break;
 
-        case -1:               /* right */
+        case -1: /* right */
             x = PB->width - (r + 2) - extents.width;
             break;
         }

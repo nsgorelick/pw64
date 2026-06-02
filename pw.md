@@ -18,6 +18,44 @@ The canonical X11 entry point for application code is `lib/Xfred.h`, which pulls
 
 Configure enables an **internal SPECPR reader** by default (`--enable-specpr` → `INTERNAL_SP`), so only `pw` is installed. With `--disable-specpr`, both `pw` and `sp` are built and installed.
 
+## Display model (8-bit colormap)
+
+PicWorks targets **indexed color on an 8-bit PseudoColor display**, not direct RGB blitting. The manual (`manual/pw.manual`) assumes ~256 display levels shared among the base image, overlays, and UI chrome.
+
+Pipeline in brief:
+
+1. Cube samples live in `Image->data` (often 16-bit); stretching produces `Image->sdata`.
+2. `sdata` bytes are **X colormap pixel IDs** (from `XAllocColorCells`), not simple indices 0…255.
+3. `XStoreColors` updates hardware LUT entries for false-color and per-image palettes (`pw/ColorControls.c`, `pw/colorspread.c`).
+4. The main view is an 8-bit `ZPixmap` `XImage` (`pw/composite.c` `update_display()`), shown with `XPutImage` on `IWindow`.
+
+Startup (`pw/pw.c` `alloc_colors()`) grabs a contiguous block of color cells; on failure it installs a **private colormap** (`MakePrivateColormap()`). Overlays partition the same cell budget across the greyscale image and up to 15 overlay planes (`manual/pw.manual`, COLOR OVERLAYS).
+
+Key symbols: global `Colors[]`, `NColors`, `ColorMap`, `PlaneMask` (highlight uses a second plane bit on PseudoColor hardware).
+
+### Modern X11 (XQuartz and typical Linux)
+
+Contemporary servers default to **TrueColor 24/32-bit**. They often still list **depth 8** under supported pixmap formats, but that only means 8-bit pixmaps are representable—not that a **PseudoColor** window visual exists.
+
+On a typical XQuartz setup:
+
+- Root/default visual: **TrueColor, 24 planes**
+- All visuals: **TrueColor** (no `PseudoColor`)
+- `xdpyinfo` may show `depth 8` in the pixmap-format list while **no** `class: PseudoColor` line appears
+
+Implications for the current code:
+
+| Mechanism | On TrueColor default |
+|-----------|----------------------|
+| `XAllocColorCells` | Fails or is meaningless |
+| `XStoreColors` for image LUT | Does not drive what you see |
+| 8-bit `XCreateImage` + `DefaultDepth()` | Depth/visual mismatch |
+| Private colormap fallback | No real indexed visual to attach to |
+
+Symptoms: `Cant allocate colorcells`, very small `allocated N pixels`, wrong or blank image, or unstable colors. **Building and linking is not enough**—the display path must be ported.
+
+**Planned fix:** TrueColor display port (software LUT → 24/32-bit RGB, then `XPutImage`). Phased design, file list, and tests are in [`plan.md`](plan.md). Until that lands, do not expect a correct GUI on XQuartz despite a successful `make`.
+
 ## Build system
 
 - **Autoconf 2.61** — top-level `configure.in` generates `configure`, `config.h`, and Makefiles for the root, `lib/`, `pw/`, and `sp/`.
@@ -31,7 +69,9 @@ Typical flow:
 make
 ```
 
-Binaries: `pw/pw`, `sp/sp` (when built).
+Binaries: `pw/pw`, `sp/sp` (when built). These paths are **generated** and not in git (see Version control below).
+
+`configure` produces `Makefile`, `config.h`, and `config.status` at the top level; `iomedley/configure` produces `iomedley/iom_config.h` and sub-makes for vendored codecs. A clean tree requires running `./configure` before `make`.
 
 ### Configure options (selected)
 
@@ -52,6 +92,15 @@ On Darwin, X11 comes from **XQuartz**, usually under `/opt/X11`. Configure can p
 Expected link libraries for `pw` (from configure): `X11`, `Xt`, `Xext`, `Xpm` (if found), `m`, `z`, plus `libXfred` and `libiomedley`. **Motif (`Xm`)** is probed but not required for a successful configure on macOS.
 
 `PATH` should include `/opt/X11/bin` for `xmkmf` and runtime. `DISPLAY` must be set to use the GUI.
+
+To inspect the server (useful before debugging color problems):
+
+```bash
+xdpyinfo | grep -E "default visual|depth of root|class:|depth:"
+xdpyinfo | awk '/visual id:/{v=$0} /class:/{c=$0} /depth:/{d=$0} d ~ /8 planes/{print v,c,d}'
+```
+
+If the second command prints nothing, there is no 8-bit window visual—only pixmap depth support.
 
 ### Compiler notes (modern Clang / GCC)
 
@@ -92,10 +141,21 @@ Without ImageMagick, configure still succeeds; format coverage depends on the bu
 
 SPECPR-related code lives in `pw/specpr.c`, `pw/sp.c`, and `sp/`.
 
+## Version control
+
+The git tree tracks **source and build templates** only (see `.gitignore`). Not checked in:
+
+- `backup/` (removed from history; keep locally only if needed)
+- Subversion `.svn/` metadata (was erroneously committed earlier)
+- Build products: `*.o`, `*.a`, `libiomedley.a`, generated `Makefile`, `config.log`, `config.status`, `config.h`, `iom_config.h`
+- Programs: `pw/pw`, `sp/sp`, libtiff utility binaries under `iomedley/libtiff/tools/`
+
+After clone: `./configure && make` rebuilds everything.
+
 ## Key headers and config
 
-- `config.h` — Autoconf feature macros for the top-level app
-- `iom_config.h` — feature macros for iomedley (e.g. `HAVE_LIBPNG`, `HAVE_LIBZ`, endianness)
+- `config.h` — generated by `./configure` (template: `config.h.in` if present)
+- `iom_config.h` — generated under `iomedley/` by its `configure` (template: `iom_config.h.in`)
 - `lib/values.h` — local stand-in when system `<values.h>` is absent
 - `pw/image.h`, `pw/vicar.h`, `iomedley/iomedley.h` — image cube and format structures
 
@@ -106,8 +166,20 @@ Default prefix `/usr/local`:
 - `$(prefix)/bin/pw` (and optionally `sp`)
 - Man page generation is stubbed in the top-level `Makefile` install targets
 
+## Tests
+
+Headless unit tests live under `tests/`. After `./configure && make`, run:
+
+```bash
+make test
+```
+
+See `tests/README.md` for scope and gaps. They cover **iomedley** I/O helpers, **pseudocolor** / **quantize**, **color** math, and **lib** packbits utilities—not the X11 display path.
+
 ## References
 
 - Original README and FTP distribution notes in `README`
 - Tutorial package (historical): `speclab.cr.usgs.gov:pub/pw/pw.manual.tar`
 - Contact in README: Noel Gorelick / USGS SPECLAB lineage
+- [`plan.md`](plan.md) — TrueColor port plan (display path for modern X11)
+- Upstream clone: https://github.com/nsgorelick/pw64

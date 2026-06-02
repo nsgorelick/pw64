@@ -20,9 +20,8 @@ int XfHersheyWidth(char c, int cset)
     return ((str[1] - 'R') - (str[0] - 'R'));
 }
 
-void
-XfHersheyChar(Display *display, Drawable drawable, GC gc, int x, int y, float xscale, float yscale, float cost,
-              float sint, char c, int cset)
+void XfHersheyChar(Display *display, Drawable drawable, GC gc, int x, int y, float xscale, float yscale, float cost,
+                   float sint, char c, int cset)
 {
     char *str;
     int count;
@@ -50,23 +49,22 @@ XfHersheyChar(Display *display, Drawable drawable, GC gc, int x, int y, float xs
         yt = y + (xt * sint + yt * cost) * yscale;
         xt = x2;
         if (!move) {
-            XDrawLine(display, drawable, gc, xlast, ylast, (int) xt, (int) yt);
+            XDrawLine(display, drawable, gc, xlast, ylast, (int)xt, (int)yt);
         }
         move = 0;
-        xlast = (int) xt;
-        ylast = (int) yt;
+        xlast = (int)xt;
+        ylast = (int)yt;
     }
 }
 
 /**
 *** Alignment here signifies the percentage in the positive x direction to
-*** align the string.  
+*** align the string.
 *** 1.0 is left justified, 0.0 is centered, -1.0 is right justified.
 **/
 
-void
-XfHersheyString(Display *display, Drawable drawable, GC gc, int x, int y, float xscale, float yscale, float angle,
-                char *str, int cset, float align)
+void XfHersheyString(Display *display, Drawable drawable, GC gc, int x, int y, float xscale, float yscale, float angle,
+                     char *str, int cset, float align)
 {
     int i;
     float cost, sint;
@@ -88,16 +86,16 @@ XfHersheyString(Display *display, Drawable drawable, GC gc, int x, int y, float 
         count += XfHersheyWidth(str[i], cset);
     }
 
-        /**
-	*** Adjust for alignment.k
-	**/
+    /**
+    *** Adjust for alignment.k
+    **/
 
-    x1 = x1 + (align - 1.0) * ((float) count * cost * xscale / 2.0);
-    y1 = y1 + (align - 1.0) * ((float) count * sint * yscale / 2.0);
+    x1 = x1 + (align - 1.0) * ((float)count * cost * xscale / 2.0);
+    y1 = y1 + (align - 1.0) * ((float)count * sint * yscale / 2.0);
 
-        /**
-	*** Each character needs to be centered in its cell.
-	**/
+    /**
+    *** Each character needs to be centered in its cell.
+    **/
 
     c3 = 0;
     c4 = 0;

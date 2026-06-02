@@ -18,7 +18,7 @@
 
 /* Information necessary to define a state: callbacks and visual data */
 struct ButtonState {
-    struct CallBackList *CallBacks;     /* List of call backs for specific state */
+    struct CallBackList *CallBacks; /* List of call backs for specific state */
     struct VisualInfo *Visuals; /* Visual elements for button */
 };
 
@@ -27,24 +27,24 @@ typedef struct _Button *Button;
 
 /* The underlying structure, defining the definitive button */
 struct _Button {
-    Display *display;           /* Display that button is on */
-    Window window;              /* Window ID of the button */
-    Window parent;              /* Parent's Window ID */
-    int active;                 /* Is this button active? */
-    int width, height;          /* sizing of the button */
-    int x, y;                   /* X and Y position of button wrt parent */
-    int border_width;           /* width in pixels of button's border */
+    Display *display; /* Display that button is on */
+    Window window; /* Window ID of the button */
+    Window parent; /* Parent's Window ID */
+    int active; /* Is this button active? */
+    int width, height; /* sizing of the button */
+    int x, y; /* X and Y position of button wrt parent */
+    int border_width; /* width in pixels of button's border */
     unsigned long border_color; /* color for window's border */
-    char name[256];             /* Name used to identify the button */
-    void *ext;                  /* An externally-visible piece of data */
-    void *member;               /* A pseudo-class identifier */
-    int state;                  /* Current state of the button */
-    int maxstate;               /* Number of states */
-    int noAutoExpose;           /* Don't Handle Exposure Events automatically */
-    struct ButtonState **States;        /* Dynamically allocated state data */
-    CallBack exposeCallback;    /* Callback action on expose events */
-    CallBack updateCallback;    /* Callback action forced, to update */
-    Button nextButton;          /* Pointer for linked list */
+    char name[256]; /* Name used to identify the button */
+    void *ext; /* An externally-visible piece of data */
+    void *member; /* A pseudo-class identifier */
+    int state; /* Current state of the button */
+    int maxstate; /* Number of states */
+    int noAutoExpose; /* Don't Handle Exposure Events automatically */
+    struct ButtonState **States; /* Dynamically allocated state data */
+    CallBack exposeCallback; /* Callback action on expose events */
+    CallBack updateCallback; /* Callback action forced, to update */
+    Button nextButton; /* Pointer for linked list */
 };
 
 /* The support routines for general manipulation */
@@ -64,15 +64,15 @@ Button XfEventButton(XEvent *);
 void XfNoAutoExposeButton(Button);
 void ResizeButton(Button, int, int, int, int);
 void SetButtonText(Button, char *);
-Button Make2State(Display *, Window, XFontStruct *, int, int, int, int,
-                  int, unsigned int, unsigned int, unsigned int, char *);
-Button Make2State3D(Display *, Window, XFontStruct *, int, int, int, int,
-                    int, unsigned int, unsigned int, unsigned int, char *);
+Button Make2State(Display *, Window, XFontStruct *, int, int, int, int, int, unsigned int, unsigned int, unsigned int,
+                  char *);
+Button Make2State3D(Display *, Window, XFontStruct *, int, int, int, int, int, unsigned int, unsigned int, unsigned int,
+                    char *);
 char *GetButtonText(Button);
 void SetButtonState(Button, int);
 void UpdateButton(Button);
 
-#define XfActivateButton(B, mask)       XfActivateButtonState(B, 0, mask)
+#define XfActivateButton(B, mask) XfActivateButtonState(B, 0, mask)
 
 /* One application that is too easy to waste code on */
 #define XfButtonState(B) (B)->state
@@ -80,4 +80,4 @@ void UpdateButton(Button);
 /* The global list of buttons */
 extern Button ButtonList;
 
-#endif                          /* _XF_BUTTON_H */
+#endif /* _XF_BUTTON_H */

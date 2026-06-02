@@ -31,7 +31,7 @@ int GetText(Button B, XEvent *E, char *s, int n, int copy)
 
     if (q == NULL || *q == '\0')
         return -1;
-    strncpy(s, q, (size_t) n);
+    strncpy(s, q, (size_t)n);
     s[n - 1] = '\0';
 
     return 1;
@@ -43,7 +43,7 @@ int GetText(Button B, XEvent *E, char *s, int n, int copy)
 #include <sys/stat.h>
 
 #ifndef MIN
-#define MIN(a,b)	((a) < (b) ? (a) : (b))
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 #endif
 
 int getbit(FILE *file)
@@ -53,7 +53,8 @@ int getbit(FILE *file)
     do {
         ch = fgetc(file);
         if (ch == '#') {
-            while ((ch = fgetc(file)) != '\n' && ch != EOF);
+            while ((ch = fgetc(file)) != '\n' && ch != EOF)
+                ;
         }
     } while (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r');
 
@@ -73,8 +74,7 @@ int get_int(FILE *fp)
         if (ch == '#') {
             do {
                 ch = fgetc(fp);
-            }
-            while (ch != '\n');
+            } while (ch != '\n');
         }
     }
     if (ch < '0' || ch > '9')
@@ -99,8 +99,7 @@ float get_float(FILE *fp)
         if (ch == '#') {
             do {
                 ch = fgetc(fp);
-            }
-            while (ch != '\n');
+            } while (ch != '\n');
         }
     }
     if (!isdigit(ch) && ch != '.' && ch != 'e' && ch != '-')
@@ -152,9 +151,9 @@ int is_dir(char *path)
 
 int ToTiff(unsigned char *s1, unsigned char *s2, int len)
 {
-        /**
-	*** Pack s1 using TIFF packbits encoding into s2
-	**/
+    /**
+    *** Pack s1 using TIFF packbits encoding into s2
+    **/
     int count = 0;
     int i;
     int base, newbase, size, outp;
@@ -168,9 +167,9 @@ int ToTiff(unsigned char *s1, unsigned char *s2, int len)
                 newbase = i;
                 count = 0;
             } else {
-                                /**
-				*** Put any backed up literals first.
-				**/
+                /**
+                *** Put any backed up literals first.
+                **/
                 while ((newbase - base) > 0) {
                     size = MIN(127, newbase - base - 1);
                     s2[outp++] = size;
@@ -178,9 +177,9 @@ int ToTiff(unsigned char *s1, unsigned char *s2, int len)
                     outp += size + 1;
                     base += size + 1;
                 }
-                                /**
-				*** Now put -count and repeated string.
-				**/
+                /**
+                *** Now put -count and repeated string.
+                **/
                 count++;
                 while (count > 0) {
                     size = MIN(128, count);
@@ -192,9 +191,9 @@ int ToTiff(unsigned char *s1, unsigned char *s2, int len)
             }
         }
     }
-        /**
-	*** Output any trailing literals.
-	**/
+    /**
+    *** Output any trailing literals.
+    **/
     newbase = i;
     while ((newbase - base) > 0) {
         size = MIN(127, newbase - base - 1);
@@ -213,19 +212,19 @@ int UnTiff(unsigned char *s1, unsigned char *s2, int len)
 
     outp = 0;
     for (i = 0; i < len; i++) {
-        size = ((char *) s1)[i];
+        size = ((char *)s1)[i];
         if (size < 0) {
-                        /**
-			*** repeat next character -N times.
-			**/
+            /**
+            *** repeat next character -N times.
+            **/
             size = -size;
             memset(s2 + outp, s1[i + 1], size + 1);
             outp += size + 1;
             i++;
         } else {
-                        /**
-			*** Copy N characters
-			**/
+            /**
+            *** Copy N characters
+            **/
             for (j = 0; j <= size; j++) {
                 i++;
                 s2[outp] = s1[i];

@@ -20,7 +20,7 @@ INSTALL_DATA=@INSTALL_DATA@
 
 DEFS=@DEFS@
 CPPFLAGS=@CPPFLAGS@ @XINCLUDES@
-CFLAGS=@CFLAGS@ -std=gnu89 -Wno-return-type -Wno-implicit-function-declaration -Wno-incompatible-function-pointer-types -Wno-int-conversion -I../lib -I.. -I../iomedley 
+CFLAGS=@CFLAGS@ -std=gnu89 -I../lib -I.. -I../iomedley
 LDFLAGS=@LDFLAGS@ @XLIBS@ -L../lib -L../iomedley
 LIBS=-liomedley @LIBS@ -lXext -lXt -lXpm -lXfred -lX11 $(ISIS_LIB) -lm
 #

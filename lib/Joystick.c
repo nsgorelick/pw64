@@ -34,10 +34,9 @@ int XfDestroyJoystick(Joystick J)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(J->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -47,10 +46,9 @@ int XfDestroyJoystick(Joystick J)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(J->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -69,10 +67,9 @@ int XfDestroyJoystick(Joystick J)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(J->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -82,10 +79,9 @@ int XfDestroyJoystick(Joystick J)
         while (nn != NULL) {
             mm = nn->next;
             if (nn->vtype == XfXImageVisual)
-                XFree((char *) nn->visual.i_vis);
-            if ((nn->vtype == XfPixmapVisual) ||
-                (nn->vtype == XfTiledVisual) ||
-                (nn->vtype == XfStippledVisual) || (nn->vtype == XfOpaqueStippledVisual))
+                XFree((char *)nn->visual.i_vis);
+            if ((nn->vtype == XfPixmapVisual) || (nn->vtype == XfTiledVisual) || (nn->vtype == XfStippledVisual) ||
+                (nn->vtype == XfOpaqueStippledVisual))
                 XFreePixmap(J->display, nn->visual.p_vis.map);
             free(nn);
             nn = mm;
@@ -121,7 +117,7 @@ Joystick XfGetJoystick(char *name)
  * the joystick field or thumb, based on flag.
  */
 int XfAddJoystickVisual(Joystick J, struct VisualInfo *vis, int flag)
-                           /* 0 for field, 1 for thumb */
+/* 0 for field, 1 for thumb */
 {
     struct VisualInfo *loop;
 
@@ -192,12 +188,12 @@ Joystick XfEventJoystick(XEvent *E)
     return (NULL);
 }
 
-/* 
+/*
  * Add a callback to the list for the joystick specified. Return
  * an error for any of the many things that could go wrong.
  */
 int XfAddJoystickCallback(Joystick J, CallBack new, CallBack old)
-             /* The joystick */
+/* The joystick */
 {
     struct CallBackList *new_ptr;
     struct CallBackList *loop;
@@ -206,7 +202,7 @@ int XfAddJoystickCallback(Joystick J, CallBack new, CallBack old)
     if (J == NULL)
         return (False);
 
-    new_ptr = (struct CallBackList *) malloc(sizeof(struct CallBackList));
+    new_ptr = (struct CallBackList *)malloc(sizeof(struct CallBackList));
     if (new_ptr == NULL)
         return (False);
     new_ptr->proc = new;
@@ -271,7 +267,7 @@ int XfDelJoystickCallback(Joystick J, CallBack cb)
         loop = loopn;
         loopn = loop->next;
     }
-    return (False);             /* Callback was not found */
+    return (False); /* Callback was not found */
 }
 
 /*
@@ -287,7 +283,7 @@ int XfDeactivateJoystick(Joystick J)
     return (True);
 }
 
-/* 
+/*
  * Map the joystick's window, set it's event mask, and mark it active.
  */
 int XfActivateJoystickValue(Joystick J, int x, int y, long unsigned int mask)
@@ -316,7 +312,7 @@ Joystick XfCreateJoystick(Display *display, Window parent, int x, int y, int wid
     if ((thumb_width == 0) || (thumb_height == 0))
         return (NULL);
 
-    new = (Joystick) malloc(sizeof(struct _Joystick));
+    new = (Joystick)malloc(sizeof(struct _Joystick));
     if (new == NULL)
         return (NULL);
 
@@ -335,10 +331,11 @@ Joystick XfCreateJoystick(Display *display, Window parent, int x, int y, int wid
     new->thumb_max_y = height - thumb_height - 1;
     new->thumb_min_x = 0;
     new->thumb_min_y = 0;
-    new->field = (struct VisualInfo *) NULL;
-    new->thumb = (struct VisualInfo *) NULL;
-    new->CallBacks = (struct CallBackList *) NULL;
-    new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color, 0);
+    new->field = (struct VisualInfo *)NULL;
+    new->thumb = (struct VisualInfo *)NULL;
+    new->CallBacks = (struct CallBackList *)NULL;
+    new->window = XCreateSimpleWindow(display, parent, x, y, width, height, border_width, border_color,
+                                      XfDefaultWidgetBackground(display));
     new->exposeCallback = XF_CALLBACK(defaultJoystickCallback);
     new->updateCallback = XF_CALLBACK(defaultJoystickUpdateCallback);
     new->active = False;
@@ -360,12 +357,14 @@ Joystick XfCreateJoystick(Display *display, Window parent, int x, int y, int wid
  */
 void defaultJoystickCallback(Joystick J, XEvent *E)
 {
-    (void) E;
-    struct VisualInfo *vis;     /* For traversing linked lists */
-    GC localGC;                 /* Inherited from parent */
-    unsigned long bg;           /* Color for filling bar initially */
+    (void)E;
+    struct VisualInfo *vis; /* For traversing linked lists */
+    GC localGC; /* Inherited from parent */
+    unsigned long bg; /* Color for filling bar initially */
 
-    localGC = DefaultGC(J->display, DefaultScreen(J->display));
+    localGC = XCreateGC(J->display, J->window, 0, NULL);
+    if (localGC == NULL)
+        return;
     vis = J->field;
     if (vis != NULL)
         bg = vis->background;
@@ -376,6 +375,7 @@ void defaultJoystickCallback(Joystick J, XEvent *E)
     XFillRectangle(J->display, J->window, localGC, 0, 0, J->width, J->height);
 
     displayJoystick(J, localGC);
+    XFreeGC(J->display, localGC);
 }
 
 /*
@@ -385,20 +385,16 @@ void defaultJoystickUpdateCallback(Joystick J, XEvent *E)
 {
     GC localGC;
 
-    (void) E;
+    (void)E;
 
-    localGC = DefaultGC(J->display, DefaultScreen(J->display));
-    /*
-     * Why?
-     *
-     XSetForeground(J->display, localGC, bg);
-     XFillRectangle(J->display, J->window, localGC, J->thumb_cur_x,
-     J->thumb_cur_y, J->thumb_width, J->thumb_height);
-     */
+    localGC = XCreateGC(J->display, J->window, 0, NULL);
+    if (localGC == NULL)
+        return;
     J->thumb_cur_x = J->new_x;
     J->thumb_cur_y = J->new_y;
 
     displayJoystick(J, localGC);
+    XFreeGC(J->display, localGC);
 }
 
 /* Since so much code was common... */
@@ -407,10 +403,9 @@ void displayJoystick(Joystick J, GC localGC)
     int x_off, y_off;
     struct VisualInfo *vis;
     int i;
-    XCharStruct xcs;            /* Character structure for XQueryTextExtents */
-    int dir, asc, des;          /* Used in calls to XQueryTextExtents */
 
-    localGC = DefaultGC(J->display, DefaultScreen(J->display));
+    if (localGC == NULL)
+        return;
     vis = J->field;
     x_off = 0;
     y_off = 0;
@@ -424,58 +419,31 @@ void displayJoystick(Joystick J, GC localGC)
         while (vis != NULL) {
             switch (vis->vtype) {
             case XfXImageVisual:
-                XPutImage(J->display, J->window, localGC, vis->visual.i_vis, 0,
-                          0, (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                XPutImage(J->display, J->window, localGC, vis->visual.i_vis, 0, 0, (vis->x_pos + x_off),
+                          (vis->y_pos + y_off), vis->width, vis->height);
                 break;
             case XfPixmapVisual:
                 XSetForeground(J->display, localGC, vis->foreground);
                 XSetBackground(J->display, localGC, vis->background);
                 if (vis->visual.p_vis.depth == 1)
-                    XCopyPlane(J->display, vis->visual.p_vis.map, J->window,
-                               localGC, 0, 0, vis->width, vis->height, (vis->x_pos + x_off), (vis->y_pos + y_off), 1);
+                    XCopyPlane(J->display, vis->visual.p_vis.map, J->window, localGC, 0, 0, vis->width, vis->height,
+                               (vis->x_pos + x_off), (vis->y_pos + y_off), 1);
                 else
-                    XCopyArea(J->display, vis->visual.p_vis.map, J->window,
-                              localGC, 0, 0, vis->width, vis->height, (vis->x_pos + x_off), (vis->y_pos + y_off));
+                    XCopyArea(J->display, vis->visual.p_vis.map, J->window, localGC, 0, 0, vis->width, vis->height,
+                              (vis->x_pos + x_off), (vis->y_pos + y_off));
                 break;
             case XfTextVisual:
-                XSetFont(J->display, localGC, vis->visual.t_vis.font->fid);
-                XSetForeground(J->display, localGC, vis->foreground);
-                XTextExtents(vis->visual.t_vis.font, vis->visual.t_vis.text,
-                             strlen(vis->visual.t_vis.text), &dir, &asc, &des, &xcs);
-                switch (vis->visual.t_vis.align) {
-                case 0:        /* Center */
-                    dir = xcs.width / 2;
-                    if (vis->width == 0)
-                        asc = (vis->x_pos + x_off) + J->width / 2;
-                    else
-                        asc = (vis->x_pos + x_off) + vis->width / 2;
-                    asc -= dir;
-                    des = (vis->y_pos + y_off) + xcs.ascent;
-                    break;
-                case 1:        /* Left justify */
-                    asc = (vis->x_pos + x_off);
-                    des = (vis->y_pos + y_off) + xcs.ascent;
-                    break;
-                case 2:        /* Right justify */
-                    asc = vis->width;
-                    if (asc == 0)
-                        asc = J->width;
-                    asc -= xcs.width;
-                    des = (vis->y_pos + y_off) + xcs.ascent;
-                    break;
-                }
-                XDrawString(J->display, J->window, localGC, asc, des,
-                            vis->visual.t_vis.text, strlen(vis->visual.t_vis.text));
+                XfDrawTextVisual(J->display, J->window, localGC, J->width, J->height, vis, x_off, y_off);
                 break;
             case XfOutlineVisual:
             case XfSolidVisual:
                 XSetForeground(J->display, localGC, vis->foreground);
                 if (vis->vtype == XfSolidVisual)
-                    XFillRectangle(J->display, J->window, localGC,
-                                   (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                    XFillRectangle(J->display, J->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off),
+                                   vis->width, vis->height);
                 else
-                    XDrawRectangle(J->display, J->window, localGC,
-                                   (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                    XDrawRectangle(J->display, J->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off),
+                                   vis->width, vis->height);
                 break;
             case XfStippledVisual:
             case XfOpaqueStippledVisual:
@@ -484,15 +452,15 @@ void displayJoystick(Joystick J, GC localGC)
                 XSetStipple(J->display, localGC, vis->visual.p_vis.map);
                 XSetFillStyle(J->display, localGC,
                               ((vis->vtype == XfStippledVisual) ? FillStippled : FillOpaqueStippled));
-                XFillRectangle(J->display, J->window, localGC,
-                               (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                XFillRectangle(J->display, J->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width,
+                               vis->height);
                 XSetFillStyle(J->display, localGC, FillSolid);
                 break;
             case XfTiledVisual:
                 XSetTile(J->display, localGC, vis->visual.p_vis.map);
                 XSetFillStyle(J->display, localGC, FillTiled);
-                XFillRectangle(J->display, J->window, localGC,
-                               (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width, vis->height);
+                XFillRectangle(J->display, J->window, localGC, (vis->x_pos + x_off), (vis->y_pos + y_off), vis->width,
+                               vis->height);
                 XSetFillStyle(J->display, localGC, FillSolid);
                 break;
             }
@@ -520,11 +488,12 @@ int XfJoystickResponse(Joystick J, XEvent *E)
 
     switch (E->type) {
     case Expose:
-        (*(J->exposeCallback)) (J, E);
+        (*(J->exposeCallback))(J, E);
         return (True);
         break;
     case ButtonPress:
-        while (XCheckMaskEvent(J->display, ButtonMotionMask, &EE));
+        while (XCheckMaskEvent(J->display, ButtonMotionMask, &EE))
+            ;
         if (E->xbutton.button == Button3) {
             /* Move joystick along Y axis */
             x = J->thumb_cur_x;
@@ -533,14 +502,15 @@ int XfJoystickResponse(Joystick J, XEvent *E)
             /* Move joystick along X axis */
             y = J->thumb_cur_y;
             x = E->xbutton.x - (J->thumb_width / 2);
-        } else {                /* Button1 */
+        } else { /* Button1 */
             /* Move joystick in both X and Y */
             x = E->xbutton.x - (J->thumb_width / 2);
             y = E->xbutton.y - (J->thumb_height / 2);
         }
         break;
     case MotionNotify:
-        while (XCheckMaskEvent(J->display, ButtonMotionMask, E));
+        while (XCheckMaskEvent(J->display, ButtonMotionMask, E))
+            ;
         if (E->xmotion.state & Button1Mask) {
             /* Move joystick in both X and Y */
             x = E->xbutton.x - (J->thumb_width / 2);
@@ -567,13 +537,13 @@ int XfJoystickResponse(Joystick J, XEvent *E)
         y = J->thumb_max_y;
     J->new_x = x;
     J->new_y = y;
-    (*(J->updateCallback)) (J, E);
+    (*(J->updateCallback))(J, E);
 
     while (execs != NULL) {
         struct CallBackList *next_exec = execs->next;
 
         if (execs->proc != NULL)
-            (*(execs->proc)) (J, E);
+            (*(execs->proc))(J, E);
         execs = next_exec;
     }
     return (True);

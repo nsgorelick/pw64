@@ -21,8 +21,8 @@ struct tagLB {
     int pix_h;
 };
 
-#define XfResizeLB(LB, w, h)    XfPosLB(LB, MAXINT, MAXINT, w, h)
-#define XfMoveLB(LB, x, y)      XfPosLB(LB, x, y, MAXINT, MAXINT)
+#define XfResizeLB(LB, w, h) XfPosLB(LB, MAXINT, MAXINT, w, h)
+#define XfMoveLB(LB, x, y) XfPosLB(LB, x, y, MAXINT, MAXINT)
 
 /**
 *** Function declarations
@@ -32,4 +32,4 @@ int XfPushLB(LButton, XEvent *);
 void RedrawLB(LButton);
 Pixmap XfSetLBPixmap(LButton, Pixmap, int, int);
 
-#endif                          /* _LB_H_ */
+#endif /* _LB_H_ */

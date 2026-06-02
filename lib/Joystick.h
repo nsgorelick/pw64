@@ -18,29 +18,29 @@ typedef struct _Joystick *Joystick;
 
 /* The basis for a Joystick. That is to say, no definition, no joystick! */
 struct _Joystick {
-    Display *display;           /* Display the joystick is on */
-    Window window;              /* Window associated with joystick */
-    Window parent;              /* window's parent */
-    int active;                 /* Joystick active/not active */
-    int width, height;          /* Sizing of joystick */
-    int x, y;                   /* X and Y position within parent window */
-    int border_width;           /* width (in pixels) of border */
+    Display *display; /* Display the joystick is on */
+    Window window; /* Window associated with joystick */
+    Window parent; /* window's parent */
+    int active; /* Joystick active/not active */
+    int width, height; /* Sizing of joystick */
+    int x, y; /* X and Y position within parent window */
+    int border_width; /* width (in pixels) of border */
     unsigned long border_color; /* Color of border */
-    char name[256];             /* Name used to identify joystick */
-    char *ext;                  /* An externally-visible piece of data */
-    int *member;                /* A pseudo-class identifier */
-    int thumb_width;            /* Thumb size in X */
-    int thumb_height;           /* Thumb size in Y */
-    int thumb_max_x;            /* Maximum value along X axis */
-    int thumb_max_y;            /* Maximum value along Y axis */
-    int thumb_min_x;            /* Maximum value along X axis */
-    int thumb_min_y;            /* Maximum value along Y axis */
-    int thumb_cur_x;            /* Current pixel value along X axis */
-    int thumb_cur_y;            /* Current pixel value along Y axis */
-    int new_x;                  /* New X value prior to updating */
-    int new_y;                  /* New Y prior to updating */
-    struct VisualInfo *field;   /* Defining the background, or "field" */
-    struct VisualInfo *thumb;   /* The definition of the thumb */
+    char name[256]; /* Name used to identify joystick */
+    char *ext; /* An externally-visible piece of data */
+    int *member; /* A pseudo-class identifier */
+    int thumb_width; /* Thumb size in X */
+    int thumb_height; /* Thumb size in Y */
+    int thumb_max_x; /* Maximum value along X axis */
+    int thumb_max_y; /* Maximum value along Y axis */
+    int thumb_min_x; /* Maximum value along X axis */
+    int thumb_min_y; /* Maximum value along Y axis */
+    int thumb_cur_x; /* Current pixel value along X axis */
+    int thumb_cur_y; /* Current pixel value along Y axis */
+    int new_x; /* New X value prior to updating */
+    int new_y; /* New Y prior to updating */
+    struct VisualInfo *field; /* Defining the background, or "field" */
+    struct VisualInfo *thumb; /* The definition of the thumb */
     struct CallBackList *CallBacks;
     CallBack exposeCallback;
     CallBack updateCallback;
@@ -48,7 +48,7 @@ struct _Joystick {
 };
 
 /* The support routines for general no-good */
-Joystick XfCreateJoystick(Display * display, Window parent, int x, int y, int width, int height, int border_width,
+Joystick XfCreateJoystick(Display *display, Window parent, int x, int y, int width, int height, int border_width,
                           long unsigned int border_color, char *name, int thumb_width, int thumb_height);
 int XfDestroyJoystick(Joystick J);
 int XfActivateJoystickValue(Joystick J, int x, int y, long unsigned int mask);
@@ -56,22 +56,22 @@ int XfDeactivateJoystick(Joystick J);
 int XfAddJoystickVisual(Joystick J, struct VisualInfo *vis, int flag);
 int XfAddJoystickCallback(Joystick J, CallBack new, CallBack old);
 int XfDelJoystickCallback(Joystick J, CallBack cb);
-int XfJoystickResponse(Joystick J, XEvent * E);
+int XfJoystickResponse(Joystick J, XEvent *E);
 int XfMoveJoystick(Joystick J);
 Joystick XfGetJoystick(char *name);
-Joystick XfEventJoystick(XEvent * E);
+Joystick XfEventJoystick(XEvent *E);
 
-#define XfActivateJoystick(J, M)          XfActivateJoystickValue(J, 0, 0, M)
-#define XfAddJoystickFieldVisual(J, V)    XfAddJoystickVisual(J, V, 0)
-#define XfAddJoystickThumbVisual(J, V)    XfAddJoystickVisual(J, V, 1)
+#define XfActivateJoystick(J, M) XfActivateJoystickValue(J, 0, 0, M)
+#define XfAddJoystickFieldVisual(J, V) XfAddJoystickVisual(J, V, 0)
+#define XfAddJoystickThumbVisual(J, V) XfAddJoystickVisual(J, V, 1)
 
 /* The easy ones */
-#define XfJoystickUpperX(J)     (J)->thumb_cur_x
-#define XfJoystickUpperY(J)     (J)->thumb_cur_y
-#define XfJoystickLowerX(J)     ((J)->thumb_cur_x + (J)->thumb_width)
-#define XfJoystickLowerY(J)     ((J)->thumb_cur_y + (J)->thumb_height)
+#define XfJoystickUpperX(J) (J)->thumb_cur_x
+#define XfJoystickUpperY(J) (J)->thumb_cur_y
+#define XfJoystickLowerX(J) ((J)->thumb_cur_x + (J)->thumb_width)
+#define XfJoystickLowerY(J) ((J)->thumb_cur_y + (J)->thumb_height)
 
 /* The global list of joysticks */
 extern Joystick JoystickList;
 
-#endif                          /* _XF_JOYSTICK_H */
+#endif /* _XF_JOYSTICK_H */

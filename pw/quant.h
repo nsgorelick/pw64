@@ -9,4 +9,3 @@ struct quant_data {
     int count;
     int *pixels;
 };
-

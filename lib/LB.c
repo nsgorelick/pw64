@@ -16,9 +16,8 @@
  ** XfDestroyLB		- Deactivate, unmap and destroy a LabelButton
  **/
 
-LButton
-XfCreateLB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, char *text, int align,
-           XFontStruct *font)
+LButton XfCreateLB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, int fg, int bg, char *text,
+                   int align, XFontStruct *font)
 {
     LButton new;
     int dir, ascent, descent;
@@ -32,11 +31,11 @@ XfCreateLB(Display *d, Window win, int x, int y, int w, int h, int hi, int lo, i
         }
     }
 
-    new = (LButton) XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, NULL, XF_LB);
+    new = (LButton)XfCreateXB(d, win, x, y, w, h, hi, lo, fg, bg, NULL, XF_LB);
 
-        /**
-	 ** reset input to just expose and resize
-	 **/
+    /**
+     ** reset input to just expose and resize
+     **/
     XSelectInput(d, new->window, ExposureMask | StructureNotifyMask);
 
     if (text != NULL) {
@@ -69,7 +68,8 @@ int XfPushLB(LButton LB, XEvent *E)
 
     switch (E->type) {
     case Expose:
-        while (XCheckTypedWindowEvent(display, LB->window, Expose, &Ev));
+        while (XCheckTypedWindowEvent(display, LB->window, Expose, &Ev))
+            ;
         RedrawLB(LB);
         break;
 

@@ -56,6 +56,10 @@ iomedley/config.subsub
 # --- Built applications ---
 /pw/pw
 /sp/sp
+tests/run_tests
+tests/*.o
+lib/tests/run_xfred_tests
+lib/tests/*.o
 
 # libtiff built utilities (sources are *.c)
 iomedley/libtiff/tools/bmp2tiff

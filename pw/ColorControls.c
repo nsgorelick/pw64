@@ -1,54 +1,98 @@
-#include <X11/Xos.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include "Xfred.h"
-#include "color.h"
-#include "setcolor.h"
 #include "ColorControls.h"
-#include "image.h"
-#include <math.h>
+#include "Xfred.h"
 #include "bitmaps/bitmaps.h"
+#include "color.h"
 #include "composite.h"
+#include "display_rgb.h"
+#include "image.h"
+#include "mag.h"
+#include "setcolor.h"
+#include <X11/Xlib.h>
+#include <X11/Xos.h>
+#include <X11/Xutil.h>
+#include <math.h>
+#include <stdint.h>
 
 extern Display *display;
 extern XColor Colors[], pwBackground;
+extern int NColors;
+extern void LoadImageWindow(Image new);
+extern int update_display(Display *display, Image new);
+extern int load_pan(void);
+extern struct magnify *Mag;
+
+#define MIX_LUT_C1 0
+#define MIX_LUT_C2 1
 
 /*
  * load color:
  *    Take pixel value from B->ext, and load it into ColorSliders
  */
 
-static char    buf[256];
-static char    tbuf[256];
+static char buf[256];
+static char tbuf[256];
 void AMapReadoutUpdate(AMap A, XEvent *E);
 void ActivateHistList(Button B, XEvent *E);
 void DeactivateHistList(Button B, XEvent *E);
 void color_sliders(Slider s, XEvent *e);
 
+extern int FlagForLoad(Requestor R, int i);
+int colorspread(struct ColorControls *CC);
+extern int RGBToXColor(RGB r, XColor *x);
+extern int CreateCSData(Display *display, int ncolors, XColor *colors, int width, int height, char *CSData);
+extern int create_hist(Display *display, Image new, int size, int type, int scale);
+extern int load_histogram(void);
+extern int RGB_CS(Display *display, Colormap CMap, XColor *start, XColor *end, int ncolors, XColor *colors, int rgb,
+                  int *map);
+int CompositeCS(struct ColorControls *CC);
 
-extern int FlagForLoad (Requestor R, int i);
-int colorspread (struct ColorControls *CC);
-extern int RGBToXColor (RGB r, XColor *x);
-extern int CreateCSData (Display *display, int ncolors, XColor *colors, int width, int height, char *CSData);
-extern int create_hist (Display *display, Image new, int size, int type, int scale);
-extern int load_histogram (void);
-extern int RGB_CS (Display *display, Colormap CMap, XColor *start, XColor *end, int ncolors, XColor *colors, int rgb, int *map);
-int CompositeCS (struct ColorControls *CC);
+static void refresh_cs_visual(struct ColorControls *CC)
+{
+    struct VisualInfo *vis;
+    XImage *xim;
 
-void
-GetLowScale(Button B, XEvent *E)
+    if (CC == NULL || CC->Colorspread == NULL || CC->CSData == NULL)
+        return;
+    vis = (CC->Colorspread->States[0])->Visuals;
+    if (vis == NULL)
+        return;
+    if (vis->vtype == XfXImageVisual && vis->visual.i_vis != NULL) {
+        if (vis->visual.i_vis->data != CC->CSData)
+            pw_free_rgb_image(vis->visual.i_vis);
+        else
+            XFree((char *)vis->visual.i_vis);
+    } else if (vis->vtype != XfSolidVisual)
+        return;
+
+    xim = pw_create_rgb_image(CC->display, (unsigned char *)CC->CSData, CC->CSWidth, CC->CSHeight);
+    vis->vtype = XfXImageVisual;
+    vis->visual.i_vis = xim;
+}
+
+static void refresh_display_lut(struct ColorControls *CC)
+{
+    if (CC == NULL || CC->image == NULL || CC->image->sdata == NULL)
+        return;
+    update_display(CC->display, CC->image);
+    LoadImageWindow(CC->image);
+    load_pan();
+    if (Mag != NULL && Mag->state && Mag->image == CC->image)
+        SetMagnify(CC->display, CC->image, Mag, Mag->x, Mag->y);
+}
+
+void GetLowScale(Button B, XEvent *E)
 {
     extern Requestor requestor;
     struct ColorControls *CC = (struct ColorControls *)B->member;
 
-    if (CC->image == NULL) 
+    if (CC->image == NULL)
         return;
     if (GetText(B, E, buf, 256, 0) == -1)
         return;
-/*    sprintf(tbuf, "%.3g", atof(buf));		****ORIGINAL*****/
-    sprintf(tbuf, "%f", atof(buf));		/**Modified 9/13/99***/
+    /*    sprintf(tbuf, "%.3g", atof(buf));		****ORIGINAL*****/
+    sprintf(tbuf, "%f", atof(buf)); /**Modified 9/13/99***/
 
-    if (atof(buf) == CC->image->s_high || atof(buf) == CC->image->s_low) 
+    if (atof(buf) == CC->image->s_high || atof(buf) == CC->image->s_low)
         return;
 
     SetButtonText(B, tbuf);
@@ -56,22 +100,20 @@ GetLowScale(Button B, XEvent *E)
     FlagForLoad(requestor, CC->image_index);
 }
 
-
-void
-GetHighScale(Button B, XEvent *E)
+void GetHighScale(Button B, XEvent *E)
 {
     extern Requestor requestor;
     struct ColorControls *CC = (struct ColorControls *)B->member;
 
-    if (CC->image == NULL) 
+    if (CC->image == NULL)
         return;
 
     if (GetText(B, E, buf, 256, 0) == -1)
         return;
-/*  sprintf(tbuf, "%.3g", atof(buf));		****ORIGINAL****/	
-    sprintf(tbuf, "%f", atof(buf));		/****Modified 9/13/99***/
+    /*  sprintf(tbuf, "%.3g", atof(buf));		****ORIGINAL****/
+    sprintf(tbuf, "%f", atof(buf)); /****Modified 9/13/99***/
 
-    if (atof(buf) == CC->image->s_high || atof(buf) == CC->image->s_low) 
+    if (atof(buf) == CC->image->s_high || atof(buf) == CC->image->s_low)
         return;
 
     SetButtonText(B, tbuf);
@@ -79,44 +121,33 @@ GetHighScale(Button B, XEvent *E)
     FlagForLoad(requestor, CC->image_index);
 }
 
+void SetLowScale(Button B, XEvent *E) {}
 
-void
-SetLowScale(Button B, XEvent *E)
+void SetHighScale(Button B, XEvent *E) {}
+
+void change_space(Button b, XEvent *e)
 {
-
-}
-
-
-void
-SetHighScale(Button B, XEvent *E)
-{
-
-}
-
-void
-change_space(Button b, XEvent *e)
-{
-    /* 
- * Change slider values to new space.  
- * ('HSV s' is used for final floats cuz its already there.)
- */
+    /*
+     * Change slider values to new space.
+     * ('HSV s' is used for final floats cuz its already there.)
+     */
     RGB r;
     HSV s;
     struct ColorControls *CC = (struct ColorControls *)b->member;
 
-    if (b->state) {     /* change to HSV space*/
+    if (b->state) { /* change to HSV space */
         r.r = XfGetSliderValue(CC->RedSlider);
         r.g = XfGetSliderValue(CC->GreenSlider);
         r.b = XfGetSliderValue(CC->BlueSlider);
         s = RGBToHSV(r);
-    } else {            /* change To RGB space */
+    } else { /* change To RGB space */
         s.h = CC->RedSlider->value;
         s.s = CC->GreenSlider->value;
         s.v = CC->BlueSlider->value;
         r = HSVToRGB(s);
-        s.h = (float) r.r / (float)MAX_INTENSITY;
-        s.s = (float) r.g / (float)MAX_INTENSITY;
-        s.v = (float) r.b / (float)MAX_INTENSITY;
+        s.h = (float)r.r / (float)MAX_INTENSITY;
+        s.s = (float)r.g / (float)MAX_INTENSITY;
+        s.v = (float)r.b / (float)MAX_INTENSITY;
     }
 
     XfSetSliderValue(CC->RedSlider, s.h);
@@ -126,11 +157,9 @@ change_space(Button b, XEvent *e)
     color_sliders(CC->RedSlider, NULL);
 }
 
-
-void
-load_color(Button B, XEvent *e)
+void load_color(Button B, XEvent *e)
 {
-    XColor * xc;
+    XColor *xc;
     RGB p;
     HSV q;
 
@@ -149,19 +178,22 @@ load_color(Button B, XEvent *e)
         q.s = (float)(CC->image->color_offsets[1] + 0xFFFF) / (float)(2 * 0xFFFF);
         q.v = (float)(CC->image->color_offsets[2] + 0xFFFF) / (float)(2 * 0xFFFF);
     } else {
-        CC->MixBox->ext = (char *)xc->pixel;
-        (CC->MixBox->States[0])->Visuals->foreground = xc->pixel;
+        if (xc == CC->C1)
+            CC->MixBox->ext = PW_CAST_INT(MIX_LUT_C1);
+        else
+            CC->MixBox->ext = PW_CAST_INT(MIX_LUT_C2);
+        (CC->MixBox->States[0])->Visuals->foreground = BLACK(CC->display);
         UpdateButton(CC->MixBox);
 
-        if (CC->SliderSpace->state) {       /* In HSV space */
+        if (CC->SliderSpace->state) { /* In HSV space */
             p.r = xc->red;
             p.g = xc->green;
             p.b = xc->blue;
             q = RGBToHSV(p);
         } else {
-            q.h = (float) xc->red / (float)MAX_INTENSITY;
-            q.s = (float) xc->green / (float)MAX_INTENSITY;
-            q.v = (float) xc->blue / (float)MAX_INTENSITY;
+            q.h = (float)xc->red / (float)MAX_INTENSITY;
+            q.s = (float)xc->green / (float)MAX_INTENSITY;
+            q.v = (float)xc->blue / (float)MAX_INTENSITY;
         }
     }
 
@@ -172,9 +204,7 @@ load_color(Button B, XEvent *e)
     color_sliders(CC->RedSlider, NULL);
 }
 
-
-void
-hsv_spread(Button b, XEvent *e)
+void hsv_spread(Button b, XEvent *e)
 {
 
     /* this is the callback for the SpreadSpace controls */
@@ -184,17 +214,14 @@ hsv_spread(Button b, XEvent *e)
     colorspread(CC);
 }
 
-
-void
-color_sliders(Slider s, XEvent *e)
+void color_sliders(Slider s, XEvent *e)
 {
     int i;
-    float   f[3];
+    float f[3];
     Button b[3];
-    unsigned short  color[3];
-    XColor * xc, t;
+    unsigned short color[3];
+    XColor *xc, t;
     struct ColorControls *CC = (struct ColorControls *)s->member;
-
 
     b[0] = CC->RedVal;
     b[1] = CC->GreenVal;
@@ -203,11 +230,10 @@ color_sliders(Slider s, XEvent *e)
     if (CC->image == NULL)
         return;
     if (CC->image->composite == 0) {
-        if ((unsigned long)CC->MixBox->ext == Colors[0].pixel) {
+        if ((intptr_t)CC->MixBox->ext == MIX_LUT_C1)
             xc = &(CC->image->C1);
-        } else {
+        else
             xc = &(CC->image->C2);
-        }
 
         if (CC->SliderSpace->state) {
             HSV r;
@@ -220,137 +246,142 @@ color_sliders(Slider s, XEvent *e)
             f[1] = r.s;
             f[2] = r.v;
 
-            for (i = 0 ; i < 3 ; i++) {
-              sprintf((b[i]->States[0])->Visuals->visual.t_vis.text,
-                      "%-1.2f", f[i]);
-              UpdateButton(b[i]);
+            for (i = 0; i < 3; i++) {
+                sprintf((b[i]->States[0])->Visuals->visual.t_vis.text, "%-1.2f", f[i]);
+                UpdateButton(b[i]);
             }
         } else {
-          xc->red  = (unsigned short) XfGetSliderValue(CC->RedSlider);
-          xc->blue  = (unsigned short) XfGetSliderValue(CC->BlueSlider);
-          xc->green  = (unsigned short) XfGetSliderValue(CC->GreenSlider);
+            xc->red = (unsigned short)XfGetSliderValue(CC->RedSlider);
+            xc->blue = (unsigned short)XfGetSliderValue(CC->BlueSlider);
+            xc->green = (unsigned short)XfGetSliderValue(CC->GreenSlider);
 
-          color[0] = xc->red >> 8;
-          color[1] = xc->green >> 8;
-          color[2] = xc->blue >> 8;
+            color[0] = xc->red >> 8;
+            color[1] = xc->green >> 8;
+            color[2] = xc->blue >> 8;
 
-          for (i = 0 ; i < 3 ; i++) {
-            sprintf((b[i]->States[0])->Visuals->visual.t_vis.text,
-                    "%d", color[i]);
-            UpdateButton(b[i]);
-          }
+            for (i = 0; i < 3; i++) {
+                sprintf((b[i]->States[0])->Visuals->visual.t_vis.text, "%d", color[i]);
+                UpdateButton(b[i]);
+            }
         }
 
         /*
-        SEtcolor(CC->display,CC->ColorMap, xc->red,0,0, CC->RedSliderColor);
-        setcolor(CC->display,CC->ColorMap, 0,xc->green,0, CC->GreenSliderColor);
-        setcolor(CC->display,CC->ColorMap, 0,0,xc->blue, CC->BlueSliderColor);
-*/
-        setcolor(CC->display, CC->ColorMap, xc->red, xc->green, xc->blue, (*xc));
+           SEtcolor(CC->display,CC->ColorMap, xc->red,0,0, CC->RedSliderColor);
+           setcolor(CC->display,CC->ColorMap, 0,xc->green,0, CC->GreenSliderColor);
+           setcolor(CC->display,CC->ColorMap, 0,0,xc->blue, CC->BlueSliderColor);
+         */
+        setcolor_lut(xc->red, xc->green, xc->blue, *xc);
     } else {
         f[0] = CC->RedSlider->value;
         f[1] = CC->GreenSlider->value;
         f[2] = CC->BlueSlider->value;
 
+        for (i = 0; i < 3; i++) {
+            CC->image->color_offsets[i] = (int)(f[i] * (float)(0xFFFF * 2)) - 0xFFFF;
 
-        for (i = 0 ; i < 3 ; i++) {
-          CC->image->color_offsets[i] = (int)
-              (f[i] * (float)(0xFFFF * 2)) - 0xFFFF;
-
-          sprintf((b[i]->States[0])->Visuals->visual.t_vis.text,
-                  "%-1.2f", (f[i] * 2 - 1.0));
-          UpdateButton(b[i]);
+            sprintf((b[i]->States[0])->Visuals->visual.t_vis.text, "%-1.2f", (f[i] * 2 - 1.0));
+            UpdateButton(b[i]);
         }
     }
     colorspread(CC);
 }
 
+char *color_names[5] = {"Black", "White", "Red", "Green", "Blue"};
 
-char    *color_names[5] = {
-    "Black",
-    "White",
-    "Red",
-    "Green",
-    "Blue"
-};
-
-
-void
-selected_color(Button B, XEvent *E)
+void selected_color(Button B, XEvent *E)
 {
     int i;
     XColor xc;
     struct ColorControls *CC;
     CC = (struct ColorControls *)B->member;
 
-
     sscanf(B->name, "PICK%d", &i);
-
 
     xc.pixel = (B->States[0])->Visuals->foreground;
 
     XQueryColor(CC->display, CC->ColorMap, &xc);
 
     if (i % 2) {
-        xc.pixel = (unsigned long)CC->C2->pixel;
-        XStoreColor(CC->display, CC->ColorMap, &xc);
+        *CC->C2 = xc;
         load_color(CC->CSHigh, NULL);
     } else {
-        xc.pixel = (unsigned long)CC->C1->pixel;
-        XStoreColor(CC->display, CC->ColorMap, &xc);
+        *CC->C1 = xc;
         load_color(CC->CSLow, NULL);
     }
 
     colorspread(CC);
 }
 
-
-void
-select_window(Button B, XEvent *E)
+void select_window(Button B, XEvent *E)
 {
     Button b[11];
     XEvent e;
     int i;
-    unsigned long   pixels[5];
+    unsigned long pixels[5];
     struct ColorControls *CC;
 
     CC = (struct ColorControls *)B->member;
 
-    if (!XAllocColorCells(CC->display, CC->ColorMap, False, 0, 0, pixels, 5))
-        return;
+    for (i = 0; i < 5; i++) {
+        XColor sc;
 
-    b[0] = XfCreateButton(CC->display, B->parent, (B->x + 10), (B->y) + 10, 40, 100,
-        1, BLACK(display), "Selection", 1);
-
-    XfAddButtonVisual(  b[0], 0, XfCreateVisual(
-        b[0], 0, 0, 0, 0, WHITE(display), BLACK(display),
-        XfSolidVisual));
-
-    for (i = 0 ; i < 10 ; i++) {
-        char    buf[256];
-        XStoreNamedColor(CC->display, CC->ColorMap, color_names[i/2],
-            pixels[i/2], DoRed | DoBlue | DoGreen);
-
-        sprintf(buf, "PICK%d", i);
-        b[i+1] = XfCreateButton(CC->display, b[0]->window, 
-            (i % 2) * 20 + 5, (i / 2) * 20 + 5, 10, 10, 1, BLACK(display), buf, 1);
-
-        XfAddButtonCallback(b[i+1], 0, selected_color, NULL);
-        XfAddButtonVisual(  b[i+1], 0, XfCreateVisual(
-            b[i+1], 0, 0, 0, 0, pixels[i/2], BLACK(display),
-            XfSolidVisual));
-        b[i+1]->member = (int *)CC;
+        sc.flags = DoRed | DoGreen | DoBlue;
+        switch (i) {
+        case 0:
+            sc.red = 0;
+            sc.green = 0;
+            sc.blue = 0;
+            break;
+        case 1:
+            sc.red = MAX_INTENSITY;
+            sc.green = MAX_INTENSITY;
+            sc.blue = MAX_INTENSITY;
+            break;
+        case 2:
+            sc.red = MAX_INTENSITY;
+            sc.green = 0;
+            sc.blue = 0;
+            break;
+        case 3:
+            sc.red = 0;
+            sc.green = MAX_INTENSITY;
+            sc.blue = 0;
+            break;
+        default:
+            sc.red = 0;
+            sc.green = 0;
+            sc.blue = MAX_INTENSITY;
+            break;
+        }
+        if (!XAllocColor(CC->display, CC->ColorMap, &sc))
+            return;
+        pixels[i] = sc.pixel;
     }
 
-    XfActivateButton(b[0], (ButtonPressMask | ExposureMask | ButtonReleaseMask) );
+    b[0] = XfCreateButton(CC->display, B->parent, (B->x + 10), (B->y) + 10, 40, 100, 1, BLACK(display), "Selection", 1);
 
-    for (i = 0 ; i < 10 ; i++)
-        XfActivateButton(b[i+1], 
-            (ButtonPressMask | ExposureMask | ButtonReleaseMask));
+    XfAddButtonVisual(b[0], 0, XfCreateVisual(b[0], 0, 0, 0, 0, WHITE(display), BLACK(display), XfSolidVisual));
 
-    XGrabPointer(CC->display, b[0]->window, True, 
-        (ButtonPressMask | ButtonReleaseMask), GrabModeAsync, GrabModeAsync, 
-        b[0]->window, None, CurrentTime);
+    for (i = 0; i < 10; i++) {
+        char buf[256];
+
+        sprintf(buf, "PICK%d", i);
+        b[i + 1] = XfCreateButton(CC->display, b[0]->window, (i % 2) * 20 + 5, (i / 2) * 20 + 5, 10, 10, 1,
+                                  BLACK(display), buf, 1);
+
+        XfAddButtonCallback(b[i + 1], 0, XF_CALLBACK(selected_color), NULL);
+        XfAddButtonVisual(b[i + 1], 0,
+                          XfCreateVisual(b[i + 1], 0, 0, 0, 0, pixels[i / 2], BLACK(display), XfSolidVisual));
+        b[i + 1]->member = (int *)CC;
+    }
+
+    XfActivateButton(b[0], (ButtonPressMask | ExposureMask | ButtonReleaseMask));
+
+    for (i = 0; i < 10; i++)
+        XfActivateButton(b[i + 1], (ButtonPressMask | ExposureMask | ButtonReleaseMask));
+
+    XGrabPointer(CC->display, b[0]->window, True, (ButtonPressMask | ButtonReleaseMask), GrabModeAsync, GrabModeAsync,
+                 b[0]->window, None, CurrentTime);
 
     while (1) {
         XNextEvent(CC->display, &e);
@@ -358,7 +389,7 @@ select_window(Button B, XEvent *E)
         if (e.type == ButtonPress || e.type == ButtonRelease)
             break;
     }
-    for (i = 1 ; i < 11 ; i++) {
+    for (i = 1; i < 11; i++) {
         XfDeactivateButton(b[i]);
         XfDestroyButton(b[i]);
     }
@@ -368,13 +399,11 @@ select_window(Button B, XEvent *E)
     XUngrabPointer(CC->display, CurrentTime);
 }
 
+char *ColorControlsText[] = {"RED", "GRN", "BLU", "HUE", "SAT", "VAL"};
 
-char    *ColorControlsText[] = {
-    "RED", "GRN", "BLU", "HUE", "SAT", "VAL" };
-
-
-struct ColorControls *
-InitColorControls(Display *d, Window w, XFontStruct *font, Colormap ColorMap, int x, int y, char *name, XColor RedSliderColor, XColor GreenSliderColor, XColor BlueSliderColor)
+struct ColorControls *InitColorControls(Display *d, Window w, XFontStruct *font, Colormap ColorMap, int x, int y,
+                                        char *name, XColor RedSliderColor, XColor GreenSliderColor,
+                                        XColor BlueSliderColor)
 {
     Button b;
     int i;
@@ -382,36 +411,33 @@ InitColorControls(Display *d, Window w, XFontStruct *font, Colormap ColorMap, in
     int width, height;
     int Border = 1;
     int text_offset = 3;
-    char    buf[256];
+    char buf[256];
     struct ColorControls *CC;
 
-    CC = (struct ColorControls *)malloc(sizeof(struct ColorControls ));
+    CC = (struct ColorControls *)malloc(sizeof(struct ColorControls));
 
     display = d;
 
     width = 35;
     height = 47;
 
-    b = XfCreateButton(display, w, x_pos, y_pos, width, height,
-        Border, BLACK(display), "SliderSpace", 2);
+    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "SliderSpace", 2);
 
-    XfAddButtonCallback(b, 0, toggle_state, NULL);
-    XfAddButtonCallback(b, 1, toggle_state, NULL);
-    XfAddButtonCallback(b, 0, change_space, NULL);
-    XfAddButtonCallback(b, 1, change_space, NULL);
+    XfAddButtonCallback(b, 0, XF_CALLBACK(toggle_state), NULL);
+    XfAddButtonCallback(b, 1, XF_CALLBACK(toggle_state), NULL);
+    XfAddButtonCallback(b, 0, XF_CALLBACK(change_space), NULL);
+    XfAddButtonCallback(b, 1, XF_CALLBACK(change_space), NULL);
 
     /* Add Text visuals for RGB/HSV button: 0,1,2 is RGB, 3,4,5 is HSV */
 
-    for (i = 0 ; i < 6 ; i++) {
-        XfAddButtonVisual(b, (i / 3), XfCreateVisual( 
-            b, 0, (i % 3 * 15) + text_offset, 0, 15, BLACK(display), 
-            WHITE(display), 
-            XfTextVisual, ColorControlsText[i], font, 0));
+    for (i = 0; i < 6; i++) {
+        XfAddButtonVisual(b, (i / 3),
+                          XfCreateVisual(b, 0, (i % 3 * 15) + text_offset, 0, 15, BLACK(display), WHITE(display),
+                                         XfTextVisual, ColorControlsText[i], font, 0));
     }
-    XfActivateButton(b, (ButtonPressMask | ExposureMask) );
+    XfActivateButton(b, (ButtonPressMask | ExposureMask));
     b->member = (int *)CC;
     CC->SliderSpace = b;
-
 
     /* color boxes */
 
@@ -420,30 +446,25 @@ InitColorControls(Display *d, Window w, XFontStruct *font, Colormap ColorMap, in
     width = 10;
     height = 15;
 
-     {
+    {
         Button b[3];
 
-        b[0] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border,
-            BLACK(display), "RedColor", 1);
+        b[0] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "RedColor", 1);
         y_pos += height + Border;
-        b[1] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border,
-            BLACK(display), "GreenColor", 1);
+        b[1] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "GreenColor", 1);
         y_pos += height + Border;
-        b[2] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border,
-            BLACK(display), "BlueColor", 1);
+        b[2] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "BlueColor", 1);
 
-         {
-            unsigned int    colors[3];
+        {
+            unsigned int colors[3];
 
             colors[0] = RedSliderColor.pixel;
             colors[1] = GreenSliderColor.pixel;
             colors[2] = BlueSliderColor.pixel;
 
-            for (i = 0 ; i < 3 ; i++) {
-                XfAddButtonVisual(b[i], 0, XfCreateVisual(
-                    b[i], 0, 0, 0, 0, colors[i], BLACK(display),
-                    XfSolidVisual));
-                XfActivateButton(b[i], (ExposureMask) );
+            for (i = 0; i < 3; i++) {
+                XfAddButtonVisual(b[i], 0, XfCreateVisual(b[i], 0, 0, 0, 0, colors[i], BLACK(display), XfSolidVisual));
+                XfActivateButton(b[i], (ExposureMask));
                 b[i]->member = (int *)CC;
             }
         }
@@ -459,33 +480,26 @@ InitColorControls(Display *d, Window w, XFontStruct *font, Colormap ColorMap, in
     width = 130;
     height = 15;
 
-     {
+    {
         Slider s[3];
-        s[0] = XfCreateSlider(display, w, x_pos, y_pos, width, height, 
-            1, BLACK(display),
-            "RedSlider", XfSliderLeftRight, 0.0, 65535.0, 255.0, 10, height);
+        s[0] = XfCreateSlider(display, w, x_pos, y_pos, width, height, 1, BLACK(display), "RedSlider",
+                              XfSliderLeftRight, 0.0, 65535.0, 255.0, 10, height);
         y_pos += height + Border;
-        s[1] = XfCreateSlider(display, w, x_pos, y_pos, width, height, 
-            1, BLACK(display),
-            "GreenSlider", XfSliderLeftRight, 0.0, 65535.0, 255.0, 10, height);
+        s[1] = XfCreateSlider(display, w, x_pos, y_pos, width, height, 1, BLACK(display), "GreenSlider",
+                              XfSliderLeftRight, 0.0, 65535.0, 255.0, 10, height);
         y_pos += height + Border;
-        s[2] = XfCreateSlider(display, w, x_pos, y_pos, width, height, 
-            1, BLACK(display),
-            "BlueSlider", XfSliderLeftRight, 0.0, 65535.0, 255.0, 10, height);
+        s[2] = XfCreateSlider(display, w, x_pos, y_pos, width, height, 1, BLACK(display), "BlueSlider",
+                              XfSliderLeftRight, 0.0, 65535.0, 255.0, 10, height);
 
-        for (i = 0 ; i < 3 ; i++) {
-            XfAddSliderBarVisual(s[i],
-                XfCreateVisual(s[i], 0, 0, 0, 0, WHITE(display),
-                BLACK(display), XfStippledVisual, "\252\125", 2, 2));
-            XfAddSliderThumbVisual(s[i],
-                XfCreateVisual(s[i], 0, 0, 10, height, BLACK(display),
-                (unsigned long)1, XfSolidVisual));
-            XfAddSliderThumbVisual(s[i],
-                XfCreateVisual(s[i], 1, 0, 8, height, WHITE(display),
-                (unsigned long)1, XfSolidVisual));
-            XfAddSliderCallback(s[i], color_sliders, NULL);
-            XfActivateSlider(s[i], 
-                (ExposureMask | ButtonPressMask |  ButtonMotionMask));
+        for (i = 0; i < 3; i++) {
+            XfAddSliderBarVisual(s[i], XfCreateVisual(s[i], 0, 0, 0, 0, WHITE(display), BLACK(display),
+                                                      XfStippledVisual, "\252\125", 2, 2));
+            XfAddSliderThumbVisual(
+                s[i], XfCreateVisual(s[i], 0, 0, 10, height, BLACK(display), BLACK(display), XfSolidVisual));
+            XfAddSliderThumbVisual(
+                s[i], XfCreateVisual(s[i], 1, 0, 8, height, WHITE(display), (unsigned long)1, XfSolidVisual));
+            XfAddSliderCallback(s[i], XF_CALLBACK(color_sliders), NULL);
+            XfActivateSlider(s[i], (ExposureMask | ButtonPressMask | ButtonMotionMask));
 
             s[i]->member = (int *)CC;
         }
@@ -502,11 +516,9 @@ InitColorControls(Display *d, Window w, XFontStruct *font, Colormap ColorMap, in
     width = 10;
     height = 47;
 
-    b = XfCreateButton(display, w, x_pos, y_pos, width, height,
-        1, BLACK(display), "MixBox", 1);
-    XfAddButtonVisual(b, 0,
-        XfCreateVisual(b, 0, 0, 0, 0, BLACK(display), BLACK(display), XfSolidVisual));
-    XfActivateButton(b, (ButtonPressMask | ExposureMask) );
+    b = XfCreateButton(display, w, x_pos, y_pos, width, height, 1, BLACK(display), "MixBox", 1);
+    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 0, 0, 0, BLACK(display), BLACK(display), XfSolidVisual));
+    XfActivateButton(b, (ButtonPressMask | ExposureMask));
     b->member = (int *)CC;
     CC->MixBox = b;
 
@@ -515,23 +527,20 @@ InitColorControls(Display *d, Window w, XFontStruct *font, Colormap ColorMap, in
     width = 35;
     height = 15;
 
-
-     {
+    {
         Button b[3];
 
-        b[0] = XfCreateButton(display, w, x_pos, y_pos, width, height,
-            Border, BLACK(display), "RedVal", 1);
+        b[0] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "RedVal", 1);
         y_pos += height + Border;
-        b[1] = XfCreateButton(display, w, x_pos, y_pos, width, height,
-            Border, BLACK(display), "GreenVal", 1);
+        b[1] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "GreenVal", 1);
         y_pos += height + Border;
-        b[2] = XfCreateButton(display, w, x_pos, y_pos, width, height,
-            Border, BLACK(display), "BlueVal", 1);
+        b[2] = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "BlueVal", 1);
 
-        for (i = 0 ; i < 3 ; i++) {
-            XfAddButtonVisual(b[i], 0, XfCreateVisual(b[i], 0, 0 + text_offset, 0, 0,
-                BLACK(display), WHITE(display), XfTextVisual, "255", font, 0));
-            XfActivateButton(b[i], (ButtonPressMask | ExposureMask) );
+        for (i = 0; i < 3; i++) {
+            XfAddButtonVisual(b[i], 0,
+                              XfCreateVisual(b[i], 0, 0 + text_offset, 0, 0, BLACK(display), WHITE(display),
+                                             XfTextVisual, "255", font, 0));
+            XfActivateButton(b[i], (ButtonPressMask | ExposureMask));
             b[i]->member = (int *)CC;
         }
         CC->RedVal = b[0];
@@ -547,12 +556,11 @@ InitColorControls(Display *d, Window w, XFontStruct *font, Colormap ColorMap, in
     CC->RedSliderColor = RedSliderColor;
     CC->BlueSliderColor = BlueSliderColor;
     CC->GreenSliderColor = GreenSliderColor;
-    return(CC);
+    return (CC);
 }
 
-
-int
-InitColorSpread(Display *display, Window w, XFontStruct *font, Colormap ColorMap, int x, int y, struct ColorControls *CC)
+int InitColorSpread(Display *display, Window w, XFontStruct *font, Colormap ColorMap, int x, int y,
+                    struct ColorControls *CC)
 {
     Button b;
     int Border = 1;
@@ -560,17 +568,15 @@ InitColorSpread(Display *display, Window w, XFontStruct *font, Colormap ColorMap
     int y_pos = y;
     int width;
     int height;
-    char    *CSData;
+    char *CSData;
 
     width = 35;
     height = 15;
-    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, 
-        BLACK(display), "ColorSelection", 1);
+    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "ColorSelection", 1);
     XfAddButtonVisual(b, 0,
-        XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display),
-        XfTextVisual, "PICK", font, 0));
-    XfAddButtonCallback(b, 0, select_window, NULL);
-    XfActivateButton(b, (ButtonPressMask | ExposureMask) );
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "PICK", font, 0));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(select_window), NULL);
+    XfActivateButton(b, (ButtonPressMask | ExposureMask));
     b->member = (int *)CC;
     CC->ColorSelection = b;
 
@@ -578,16 +584,12 @@ InitColorSpread(Display *display, Window w, XFontStruct *font, Colormap ColorMap
     width = 10;
     height = 15;
 
-    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border,
-        BLACK(display), "CSLow", 1);
+    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "CSLow", 1);
     XfAddButtonVisual(b, 0,
-        XfCreateVisual(b, 1, 1, width - 2, height - 2, BLACK(display),
-        BLACK(display), XfSolidVisual));
-    XfAddButtonVisual(b, 0,
-        XfCreateVisual(b, 0, 0, 0, 0, WHITE(display), BLACK(display),
-        XfOutlineVisual));
-    XfAddButtonCallback(b, 0, load_color, NULL);
-    XfActivateButton(b, (ButtonPressMask | ExposureMask) );
+                      XfCreateVisual(b, 1, 1, width - 2, height - 2, BLACK(display), BLACK(display), XfSolidVisual));
+    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 0, 0, 0, WHITE(display), BLACK(display), XfOutlineVisual));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(load_color), NULL);
+    XfActivateButton(b, (ButtonPressMask | ExposureMask));
     b->member = (int *)CC;
     CC->CSLow = b;
 
@@ -595,103 +597,120 @@ InitColorSpread(Display *display, Window w, XFontStruct *font, Colormap ColorMap
     width = 130;
     height = 15;
 
-    CSData = (char *)malloc(width * height);
+    CSData = (char *)malloc((unsigned int)(width * height * 4));
     if (CSData == NULL) {
         printf("GAG\n");
     }
     CC->CSWidth = width;
     CC->CSHeight = height;
 
-    b = XfCreateButton(display, w, x_pos, y_pos, width, height, 1, 
-        BLACK(display), "ColorSpread", 1);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 0, width, height,
-        WHITE(display), BLACK(display), XfXImageVisual, 8, ZPixmap, CSData));
-    XfActivateButton(b, (ButtonPressMask | ExposureMask) );
+    b = XfCreateButton(display, w, x_pos, y_pos, width, height, 1, BLACK(display), "ColorSpread", 1);
+    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 0, width, height, WHITE(display), BLACK(display), XfSolidVisual));
     b->member = (int *)CC;
     CC->Colorspread = b;
+    CC->CSData = CSData;
+    CC->display = display;
+    if (CSData != NULL) {
+        XColor white;
+        int k;
+
+        white.red = white.green = white.blue = MAX_INTENSITY;
+        white.flags = DoRed | DoGreen | DoBlue;
+        for (k = 0; k < width * height; k++)
+            pw_pack_xcolor(&white, (unsigned char *)(CSData + k * 4));
+        refresh_cs_visual(CC);
+    }
+    XfActivateButton(b, (ButtonPressMask | ExposureMask));
 
     x_pos += width + Border;
     width = 10;
     height = 15;
 
-    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border,
-        BLACK(display), "CSHigh", 1);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 1, 1, width - 2, height - 2,
-        BLACK(display), BLACK(display), XfSolidVisual));
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 0, 0, 0,
-        WHITE(display), BLACK(display), XfOutlineVisual));
-    XfAddButtonCallback(b, 0, load_color, NULL);
-    XfActivateButton(b, (ButtonPressMask | ExposureMask) );
-    b->member = (int *) CC;
+    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "CSHigh", 1);
+    XfAddButtonVisual(b, 0,
+                      XfCreateVisual(b, 1, 1, width - 2, height - 2, BLACK(display), BLACK(display), XfSolidVisual));
+    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 0, 0, 0, WHITE(display), BLACK(display), XfOutlineVisual));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(load_color), NULL);
+    XfActivateButton(b, (ButtonPressMask | ExposureMask));
+    b->member = (int *)CC;
     CC->CSHigh = b;
 
     x_pos += width + Border;
 
     width = 35;
     height = 15;
-    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, 
-        BLACK(display), "SpreadSpace", 2);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 3, 0, 0,
-        BLACK(display), WHITE(display), XfTextVisual, "HSV", font, 0));
-    XfAddButtonVisual(b, 1, XfCreateVisual(b, 0, 3, 0, 0,
-        BLACK(display), WHITE(display), XfTextVisual, "RGB", font, 0));
+    b = XfCreateButton(display, w, x_pos, y_pos, width, height, Border, BLACK(display), "SpreadSpace", 2);
+    XfAddButtonVisual(b, 0,
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "HSV", font, 0));
+    XfAddButtonVisual(b, 1,
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "RGB", font, 0));
 
-    XfAddButtonCallback(b, 0, toggle_state, NULL);
-    XfAddButtonCallback(b, 1, toggle_state, NULL);
-    XfAddButtonCallback(b, 0, hsv_spread, NULL);
-    XfAddButtonCallback(b, 1, hsv_spread, NULL);
+    XfAddButtonCallback(b, 0, XF_CALLBACK(toggle_state), NULL);
+    XfAddButtonCallback(b, 1, XF_CALLBACK(toggle_state), NULL);
+    XfAddButtonCallback(b, 0, XF_CALLBACK(hsv_spread), NULL);
+    XfAddButtonCallback(b, 1, XF_CALLBACK(hsv_spread), NULL);
 
-    XfActivateButton(b, (ButtonPressMask | ExposureMask) );
+    XfActivateButton(b, (ButtonPressMask | ExposureMask));
     b->member = (int *)CC;
     CC->SpreadSpace = b;
 
-    CC->display = display;
     CC->ColorMap = ColorMap;
-    CC->CSData = CSData;
 
-    return(0);
+    return (0);
 }
 
-
-int
-LoadColorSpread(struct ColorControls *CC, XColor *low, XColor *high, int ncolors, XColor *colors)
+int LoadColorSpread(struct ColorControls *CC, XColor *low, XColor *high, int ncolors, XColor *colors)
 {
 
     CC->C1 = low;
     CC->C2 = high;
 
-    (CC->CSLow->States[0])->Visuals->foreground = low->pixel;
-    (CC->CSHigh->States[0])->Visuals->foreground = high->pixel;
+    {
+        XColor t = *low;
 
-	UpdateButton(CC->CSLow);
-	UpdateButton(CC->CSHigh);
+        t.flags = DoRed | DoGreen | DoBlue;
+        if (XAllocColor(CC->display, CC->ColorMap, &t))
+            (CC->CSLow->States[0])->Visuals->foreground = t.pixel;
+        t = *high;
+        t.flags = DoRed | DoGreen | DoBlue;
+        if (XAllocColor(CC->display, CC->ColorMap, &t))
+            (CC->CSHigh->States[0])->Visuals->foreground = t.pixel;
+    }
 
-    CC->Colorspread->ext = (char *)ncolors;
+    UpdateButton(CC->CSLow);
+    UpdateButton(CC->CSHigh);
+
+    CC->Colorspread->ext = PW_CAST_INT(ncolors);
     CC->Spread = colors;
 
     load_color(CC->CSHigh, NULL);
 
-    if (CC->image != NULL && CC->image->composite == 0) {
-        CreateCSData(CC->display, ncolors, colors, CC->CSWidth,
-            CC->CSHeight, CC->CSData);
-    } else {
-        /* compoiste, blank it out */
-        int i, j;
-        for (i = 0 ; i < CC->CSWidth ; i++) {
-            for (j = 0 ; j < CC->CSHeight ; j++) {
-                CC->CSData[j*CC->CSWidth + i] = 
-                    ((i + j) % 2 ? BLACK(CC->display) : WHITE(CC->display));
+    if (CC->CSData != NULL) {
+        if (CC->image != NULL && CC->image->composite == 0 && ncolors > 0) {
+            CreateCSData(CC->display, ncolors, colors, CC->CSWidth, CC->CSHeight, CC->CSData);
+        } else {
+            int ii, jj;
+            XColor white, black;
+
+            white.red = white.green = white.blue = MAX_INTENSITY;
+            white.flags = DoRed | DoGreen | DoBlue;
+            black.red = black.green = black.blue = 0;
+            black.flags = DoRed | DoGreen | DoBlue;
+            for (ii = 0; ii < CC->CSWidth; ii++) {
+                for (jj = 0; jj < CC->CSHeight; jj++) {
+                    pw_pack_xcolor(((ii + jj) % 2) ? &black : &white,
+                                   (unsigned char *)(CC->CSData + (jj * CC->CSWidth + ii) * 4));
+                }
             }
         }
+        refresh_cs_visual(CC);
     }
     UpdateButton(CC->Colorspread);
 
-    return(0);
+    return (0);
 }
 
-
-void
-amap_set_action(Button B, XEvent *E)
+void amap_set_action(Button B, XEvent *E)
 {
     int i, j;
     Button b;
@@ -700,9 +719,9 @@ amap_set_action(Button B, XEvent *E)
     AC = (struct ColorControls *)B->member;
     j = AC->Map->action_mode;
     if (j) {
-        for (i = 0 ; i < 4 ; i++) {
+        for (i = 0; i < 4; i++) {
             b = AC->Modes[i];
-            if ((int)b->ext == j) {
+            if (PW_CAST_PTR_INT(b->ext) == j) {
                 b->state = 0;
                 (*(b->updateCallback))(b, E);
             }
@@ -710,12 +729,10 @@ amap_set_action(Button B, XEvent *E)
     }
     B->state = 1;
     (*(B->updateCallback))(B, E);
-    XfSetAMapAction(AC->Map, (int)(long)B->ext);
+    XfSetAMapAction(AC->Map, PW_CAST_PTR_INT(B->ext));
 }
 
-
-void
-amap_toggle_state(Button B, XEvent *e)
+void amap_toggle_state(Button B, XEvent *e)
 {
     struct ColorControls *CC;
 
@@ -725,9 +742,7 @@ amap_toggle_state(Button B, XEvent *e)
     XfSetAMapAction(CC->Map, XfAMapNoAction);
 }
 
-
-int
-topslider(Slider S, XEvent *E)
+int topslider(Slider S, XEvent *E)
 {
     AMap a;
     float value;
@@ -735,42 +750,40 @@ topslider(Slider S, XEvent *E)
     struct ColorControls *CC;
     int ncolors;
     int colors;
-    char    buf[256];
+    char buf[256];
 
-    /*value = (int)XfGetSliderValue(S); ***ORIGINAL***/
+    /*value = (int)XfGetSliderValue(S); ***ORIGINAL** */
     value = XfGetSliderValue(S); /* Modified 9/9/99 */
     CC = (struct ColorControls *)S->member;
     a = CC->Map;
 
     if (a->shade_left != value) {
-        a->shade_left = value;		/***ORIGINAL***/
+        a->shade_left = value; /***ORIGINAL***/
 
-/*    if (a->shade_left != (int)value) {
-        a->shade_left = (int)value;		*/
+        /*    if (a->shade_left != (int)value) {
+                a->shade_left = (int)value;		*/
         (*(a->exposeCallback))(a, E);
         if (CC->image != NULL) {
             s_low = CC->image->s_low;
             s_high = CC->image->s_high;
             value = (value) * (s_high - s_low) / 130.0 + s_low;
             CC->image->c_low = value;
-/*          sprintf(buf, "%.3g", value);		***ORIGINAL****/
-            sprintf(buf, "%f", value);		/*Modified 9/13/99***/
+            /*          sprintf(buf, "%.3g", value);		***ORIGINAL****/
+            sprintf(buf, "%f", value); /*Modified 9/13/99** */
             SetButtonText(CC->ScrollLow, buf);
         }
         colorspread(CC);
     }
-    return(0);
+    return (0);
 }
 
-
-int
-bottomslider(Slider S, XEvent *E)
+int bottomslider(Slider S, XEvent *E)
 {
     AMap a;
     struct ColorControls *CC;
     int ncolors;
     int colors;
-    char    buf[256];
+    char buf[256];
     float value;
     float s_low, s_high;
 
@@ -785,19 +798,17 @@ bottomslider(Slider S, XEvent *E)
             s_high = CC->image->s_high;
             value = (S->max - value) * (s_high - s_low) / 130 + s_low;
             CC->image->c_high = value;
-/*          sprintf(buf, "%.3g", value);		***ORIGINAL***/
-            sprintf(buf, "%f", value);		/*Modified 9/13/99****/
+            /*          sprintf(buf, "%.3g", value);		***ORIGINAL***/
+            sprintf(buf, "%f", value); /*Modified 9/13/99*** */
             SetButtonText(CC->ScrollHigh, buf);
         }
 
         colorspread(CC);
     }
-    return(0);
+    return (0);
 }
 
-
-void
-amap_clear(Button B, XEvent *E)
+void amap_clear(Button B, XEvent *E)
 {
     struct ColorControls *CC;
     int ncolors, *colors;
@@ -810,74 +821,69 @@ amap_clear(Button B, XEvent *E)
     colorspread(CC);
 }
 
-
-void
-amap_center(Button B, XEvent *E)
+void amap_center(Button B, XEvent *E)
 {
     struct ColorControls *CC;
     CC = (struct ColorControls *)B->member;
     XfCenterAMap(CC->Map);
     (*(CC->Map->exposeCallback))(CC->Map, E);
-
 }
 
-
-void
-amap_callback(AMap A, XEvent *E)
+void amap_callback(AMap A, XEvent *E)
 {
     struct ColorControls *CC;
     int *mapping, *colors;
     int ncolors;
 
-
-    CC = (struct ColorControls *) A->member;
+    CC = (struct ColorControls *)A->member;
     colorspread(CC);
 }
 
-
-int
-translate_amap(AMap map, int *B, int n)
+int translate_amap(AMap map, int *B, int n)
 {
     int *A;
     int i, m, left, right;
-    float   step, scale;
-    float   x, z;
-    float   y;
+    float step, scale;
+    float x, z;
+    float y;
 
     m = map->width;
     A = (int *)malloc(m * sizeof(int));
     XfAMapValue(map, A);
-    left  = map->shade_left;
+    left = map->shade_left;
     right = m - map->shade_right;
-    for (i = 0 ; i < left ; i++) {
+    for (i = 0; i < left; i++) {
         A[i] = 0;
     }
-    for (i = right ; i < m ; i++) {
-        A[i] = m-1;
+    for (i = right; i < m; i++) {
+        A[i] = m - 1;
     }
 
-	for (i = 0; i < n; i++) {
-		z = (float) i / (float) (n - 1) * (m - 1);
-		B[i] = (int) A[(int) z] / (float) (m - 1) * (n - 1);
-	}
+    for (i = 0; i < n; i++) {
+        z = (float)i / (float)(n - 1) * (m - 1);
+        B[i] = (int)A[(int)z] / (float)(m - 1) * (n - 1);
+    }
 
     free((char *)A);
 
-    return(1);
+    return (1);
 }
 
-void
-toggle_hist(Button B, XEvent *E)
+void toggle_hist(Button B, XEvent *E)
 {
     struct ColorControls *CC;
     CC = (struct ColorControls *)B->member;
     toggle_state(B, E);
     if (CC->image != NULL && CC->image->composite == 0) {
         if (B->state == 2) {
-            free(CC->image->hist_data);
-            XFree((char *)CC->image->hist_image);
-            CC->image->hist_data = NULL;
-            CC->image->hist_image = NULL;
+            if (CC->image->hist_image != NULL) {
+                pw_free_rgb_image(CC->image->hist_image);
+                CC->image->hist_image = NULL;
+                CC->image->hist_data = NULL;
+            } else if (CC->image->hist_data != NULL) {
+                free(CC->image->hist_data);
+                CC->image->hist_data = NULL;
+            }
         } else {
             create_hist(B->display, CC->image, 130, B->state, 1);
         }
@@ -886,14 +892,12 @@ toggle_hist(Button B, XEvent *E)
     }
 }
 
-
-void
-scale_hist(Button B, XEvent *E)
+void scale_hist(Button B, XEvent *E)
 {
     int scale;
     struct ColorControls *CC;
     CC = (struct ColorControls *)B->member;
-    if (CC->image == NULL || CC->image->composite != 0) 
+    if (CC->image == NULL || CC->image->composite != 0)
         return;
 
     scale = CC->image->hist_scale;
@@ -905,11 +909,11 @@ scale_hist(Button B, XEvent *E)
         /* down */
         scale *= 0.5;
     }
-    if (scale > 512) 
+    if (scale > 512)
         scale = 512;
-    if (scale < 1) 
+    if (scale < 1)
         scale = 1;
-    if (scale == CC->image->hist_scale) 
+    if (scale == CC->image->hist_scale)
         return;
 
     create_hist(B->display, CC->image, 130, CC->HistType->state, scale);
@@ -917,9 +921,8 @@ scale_hist(Button B, XEvent *E)
     load_histogram();
 }
 
-
-int
-CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *font, int x, int y, long unsigned int hilite, long unsigned int shade)
+int CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *font, int x, int y,
+               long unsigned int hilite, long unsigned int shade)
 {
     int xin = x, yin = y;
     int width, height;
@@ -927,91 +930,75 @@ CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *fo
     int Border = 1;
     int i;
     int yout;
-    char    *map;
+    char *map;
 
-	yin = y = y + 20;
+    yin = y = y + 20;
 
     y += 45;
     width = 35;
     height = 15;
 
-    AC->Modes[0] = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "Add", 2);
+    AC->Modes[0] = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "Add", 2);
     y += height + 8;
-    AC->Modes[1] = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "Mov", 2);
+    AC->Modes[1] = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "Mov", 2);
     y += height + 8;
-    AC->Modes[2] = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "Del", 2);
+    AC->Modes[2] = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "Del", 2);
     y += height + 8;
-    AC->Modes[3] = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "Shift", 2);
+    AC->Modes[3] = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "Shift", 2);
     y += height + 8;
     /* only one state for clear */
-    AC->Modes[4] = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "Clear", 1);
+    AC->Modes[4] = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "Clear", 1);
     y += height + 8;
-    AC->Modes[5] = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "Center", 1);
+    AC->Modes[5] = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "Center", 1);
 
     yout = y + height;
 
     y = yin + 45;
     x += width + 12;
 
-    XfAddButtonVisual(AC->Modes[0], 0,
-        XfCreateVisual(AC->Modes[0], 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "ADD",
-        font, 0));
-    XfAddButtonVisual(AC->Modes[1], 0,
-        XfCreateVisual(AC->Modes[1], 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "MOV",
-        font, 0));
-    XfAddButtonVisual(AC->Modes[2], 0,
-        XfCreateVisual(AC->Modes[2], 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "DEL",
-        font, 0));
-    XfAddButtonVisual(AC->Modes[3], 0,
-        XfCreateVisual(AC->Modes[3], 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "SHIFT",
-        font, 0));
-    XfAddButtonVisual(AC->Modes[4], 0,
-        XfCreateVisual(AC->Modes[4], 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "CLEAR",
-        font, 0));
-    XfAddButtonVisual(AC->Modes[5], 0,
-        XfCreateVisual(AC->Modes[5], 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "ALIGN",
-        font, 0));
+    XfAddButtonVisual(
+        AC->Modes[0], 0,
+        XfCreateVisual(AC->Modes[0], 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "ADD", font, 0));
+    XfAddButtonVisual(
+        AC->Modes[1], 0,
+        XfCreateVisual(AC->Modes[1], 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "MOV", font, 0));
+    XfAddButtonVisual(
+        AC->Modes[2], 0,
+        XfCreateVisual(AC->Modes[2], 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "DEL", font, 0));
+    XfAddButtonVisual(
+        AC->Modes[3], 0,
+        XfCreateVisual(AC->Modes[3], 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "SHIFT", font, 0));
+    XfAddButtonVisual(
+        AC->Modes[4], 0,
+        XfCreateVisual(AC->Modes[4], 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "CLEAR", font, 0));
+    XfAddButtonVisual(
+        AC->Modes[5], 0,
+        XfCreateVisual(AC->Modes[5], 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "ALIGN", font, 0));
 
     XfAddButtonVisual(AC->Modes[0], 1,
-        XfCreateVisual(AC->Modes[0], 0, 3, 0, 0, BLACK(display),
-        hilite, XfTextVisual, "ADD", font, 0));
+                      XfCreateVisual(AC->Modes[0], 0, 3, 0, 0, BLACK(display), hilite, XfTextVisual, "ADD", font, 0));
     XfAddButtonVisual(AC->Modes[1], 1,
-        XfCreateVisual(AC->Modes[1], 0, 3, 0, 0, BLACK(display),
-        hilite, XfTextVisual, "MOV", font, 0));
+                      XfCreateVisual(AC->Modes[1], 0, 3, 0, 0, BLACK(display), hilite, XfTextVisual, "MOV", font, 0));
     XfAddButtonVisual(AC->Modes[2], 1,
-        XfCreateVisual(AC->Modes[2], 0, 3, 0, 0, BLACK(display),
-        hilite, XfTextVisual, "DEL", font, 0));
+                      XfCreateVisual(AC->Modes[2], 0, 3, 0, 0, BLACK(display), hilite, XfTextVisual, "DEL", font, 0));
     XfAddButtonVisual(AC->Modes[3], 1,
-        XfCreateVisual(AC->Modes[3], 0, 3, 0, 0, BLACK(display),
-        hilite, XfTextVisual, "SHIFT", font, 0));
+                      XfCreateVisual(AC->Modes[3], 0, 3, 0, 0, BLACK(display), hilite, XfTextVisual, "SHIFT", font, 0));
 
-    AC->Modes[0]->ext = (char *)XfAMapAdd;
-    AC->Modes[1]->ext = (char *)XfAMapMove;
-    AC->Modes[2]->ext = (char *)XfAMapDel;
-    AC->Modes[3]->ext = (char *)XfAMapSlide;
+    AC->Modes[0]->ext = PW_CAST_INT(XfAMapAdd);
+    AC->Modes[1]->ext = PW_CAST_INT(XfAMapMove);
+    AC->Modes[2]->ext = PW_CAST_INT(XfAMapDel);
+    AC->Modes[3]->ext = PW_CAST_INT(XfAMapSlide);
 
     /* No second visual for clear, its a pushbutton */
 
-    for (i = 0 ; i < 4 ; i++) {
-        XfAddButtonCallback(AC->Modes[i], 0, amap_set_action, NULL);
-        XfAddButtonCallback(AC->Modes[i], 1, amap_toggle_state, NULL);
+    for (i = 0; i < 4; i++) {
+        XfAddButtonCallback(AC->Modes[i], 0, XF_CALLBACK(amap_set_action), NULL);
+        XfAddButtonCallback(AC->Modes[i], 1, XF_CALLBACK(amap_toggle_state), NULL);
         XfActivateButton(AC->Modes[i], (ExposureMask | ButtonPressMask));
         AC->Modes[i]->member = (int *)AC;
     }
-    XfAddButtonCallback(AC->Modes[4], 0, amap_clear, NULL);
-    XfAddButtonCallback(AC->Modes[5], 0, amap_center, NULL);
+    XfAddButtonCallback(AC->Modes[4], 0, XF_CALLBACK(amap_clear), NULL);
+    XfAddButtonCallback(AC->Modes[5], 0, XF_CALLBACK(amap_center), NULL);
     XfActivateButton(AC->Modes[4], (ExposureMask | ButtonPressMask));
     XfActivateButton(AC->Modes[5], (ExposureMask | ButtonPressMask));
     AC->Modes[4]->member = (int *)AC;
@@ -1022,15 +1009,10 @@ CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *fo
     width = 130;
     height = 130;
 
-    AC->Map = XfCreateAMap(display, w, x, y, width, height, 1, BLACK(display),
-        "Map", hilite, shade, FillSolid, 0);
-    XfAddAMapVisual(AC->Map,
-        XfCreateVisual(AC->Map,
-        0, 0, 0, 0, WHITE(display), WHITE(display),
-        XfSolidVisual));
-    XfAddAMapCallback(AC->Map, amap_callback, NULL);
-    XfActivateAMap(AC->Map, (ExposureMask | ButtonPressMask | 
-        ButtonReleaseMask | ButtonMotionMask));
+    AC->Map = XfCreateAMap(display, w, x, y, width, height, 1, BLACK(display), "Map", hilite, shade, FillSolid, 0);
+    XfAddAMapVisual(AC->Map, XfCreateVisual(AC->Map, 0, 0, 0, 0, WHITE(display), WHITE(display), XfSolidVisual));
+    XfAddAMapCallback(AC->Map, XF_CALLBACK(amap_callback), NULL);
+    XfActivateAMap(AC->Map, (ExposureMask | ButtonPressMask | ButtonReleaseMask | ButtonMotionMask));
     AC->Map->member = (int *)AC;
 
     /* Now, sliders */
@@ -1039,69 +1021,49 @@ CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *fo
     width = 130;
     height = 15;
 
-    AC->Top = XfCreateSlider(display, w, x, y, width, height, 1, BLACK(display),
-        "Top", XfSliderLeftRight, 0.0, 130.0, 1.0, 10,
-        height);
+    AC->Top = XfCreateSlider(display, w, x, y, width, height, 1, BLACK(display), "Top", XfSliderLeftRight, 0.0, 130.0,
+                             1.0, 10, height);
     y += height + 1;
-    AC->Bottom = XfCreateSlider(display, w, x, y, width, height, 1, BLACK(display),
-        "Bottom", XfSliderLeftRight, 0.0, 130.0, 1.0,
-        10, height);
+    AC->Bottom = XfCreateSlider(display, w, x, y, width, height, 1, BLACK(display), "Bottom", XfSliderLeftRight, 0.0,
+                                130.0, 1.0, 10, height);
 
-    XfAddSliderCallback(AC->Top, (CallBack)topslider, NULL);
-    XfAddSliderCallback(AC->Bottom, (CallBack)bottomslider, NULL);
+    XfAddSliderCallback(AC->Top, XF_CALLBACK(topslider), NULL);
+    XfAddSliderCallback(AC->Bottom, XF_CALLBACK(bottomslider), NULL);
 
-    XfAddSliderBarVisual(AC->Top,
-        XfCreateVisual(AC->Top, 0, 0, 0, 0,
-        BLACK(display), WHITE(display),
-        XfStippledVisual, "\252\125", 2, 2));
-    XfAddSliderBarVisual(AC->Bottom,
-        XfCreateVisual(AC->Bottom, 0, 0, 0, 0,
-        BLACK(display), WHITE(display),
-        XfStippledVisual, "\252\125", 2, 2));
+    XfAddSliderBarVisual(AC->Top, XfCreateVisual(AC->Top, 0, 0, 0, 0, BLACK(display), WHITE(display), XfStippledVisual,
+                                                 "\252\125", 2, 2));
+    XfAddSliderBarVisual(AC->Bottom, XfCreateVisual(AC->Bottom, 0, 0, 0, 0, BLACK(display), WHITE(display),
+                                                    XfStippledVisual, "\252\125", 2, 2));
 
     XfAddSliderThumbVisual(AC->Top,
-        XfCreateVisual(AC->Top, 0, 0, 10, height,
-        BLACK(display), BLACK(display),
-        XfSolidVisual));
+                           XfCreateVisual(AC->Top, 0, 0, 10, height, BLACK(display), BLACK(display), XfSolidVisual));
     XfAddSliderThumbVisual(AC->Bottom,
-        XfCreateVisual(AC->Bottom, 0, 0, 
-        10, height, BLACK(display),
-        BLACK(display), XfSolidVisual));
+                           XfCreateVisual(AC->Bottom, 0, 0, 10, height, BLACK(display), BLACK(display), XfSolidVisual));
 
     XfAddSliderThumbVisual(AC->Top,
-        XfCreateVisual(AC->Top, 1, 0, 8, height,
-        WHITE(display), BLACK(display),
-        XfSolidVisual));
+                           XfCreateVisual(AC->Top, 1, 0, 8, height, WHITE(display), BLACK(display), XfSolidVisual));
     XfAddSliderThumbVisual(AC->Bottom,
-        XfCreateVisual(AC->Bottom, 1, 0, 
-        8, height, WHITE(display),
-        BLACK(display), XfSolidVisual));
+                           XfCreateVisual(AC->Bottom, 1, 0, 8, height, WHITE(display), BLACK(display), XfSolidVisual));
 
-    XfActivateSlider(AC->Top,
-        (ExposureMask | ButtonPressMask | ButtonMotionMask));
-    XfActivateSliderValue(AC->Bottom, 1.0,
-        (ExposureMask | ButtonPressMask | ButtonMotionMask));
+    XfActivateSlider(AC->Top, (ExposureMask | ButtonPressMask | ButtonMotionMask));
+    XfActivateSliderValue(AC->Bottom, 1.0, (ExposureMask | ButtonPressMask | ButtonMotionMask));
 
     x = xin;
     y = yin + 5;
     width = 35;
     height = 15;
-    b = XfCreateButton(display, w, x, y, width, height, 1, BLACK(display),
-        "lowstr", 1);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), 
-        WHITE(display), XfTextVisual, "0", font, 1));
-    XfAddButtonCallback(b, 0, GetLowScale, NULL);
+    b = XfCreateButton(display, w, x, y, width, height, 1, BLACK(display), "lowstr", 1);
+    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "0", font, 1));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(GetLowScale), NULL);
     XfActivateButton(b, ExposureMask | ButtonPressMask);
     AC->StretchLow = b;
     b->member = (int *)AC;
 
     y = y + height;
 
-    b = XfCreateButton(display, w, x, y, width, height, 1, BLACK(display),
-        "highstr", 1);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), 
-        WHITE(display), XfTextVisual, "0", font, 1));
-    XfAddButtonCallback(b, 0, GetHighScale, NULL);
+    b = XfCreateButton(display, w, x, y, width, height, 1, BLACK(display), "highstr", 1);
+    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "0", font, 1));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(GetHighScale), NULL);
     XfActivateButton(b, ExposureMask | ButtonPressMask);
     AC->StretchHigh = b;
     b->member = (int *)AC;
@@ -1112,23 +1074,20 @@ CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *fo
     width = 35;
     height = 15;
 
-    b = XfCreateButton(display, w, x, y, width, height, 1, BLACK(display),
-        "lowscroll", 1);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), 
-        pwBackground.pixel, XfTextVisual, "0", font, 1));
-    XfAddButtonCallback(b, 0, SetLowScale, NULL);
+    b = XfCreateButton(display, w, x, y, width, height, 1, BLACK(display), "lowscroll", 1);
+    XfAddButtonVisual(b, 0,
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), pwBackground.pixel, XfTextVisual, "0", font, 1));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(SetLowScale), NULL);
     XfActivateButton(b, ExposureMask | ButtonPressMask);
     AC->ScrollLow = b;
     b->member = (int *)AC;
 
     y = y + height;
 
-
-    b = XfCreateButton(display, w, x, y, width, height, 1, BLACK(display),
-        "highscroll", 1);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), 
-        pwBackground.pixel, XfTextVisual, "0", font, 1));
-    XfAddButtonCallback(b, 0, SetHighScale, NULL);
+    b = XfCreateButton(display, w, x, y, width, height, 1, BLACK(display), "highscroll", 1);
+    XfAddButtonVisual(b, 0,
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), pwBackground.pixel, XfTextVisual, "0", font, 1));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(SetHighScale), NULL);
     XfActivateButton(b, ExposureMask | ButtonPressMask);
     AC->ScrollHigh = b;
     b->member = (int *)AC;
@@ -1140,16 +1099,15 @@ CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *fo
     width = 35;
     height = 20;
 
-    b = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "Arrows", 1);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, -1, 0, 20, 20,
-        BLACK(display), WHITE(display),
-        XfPixmapVisual, 1, Bitmap_Button_Up_bits));
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 18, 0, 20, 20,
-        BLACK(display), WHITE(display),
-        XfPixmapVisual, 1, Bitmap_Button_Down_bits));
+    b = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "Arrows", 1);
+    XfAddButtonVisual(
+        b, 0,
+        XfCreateVisual(b, -1, 0, 20, 20, BLACK(display), WHITE(display), XfPixmapVisual, 1, Bitmap_Button_Up_bits));
+    XfAddButtonVisual(
+        b, 0,
+        XfCreateVisual(b, 18, 0, 20, 20, BLACK(display), WHITE(display), XfPixmapVisual, 1, Bitmap_Button_Down_bits));
 
-    XfAddButtonCallback(b, 0, scale_hist, NULL);
+    XfAddButtonCallback(b, 0, XF_CALLBACK(scale_hist), NULL);
     XfActivateButton(b, ButtonPressMask | ExposureMask);
     b->member = (int *)AC;
     AC->HistScale = b;
@@ -1159,23 +1117,16 @@ CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *fo
     width = 35;
     height = 15;
 
-    b = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "Guass", 3);
+    b = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "Guass", 3);
     XfAddButtonVisual(b, 0,
-        XfCreateVisual(b, 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "FREQ",
-        font, 0));
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "FREQ", font, 0));
     XfAddButtonVisual(b, 1,
-        XfCreateVisual(b, 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "CUMUL",
-        font, 0));
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "CUMUL", font, 0));
     XfAddButtonVisual(b, 2,
-        XfCreateVisual(b, 0, 3, 0, 0, BLACK(display),
-        WHITE(display), XfTextVisual, "NONE",
-        font, 0));
-    XfAddButtonCallback(b, 0, toggle_hist, NULL);
-    XfAddButtonCallback(b, 1, toggle_hist, NULL);
-    XfAddButtonCallback(b, 2, toggle_hist, NULL);
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "NONE", font, 0));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(toggle_hist), NULL);
+    XfAddButtonCallback(b, 1, XF_CALLBACK(toggle_hist), NULL);
+    XfAddButtonCallback(b, 2, XF_CALLBACK(toggle_hist), NULL);
     XfActivateButton(b, ButtonPressMask | ExposureMask);
     b->member = (int *)AC;
     AC->HistType = b;
@@ -1184,86 +1135,80 @@ CreateAMap(struct ColorControls *AC, Display *display, Window w, XFontStruct *fo
     width = 35;
     height = 15;
 
-    b = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "ReadHist", 2);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 3, 0, 0,
-        BLACK(display), WHITE(display),
-        XfTextVisual, "LIST", font, 0));
-    XfAddButtonVisual(b, 1, XfCreateVisual(b, 0, 3, 0, 0,
-        WHITE(display), BLACK(display),
-        XfTextVisual, "LIST", font, 0));
-    XfAddButtonCallback(b, 0, ActivateHistList, NULL);
-    XfAddButtonCallback(b, 1, DeactivateHistList, NULL);
+    b = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "ReadHist", 2);
+    XfAddButtonVisual(b, 0,
+                      XfCreateVisual(b, 0, 3, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "LIST", font, 0));
+    XfAddButtonVisual(b, 1,
+                      XfCreateVisual(b, 0, 3, 0, 0, WHITE(display), BLACK(display), XfTextVisual, "LIST", font, 0));
+    XfAddButtonCallback(b, 0, XF_CALLBACK(ActivateHistList), NULL);
+    XfAddButtonCallback(b, 1, XF_CALLBACK(DeactivateHistList), NULL);
     XfActivateButton(b, ButtonPressMask | ExposureMask);
 
     x = xin + 47 + 131 - 100;
     y = yin + 135 + 47;
     width = 100;
 
-    b = XfCreateButton(display, w, x, y, width, height, 
-        Border, BLACK(display), "WriteHist", 1);
-    XfAddButtonVisual(b, 0, XfCreateVisual(b, 0, 7, 0, 0,
-        BLACK(display), WHITE(display),
-        XfTextVisual, "Readout", font, 0));
+    b = XfCreateButton(display, w, x, y, width, height, Border, BLACK(display), "WriteHist", 1);
+    XfAddButtonVisual(b, 0,
+                      XfCreateVisual(b, 0, 7, 0, 0, BLACK(display), WHITE(display), XfTextVisual, "Readout", font, 0));
     XfActivateButton(b, ButtonPressMask | ExposureMask);
 
     AC->Readout = b;
-    XfAddAMapReadoutCallback(AC->Map, AMapReadoutUpdate);
+    XfAddAMapReadoutCallback(AC->Map, XF_CALLBACK(AMapReadoutUpdate));
 
-    return(0);
+    return (0);
 }
 
-
-int
-CompositeCS(struct ColorControls *CC)
+int CompositeCS(struct ColorControls *CC)
 {
     XColor xc, *p;
     Image new = CC->image;
-    int result;
     int j;
 
     if (new == NULL) {
-        return(0);
+        return (0);
     }
 
-    for (j = 0 ; j < new->ncolors; j++) {
+    for (j = 0; j < new->ncolors; j++) {
         p = &(new->Colors[j]);
         p->red = MAX(MIN((int)(p->red + new->color_offsets[0]), 0xFFFF), 0);
         p->green = MAX(MIN((int)(p->green + new->color_offsets[1]), 0xFFFF), 0);
         p->blue = MAX(MIN((int)(p->blue + new->color_offsets[2]), 0xFFFF), 0);
         p->flags = DoRed | DoBlue | DoGreen;
     }
-    result = XStoreColors(CC->display, CC->ColorMap, new->Colors, new->ncolors);
-    if (result != Success) {
-        char error_buf[256];
-        XGetErrorText(CC->display, result, error_buf, 256);
-        printf("XStoreColors error: %s\n", error_buf);
-    }
+    if (CC->CSData != NULL && new->ncolors > 0)
+        CreateCSData(CC->display, new->ncolors, new->Colors, CC->CSWidth, CC->CSHeight, CC->CSData);
+    refresh_cs_visual(CC);
+    refresh_display_lut(CC);
+    UpdateButton(CC->Colorspread);
 
-    return(1);
+    return (1);
 }
 
-
-void
-AMapReadoutUpdate(AMap A, XEvent *E)
+void AMapReadoutUpdate(AMap A, XEvent *E)
 {
     struct ColorControls *CC;
-    int x,y;
+    int x, y;
     int imin, imax;
 
     CC = (struct ColorControls *)A->member;
-    if (CC == NULL || CC->Readout == NULL) return;
-    if (CC->image == NULL) return;
+    if (CC == NULL || CC->Readout == NULL)
+        return;
+    if (CC->image == NULL)
+        return;
 
     x = E->xbutton.x;
     y = E->xbutton.y;
-    
-    if (y < 0) y = 0;
+
+    if (y < 0)
+        y = 0;
     else if (y >= A->height)
         y = A->height - 1;
-    
-    if (x < 0)  x = 0;
-    else if (x >= A->width) x = A->width;
+
+    if (x < 0)
+        x = 0;
+    else if (x >= A->width)
+        x = A->width;
 
     imin = CC->image->s_low;
     imax = CC->image->s_high;
@@ -1274,39 +1219,40 @@ AMapReadoutUpdate(AMap A, XEvent *E)
     /* this probably wants to be scaled according to the
        stretch on the image already, but doesn't present
        itself in an easy way)
-    */
-       
-
+     */
 
     sprintf(buf, "%d,%d", x, y);
-    SetButtonText(CC->Readout, buf);    
+    SetButtonText(CC->Readout, buf);
 }
 
-int
-colorspread(struct ColorControls *CC)
+int colorspread(struct ColorControls *CC)
 {
     int ncolors;
 
     if (CC->Colorspread == NULL) {
-        return(0);
+        return (0);
     }
 
     if (CC->image == NULL)
-        return(0);
+        return (0);
     if (CC->image->composite == 0) {
         int *colors;
 
-        ncolors = (int)(long)CC->Colorspread->ext;
+        ncolors = PW_CAST_PTR_INT(CC->Colorspread->ext);
         if (CC->image->map != NULL) {
             free((char *)CC->image->map);
         }
         CC->image->map = (int *)malloc(ncolors * sizeof(int));
         translate_amap(CC->Map, CC->image->map, ncolors);
 
-        RGB_CS(CC->display, CC->ColorMap, CC->C1, CC->C2,
-            (long)CC->Colorspread->ext, CC->Spread, CC->SpreadSpace->state,
-            CC->image->map);
-        return(1);
+        RGB_CS(CC->display, CC->ColorMap, CC->C1, CC->C2, (long)CC->Colorspread->ext, CC->Spread,
+               CC->SpreadSpace->state, CC->image->map);
+        if (CC->CSData != NULL)
+            CreateCSData(CC->display, ncolors, CC->Spread, CC->CSWidth, CC->CSHeight, CC->CSData);
+        refresh_cs_visual(CC);
+        refresh_display_lut(CC);
+        UpdateButton(CC->Colorspread);
+        return (1);
     } else {
         return CompositeCS(CC);
     }

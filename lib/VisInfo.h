@@ -22,57 +22,63 @@
 
 /* A visual element comprised of normal text */
 struct TextVisual {
-    int align;                  /* 0 is center, 1 is left, 2 is right */
-    XFontStruct *font;          /* The font to use in displaying */
-    char text[256];             /* The actual text displayed */
+    int align; /* 0 is center, 1 is left, 2 is right */
+    XFontStruct *font; /* The font to use in displaying */
+    char text[256]; /* The actual text displayed */
 };
 
 /* A visual element comprised of a bitmap or pixmap */
 struct PixmapVisual {
-    int depth;                  /* Bit depth of image */
-    Pixmap map;                 /* Pixmap data */
+    int depth; /* Bit depth of image */
+    Pixmap map; /* Pixmap data */
 };
 
 /* A hershey font string */
 struct HersheyVisual {
-    int cset;                   /* Character set */
-    float scale;                /* scale factor */
-    float angle;                /* rotation */
-    float align;                /* percentage from center (in positive X dir) */
+    int cset; /* Character set */
+    float scale; /* scale factor */
+    float angle; /* rotation */
+    float align; /* percentage from center (in positive X dir) */
     char text[256];
 };
 
 /* The structure combining image and text visuals into one treatment */
 struct VisualInfo {
-    int x_pos, y_pos;           /* position relative to button's X & Y */
-    int height, width;          /* Height and width of this little piece */
-    unsigned long foreground;   /* Foreground color for this element */
-    unsigned long background;   /* Background for element */
-    int vtype;                  /* Type of element-- text or image */
-    union Visual {              /* The needed data for displaying */
+    int x_pos, y_pos; /* position relative to button's X & Y */
+    int height, width; /* Height and width of this little piece */
+    unsigned long foreground; /* Foreground color for this element */
+    unsigned long background; /* Background for element */
+    int vtype; /* Type of element-- text or image */
+    union Visual { /* The needed data for displaying */
         struct TextVisual t_vis;
         struct PixmapVisual p_vis;
         struct HersheyVisual h_vis;
         XImage *i_vis;
     } visual;
-    struct VisualInfo *next;    /* Handle to the next bit of Visual info */
+    struct VisualInfo *next; /* Handle to the next bit of Visual info */
 };
 
 struct XfAnyWidget {
-    Display *display;           /* Display that tool is on */
-    Window window;              /* Window ID of the tool */
-    Window parent;              /* Parent's Window ID */
-    int active;                 /* Is this tool active? */
-    int width, height;          /* sizing of the tool */
-    int x, y;                   /* X and Y position of tool wrt parent */
-    int border_width;           /* width (in pixels) of tool's border */
+    Display *display; /* Display that tool is on */
+    Window window; /* Window ID of the tool */
+    Window parent; /* Parent's Window ID */
+    int active; /* Is this tool active? */
+    int width, height; /* sizing of the tool */
+    int x, y; /* X and Y position of tool wrt parent */
+    int border_width; /* width (in pixels) of tool's border */
     unsigned long border_color; /* Color of border */
-    char name[256];             /* Name used to identify tool */
-    char *ext;                  /* An externally-visible piece of data */
-    int *member;                /* Pseudo-class identifier */
+    char name[256]; /* Name used to identify tool */
+    char *ext; /* An externally-visible piece of data */
+    int *member; /* Pseudo-class identifier */
 };
 
 void XfFreeVisual(Display *, struct VisualInfo *);
 struct VisualInfo *XfCreateVisual(void *, int, int, int, int, unsigned long, unsigned long, int, ...);
 
-#endif                          /* _XF_VISINFO_H */
+/* Draw text using vis->foreground on vis->background (not the window border pixel). */
+void XfDrawTextVisual(Display *d, Window w, GC gc, int widget_w, int widget_h, struct VisualInfo *vis, int x_off,
+                      int y_off);
+
+unsigned long XfDefaultWidgetBackground(Display *d);
+
+#endif /* _XF_VISINFO_H */

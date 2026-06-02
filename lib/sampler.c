@@ -47,8 +47,8 @@ static void set_status(const char *fmt, ...)
 
 static void quit_cb(Button B, XEvent *E)
 {
-    (void) B;
-    (void) E;
+    (void)B;
+    (void)E;
     quitting = 1;
 }
 
@@ -56,11 +56,9 @@ static void confirm_cb(Button B, XEvent *E)
 {
     int pick;
 
-    (void) B;
-    pick = ConfirmRequestor(display,
-                            RootWindow(display, screen), gc, font,
-                            (int) E->xbutton.x_root, (int) E->xbutton.y_root,
-                            200, 90, 0, 1, 2, 1, "Confirm dialog OK?", 2, "Cancel", "OK");
+    (void)B;
+    pick = ConfirmRequestor(display, RootWindow(display, screen), gc, font, (int)E->xbutton.x_root,
+                            (int)E->xbutton.y_root, 200, 90, 0, 1, 2, 1, "Confirm dialog OK?", 2, "Cancel", "OK");
     set_status("Confirm returned %d", pick);
 }
 
@@ -68,7 +66,7 @@ static void gettext_cb(Button B, XEvent *E)
 {
     char buf[256];
 
-    if (GetText(B, E, buf, (int) sizeof(buf), 1) == 1)
+    if (GetText(B, E, buf, (int)sizeof(buf), 1) == 1)
         set_status("GetText: \"%s\"", buf);
     else
         set_status("GetText cancelled");
@@ -76,82 +74,80 @@ static void gettext_cb(Button B, XEvent *E)
 
 static void pb_cb(void *widget, XEvent *E)
 {
-    (void) widget;
-    (void) E;
+    (void)widget;
+    (void)E;
     set_status("PushButton clicked");
 }
 
 static void cb_cb(void *widget, XEvent *E)
 {
-    CButton cb = (CButton) widget;
+    CButton cb = (CButton)widget;
 
-    (void) E;
+    (void)E;
     set_status("CheckButton %s", XfActiveCB(cb) ? "on" : "off");
 }
 
 static void rb_cb(void *widget, XEvent *E)
 {
-    RButton rb = (RButton) widget;
+    RButton rb = (RButton)widget;
 
-    (void) E;
+    (void)E;
     set_status("RadioButton #%d", XfWhichRB(rb));
 }
 
 static void mb_cb(void *widget, XEvent *E)
 {
-    MButton mb = (MButton) widget;
+    MButton mb = (MButton)widget;
     char *text;
 
-    (void) E;
+    (void)E;
     text = XfMBSelectedText(mb);
     set_status("Menu: %s", text ? text : "(none)");
 }
 
 static void toggle_cb(Button B, XEvent *E)
 {
-    (void) E;
+    (void)E;
     set_status("%s state %d", B->name, B->state);
 }
 
 static void slider_cb(Slider S, XEvent *E)
 {
-    (void) E;
+    (void)E;
     set_status("Slider \"%s\" = %.2f", S->name, XfGetSliderValue(S));
 }
 
 static void joystick_cb(Joystick J, XEvent *E)
 {
-    (void) E;
-    set_status("Joystick %d,%d - %d,%d",
-               XfJoystickUpperX(J), XfJoystickUpperY(J), XfJoystickLowerX(J), XfJoystickLowerY(J));
+    (void)E;
+    set_status("Joystick %d,%d - %d,%d", XfJoystickUpperX(J), XfJoystickUpperY(J), XfJoystickLowerX(J),
+               XfJoystickLowerY(J));
 }
 
 static void list_cb(void *widget, XEvent *E)
 {
-    List list = (List) widget;
+    List list = (List)widget;
 
-    (void) E;
+    (void)E;
     if (list->selected >= 0 && list->selected < list->nitems)
         set_status("List selected: %s", list->items[list->selected]);
 }
 
 static void composite_load_cb(void *widget, XEvent *E)
 {
-    Composite C = (Composite) widget;
+    Composite C = (Composite)widget;
 
-    (void) E;
+    (void)E;
     set_status("Composite load: %s", C->current_text ? C->current_text : "(empty)");
 }
 
 static void amap_mode_cb(Button B, XEvent *E)
 {
-    static const char *mode_name[] = {
-        "off", "add", "delete", "move", "slide"
-    };
-    int mode = (int) (intptr_t) B->ext;
+    static const char *mode_name[] = {"off", "add", "delete", "move", "slide"};
+    int mode = (int)(intptr_t)B->ext;
     int i;
 
-    (void) E;
+    (void)E;
     if (sampler_amap == NULL)
         return;
 
@@ -212,9 +208,9 @@ static int init_display(void)
     XSetFont(display, gc, font->fid);
     XfSetDefaultFont(display, font);
     /* Prime XV_COLORS cache (macros call XfColor(NULL, ...)) */
-    (void) XfColor(display, "#C6D5E2");
-    (void) XfColor(display, "#8B99B5");
-    (void) XfColor(display, "#B2C0DC");
+    (void)XfColor(display, "#C6D5E2");
+    (void)XfColor(display, "#8B99B5");
+    (void)XfColor(display, "#B2C0DC");
 
     c.flags = DoRed | DoGreen | DoBlue;
     if (XParseColor(display, cmap, "#E8E8E8", &c) && XAllocColor(display, cmap, &c))
@@ -240,17 +236,17 @@ static void build_ui(void)
     Composite comp;
     int y;
 
-    shell = XFCreateButton(display, RootWindow(display, screen),
-                           30, 30, PANEL_W + 4, PANEL_H + 4, 2, fg, bg, "sampler", 1);
+    shell =
+        XFCreateButton(display, RootWindow(display, screen), 30, 30, PANEL_W + 4, PANEL_H + 4, 2, fg, bg, "sampler", 1);
     XfAddButtonVisual(shell, 0, XfCreateVisual(shell, 0, 0, 0, 0, bg, bg, XfSolidVisual));
     XfActivateButton(shell, ExposureMask);
     panel = shell->window;
 
     status_btn = XFCreateButton(display, panel, 8, PANEL_H - 36, PANEL_W - 16, 24, 1, fg, bg, "status", 1);
     XfAddButtonVisual(status_btn, 0, XfCreateVisual(status_btn, 0, 0, 0, 0, bg, bg, XfSolidVisual));
-    XfAddButtonVisual(status_btn, 0,
-                      XfCreateVisual(status_btn, 4, 4, 0, 0,
-                                     fg, bg, XfTextVisual, "Ready - click widgets to test.", font, 1));
+    XfAddButtonVisual(
+        status_btn, 0,
+        XfCreateVisual(status_btn, 4, 4, 0, 0, fg, bg, XfTextVisual, "Ready - click widgets to test.", font, 1));
     XfActivateButton(status_btn, ExposureMask);
 
     y = 8;
@@ -269,10 +265,10 @@ static void build_ui(void)
     lb = XfCreateLB(display, panel, 358, y, 80, 26, XV_COLORS, LEFTTEXT("Label"));
     XfActivateLB(lb, ExposureMask);
 
-    menu = XfAddMenuItem(NULL, "Menu", CENTER, font, (Pixmap) 0, 0, 0, NULL);
-    XfAddMenuItem(menu, "Open", CENTER, font, (Pixmap) 0, 0, 0, NULL);
-    XfAddMenuItem(menu, "Save", CENTER, font, (Pixmap) 0, 0, 0, NULL);
-    XfAddMenuItem(menu, "Close", CENTER, font, (Pixmap) 0, 0, 0, NULL);
+    menu = XfAddMenuItem(NULL, "Menu", CENTER, font, (Pixmap)0, 0, 0, NULL);
+    XfAddMenuItem(menu, "Open", CENTER, font, (Pixmap)0, 0, 0, NULL);
+    XfAddMenuItem(menu, "Save", CENTER, font, (Pixmap)0, 0, 0, NULL);
+    XfAddMenuItem(menu, "Close", CENTER, font, (Pixmap)0, 0, 0, NULL);
     mb = XfCreateMB(display, panel, 448, y, 80, 26, XV_COLORS, menu, XF_CALLBACK(mb_cb));
     XfActivateMB(mb, ExposureMask | ButtonPressMask | ButtonReleaseMask);
 
@@ -295,9 +291,9 @@ static void build_ui(void)
 
     y = 92;
     sh = add_slider(display, panel, 8, y, 220, 18, XfSliderLeftRight, "H-Slider", XF_CALLBACK(slider_cb));
-    (void) sh;
+    (void)sh;
     sv = add_slider(display, panel, 240, y, 18, 100, XfSliderUpDown, "V-Slider", XF_CALLBACK(slider_cb));
-    (void) sv;
+    (void)sv;
 
     joy = XfCreateJoystick(display, panel, 270, y, 110, 110, 1, BLACK(display), "joy", 14, 14);
     XfAddJoystickFieldVisual(joy, XfCreateVisual(joy, 0, 0, 0, 0, bg, bg, XfSolidVisual));
@@ -307,24 +303,24 @@ static void build_ui(void)
 
     y = 188;
     amap_mode_btn[0] = Make2State3D(display, panel, font, 8, y, 52, 20, 1, fg, fg, bg, "Move");
-    amap_mode_btn[0]->ext = (void *) (intptr_t) XfAMapMove;
+    amap_mode_btn[0]->ext = (void *)(intptr_t)XfAMapMove;
     amap_mode_btn_setup(amap_mode_btn[0]);
     XfActivateButton(amap_mode_btn[0], ExposureMask | ButtonPressMask);
 
     amap_mode_btn[1] = Make2State3D(display, panel, font, 64, y, 52, 20, 1, fg, fg, bg, "Add");
-    amap_mode_btn[1]->ext = (void *) (intptr_t) XfAMapAdd;
+    amap_mode_btn[1]->ext = (void *)(intptr_t)XfAMapAdd;
     amap_mode_btn_setup(amap_mode_btn[1]);
     XfActivateButton(amap_mode_btn[1], ExposureMask | ButtonPressMask);
 
     amap_mode_btn[2] = Make2State3D(display, panel, font, 120, y, 52, 20, 1, fg, fg, bg, "Slide");
-    amap_mode_btn[2]->ext = (void *) (intptr_t) XfAMapSlide;
+    amap_mode_btn[2]->ext = (void *)(intptr_t)XfAMapSlide;
     amap_mode_btn_setup(amap_mode_btn[2]);
     XfActivateButton(amap_mode_btn[2], ExposureMask | ButtonPressMask);
 
     set_state(amap_mode_btn[0], 1);
 
     y = 212;
-    amap = XfCreateAMap(display, panel, 8, y, 150, 150, 1, BLACK(display), "amap", hilite, gray, FillSolid, (Pixmap) 0);
+    amap = XfCreateAMap(display, panel, 8, y, 150, 150, 1, BLACK(display), "amap", hilite, gray, FillSolid, (Pixmap)0);
     sampler_amap = amap;
     XfAddAMapVisual(amap, XfCreateVisual(amap, 0, 0, 0, 0, bg, bg, XfSolidVisual));
     /*
@@ -339,7 +335,7 @@ static void build_ui(void)
     ActivateList(list);
 
     y = 352;
-    comp = CreateComposite(display, panel, font, 8, y, 260, 22, (short) hilite, "type filename here");
+    comp = CreateComposite(display, panel, font, 8, y, 260, 22, (short)hilite, "type filename here");
     AddCompositeCallback(comp, XF_CALLBACK(composite_load_cb));
     ActivateComposite(comp);
     AddToComposite(comp, "sample.txt");
@@ -353,7 +349,7 @@ static void build_ui(void)
     B = XFCreateButton(display, panel, 106, y, 90, 24, 1, fg, bg, "gettext", 1);
     XfAddButtonVisual(B, 0, XfCreateVisual(B, 0, 0, 0, 0, bg, bg, XfSolidVisual));
     XfAddButtonVisual(B, 0, XfCreateVisual(B, 4, 4, 0, 0, fg, bg, XfTextVisual, "GetText...", font, 1));
-    B->ext = (char *) 1;
+    B->ext = (char *)1;
     XfAddButtonCallback(B, 0, XF_CALLBACK(gettext_cb), NULL);
     XfActivateButton(B, ExposureMask | ButtonPressMask | KeyPressMask);
 
@@ -366,8 +362,8 @@ int main(int argc, char **argv)
 {
     XEvent E;
 
-    (void) argc;
-    (void) argv;
+    (void)argc;
+    (void)argv;
 
     if (!init_display()) {
         fprintf(stderr, "sampler: cannot open display\n");
@@ -390,7 +386,7 @@ int main(int argc, char **argv)
         {
             XButton xb = XfEventXB(&E);
             if (xb != NULL)
-                (void) XfPushXB(xb, &E);
+                (void)XfPushXB(xb, &E);
         }
     }
 
